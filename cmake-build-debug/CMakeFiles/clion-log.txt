@@ -1,0 +1,7 @@
+/snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/209/bin/ninja/linux/ninja -G Ninja -S /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II -B /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug
+-- Found OpenCV: /usr/local (found version "4.6.0") 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found suitable version "1.74.0", minimum required is "1.70.0") found components: system filesystem 
+-- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found suitable version "1.74.0", minimum required is "1.70.0") found components: system filesystem serialization 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug

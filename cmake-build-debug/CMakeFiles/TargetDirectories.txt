@@ -1,0 +1,3 @@
+/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/CMakeFiles/Server.dir
+/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/CMakeFiles/rebuild_cache.dir
