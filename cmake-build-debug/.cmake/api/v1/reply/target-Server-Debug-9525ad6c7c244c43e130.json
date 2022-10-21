@@ -26,25 +26,37 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 11,
+				"line" : 17,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 15,
+				"line" : 21,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 16,
+				"line" : 22,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 13,
+				"line" : 9,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 19,
 				"parent" : 0
 			}
 		]
@@ -55,10 +67,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
-				},
-				{
-					"fragment" : "-std=gnu++14"
+					"fragment" : "-fprofile-arcs -ftest-coverage -g"
 				}
 			],
 			"defines" : 
@@ -84,19 +93,27 @@
 			[
 				{
 					"backtrace" : 4,
+					"path" : "/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include"
+				},
+				{
+					"backtrace" : 4,
+					"path" : "/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/include"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock"
+				},
+				{
+					"backtrace" : 6,
 					"isSystem" : true,
 					"path" : "/usr/local/include/opencv4"
 				}
 			],
 			"language" : "CXX",
-			"languageStandard" : 
-			{
-				"backtraces" : 
-				[
-					2
-				],
-				"standard" : "14"
-			},
 			"sourceIndexes" : 
 			[
 				0
@@ -109,7 +126,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-g",
+				"fragment" : "-fprofile-arcs -ftest-coverage -g",
 				"role" : "flags"
 			},
 			{

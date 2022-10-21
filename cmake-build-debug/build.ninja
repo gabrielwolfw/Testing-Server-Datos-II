@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: Testing_Server_Datos_II
+# Project: test_tuto
 # Configurations: Debug
 # =============================================================================
 
@@ -52,8 +52,8 @@ build cmake_object_order_depends_target_Server: phony || CMakeFiles/Server.dir
 build CMakeFiles/Server.dir/server.cpp.o: CXX_COMPILER__Server_Debug /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/server.cpp || cmake_object_order_depends_target_Server
   DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_SERIALIZATION_DYN_LINK -DBOOST_SYSTEM_DYN_LINK
   DEP_FILE = CMakeFiles/Server.dir/server.cpp.o.d
-  FLAGS = -g -std=gnu++14
-  INCLUDES = -isystem /usr/local/include/opencv4
+  FLAGS = -fprofile-arcs -ftest-coverage -g
+  INCLUDES = -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/include -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock -isystem /usr/local/include/opencv4
   OBJECT_DIR = CMakeFiles/Server.dir
   OBJECT_FILE_DIR = CMakeFiles/Server.dir
 
@@ -66,13 +66,91 @@ build CMakeFiles/Server.dir/server.cpp.o: CXX_COMPILER__Server_Debug /home/gabri
 # Link the executable Server
 
 build Server: CXX_EXECUTABLE_LINKER__Server_Debug CMakeFiles/Server.dir/server.cpp.o | /usr/local/lib/libopencv_gapi.so.4.6.0 /usr/local/lib/libopencv_highgui.so.4.6.0 /usr/local/lib/libopencv_ml.so.4.6.0 /usr/local/lib/libopencv_objdetect.so.4.6.0 /usr/local/lib/libopencv_photo.so.4.6.0 /usr/local/lib/libopencv_stitching.so.4.6.0 /usr/local/lib/libopencv_video.so.4.6.0 /usr/local/lib/libopencv_videoio.so.4.6.0 /usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0 /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.74.0 /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.74.0 /usr/local/lib/libopencv_imgcodecs.so.4.6.0 /usr/local/lib/libopencv_dnn.so.4.6.0 /usr/local/lib/libopencv_calib3d.so.4.6.0 /usr/local/lib/libopencv_features2d.so.4.6.0 /usr/local/lib/libopencv_flann.so.4.6.0 /usr/local/lib/libopencv_imgproc.so.4.6.0 /usr/local/lib/libopencv_core.so.4.6.0
-  FLAGS = -g
+  FLAGS = -fprofile-arcs -ftest-coverage -g
   LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib  /usr/local/lib/libopencv_gapi.so.4.6.0  /usr/local/lib/libopencv_highgui.so.4.6.0  /usr/local/lib/libopencv_ml.so.4.6.0  /usr/local/lib/libopencv_objdetect.so.4.6.0  /usr/local/lib/libopencv_photo.so.4.6.0  /usr/local/lib/libopencv_stitching.so.4.6.0  /usr/local/lib/libopencv_video.so.4.6.0  /usr/local/lib/libopencv_videoio.so.4.6.0  /usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0  /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.74.0  /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.74.0  /usr/local/lib/libopencv_imgcodecs.so.4.6.0  /usr/local/lib/libopencv_dnn.so.4.6.0  /usr/local/lib/libopencv_calib3d.so.4.6.0  /usr/local/lib/libopencv_features2d.so.4.6.0  /usr/local/lib/libopencv_flann.so.4.6.0  /usr/local/lib/libopencv_imgproc.so.4.6.0  /usr/local/lib/libopencv_core.so.4.6.0
   OBJECT_DIR = CMakeFiles/Server.dir
   POST_BUILD = :
   PRE_LINK = :
   TARGET_FILE = Server
   TARGET_PDB = Server.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target test_tuto
+
+
+#############################################
+# Order-only phony target for test_tuto
+
+build cmake_object_order_depends_target_test_tuto: phony || cmake_object_order_depends_target_gmock cmake_object_order_depends_target_gmock_main cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main
+
+build CMakeFiles/test_tuto.dir/main.cpp.o: CXX_COMPILER__test_tuto_Debug /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/main.cpp || cmake_object_order_depends_target_test_tuto
+  DEP_FILE = CMakeFiles/test_tuto.dir/main.cpp.o.d
+  FLAGS = -fprofile-arcs -ftest-coverage -g
+  INCLUDES = -I/usr/local/include/opencv4 -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock
+  OBJECT_DIR = CMakeFiles/test_tuto.dir
+  OBJECT_FILE_DIR = CMakeFiles/test_tuto.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_tuto
+
+
+#############################################
+# Link the executable test_tuto
+
+build test_tuto: CXX_EXECUTABLE_LINKER__test_tuto_Debug CMakeFiles/test_tuto.dir/main.cpp.o | lib/libgtestd.a lib/libgtest_maind.a lib/libgmock_maind.a lib/libgmockd.a lib/libgtestd.a || lib/libgmock_maind.a lib/libgmockd.a lib/libgtest_maind.a lib/libgtestd.a
+  FLAGS = -fprofile-arcs -ftest-coverage -g
+  LINK_LIBRARIES = lib/libgtestd.a  lib/libgtest_maind.a  lib/libgmock_maind.a  lib/libgmockd.a  lib/libgtestd.a
+  OBJECT_DIR = CMakeFiles/test_tuto.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test_tuto
+  TARGET_PDB = test_tuto.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target server
+
+
+#############################################
+# Order-only phony target for server
+
+build cmake_object_order_depends_target_server: phony || cmake_object_order_depends_target_gmock cmake_object_order_depends_target_gmock_main cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main
+
+build CMakeFiles/server.dir/server.cpp.o: CXX_COMPILER__server_Debug /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/server.cpp || cmake_object_order_depends_target_server
+  DEP_FILE = CMakeFiles/server.dir/server.cpp.o.d
+  FLAGS = -fprofile-arcs -ftest-coverage -g
+  INCLUDES = -I/usr/local/include/opencv4 -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock
+  OBJECT_DIR = CMakeFiles/server.dir
+  OBJECT_FILE_DIR = CMakeFiles/server.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target server
+
+
+#############################################
+# Link the executable server
+
+build server: CXX_EXECUTABLE_LINKER__server_Debug CMakeFiles/server.dir/server.cpp.o | lib/libgtestd.a lib/libgtest_maind.a lib/libgmock_maind.a lib/libgmockd.a lib/libgtestd.a || lib/libgmock_maind.a lib/libgmockd.a lib/libgtest_maind.a lib/libgtestd.a
+  FLAGS = -fprofile-arcs -ftest-coverage -g
+  LINK_LIBRARIES = lib/libgtestd.a  lib/libgtest_maind.a  lib/libgmock_maind.a  lib/libgmockd.a  lib/libgtestd.a
+  OBJECT_DIR = CMakeFiles/server.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = server
+  TARGET_PDB = server.dbg
+
+
+#############################################
+# Utility command for test
+
+build CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug && /snap/clion/209/bin/cmake/linux/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build test: phony CMakeFiles/test.util
 
 
 #############################################
@@ -98,8 +176,443 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
+
+#############################################
+# Utility command for list_install_components
+
+build list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build CMakeFiles/install.util: CUSTOM_COMMAND all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug && /snap/clion/209/bin/cmake/linux/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build install: phony CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build CMakeFiles/install/local.util: CUSTOM_COMMAND all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug && /snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build install/local: phony CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build CMakeFiles/install/strip.util: CUSTOM_COMMAND all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug && /snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build install/strip: phony CMakeFiles/install/strip.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for test
+
+build test/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test && /snap/clion/209/bin/cmake/linux/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build test/test: phony test/CMakeFiles/test.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test && /snap/clion/209/bin/cmake/linux/bin/ccmake -S/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II -B/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build test/edit_cache: phony test/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test && /snap/clion/209/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II -B/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build test/rebuild_cache: phony test/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build test/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build test/CMakeFiles/install.util: CUSTOM_COMMAND test/all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test && /snap/clion/209/bin/cmake/linux/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build test/install: phony test/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build test/CMakeFiles/install/local.util: CUSTOM_COMMAND test/all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test && /snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build test/install/local: phony test/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build test/CMakeFiles/install/strip.util: CUSTOM_COMMAND test/all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test && /snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build test/install/strip: phony test/CMakeFiles/install/strip.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target gmock
+
+
+#############################################
+# Order-only phony target for gmock
+
+build cmake_object_order_depends_target_gmock: phony || cmake_object_order_depends_target_gtest
+
+build test/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o: CXX_COMPILER__gmock_Debug /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/src/gmock-all.cc || cmake_object_order_depends_target_gmock
+  DEP_FILE = test/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o.d
+  FLAGS = -fprofile-arcs -ftest-coverage -g -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
+  INCLUDES = -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/include -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest
+  OBJECT_DIR = test/googlemock/CMakeFiles/gmock.dir
+  OBJECT_FILE_DIR = test/googlemock/CMakeFiles/gmock.dir/src
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target gmock
+
+
+#############################################
+# Link the static library lib/libgmockd.a
+
+build lib/libgmockd.a: CXX_STATIC_LIBRARY_LINKER__gmock_Debug test/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o || lib/libgtestd.a
+  LANGUAGE_COMPILE_FLAGS = -fprofile-arcs -ftest-coverage -g
+  OBJECT_DIR = test/googlemock/CMakeFiles/gmock.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = lib/libgmockd.a
+  TARGET_PDB = gmockd.a.dbg
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target gmock_main
+
+
+#############################################
+# Order-only phony target for gmock_main
+
+build cmake_object_order_depends_target_gmock_main: phony || cmake_object_order_depends_target_gmock cmake_object_order_depends_target_gtest
+
+build test/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o: CXX_COMPILER__gmock_main_Debug /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/src/gmock_main.cc || cmake_object_order_depends_target_gmock_main
+  DEP_FILE = test/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o.d
+  FLAGS = -fprofile-arcs -ftest-coverage -g -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
+  INCLUDES = -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest
+  OBJECT_DIR = test/googlemock/CMakeFiles/gmock_main.dir
+  OBJECT_FILE_DIR = test/googlemock/CMakeFiles/gmock_main.dir/src
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target gmock_main
+
+
+#############################################
+# Link the static library lib/libgmock_maind.a
+
+build lib/libgmock_maind.a: CXX_STATIC_LIBRARY_LINKER__gmock_main_Debug test/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o || lib/libgmockd.a lib/libgtestd.a
+  LANGUAGE_COMPILE_FLAGS = -fprofile-arcs -ftest-coverage -g
+  OBJECT_DIR = test/googlemock/CMakeFiles/gmock_main.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = lib/libgmock_maind.a
+  TARGET_PDB = gmock_maind.a.dbg
+
+
+#############################################
+# Utility command for test
+
+build test/googlemock/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock && /snap/clion/209/bin/cmake/linux/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build test/googlemock/test: phony test/googlemock/CMakeFiles/test.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build test/googlemock/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock && /snap/clion/209/bin/cmake/linux/bin/ccmake -S/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II -B/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build test/googlemock/edit_cache: phony test/googlemock/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build test/googlemock/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock && /snap/clion/209/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II -B/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build test/googlemock/rebuild_cache: phony test/googlemock/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build test/googlemock/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build test/googlemock/CMakeFiles/install.util: CUSTOM_COMMAND test/googlemock/all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock && /snap/clion/209/bin/cmake/linux/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build test/googlemock/install: phony test/googlemock/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build test/googlemock/CMakeFiles/install/local.util: CUSTOM_COMMAND test/googlemock/all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock && /snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build test/googlemock/install/local: phony test/googlemock/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build test/googlemock/CMakeFiles/install/strip.util: CUSTOM_COMMAND test/googlemock/all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock && /snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build test/googlemock/install/strip: phony test/googlemock/CMakeFiles/install/strip.util
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target gtest
+
+
+#############################################
+# Order-only phony target for gtest
+
+build cmake_object_order_depends_target_gtest: phony || test/googletest/CMakeFiles/gtest.dir
+
+build test/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest_Debug /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/src/gtest-all.cc || cmake_object_order_depends_target_gtest
+  DEP_FILE = test/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o.d
+  FLAGS = -fprofile-arcs -ftest-coverage -g -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
+  INCLUDES = -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest
+  OBJECT_DIR = test/googletest/CMakeFiles/gtest.dir
+  OBJECT_FILE_DIR = test/googletest/CMakeFiles/gtest.dir/src
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target gtest
+
+
+#############################################
+# Link the static library lib/libgtestd.a
+
+build lib/libgtestd.a: CXX_STATIC_LIBRARY_LINKER__gtest_Debug test/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
+  LANGUAGE_COMPILE_FLAGS = -fprofile-arcs -ftest-coverage -g
+  OBJECT_DIR = test/googletest/CMakeFiles/gtest.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = lib/libgtestd.a
+  TARGET_PDB = gtestd.a.dbg
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target gtest_main
+
+
+#############################################
+# Order-only phony target for gtest_main
+
+build cmake_object_order_depends_target_gtest_main: phony || cmake_object_order_depends_target_gtest
+
+build test/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gtest_main_Debug /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/src/gtest_main.cc || cmake_object_order_depends_target_gtest_main
+  DEP_FILE = test/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.d
+  FLAGS = -fprofile-arcs -ftest-coverage -g -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers
+  INCLUDES = -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest
+  OBJECT_DIR = test/googletest/CMakeFiles/gtest_main.dir
+  OBJECT_FILE_DIR = test/googletest/CMakeFiles/gtest_main.dir/src
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target gtest_main
+
+
+#############################################
+# Link the static library lib/libgtest_maind.a
+
+build lib/libgtest_maind.a: CXX_STATIC_LIBRARY_LINKER__gtest_main_Debug test/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o || lib/libgtestd.a
+  LANGUAGE_COMPILE_FLAGS = -fprofile-arcs -ftest-coverage -g
+  OBJECT_DIR = test/googletest/CMakeFiles/gtest_main.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = lib/libgtest_maind.a
+  TARGET_PDB = gtest_maind.a.dbg
+
+
+#############################################
+# Utility command for test
+
+build test/googletest/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googletest && /snap/clion/209/bin/cmake/linux/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+
+build test/googletest/test: phony test/googletest/CMakeFiles/test.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build test/googletest/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googletest && /snap/clion/209/bin/cmake/linux/bin/ccmake -S/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II -B/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug
+  DESC = Running CMake cache editor...
+  pool = console
+  restat = 1
+
+build test/googletest/edit_cache: phony test/googletest/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build test/googletest/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googletest && /snap/clion/209/bin/cmake/linux/bin/cmake --regenerate-during-build -S/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II -B/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build test/googletest/rebuild_cache: phony test/googletest/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build test/googletest/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build test/googletest/CMakeFiles/install.util: CUSTOM_COMMAND test/googletest/all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googletest && /snap/clion/209/bin/cmake/linux/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build test/googletest/install: phony test/googletest/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build test/googletest/CMakeFiles/install/local.util: CUSTOM_COMMAND test/googletest/all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googletest && /snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build test/googletest/install/local: phony test/googletest/CMakeFiles/install/local.util
+
+
+#############################################
+# Utility command for install/strip
+
+build test/googletest/CMakeFiles/install/strip.util: CUSTOM_COMMAND test/googletest/all
+  COMMAND = cd /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googletest && /snap/clion/209/bin/cmake/linux/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+  DESC = Installing the project stripped...
+  pool = console
+  restat = 1
+
+build test/googletest/install/strip: phony test/googletest/CMakeFiles/install/strip.util
+
 # =============================================================================
 # Target aliases.
+
+build gmock: phony lib/libgmockd.a
+
+build gmock_main: phony lib/libgmock_maind.a
+
+build gtest: phony lib/libgtestd.a
+
+build gtest_main: phony lib/libgtest_maind.a
+
+build libgmock_maind.a: phony lib/libgmock_maind.a
+
+build libgmockd.a: phony lib/libgmockd.a
+
+build libgtest_maind.a: phony lib/libgtest_maind.a
+
+build libgtestd.a: phony lib/libgtestd.a
 
 # =============================================================================
 # Folder targets.
@@ -109,7 +622,28 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug
 
-build all: phony Server
+build all: phony Server test_tuto server test/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test
+
+build test/all: phony test/googlemock/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock
+
+build test/googlemock/all: phony lib/libgmockd.a lib/libgmock_maind.a test/googletest/all
+
+# =============================================================================
+
+#############################################
+# Folder: /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googletest
+
+build test/googletest/all: phony lib/libgtestd.a lib/libgtest_maind.a
 
 # =============================================================================
 # Built-in targets
@@ -118,14 +652,14 @@ build all: phony Server
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU-C.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU-CXX.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindBoost.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPackageMessage.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU-C.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/BoostDetectToolset-1.74.0.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/boost_filesystem-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/boost_filesystem-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/libboost_filesystem-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/libboost_filesystem-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0/boost_headers-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0/boost_headers-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/boost_serialization-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/boost_serialization-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/libboost_serialization-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/libboost_serialization-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/boost_system-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/boost_system-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/libboost_system-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/libboost_system-variant-static.cmake /usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake /usr/local/lib/cmake/opencv4/OpenCVConfig.cmake /usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake /usr/local/lib/cmake/opencv4/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../test/CMakeLists.txt ../test/googlemock/CMakeLists.txt ../test/googlemock/cmake/gmock.pc.in ../test/googlemock/cmake/gmock_main.pc.in ../test/googletest/CMakeLists.txt ../test/googletest/cmake/Config.cmake.in ../test/googletest/cmake/gtest.pc.in ../test/googletest/cmake/gtest_main.pc.in ../test/googletest/cmake/internal_utils.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeDependentOption.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakePackageConfigHelpers.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CheckCSourceCompiles.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CheckIncludeFile.c.in /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CheckIncludeFile.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CheckLibraryExists.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU-C.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU-CXX.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindBoost.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPackageMessage.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPython.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPython/Support.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindThreads.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/GNUInstallDirs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU-C.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/UnixPaths.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/WriteBasicConfigVersionFile.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/BoostDetectToolset-1.74.0.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/boost_filesystem-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/boost_filesystem-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/libboost_filesystem-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/libboost_filesystem-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0/boost_headers-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0/boost_headers-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/boost_serialization-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/boost_serialization-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/libboost_serialization-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/libboost_serialization-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/boost_system-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/boost_system-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/libboost_system-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/libboost_system-variant-static.cmake /usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake /usr/local/lib/cmake/opencv4/OpenCVConfig.cmake /usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake /usr/local/lib/cmake/opencv4/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU-C.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU-CXX.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindBoost.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPackageMessage.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU-C.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/UnixPaths.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/BoostDetectToolset-1.74.0.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/boost_filesystem-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/boost_filesystem-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/libboost_filesystem-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/libboost_filesystem-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0/boost_headers-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0/boost_headers-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/boost_serialization-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/boost_serialization-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/libboost_serialization-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/libboost_serialization-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/boost_system-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/boost_system-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/libboost_system-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/libboost_system-variant-static.cmake /usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake /usr/local/lib/cmake/opencv4/OpenCVConfig.cmake /usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake /usr/local/lib/cmake/opencv4/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../test/CMakeLists.txt ../test/googlemock/CMakeLists.txt ../test/googlemock/cmake/gmock.pc.in ../test/googlemock/cmake/gmock_main.pc.in ../test/googletest/CMakeLists.txt ../test/googletest/cmake/Config.cmake.in ../test/googletest/cmake/gtest.pc.in ../test/googletest/cmake/gtest_main.pc.in ../test/googletest/cmake/internal_utils.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeDependentOption.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakePackageConfigHelpers.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CheckCSourceCompiles.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CheckIncludeFile.c.in /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CheckIncludeFile.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/CheckLibraryExists.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU-C.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU-CXX.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Compiler/GNU.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindBoost.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPackageMessage.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPython.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindPython/Support.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/FindThreads.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/GNUInstallDirs.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU-C.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux-GNU.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/Linux.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/Platform/UnixPaths.cmake /snap/clion/209/bin/cmake/linux/share/cmake-3.23/Modules/WriteBasicConfigVersionFile.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfigVersion.cmake /usr/lib/x86_64-linux-gnu/cmake/BoostDetectToolset-1.74.0.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/boost_filesystem-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/boost_filesystem-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/libboost_filesystem-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_filesystem-1.74.0/libboost_filesystem-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0/boost_headers-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0/boost_headers-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/boost_serialization-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/boost_serialization-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/libboost_serialization-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0/libboost_serialization-variant-static.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/boost_system-config-version.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/boost_system-config.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/libboost_system-variant-shared.cmake /usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0/libboost_system-variant-static.cmake /usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake /usr/local/lib/cmake/opencv4/OpenCVConfig.cmake /usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake /usr/local/lib/cmake/opencv4/OpenCVModules.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake: phony
 
 
 #############################################
