@@ -361,8 +361,8 @@ call    0 never executed
         -:  270:      : _M_node() { }
         -:  271:
         -:  272:      explicit
-       6*:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-       6*:  274:      : _M_node(__x) { }
+       8*:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+       8*:  274:      : _M_node(__x) { }
 ------------------
 _ZNSt17_Rb_tree_iteratorIPN7testing8internal25UntypedFunctionMockerBaseEEC2EPSt18_Rb_tree_node_base:
 function _ZNSt17_Rb_tree_iteratorIPN7testing8internal25UntypedFunctionMockerBaseEEC2EPSt18_Rb_tree_node_base called 0 returned 0% blocks executed 0%
@@ -375,9 +375,9 @@ function _ZNSt17_Rb_tree_iteratorISt4pairIKPKvN7testing8internal12CallReactionEE
     #####:  274:      : _M_node(__x) { }
 ------------------
 _ZNSt17_Rb_tree_iteratorISt4pairIKPKvN7testing12_GLOBAL__N_115MockObjectStateEEEC2EPSt18_Rb_tree_node_base:
-function _ZNSt17_Rb_tree_iteratorISt4pairIKPKvN7testing12_GLOBAL__N_115MockObjectStateEEEC2EPSt18_Rb_tree_node_base called 6 returned 100% blocks executed 100%
-        6:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-        6:  274:      : _M_node(__x) { }
+function _ZNSt17_Rb_tree_iteratorISt4pairIKPKvN7testing12_GLOBAL__N_115MockObjectStateEEEC2EPSt18_Rb_tree_node_base called 8 returned 100% blocks executed 100%
+        8:  273:      _Rb_tree_iterator(_Base_ptr __x) _GLIBCXX_NOEXCEPT
+        8:  274:      : _M_node(__x) { }
 ------------------
 _ZNSt17_Rb_tree_iteratorIN7testing11ExpectationEEC2EPSt18_Rb_tree_node_base:
 function _ZNSt17_Rb_tree_iteratorIN7testing11ExpectationEEC2EPSt18_Rb_tree_node_base called 0 returned 0% blocks executed 0%
@@ -528,10 +528,10 @@ function _ZSteqRKSt17_Rb_tree_iteratorISt4pairIKPKvN7testing8internal12CallReact
         -:  317:
         -:  318:#if ! __cpp_lib_three_way_comparison
         -:  319:      friend bool
-function _ZStneRKSt17_Rb_tree_iteratorISt4pairIKPKvN7testing12_GLOBAL__N_115MockObjectStateEEESA_ called 2 returned 100% blocks executed 100%
-        2:  320:      operator!=(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
-        2:  321:      { return __x._M_node != __y._M_node; }
-        2:  321-block  0
+function _ZStneRKSt17_Rb_tree_iteratorISt4pairIKPKvN7testing12_GLOBAL__N_115MockObjectStateEEESA_ called 3 returned 100% blocks executed 100%
+        3:  320:      operator!=(const _Self& __x, const _Self& __y) _GLIBCXX_NOEXCEPT
+        3:  321:      { return __x._M_node != __y._M_node; }
+        3:  321-block  0
         -:  322:#endif
         -:  323:
         -:  324:      _Base_ptr _M_node;
@@ -2271,8 +2271,8 @@ function _ZNKSt8_Rb_treeIPKvSt4pairIKS1_N7testing8internal12CallReactionEESt10_S
 ------------------
         -:  993:
         -:  994:      iterator
-       3*:  995:      begin() _GLIBCXX_NOEXCEPT
-       3*:  996:      { return iterator(this->_M_impl._M_header._M_left); }
+       4*:  995:      begin() _GLIBCXX_NOEXCEPT
+       4*:  996:      { return iterator(this->_M_impl._M_header._M_left); }
 ------------------
 _ZNSt8_Rb_treeIPN7testing8internal25UntypedFunctionMockerBaseES3_St9_IdentityIS3_ESt4lessIS3_ESaIS3_EE5beginEv:
 function _ZNSt8_Rb_treeIPN7testing8internal25UntypedFunctionMockerBaseES3_St9_IdentityIS3_ESt4lessIS3_ESaIS3_EE5beginEv called 0 returned 0% blocks executed 0%
@@ -2296,11 +2296,11 @@ function _ZNSt8_Rb_treeIN7testing11ExpectationES1_St9_IdentityIS1_ENS1_4LessESaI
 call    0 never executed
 ------------------
 _ZNSt8_Rb_treeIPKvSt4pairIKS1_N7testing12_GLOBAL__N_115MockObjectStateEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE5beginEv:
-function _ZNSt8_Rb_treeIPKvSt4pairIKS1_N7testing12_GLOBAL__N_115MockObjectStateEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE5beginEv called 3 returned 100% blocks executed 100%
-        3:  995:      begin() _GLIBCXX_NOEXCEPT
-        3:  996:      { return iterator(this->_M_impl._M_header._M_left); }
-        3:  996-block  0
-call    0 returned 3
+function _ZNSt8_Rb_treeIPKvSt4pairIKS1_N7testing12_GLOBAL__N_115MockObjectStateEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE5beginEv called 4 returned 100% blocks executed 100%
+        4:  995:      begin() _GLIBCXX_NOEXCEPT
+        4:  996:      { return iterator(this->_M_impl._M_header._M_left); }
+        4:  996-block  0
+call    0 returned 4
 ------------------
         -:  997:
         -:  998:      const_iterator
@@ -2323,8 +2323,8 @@ call    0 never executed
 ------------------
         -: 1001:
         -: 1002:      iterator
-       3*: 1003:      end() _GLIBCXX_NOEXCEPT
-       3*: 1004:      { return iterator(&this->_M_impl._M_header); }
+       4*: 1003:      end() _GLIBCXX_NOEXCEPT
+       4*: 1004:      { return iterator(&this->_M_impl._M_header); }
 ------------------
 _ZNSt8_Rb_treeIPN7testing8internal25UntypedFunctionMockerBaseES3_St9_IdentityIS3_ESt4lessIS3_ESaIS3_EE3endEv:
 function _ZNSt8_Rb_treeIPN7testing8internal25UntypedFunctionMockerBaseES3_St9_IdentityIS3_ESt4lessIS3_ESaIS3_EE3endEv called 0 returned 0% blocks executed 0%
@@ -2341,11 +2341,11 @@ function _ZNSt8_Rb_treeIPKvSt4pairIKS1_N7testing8internal12CallReactionEESt10_Se
 call    0 never executed
 ------------------
 _ZNSt8_Rb_treeIPKvSt4pairIKS1_N7testing12_GLOBAL__N_115MockObjectStateEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE3endEv:
-function _ZNSt8_Rb_treeIPKvSt4pairIKS1_N7testing12_GLOBAL__N_115MockObjectStateEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE3endEv called 3 returned 100% blocks executed 100%
-        3: 1003:      end() _GLIBCXX_NOEXCEPT
-        3: 1004:      { return iterator(&this->_M_impl._M_header); }
-        3: 1004-block  0
-call    0 returned 3
+function _ZNSt8_Rb_treeIPKvSt4pairIKS1_N7testing12_GLOBAL__N_115MockObjectStateEESt10_Select1stIS7_ESt4lessIS1_ESaIS7_EE3endEv called 4 returned 100% blocks executed 100%
+        4: 1003:      end() _GLIBCXX_NOEXCEPT
+        4: 1004:      { return iterator(&this->_M_impl._M_header); }
+        4: 1004-block  0
+call    0 returned 4
 ------------------
         -: 1005:
         -: 1006:      const_iterator

@@ -65,214 +65,326 @@ call    0 returned 1
         -:   42:    }
         -:   43:};
         -:   44:
-        -:   45:
-        -:   46:
-        -:   47:
-        -:   48://Crear un TEST para el mockObject "mockSegmentingImg"
-        -:   49:class MockSegmentingImg: public funciones{
-        -:   50:public:
-        -:   51:    MOCK_METHOD(bool,segmentImage_,(const Mat& img,const int blockWidth, vector<cv::Mat>& blocks));
-        -:   52:};
-        -:   53:
-        -:   54:class MockFilterGray: public ImageProcessing{
-        -:   55:public:
-        -:   56:    MOCK_METHOD(bool,gray_scale,(Mat *_source, Mat *_destiny));
-        -:   57:};
-        -:   58:
-        -:   59:
-        4:   60:TEST(PruebaSegmentar,Prueba1){
-        1:   61:    vector<Mat> blocks;
-        1:   62:    MockSegmentingImg mockSegmentingImg;
-        -:   63:    applySegmenting Segment_image;
-       1*:   64:    EXPECT_TRUE(Segment_image.get_SegmentImage_(mockSegmentingImg,image,65,blocks));
-        1:   65:}
+        -:   45:class applyFilters2{
+        -:   46:public:
+function _ZN13applyFilters217get_gaussian_blurER15ImageProcessing called 1 returned 100% blocks executed 83%
+        1:   47:    bool get_gaussian_blur(ImageProcessing& funcion3){
+        1:   48:        if(!(image.empty())){
+        1:   48-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1:   49:            funcion3.gaussian_blur();
+        1:   49-block  0
+call    0 returned 1
+        1:   50:            return true;
+        -:   51:        }else{
+    #####:   52:            return false;
+    %%%%%:   52-block  0
+        -:   53:        }
+        -:   54:    }
+        -:   55:};
+        -:   56:
+        -:   57:
+        -:   58://Crear un TEST para el mockObject "mockSegmentingImg"
+        -:   59:class MockSegmentingImg: public funciones{
+        -:   60:public:
+        -:   61:    MOCK_METHOD(bool,segmentImage_,(const Mat& img,const int blockWidth, vector<cv::Mat>& blocks));
+        -:   62:};
+        -:   63:
+        -:   64:class MockFilterGray: public ImageProcessing{
+        -:   65:public:
+        -:   66:    MOCK_METHOD(bool,gray_scale,(Mat *_source, Mat *_destiny));
+        -:   67:};
+        -:   68:
+        -:   69:class MockFilterGaussian: public ImageProcessing{
+        -:   70:public:
+        -:   71:    MOCK_METHOD(bool,gaussian_blur,(Mat *_source, Mat *_destiny));
+        -:   72:};
+        -:   73:
+        4:   74:TEST(PruebaSegmentar,Prueba1){
+        1:   75:    vector<Mat> blocks;
+        1:   76:    MockSegmentingImg mockSegmentingImg;
+        -:   77:    applySegmenting Segment_image;
+       1*:   78:    EXPECT_TRUE(Segment_image.get_SegmentImage_(mockSegmentingImg,image,65,blocks));
+        1:   79:}
 ------------------
 _ZN28PruebaSegmentar_Prueba1_TestC2Ev:
 function _ZN28PruebaSegmentar_Prueba1_TestC2Ev called 1 returned 100% blocks executed 100%
-        1:   60:TEST(PruebaSegmentar,Prueba1){
-        1:   60-block  0
+        1:   74:TEST(PruebaSegmentar,Prueba1){
+        1:   74-block  0
 call    0 returned 1
 ------------------
 _ZN28PruebaSegmentar_Prueba1_TestD0Ev:
 function _ZN28PruebaSegmentar_Prueba1_TestD0Ev called 1 returned 100% blocks executed 100%
-        1:   60:TEST(PruebaSegmentar,Prueba1){
-        1:   60-block  0
+        1:   74:TEST(PruebaSegmentar,Prueba1){
+        1:   74-block  0
 call    0 returned 1
 call    1 returned 1
 ------------------
 _ZN28PruebaSegmentar_Prueba1_TestD2Ev:
 function _ZN28PruebaSegmentar_Prueba1_TestD2Ev called 1 returned 100% blocks executed 100%
-        1:   60:TEST(PruebaSegmentar,Prueba1){
-        1:   60-block  0
+        1:   74:TEST(PruebaSegmentar,Prueba1){
+        1:   74-block  0
 call    0 returned 1
 ------------------
 _ZN28PruebaSegmentar_Prueba1_Test8TestBodyEv:
 function _ZN28PruebaSegmentar_Prueba1_Test8TestBodyEv called 1 returned 100% blocks executed 31%
-        1:   60:TEST(PruebaSegmentar,Prueba1){
-        1:   61:    vector<Mat> blocks;
-        1:   61-block  0
+        1:   74:TEST(PruebaSegmentar,Prueba1){
+        1:   75:    vector<Mat> blocks;
+        1:   75-block  0
 call    0 returned 1
-        1:   62:    MockSegmentingImg mockSegmentingImg;
-call    0 returned 1
-branch  1 taken 1 (fallthrough)
-branch  2 taken 0 (throw)
-        -:   63:    applySegmenting Segment_image;
-       1*:   64:    EXPECT_TRUE(Segment_image.get_SegmentImage_(mockSegmentingImg,image,65,blocks));
-        1:   64-block  0
+        1:   76:    MockSegmentingImg mockSegmentingImg;
 call    0 returned 1
 branch  1 taken 1 (fallthrough)
 branch  2 taken 0 (throw)
-        1:   64-block  1
+        -:   77:    applySegmenting Segment_image;
+       1*:   78:    EXPECT_TRUE(Segment_image.get_SegmentImage_(mockSegmentingImg,image,65,blocks));
+        1:   78-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   78-block  1
 call    3 returned 1
 call    4 returned 1
 branch  5 taken 0 (fallthrough)
 branch  6 taken 1
-    %%%%%:   64-block  2
+    %%%%%:   78-block  2
 call    7 never executed
 branch  8 never executed
 branch  9 never executed
-    %%%%%:   64-block  3
+    %%%%%:   78-block  3
 call   10 never executed
 branch 11 never executed
 branch 12 never executed
-    %%%%%:   64-block  4
+    %%%%%:   78-block  4
 call   13 never executed
 call   14 never executed
 branch 15 never executed
 branch 16 never executed
-    %%%%%:   64-block  5
+    %%%%%:   78-block  5
 call   17 never executed
 branch 18 never executed
 branch 19 never executed
-    %%%%%:   64-block  6
+    %%%%%:   78-block  6
 call   20 never executed
 call   21 never executed
 call   22 never executed
-        1:   64-block  7
+        1:   78-block  7
 call   23 returned 1
-    $$$$$:   64-block  8
+    $$$$$:   78-block  8
 call   24 never executed
-    $$$$$:   64-block  9
-    $$$$$:   64-block 10
+    $$$$$:   78-block  9
+    $$$$$:   78-block 10
 call   25 never executed
-    $$$$$:   64-block 11
-    $$$$$:   64-block 12
+    $$$$$:   78-block 11
+    $$$$$:   78-block 12
 call   26 never executed
-    $$$$$:   64-block 13
-    $$$$$:   64-block 14
+    $$$$$:   78-block 13
+    $$$$$:   78-block 14
 call   27 never executed
-        1:   65:}
+        1:   79:}
 call    0 returned 1
 call    1 returned 1
-    $$$$$:   65-block  0
+    $$$$$:   79-block  0
 call    2 never executed
-    $$$$$:   65-block  1
+    $$$$$:   79-block  1
 call    3 never executed
 ------------------
-        -:   66:
-        4:   67:TEST(PruebaFiltroGray,Prueba2){
-        1:   68:    vector<Mat> blocksGray;
-        1:   69:    MockFilterGray mockFilterGray;
-        -:   70:    applyFilters grayImg;
-       1*:   71:    EXPECT_TRUE(grayImg.get_gray_scale(mockFilterGray));
-        1:   72:}
+        -:   80:
+        4:   81:TEST(PruebaFiltroGray,Prueba2){
+        1:   82:    vector<Mat> blocksGray;
+        1:   83:    MockFilterGray mockFilterGray;
+        -:   84:    applyFilters grayImg;
+       1*:   85:    EXPECT_TRUE(grayImg.get_gray_scale(mockFilterGray));
+        1:   86:}
 ------------------
 _ZN29PruebaFiltroGray_Prueba2_TestC2Ev:
 function _ZN29PruebaFiltroGray_Prueba2_TestC2Ev called 1 returned 100% blocks executed 100%
-        1:   67:TEST(PruebaFiltroGray,Prueba2){
-        1:   67-block  0
+        1:   81:TEST(PruebaFiltroGray,Prueba2){
+        1:   81-block  0
 call    0 returned 1
 ------------------
 _ZN29PruebaFiltroGray_Prueba2_TestD0Ev:
 function _ZN29PruebaFiltroGray_Prueba2_TestD0Ev called 1 returned 100% blocks executed 100%
-        1:   67:TEST(PruebaFiltroGray,Prueba2){
-        1:   67-block  0
+        1:   81:TEST(PruebaFiltroGray,Prueba2){
+        1:   81-block  0
 call    0 returned 1
 call    1 returned 1
 ------------------
 _ZN29PruebaFiltroGray_Prueba2_TestD2Ev:
 function _ZN29PruebaFiltroGray_Prueba2_TestD2Ev called 1 returned 100% blocks executed 100%
-        1:   67:TEST(PruebaFiltroGray,Prueba2){
-        1:   67-block  0
+        1:   81:TEST(PruebaFiltroGray,Prueba2){
+        1:   81-block  0
 call    0 returned 1
 ------------------
 _ZN29PruebaFiltroGray_Prueba2_Test8TestBodyEv:
 function _ZN29PruebaFiltroGray_Prueba2_Test8TestBodyEv called 1 returned 100% blocks executed 31%
-        1:   67:TEST(PruebaFiltroGray,Prueba2){
-        1:   68:    vector<Mat> blocksGray;
-        1:   68-block  0
+        1:   81:TEST(PruebaFiltroGray,Prueba2){
+        1:   82:    vector<Mat> blocksGray;
+        1:   82-block  0
 call    0 returned 1
-        1:   69:    MockFilterGray mockFilterGray;
-call    0 returned 1
-branch  1 taken 1 (fallthrough)
-branch  2 taken 0 (throw)
-        -:   70:    applyFilters grayImg;
-       1*:   71:    EXPECT_TRUE(grayImg.get_gray_scale(mockFilterGray));
-        1:   71-block  0
+        1:   83:    MockFilterGray mockFilterGray;
 call    0 returned 1
 branch  1 taken 1 (fallthrough)
 branch  2 taken 0 (throw)
-        1:   71-block  1
+        -:   84:    applyFilters grayImg;
+       1*:   85:    EXPECT_TRUE(grayImg.get_gray_scale(mockFilterGray));
+        1:   85-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   85-block  1
 call    3 returned 1
 call    4 returned 1
 branch  5 taken 0 (fallthrough)
 branch  6 taken 1
-    %%%%%:   71-block  2
+    %%%%%:   85-block  2
 call    7 never executed
 branch  8 never executed
 branch  9 never executed
-    %%%%%:   71-block  3
+    %%%%%:   85-block  3
 call   10 never executed
 branch 11 never executed
 branch 12 never executed
-    %%%%%:   71-block  4
+    %%%%%:   85-block  4
 call   13 never executed
 call   14 never executed
 branch 15 never executed
 branch 16 never executed
-    %%%%%:   71-block  5
+    %%%%%:   85-block  5
 call   17 never executed
 branch 18 never executed
 branch 19 never executed
-    %%%%%:   71-block  6
+    %%%%%:   85-block  6
 call   20 never executed
 call   21 never executed
 call   22 never executed
-        1:   71-block  7
+        1:   85-block  7
 call   23 returned 1
-    $$$$$:   71-block  8
+    $$$$$:   85-block  8
 call   24 never executed
-    $$$$$:   71-block  9
-    $$$$$:   71-block 10
+    $$$$$:   85-block  9
+    $$$$$:   85-block 10
 call   25 never executed
-    $$$$$:   71-block 11
-    $$$$$:   71-block 12
+    $$$$$:   85-block 11
+    $$$$$:   85-block 12
 call   26 never executed
-    $$$$$:   71-block 13
-    $$$$$:   71-block 14
+    $$$$$:   85-block 13
+    $$$$$:   85-block 14
 call   27 never executed
-        1:   72:}
+        1:   86:}
 call    0 returned 1
 call    1 returned 1
-    $$$$$:   72-block  0
+    $$$$$:   86-block  0
 call    2 never executed
-    $$$$$:   72-block  1
+    $$$$$:   86-block  1
 call    3 never executed
 ------------------
-        -:   73:
-        -:   74:
-        -:   75:/**
-        -:   76: * @param argc
-        -:   77: * @param argv
-        -:   78: * @return
-        -:   79: */
+        -:   87:
+        4:   88:TEST(PruebaFiltroGaussian,Prueba3){
+        1:   89:    vector<Mat> blocksGaussian;
+        1:   90:    MockFilterGaussian mockFilterGaussian;
+        -:   91:    applyFilters2 gaussianImg;
+       1*:   92:    EXPECT_TRUE(gaussianImg.get_gaussian_blur(mockFilterGaussian));
+        1:   93:}
+------------------
+_ZN33PruebaFiltroGaussian_Prueba3_TestC2Ev:
+function _ZN33PruebaFiltroGaussian_Prueba3_TestC2Ev called 1 returned 100% blocks executed 100%
+        1:   88:TEST(PruebaFiltroGaussian,Prueba3){
+        1:   88-block  0
+call    0 returned 1
+------------------
+_ZN33PruebaFiltroGaussian_Prueba3_TestD0Ev:
+function _ZN33PruebaFiltroGaussian_Prueba3_TestD0Ev called 1 returned 100% blocks executed 100%
+        1:   88:TEST(PruebaFiltroGaussian,Prueba3){
+        1:   88-block  0
+call    0 returned 1
+call    1 returned 1
+------------------
+_ZN33PruebaFiltroGaussian_Prueba3_TestD2Ev:
+function _ZN33PruebaFiltroGaussian_Prueba3_TestD2Ev called 1 returned 100% blocks executed 100%
+        1:   88:TEST(PruebaFiltroGaussian,Prueba3){
+        1:   88-block  0
+call    0 returned 1
+------------------
+_ZN33PruebaFiltroGaussian_Prueba3_Test8TestBodyEv:
+function _ZN33PruebaFiltroGaussian_Prueba3_Test8TestBodyEv called 1 returned 100% blocks executed 31%
+        1:   88:TEST(PruebaFiltroGaussian,Prueba3){
+        1:   89:    vector<Mat> blocksGaussian;
+        1:   89-block  0
+call    0 returned 1
+        1:   90:    MockFilterGaussian mockFilterGaussian;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   91:    applyFilters2 gaussianImg;
+       1*:   92:    EXPECT_TRUE(gaussianImg.get_gaussian_blur(mockFilterGaussian));
+        1:   92-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   92-block  1
+call    3 returned 1
+call    4 returned 1
+branch  5 taken 0 (fallthrough)
+branch  6 taken 1
+    %%%%%:   92-block  2
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+    %%%%%:   92-block  3
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+    %%%%%:   92-block  4
+call   13 never executed
+call   14 never executed
+branch 15 never executed
+branch 16 never executed
+    %%%%%:   92-block  5
+call   17 never executed
+branch 18 never executed
+branch 19 never executed
+    %%%%%:   92-block  6
+call   20 never executed
+call   21 never executed
+call   22 never executed
+        1:   92-block  7
+call   23 returned 1
+    $$$$$:   92-block  8
+call   24 never executed
+    $$$$$:   92-block  9
+    $$$$$:   92-block 10
+call   25 never executed
+    $$$$$:   92-block 11
+    $$$$$:   92-block 12
+call   26 never executed
+    $$$$$:   92-block 13
+    $$$$$:   92-block 14
+call   27 never executed
+        1:   93:}
+call    0 returned 1
+call    1 returned 1
+    $$$$$:   93-block  0
+call    2 never executed
+    $$$$$:   93-block  1
+call    3 never executed
+------------------
+        -:   94:
+        -:   95:/**
+        -:   96: * @param argc
+        -:   97: * @param argv
+        -:   98: * @return
+        -:   99: */
+        -:  100:
 function main called 1 returned 100% blocks executed 100%
-        1:   80:int main(int argc, char *argv[]) {
-        -:   81:
-        1:   82:    testing::InitGoogleTest(&argc, argv);
-        1:   82-block  0
+        1:  101:int main(int argc, char *argv[]) {
+        -:  102:
+        1:  103:    testing::InitGoogleTest(&argc, argv);
+        1:  103-block  0
 call    0 returned 1
-        1:   83:    return RUN_ALL_TESTS();
+        1:  104:    return RUN_ALL_TESTS();
 call    0 returned 1
-        -:   84:}
-        -:   85:
+        -:  105:}
+        -:  106:

@@ -360,9 +360,9 @@ branch  1 never executed
         -:  310:  template<typename _Iterator>
         -:  311:    _GLIBCXX20_CONSTEXPR
         -:  312:    inline _Iterator
-      78*:  313:    __niter_base(_Iterator __it)
+     102*:  313:    __niter_base(_Iterator __it)
         -:  314:    _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
-      78*:  315:    { return __it; }
+     102*:  315:    { return __it; }
 ------------------
 _ZSt12__niter_baseIPdET_S1_:
 function _ZSt12__niter_baseIPdET_S1_ called 0 returned 0% blocks executed 0%
@@ -372,11 +372,11 @@ function _ZSt12__niter_baseIPdET_S1_ called 0 returned 0% blocks executed 0%
     %%%%%:  315-block  0
 ------------------
 _ZSt12__niter_baseIPiET_S1_:
-function _ZSt12__niter_baseIPiET_S1_ called 24 returned 100% blocks executed 100%
-       24:  313:    __niter_base(_Iterator __it)
+function _ZSt12__niter_baseIPiET_S1_ called 36 returned 100% blocks executed 100%
+       36:  313:    __niter_base(_Iterator __it)
         -:  314:    _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
-       24:  315:    { return __it; }
-       24:  315-block  0
+       36:  315:    { return __it; }
+       36:  315-block  0
 ------------------
 _ZSt12__niter_baseIPmET_S1_:
 function _ZSt12__niter_baseIPmET_S1_ called 0 returned 0% blocks executed 0%
@@ -421,11 +421,11 @@ function _ZSt12__niter_baseIPPN7testing17TestEventListenerEET_S4_ called 6 retur
         6:  315-block  0
 ------------------
 _ZSt12__niter_baseIPPN7testing8TestInfoEET_S4_:
-function _ZSt12__niter_baseIPPN7testing8TestInfoEET_S4_ called 12 returned 100% blocks executed 100%
-       12:  313:    __niter_base(_Iterator __it)
+function _ZSt12__niter_baseIPPN7testing8TestInfoEET_S4_ called 18 returned 100% blocks executed 100%
+       18:  313:    __niter_base(_Iterator __it)
         -:  314:    _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
-       12:  315:    { return __it; }
-       12:  315-block  0
+       18:  315:    { return __it; }
+       18:  315-block  0
 ------------------
 _ZSt12__niter_baseIPN7testing12TestPropertyEET_S3_:
 function _ZSt12__niter_baseIPN7testing12TestPropertyEET_S3_ called 0 returned 0% blocks executed 0%
@@ -449,11 +449,11 @@ function _ZSt12__niter_baseIPN7testing8internal13edit_distance8EditTypeEET_S5_ c
     %%%%%:  315-block  0
 ------------------
 _ZSt12__niter_baseIPPN7testing9TestSuiteEET_S4_:
-function _ZSt12__niter_baseIPPN7testing9TestSuiteEET_S4_ called 12 returned 100% blocks executed 100%
-       12:  313:    __niter_base(_Iterator __it)
+function _ZSt12__niter_baseIPPN7testing9TestSuiteEET_S4_ called 18 returned 100% blocks executed 100%
+       18:  313:    __niter_base(_Iterator __it)
         -:  314:    _GLIBCXX_NOEXCEPT_IF(std::is_nothrow_copy_constructible<_Iterator>::value)
-       12:  315:    { return __it; }
-       12:  315-block  0
+       18:  315:    { return __it; }
+       18:  315-block  0
 ------------------
         -:  316:
         -:  317:  template<typename _Ite, typename _Seq>
@@ -2740,13 +2740,13 @@ call    0 never executed
         -: 2058:  template<typename _RandomAccessIterator, typename _Predicate>
         -: 2059:    _GLIBCXX20_CONSTEXPR
         -: 2060:    _RandomAccessIterator
-       2*: 2061:    __find_if(_RandomAccessIterator __first, _RandomAccessIterator __last,
+       3*: 2061:    __find_if(_RandomAccessIterator __first, _RandomAccessIterator __last,
         -: 2062:	      _Predicate __pred, random_access_iterator_tag)
         -: 2063:    {
         -: 2064:      typename iterator_traits<_RandomAccessIterator>::difference_type
-       2*: 2065:	__trip_count = (__last - __first) >> 2;
+       3*: 2065:	__trip_count = (__last - __first) >> 2;
         -: 2066:
-       2*: 2067:      for (; __trip_count > 0; --__trip_count)
+       3*: 2067:      for (; __trip_count > 0; --__trip_count)
         -: 2068:	{
     #####: 2069:	  if (__pred(__first))
     #####: 2070:	    return __first;
@@ -2765,43 +2765,43 @@ call    0 never executed
     #####: 2083:	  ++__first;
         -: 2084:	}
         -: 2085:
-       2*: 2086:      switch (__last - __first)
+       3*: 2086:      switch (__last - __first)
         -: 2087:	{
     #####: 2088:	case 3:
     #####: 2089:	  if (__pred(__first))
     #####: 2090:	    return __first;
     #####: 2091:	  ++__first;
         -: 2092:	  // FALLTHRU
-    #####: 2093:	case 2:
-    #####: 2094:	  if (__pred(__first))
+       1*: 2093:	case 2:
+       1*: 2094:	  if (__pred(__first))
     #####: 2095:	    return __first;
-    #####: 2096:	  ++__first;
+       1*: 2096:	  ++__first;
         -: 2097:	  // FALLTHRU
-       1*: 2098:	case 1:
-       1*: 2099:	  if (__pred(__first))
+       2*: 2098:	case 1:
+       2*: 2099:	  if (__pred(__first))
     #####: 2100:	    return __first;
-       1*: 2101:	  ++__first;
+       2*: 2101:	  ++__first;
         -: 2102:	  // FALLTHRU
-       2*: 2103:	case 0:
+       3*: 2103:	case 0:
         -: 2104:	default:
-       2*: 2105:	  return __last;
+       3*: 2105:	  return __last;
         -: 2106:	}
         -: 2107:    }
 ------------------
 _ZSt9__find_ifISt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS5_SaIS5_EEEEENS1_5__ops10_Iter_predINS3_8internal15TestSuiteNameIsEEEET_SH_SH_T0_St26random_access_iterator_tag:
-function _ZSt9__find_ifISt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS5_SaIS5_EEEEENS1_5__ops10_Iter_predINS3_8internal15TestSuiteNameIsEEEET_SH_SH_T0_St26random_access_iterator_tag called 2 returned 100% blocks executed 26%
-        2: 2061:    __find_if(_RandomAccessIterator __first, _RandomAccessIterator __last,
+function _ZSt9__find_ifISt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS5_SaIS5_EEEEENS1_5__ops10_Iter_predINS3_8internal15TestSuiteNameIsEEEET_SH_SH_T0_St26random_access_iterator_tag called 3 returned 100% blocks executed 35%
+        3: 2061:    __find_if(_RandomAccessIterator __first, _RandomAccessIterator __last,
         -: 2062:	      _Predicate __pred, random_access_iterator_tag)
         -: 2063:    {
         -: 2064:      typename iterator_traits<_RandomAccessIterator>::difference_type
-        2: 2065:	__trip_count = (__last - __first) >> 2;
-        2: 2065-block  0
-call    0 returned 2
+        3: 2065:	__trip_count = (__last - __first) >> 2;
+        3: 2065-block  0
+call    0 returned 3
         -: 2066:
-       2*: 2067:      for (; __trip_count > 0; --__trip_count)
-        2: 2067-block  0
+       3*: 2067:      for (; __trip_count > 0; --__trip_count)
+        3: 2067-block  0
 branch  0 taken 0
-branch  1 taken 2 (fallthrough)
+branch  1 taken 3 (fallthrough)
         -: 2068:	{
     #####: 2069:	  if (__pred(__first))
     %%%%%: 2069-block  0
@@ -2853,11 +2853,11 @@ call    0 never executed
 call    0 never executed
         -: 2084:	}
         -: 2085:
-        2: 2086:      switch (__last - __first)
-        2: 2086-block  0
-call    0 returned 2
+        3: 2086:      switch (__last - __first)
+        3: 2086-block  0
+call    0 returned 3
 branch  1 taken 0
-branch  2 taken 0
+branch  2 taken 1
 branch  3 taken 1
 branch  4 taken 1
         -: 2087:	{
@@ -2875,39 +2875,39 @@ call    0 never executed
     %%%%%: 2091-block  0
 call    0 never executed
         -: 2092:	  // FALLTHRU
-    #####: 2093:	case 2:
-    #####: 2094:	  if (__pred(__first))
-    %%%%%: 2094-block  0
-call    0 never executed
-call    1 never executed
-branch  2 never executed
-branch  3 never executed
-    #####: 2095:	    return __first;
-    %%%%%: 2095-block  0
-call    0 never executed
-    #####: 2096:	  ++__first;
-    %%%%%: 2096-block  0
-call    0 never executed
-        -: 2097:	  // FALLTHRU
-        1: 2098:	case 1:
-        1: 2099:	  if (__pred(__first))
-        1: 2099-block  0
+        1: 2093:	case 2:
+        1: 2094:	  if (__pred(__first))
+        1: 2094-block  0
 call    0 returned 1
 call    1 returned 1
 branch  2 taken 0 (fallthrough)
 branch  3 taken 1
+    #####: 2095:	    return __first;
+    %%%%%: 2095-block  0
+call    0 never executed
+        1: 2096:	  ++__first;
+        1: 2096-block  0
+call    0 returned 1
+        -: 2097:	  // FALLTHRU
+        2: 2098:	case 1:
+        2: 2099:	  if (__pred(__first))
+        2: 2099-block  0
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 0 (fallthrough)
+branch  3 taken 2
     #####: 2100:	    return __first;
     %%%%%: 2100-block  0
 call    0 never executed
-        1: 2101:	  ++__first;
-        1: 2101-block  0
-call    0 returned 1
-        -: 2102:	  // FALLTHRU
-        2: 2103:	case 0:
-        -: 2104:	default:
-        2: 2105:	  return __last;
-        2: 2105-block  0
+        2: 2101:	  ++__first;
+        2: 2101-block  0
 call    0 returned 2
+        -: 2102:	  // FALLTHRU
+        3: 2103:	case 0:
+        -: 2104:	default:
+        3: 2105:	  return __last;
+        3: 2105-block  0
+call    0 returned 3
         -: 2106:	}
         -: 2107:    }
 ------------------
@@ -3131,10 +3131,10 @@ call    0 never executed
         -: 2109:  template<typename _Iterator, typename _Predicate>
         -: 2110:    _GLIBCXX20_CONSTEXPR
         -: 2111:    inline _Iterator
-       2*: 2112:    __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
+       3*: 2112:    __find_if(_Iterator __first, _Iterator __last, _Predicate __pred)
         -: 2113:    {
-       2*: 2114:      return __find_if(__first, __last, __pred,
-       4*: 2115:		       std::__iterator_category(__first));
+       3*: 2114:      return __find_if(__first, __last, __pred,
+       6*: 2115:		       std::__iterator_category(__first));
         -: 2116:    }
         -: 2117:
         -: 2118:  template<typename _InputIterator, typename _Predicate>

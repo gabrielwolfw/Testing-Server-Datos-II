@@ -55,15 +55,15 @@ function _ZN15ImageProcessingC2EiiifPN2cv3MatES2_ called 0 returned 0% blocks ex
     #####:   50:    source = _source;
     #####:   51:    destiny = _destiny;
     #####:   52:}
-function _ZN15ImageProcessing13gaussian_blurEv called 0 returned 0% blocks executed 0%
-    #####:   53:int ImageProcessing::gaussian_blur() {
-    #####:   54:    if (source->empty()){
-    %%%%%:   54-block  0
-call    0 never executed
-branch  1 never executed
-branch  2 never executed
-    #####:   55:        return -1;
-    %%%%%:   55-block  0
+function _ZN15ImageProcessing13gaussian_blurEv called 1 returned 100% blocks executed 28%
+        1:   53:int ImageProcessing::gaussian_blur() {
+        1:   54:    if (source->empty()){
+        1:   54-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1:   55:        return -1;
+        1:   55-block  0
         -:   56:    }else{
     #####:   57:        GaussianBlur(*source, *destiny , Size(3, 3), 0);
     %%%%%:   57-block  0
@@ -209,8 +209,8 @@ call    0 never executed
 call    1 never executed
         -:   90:}
         -:   91:
-function _ZN15ImageProcessingC2Ev called 1 returned 100% blocks executed 100%
-        1:   92:ImageProcessing::ImageProcessing() {}
+function _ZN15ImageProcessingC2Ev called 2 returned 100% blocks executed 100%
+        2:   92:ImageProcessing::ImageProcessing() {}
         -:   93:
         -:   94:
 function _Z13Segment_imageRKN2cv3MatEiRSt6vectorIS0_SaIS0_EE called 1 returned 100% blocks executed 71%

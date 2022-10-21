@@ -6444,14 +6444,14 @@ call    2 never executed
         -: 6203:
         -: 6204:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 6205:    inline basic_string<_CharT, _Traits, _Alloc>
-function _ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EEOS8_PKS5_ called 44 returned 100% blocks executed 100%
-       44: 6206:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+function _ZStplIcSt11char_traitsIcESaIcEENSt7__cxx1112basic_stringIT_T0_T1_EEOS8_PKS5_ called 49 returned 100% blocks executed 100%
+       49: 6206:    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
         -: 6207:	      const _CharT* __rhs)
-       44: 6208:    { return std::move(__lhs.append(__rhs)); }
-       44: 6208-block  0
-call    0 returned 44
-call    1 returned 44
-call    2 returned 44
+       49: 6208:    { return std::move(__lhs.append(__rhs)); }
+       49: 6208-block  0
+call    0 returned 49
+call    1 returned 49
+call    2 returned 49
         -: 6209:
         -: 6210:  template<typename _CharT, typename _Traits, typename _Alloc>
         -: 6211:    inline basic_string<_CharT, _Traits, _Alloc>

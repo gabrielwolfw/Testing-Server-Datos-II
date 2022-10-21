@@ -301,7 +301,7 @@ branch  2 never executed
         -:  287:#ifdef _GLIBCXX_HAVE_BUILTIN_IS_CONSTANT_EVALUATED
         -:  288:      (void) __s;
         -:  289:      // In constexpr contexts all strings should be constant.
-       42:  290:      return __builtin_is_constant_evaluated();
+       50:  290:      return __builtin_is_constant_evaluated();
         -:  291:#else
         -:  292:      while (__builtin_constant_p(*__s) && *__s)
         -:  293:	__s++;
@@ -404,21 +404,21 @@ branch  2 never executed
         -:  390:      }
         -:  391:
         -:  392:      static _GLIBCXX17_CONSTEXPR size_t
-function _ZNSt11char_traitsIcE6lengthEPKc called 42 returned 100% blocks executed 71%
-       42:  393:      length(const char_type* __s)
-       42:  393-block  0
+function _ZNSt11char_traitsIcE6lengthEPKc called 50 returned 100% blocks executed 71%
+       50:  393:      length(const char_type* __s)
+       50:  393-block  0
         -:  394:      {
         -:  395:#if __cplusplus >= 201703L
-       42:  396:	if (__constant_string_p(__s))
-       42:  396-block  0
+       50:  396:	if (__constant_string_p(__s))
+       50:  396-block  0
 branch  0 taken 0 (fallthrough)
-branch  1 taken 42
+branch  1 taken 50
     #####:  397:	  return __gnu_cxx::char_traits<char_type>::length(__s);
     %%%%%:  397-block  0
 call    0 never executed
         -:  398:#endif
-       42:  399:	return __builtin_strlen(__s);
-       42:  399-block  0
+       50:  399:	return __builtin_strlen(__s);
+       50:  399-block  0
         -:  400:      }
         -:  401:
         -:  402:      static _GLIBCXX17_CONSTEXPR const char_type*

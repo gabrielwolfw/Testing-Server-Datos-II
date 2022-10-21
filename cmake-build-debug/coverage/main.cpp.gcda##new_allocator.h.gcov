@@ -80,15 +80,15 @@
         -:   76:#endif
         -:   77:
         -:   78:      _GLIBCXX20_CONSTEXPR
-       6*:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+       9*:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorIPKvEC2Ev:
-function _ZN9__gnu_cxx13new_allocatorIPKvEC2Ev called 4 returned 100% blocks executed 100%
-        4:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+function _ZN9__gnu_cxx13new_allocatorIPKvEC2Ev called 6 returned 100% blocks executed 100%
+        6:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorIN2cv3MatEEC2Ev:
-function _ZN9__gnu_cxx13new_allocatorIN2cv3MatEEC2Ev called 2 returned 100% blocks executed 100%
-        2:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+function _ZN9__gnu_cxx13new_allocatorIN2cv3MatEEC2Ev called 3 returned 100% blocks executed 100%
+        3:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKPKN5boost6system14error_categoryESt10unique_ptrINS4_6detail12std_categoryESt14default_deleteISB_EEEEEC2Ev:
 function _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKPKN5boost6system14error_categoryESt10unique_ptrINS4_6detail12std_categoryESt14default_deleteISB_EEEEEC2Ev called 0 returned 0% blocks executed 0%
@@ -112,15 +112,15 @@ function _ZN9__gnu_cxx13new_allocatorIcEC2ERKS1_ called 0 returned 0% blocks exe
         -:   86:	new_allocator(const new_allocator<_Tp1>&) _GLIBCXX_USE_NOEXCEPT { }
         -:   87:
         -:   88:#if __cplusplus <= 201703L
-       6*:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+       9*:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorIPKvED2Ev:
-function _ZN9__gnu_cxx13new_allocatorIPKvED2Ev called 4 returned 100% blocks executed 100%
-        4:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+function _ZN9__gnu_cxx13new_allocatorIPKvED2Ev called 6 returned 100% blocks executed 100%
+        6:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorIN2cv3MatEED2Ev:
-function _ZN9__gnu_cxx13new_allocatorIN2cv3MatEED2Ev called 2 returned 100% blocks executed 100%
-        2:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+function _ZN9__gnu_cxx13new_allocatorIN2cv3MatEED2Ev called 3 returned 100% blocks executed 100%
+        3:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKPKN5boost6system14error_categoryESt10unique_ptrINS4_6detail12std_categoryESt14default_deleteISB_EEEEED2Ev:
 function _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKPKN5boost6system14error_categoryESt10unique_ptrINS4_6detail12std_categoryESt14default_deleteISB_EEEEED2Ev called 0 returned 0% blocks executed 0%

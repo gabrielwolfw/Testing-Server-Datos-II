@@ -1852,13 +1852,13 @@ call   15 never executed
         -: 1703:// shares its API with MutexBase otherwise.
         -: 1704:class Mutex : public MutexBase {
         -: 1705: public:
-function _ZN7testing8internal5MutexC2Ev called 7 returned 100% blocks executed 31%
-        7: 1706:  Mutex() {
-       7*: 1707:    GTEST_CHECK_POSIX_SUCCESS_(pthread_mutex_init(&mutex_, nullptr));
-        7: 1707-block  0
-call    0 returned 7
+function _ZN7testing8internal5MutexC2Ev called 9 returned 100% blocks executed 31%
+        9: 1706:  Mutex() {
+       9*: 1707:    GTEST_CHECK_POSIX_SUCCESS_(pthread_mutex_init(&mutex_, nullptr));
+        9: 1707-block  0
+call    0 returned 9
 branch  1 taken 0 (fallthrough)
-branch  2 taken 7
+branch  2 taken 9
     %%%%%: 1707-block  1
 call    3 never executed
 call    4 never executed
@@ -1877,16 +1877,16 @@ branch 13 never executed
 call   14 never executed
     $$$$$: 1707-block  5
 call   15 never executed
-        7: 1708:    has_owner_ = false;
-        7: 1709:  }
-        7: 1709-block  0
-function _ZN7testing8internal5MutexD2Ev called 7 returned 100% blocks executed 30%
-        7: 1710:  ~Mutex() {
-       7*: 1711:    GTEST_CHECK_POSIX_SUCCESS_(pthread_mutex_destroy(&mutex_));
-        7: 1711-block  0
-call    0 returned 7
+        9: 1708:    has_owner_ = false;
+        9: 1709:  }
+        9: 1709-block  0
+function _ZN7testing8internal5MutexD2Ev called 9 returned 100% blocks executed 30%
+        9: 1710:  ~Mutex() {
+       9*: 1711:    GTEST_CHECK_POSIX_SUCCESS_(pthread_mutex_destroy(&mutex_));
+        9: 1711-block  0
+call    0 returned 9
 branch  1 taken 0 (fallthrough)
-branch  2 taken 7
+branch  2 taken 9
     %%%%%: 1711-block  1
 call    3 never executed
 call    4 never executed
@@ -1894,7 +1894,7 @@ call    5 never executed
 call    6 never executed
 call    7 never executed
 call    8 never executed
-        7: 1712:  }
+        9: 1712:  }
         -: 1713:
         -: 1714: private:
         -: 1715:  GTEST_DISALLOW_COPY_AND_ASSIGN_(Mutex);

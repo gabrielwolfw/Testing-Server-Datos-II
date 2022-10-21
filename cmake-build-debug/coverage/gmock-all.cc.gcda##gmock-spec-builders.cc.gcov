@@ -809,14 +809,14 @@ call    0 never executed
     #####:  306:}
     %%%%%:  306-block  0
         -:  307:
-function _ZN7testing8internal25UntypedFunctionMockerBaseC2Ev called 2 returned 100% blocks executed 100%
-        2:  308:UntypedFunctionMockerBase::UntypedFunctionMockerBase()
-        2:  309:    : mock_obj_(nullptr), name_("") {}
-        2:  309-block  0
-call    0 returned 2
-call    1 returned 2
+function _ZN7testing8internal25UntypedFunctionMockerBaseC2Ev called 3 returned 100% blocks executed 100%
+        3:  308:UntypedFunctionMockerBase::UntypedFunctionMockerBase()
+        3:  309:    : mock_obj_(nullptr), name_("") {}
+        3:  309-block  0
+call    0 returned 3
+call    1 returned 3
         -:  310:
-       2*:  311:UntypedFunctionMockerBase::~UntypedFunctionMockerBase() {}
+       3*:  311:UntypedFunctionMockerBase::~UntypedFunctionMockerBase() {}
 ------------------
 _ZN7testing8internal25UntypedFunctionMockerBaseD0Ev:
 function _ZN7testing8internal25UntypedFunctionMockerBaseD0Ev called 0 returned 0% blocks executed 0%
@@ -826,11 +826,11 @@ call    0 never executed
 call    1 never executed
 ------------------
 _ZN7testing8internal25UntypedFunctionMockerBaseD2Ev:
-function _ZN7testing8internal25UntypedFunctionMockerBaseD2Ev called 2 returned 100% blocks executed 100%
-        2:  311:UntypedFunctionMockerBase::~UntypedFunctionMockerBase() {}
-        2:  311-block  0
-call    0 returned 2
-call    1 returned 2
+function _ZN7testing8internal25UntypedFunctionMockerBaseD2Ev called 3 returned 100% blocks executed 100%
+        3:  311:UntypedFunctionMockerBase::~UntypedFunctionMockerBase() {}
+        3:  311-block  0
+call    0 returned 3
+call    1 returned 3
 ------------------
         -:  312:
         -:  313:// Sets the mock object this mock method belongs to, and registers
@@ -1497,28 +1497,28 @@ call    0 never executed
         -:  522:// Verifies that all expectations on this mock function have been
         -:  523:// satisfied.  Reports one or more Google Test non-fatal failures
         -:  524:// and returns false if not.
-function _ZN7testing8internal25UntypedFunctionMockerBase32VerifyAndClearExpectationsLockedEv called 2 returned 100% blocks executed 34%
-        2:  525:bool UntypedFunctionMockerBase::VerifyAndClearExpectationsLocked()
+function _ZN7testing8internal25UntypedFunctionMockerBase32VerifyAndClearExpectationsLockedEv called 3 returned 100% blocks executed 34%
+        3:  525:bool UntypedFunctionMockerBase::VerifyAndClearExpectationsLocked()
         -:  526:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(g_gmock_mutex) {
-        2:  527:  g_gmock_mutex.AssertHeld();
-        2:  527-block  0
-call    0 returned 2
-branch  1 taken 2 (fallthrough)
+        3:  527:  g_gmock_mutex.AssertHeld();
+        3:  527-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
 branch  2 taken 0 (throw)
-        2:  528:  bool expectations_met = true;
-        2:  529:  for (UntypedExpectations::const_iterator it =
-        2:  530:           untyped_expectations_.begin();
-        2:  530-block  0
-call    0 returned 2
-call    1 returned 2
-       2*:  531:       it != untyped_expectations_.end(); ++it) {
+        3:  528:  bool expectations_met = true;
+        3:  529:  for (UntypedExpectations::const_iterator it =
+        3:  530:           untyped_expectations_.begin();
+        3:  530-block  0
+call    0 returned 3
+call    1 returned 3
+       3*:  531:       it != untyped_expectations_.end(); ++it) {
     %%%%%:  531-block  0
 call    0 never executed
-        2:  531-block  1
-call    1 returned 2
-call    2 returned 2
+        3:  531-block  1
+call    1 returned 3
+call    2 returned 3
 branch  3 taken 0
-branch  4 taken 2 (fallthrough)
+branch  4 taken 3 (fallthrough)
     #####:  532:    ExpectationBase* const untyped_expectation = it->get();
     %%%%%:  532-block  0
 call    0 never executed
@@ -1607,29 +1607,29 @@ call    1 never executed
         -:  557:  // this method is called again. Instead, make a copy of the set of
         -:  558:  // expectations to delete, clear our set within the mutex, and then clear the
         -:  559:  // copied set outside of it.
-        2:  560:  UntypedExpectations expectations_to_delete;
-        2:  560-block  0
-call    0 returned 2
-        2:  561:  untyped_expectations_.swap(expectations_to_delete);
-call    0 returned 2
+        3:  560:  UntypedExpectations expectations_to_delete;
+        3:  560-block  0
+call    0 returned 3
+        3:  561:  untyped_expectations_.swap(expectations_to_delete);
+call    0 returned 3
         -:  562:
-        2:  563:  g_gmock_mutex.Unlock();
-call    0 returned 2
-branch  1 taken 2 (fallthrough)
+        3:  563:  g_gmock_mutex.Unlock();
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
 branch  2 taken 0 (throw)
-        2:  564:  expectations_to_delete.clear();
-        2:  564-block  0
-call    0 returned 2
-        2:  565:  g_gmock_mutex.Lock();
-call    0 returned 2
-branch  1 taken 2 (fallthrough)
+        3:  564:  expectations_to_delete.clear();
+        3:  564-block  0
+call    0 returned 3
+        3:  565:  g_gmock_mutex.Lock();
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
 branch  2 taken 0 (throw)
         -:  566:
-        2:  567:  return expectations_met;
-        2:  567-block  0
-        2:  568:}
-        2:  568-block  0
-call    0 returned 2
+        3:  567:  return expectations_met;
+        3:  567-block  0
+        3:  568:}
+        3:  568-block  0
+call    0 returned 3
     $$$$$:  568-block  1
 call    1 never executed
         -:  569:
@@ -1803,9 +1803,9 @@ branch  2 taken 0
         1:  658-block  2
     %%%%%:  658-block  3
         -:  659:
-function _ZN7testing12_GLOBAL__N_118MockObjectRegistry6statesEv called 4 returned 100% blocks executed 100%
-        4:  660:  StateMap& states() { return states_; }
-        4:  660-block  0
+function _ZN7testing12_GLOBAL__N_118MockObjectRegistry6statesEv called 6 returned 100% blocks executed 100%
+        6:  660:  StateMap& states() { return states_; }
+        6:  660-block  0
         -:  661:
         -:  662: private:
         -:  663:  StateMap states_;
@@ -2170,25 +2170,25 @@ call    1 never executed
         -:  821:// registry when the last mock method associated with it has been
         -:  822:// unregistered.  This is called only in the destructor of
         -:  823:// FunctionMockerBase.
-function _ZN7testing4Mock16UnregisterLockedEPNS_8internal25UntypedFunctionMockerBaseE called 2 returned 100% blocks executed 55%
-        2:  824:void Mock::UnregisterLocked(internal::UntypedFunctionMockerBase* mocker)
+function _ZN7testing4Mock16UnregisterLockedEPNS_8internal25UntypedFunctionMockerBaseE called 3 returned 100% blocks executed 55%
+        3:  824:void Mock::UnregisterLocked(internal::UntypedFunctionMockerBase* mocker)
         -:  825:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(internal::g_gmock_mutex) {
-        2:  826:  internal::g_gmock_mutex.AssertHeld();
-        2:  826-block  0
-call    0 returned 2
-        2:  827:  for (MockObjectRegistry::StateMap::iterator it =
-        2:  828:           g_mock_object_registry.states().begin();
-call    0 returned 2
-call    1 returned 2
-       2*:  829:       it != g_mock_object_registry.states().end(); ++it) {
+        3:  826:  internal::g_gmock_mutex.AssertHeld();
+        3:  826-block  0
+call    0 returned 3
+        3:  827:  for (MockObjectRegistry::StateMap::iterator it =
+        3:  828:           g_mock_object_registry.states().begin();
+call    0 returned 3
+call    1 returned 3
+       3*:  829:       it != g_mock_object_registry.states().end(); ++it) {
     %%%%%:  829-block  0
 call    0 never executed
-        2:  829-block  1
-call    1 returned 2
-call    2 returned 2
-call    3 returned 2
+        3:  829-block  1
+call    1 returned 3
+call    2 returned 3
+call    3 returned 3
 branch  4 taken 0
-branch  5 taken 2 (fallthrough)
+branch  5 taken 3 (fallthrough)
     #####:  830:    FunctionMockers& mockers = it->second.function_mockers;
     %%%%%:  830-block  0
 call    0 never executed

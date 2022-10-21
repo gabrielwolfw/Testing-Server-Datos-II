@@ -139,7 +139,7 @@ call    0 never executed
         -:  110:
         -:  111:  // Streams a non-pointer value to this object.
         -:  112:  template <typename T>
-     406*:  113:  inline Message& operator <<(const T& val) {
+     410*:  113:  inline Message& operator <<(const T& val) {
         -:  114:    // Some libraries overload << for STL containers.  These
         -:  115:    // overloads are defined in the global namespace instead of ::std.
         -:  116:    //
@@ -155,8 +155,8 @@ call    0 never executed
         -:  126:    // overloads of << defined in the global namespace and those
         -:  127:    // visible via Koenig lookup are both exposed in this function.
         -:  128:    using ::operator <<;
-     406*:  129:    *ss_ << val;
-     406*:  130:    return *this;
+     410*:  129:    *ss_ << val;
+     410*:  130:    return *this;
         -:  131:  }
 ------------------
 _ZN7testing7MessagelsIA3_cEERS0_RKT_:
@@ -785,8 +785,8 @@ call    1 never executed
         -:  131:  }
 ------------------
 _ZN7testing7MessagelsIiEERS0_RKT_:
-function _ZN7testing7MessagelsIiEERS0_RKT_ called 9 returned 100% blocks executed 100%
-        9:  113:  inline Message& operator <<(const T& val) {
+function _ZN7testing7MessagelsIiEERS0_RKT_ called 11 returned 100% blocks executed 100%
+       11:  113:  inline Message& operator <<(const T& val) {
         -:  114:    // Some libraries overload << for STL containers.  These
         -:  115:    // overloads are defined in the global namespace instead of ::std.
         -:  116:    //
@@ -802,11 +802,11 @@ function _ZN7testing7MessagelsIiEERS0_RKT_ called 9 returned 100% blocks execute
         -:  126:    // overloads of << defined in the global namespace and those
         -:  127:    // visible via Koenig lookup are both exposed in this function.
         -:  128:    using ::operator <<;
-        9:  129:    *ss_ << val;
-        9:  129-block  0
-call    0 returned 9
-call    1 returned 9
-        9:  130:    return *this;
+       11:  129:    *ss_ << val;
+       11:  129-block  0
+call    0 returned 11
+call    1 returned 11
+       11:  130:    return *this;
         -:  131:  }
 ------------------
 _ZN7testing7MessagelsIA2_cEERS0_RKT_:
@@ -1060,8 +1060,8 @@ call    1 never executed
         -:  131:  }
 ------------------
 _ZN7testing7MessagelsIlEERS0_RKT_:
-function _ZN7testing7MessagelsIlEERS0_RKT_ called 5 returned 100% blocks executed 100%
-        5:  113:  inline Message& operator <<(const T& val) {
+function _ZN7testing7MessagelsIlEERS0_RKT_ called 7 returned 100% blocks executed 100%
+        7:  113:  inline Message& operator <<(const T& val) {
         -:  114:    // Some libraries overload << for STL containers.  These
         -:  115:    // overloads are defined in the global namespace instead of ::std.
         -:  116:    //
@@ -1077,11 +1077,11 @@ function _ZN7testing7MessagelsIlEERS0_RKT_ called 5 returned 100% blocks execute
         -:  126:    // overloads of << defined in the global namespace and those
         -:  127:    // visible via Koenig lookup are both exposed in this function.
         -:  128:    using ::operator <<;
-        5:  129:    *ss_ << val;
-        5:  129-block  0
-call    0 returned 5
-call    1 returned 5
-        5:  130:    return *this;
+        7:  129:    *ss_ << val;
+        7:  129-block  0
+call    0 returned 7
+call    1 returned 7
+        7:  130:    return *this;
         -:  131:  }
 ------------------
 _ZN7testing7MessagelsIA20_cEERS0_RKT_:
@@ -1741,8 +1741,8 @@ call    5 never executed
         -:  207:// ::std::string, ::wstring, or ::std::wstring object, each NUL
         -:  208:// character in it is replaced with "\\0".
         -:  209:template <typename T>
-      19*:  210:std::string StreamableToString(const T& streamable) {
-      38*:  211:  return (Message() << streamable).GetString();
+      23*:  210:std::string StreamableToString(const T& streamable) {
+      46*:  211:  return (Message() << streamable).GetString();
         -:  212:}
         -:  213:
         -:  214:}  // namespace internal

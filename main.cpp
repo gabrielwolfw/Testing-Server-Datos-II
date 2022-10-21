@@ -42,7 +42,17 @@ public:
     }
 };
 
-
+class applyFilters2{
+public:
+    bool get_gaussian_blur(ImageProcessing& funcion3){
+        if(!(image.empty())){
+            funcion3.gaussian_blur();
+            return true;
+        }else{
+            return false;
+        }
+    }
+};
 
 
 //Crear un TEST para el mockObject "mockSegmentingImg"
@@ -56,6 +66,10 @@ public:
     MOCK_METHOD(bool,gray_scale,(Mat *_source, Mat *_destiny));
 };
 
+class MockFilterGaussian: public ImageProcessing{
+public:
+    MOCK_METHOD(bool,gaussian_blur,(Mat *_source, Mat *_destiny));
+};
 
 TEST(PruebaSegmentar,Prueba1){
     vector<Mat> blocks;
@@ -71,12 +85,19 @@ TEST(PruebaFiltroGray,Prueba2){
     EXPECT_TRUE(grayImg.get_gray_scale(mockFilterGray));
 }
 
+TEST(PruebaFiltroGaussian,Prueba3){
+    vector<Mat> blocksGaussian;
+    MockFilterGaussian mockFilterGaussian;
+    applyFilters2 gaussianImg;
+    EXPECT_TRUE(gaussianImg.get_gaussian_blur(mockFilterGaussian));
+}
 
 /**
  * @param argc
  * @param argv
  * @return
  */
+
 int main(int argc, char *argv[]) {
 
     testing::InitGoogleTest(&argc, argv);

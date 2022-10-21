@@ -2609,13 +2609,13 @@ call    1 never executed
         -: 1465:  using ArgumentTuple = std::tuple<Args...>;
         -: 1466:  using ArgumentMatcherTuple = std::tuple<Matcher<Args>...>;
         -: 1467:
-        2: 1468:  FunctionMocker() {}
+        3: 1468:  FunctionMocker() {}
 ------------------
 _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EEC2Ev:
-function _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EEC2Ev called 1 returned 100% blocks executed 100%
-        1: 1468:  FunctionMocker() {}
-        1: 1468-block  0
-call    0 returned 1
+function _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EEC2Ev called 2 returned 100% blocks executed 100%
+        2: 1468:  FunctionMocker() {}
+        2: 1468-block  0
+call    0 returned 2
 ------------------
 _ZN7testing8internal14FunctionMockerIFbRKN2cv3MatEiRSt6vectorIS3_SaIS3_EEEEC2Ev:
 function _ZN7testing8internal14FunctionMockerIFbRKN2cv3MatEiRSt6vectorIS3_SaIS3_EEEEC2Ev called 1 returned 100% blocks executed 100%
@@ -2642,12 +2642,12 @@ call    0 returned 1
         -: 1485:  // The destructor verifies that all expectations on this mock
         -: 1486:  // function have been satisfied.  If not, it will report Google Test
         -: 1487:  // non-fatal failures for the violations.
-       2*: 1488:  ~FunctionMocker() override GTEST_LOCK_EXCLUDED_(g_gmock_mutex) {
-        2: 1489:    MutexLock l(&g_gmock_mutex);
-        2: 1490:    VerifyAndClearExpectationsLocked();
-        2: 1491:    Mock::UnregisterLocked(this);
-        2: 1492:    ClearDefaultActionsLocked();
-       4*: 1493:  }
+       3*: 1488:  ~FunctionMocker() override GTEST_LOCK_EXCLUDED_(g_gmock_mutex) {
+        3: 1489:    MutexLock l(&g_gmock_mutex);
+        3: 1490:    VerifyAndClearExpectationsLocked();
+        3: 1491:    Mock::UnregisterLocked(this);
+        3: 1492:    ClearDefaultActionsLocked();
+       6*: 1493:  }
 ------------------
 _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EED0Ev:
 function _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EED0Ev called 0 returned 0% blocks executed 0%
@@ -2662,20 +2662,20 @@ call    0 never executed
 call    1 never executed
 ------------------
 _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EED2Ev:
-function _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EED2Ev called 1 returned 100% blocks executed 100%
-        1: 1488:  ~FunctionMocker() override GTEST_LOCK_EXCLUDED_(g_gmock_mutex) {
-        1: 1489:    MutexLock l(&g_gmock_mutex);
-        1: 1490:    VerifyAndClearExpectationsLocked();
-call    0 returned 1
-        1: 1491:    Mock::UnregisterLocked(this);
-call    0 returned 1
-        1: 1492:    ClearDefaultActionsLocked();
-call    0 returned 1
-        2: 1493:  }
-        1: 1493-block  0
-call    0 returned 1
-call    1 returned 1
-call    2 returned 1
+function _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EED2Ev called 2 returned 100% blocks executed 100%
+        2: 1488:  ~FunctionMocker() override GTEST_LOCK_EXCLUDED_(g_gmock_mutex) {
+        2: 1489:    MutexLock l(&g_gmock_mutex);
+        2: 1490:    VerifyAndClearExpectationsLocked();
+call    0 returned 2
+        2: 1491:    Mock::UnregisterLocked(this);
+call    0 returned 2
+        2: 1492:    ClearDefaultActionsLocked();
+call    0 returned 2
+        4: 1493:  }
+        2: 1493-block  0
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
 ------------------
 _ZN7testing8internal14FunctionMockerIFbRKN2cv3MatEiRSt6vectorIS3_SaIS3_EEEED0Ev:
 function _ZN7testing8internal14FunctionMockerIFbRKN2cv3MatEiRSt6vectorIS3_SaIS3_EEEED0Ev called 0 returned 0% blocks executed 0%
@@ -3080,9 +3080,41 @@ call    1 never executed
         -: 1564:
         -: 1565:  // Implements UntypedFunctionMockerBase::ClearDefaultActionsLocked():
         -: 1566:  // clears the ON_CALL()s set on this mock function.
+        3: 1567:  void ClearDefaultActionsLocked() override
+        -: 1568:      GTEST_EXCLUSIVE_LOCK_REQUIRED_(g_gmock_mutex) {
+        3: 1569:    g_gmock_mutex.AssertHeld();
+        -: 1570:
+        -: 1571:    // Deleting our default actions may trigger other mock objects to be
+        -: 1572:    // deleted, for example if an action contains a reference counted smart
+        -: 1573:    // pointer to that mock object, and that is the last reference. So if we
+        -: 1574:    // delete our actions within the context of the global mutex we may deadlock
+        -: 1575:    // when this method is called again. Instead, make a copy of the set of
+        -: 1576:    // actions to delete, clear our set within the mutex, and then delete the
+        -: 1577:    // actions outside of the mutex.
+        3: 1578:    UntypedOnCallSpecs specs_to_delete;
+        3: 1579:    untyped_on_call_specs_.swap(specs_to_delete);
+        -: 1580:
+        3: 1581:    g_gmock_mutex.Unlock();
+        3: 1582:    for (UntypedOnCallSpecs::const_iterator it =
+        6: 1583:             specs_to_delete.begin();
+       3*: 1584:         it != specs_to_delete.end(); ++it) {
+    #####: 1585:      delete static_cast<const OnCallSpec<F>*>(*it);
+        -: 1586:    }
+        -: 1587:
+        -: 1588:    // Lock the mutex again, since the caller expects it to be locked when we
+        -: 1589:    // return.
+        3: 1590:    g_gmock_mutex.Lock();
+        3: 1591:  }
+------------------
+_ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EE25ClearDefaultActionsLockedEv:
+function _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EE25ClearDefaultActionsLockedEv called 2 returned 100% blocks executed 67%
         2: 1567:  void ClearDefaultActionsLocked() override
         -: 1568:      GTEST_EXCLUSIVE_LOCK_REQUIRED_(g_gmock_mutex) {
         2: 1569:    g_gmock_mutex.AssertHeld();
+        2: 1569-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
         -: 1570:
         -: 1571:    // Deleting our default actions may trigger other mock objects to be
         -: 1572:    // deleted, for example if an action contains a reference counted smart
@@ -3092,60 +3124,28 @@ call    1 never executed
         -: 1576:    // actions to delete, clear our set within the mutex, and then delete the
         -: 1577:    // actions outside of the mutex.
         2: 1578:    UntypedOnCallSpecs specs_to_delete;
+        2: 1578-block  0
+call    0 returned 2
         2: 1579:    untyped_on_call_specs_.swap(specs_to_delete);
+call    0 returned 2
         -: 1580:
         2: 1581:    g_gmock_mutex.Unlock();
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
         2: 1582:    for (UntypedOnCallSpecs::const_iterator it =
+call    0 returned 2
         4: 1583:             specs_to_delete.begin();
+        2: 1583-block  0
+call    0 returned 2
        2*: 1584:         it != specs_to_delete.end(); ++it) {
-    #####: 1585:      delete static_cast<const OnCallSpec<F>*>(*it);
-        -: 1586:    }
-        -: 1587:
-        -: 1588:    // Lock the mutex again, since the caller expects it to be locked when we
-        -: 1589:    // return.
-        2: 1590:    g_gmock_mutex.Lock();
-        2: 1591:  }
-------------------
-_ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EE25ClearDefaultActionsLockedEv:
-function _ZN7testing8internal14FunctionMockerIFbPN2cv3MatES4_EE25ClearDefaultActionsLockedEv called 1 returned 100% blocks executed 67%
-        1: 1567:  void ClearDefaultActionsLocked() override
-        -: 1568:      GTEST_EXCLUSIVE_LOCK_REQUIRED_(g_gmock_mutex) {
-        1: 1569:    g_gmock_mutex.AssertHeld();
-        1: 1569-block  0
-call    0 returned 1
-branch  1 taken 1 (fallthrough)
-branch  2 taken 0 (throw)
-        -: 1570:
-        -: 1571:    // Deleting our default actions may trigger other mock objects to be
-        -: 1572:    // deleted, for example if an action contains a reference counted smart
-        -: 1573:    // pointer to that mock object, and that is the last reference. So if we
-        -: 1574:    // delete our actions within the context of the global mutex we may deadlock
-        -: 1575:    // when this method is called again. Instead, make a copy of the set of
-        -: 1576:    // actions to delete, clear our set within the mutex, and then delete the
-        -: 1577:    // actions outside of the mutex.
-        1: 1578:    UntypedOnCallSpecs specs_to_delete;
-        1: 1578-block  0
-call    0 returned 1
-        1: 1579:    untyped_on_call_specs_.swap(specs_to_delete);
-call    0 returned 1
-        -: 1580:
-        1: 1581:    g_gmock_mutex.Unlock();
-call    0 returned 1
-branch  1 taken 1 (fallthrough)
-branch  2 taken 0 (throw)
-        1: 1582:    for (UntypedOnCallSpecs::const_iterator it =
-call    0 returned 1
-        2: 1583:             specs_to_delete.begin();
-        1: 1583-block  0
-call    0 returned 1
-       1*: 1584:         it != specs_to_delete.end(); ++it) {
     %%%%%: 1584-block  0
 call    0 never executed
-        1: 1584-block  1
-call    1 returned 1
-call    2 returned 1
+        2: 1584-block  1
+call    1 returned 2
+call    2 returned 2
 branch  3 taken 0
-branch  4 taken 1 (fallthrough)
+branch  4 taken 2 (fallthrough)
     #####: 1585:      delete static_cast<const OnCallSpec<F>*>(*it);
     %%%%%: 1585-block  0
 call    0 never executed
@@ -3158,14 +3158,14 @@ call    4 never executed
         -: 1587:
         -: 1588:    // Lock the mutex again, since the caller expects it to be locked when we
         -: 1589:    // return.
-        1: 1590:    g_gmock_mutex.Lock();
-        1: 1590-block  0
-call    0 returned 1
-branch  1 taken 1 (fallthrough)
+        2: 1590:    g_gmock_mutex.Lock();
+        2: 1590-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
 branch  2 taken 0 (throw)
-        1: 1591:  }
-        1: 1591-block  0
-call    0 returned 1
+        2: 1591:  }
+        2: 1591-block  0
+call    0 returned 2
     $$$$$: 1591-block  1
 call    1 never executed
 ------------------

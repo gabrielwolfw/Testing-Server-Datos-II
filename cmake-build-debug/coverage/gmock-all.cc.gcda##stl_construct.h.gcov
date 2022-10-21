@@ -164,19 +164,19 @@ call    0 never executed
         -:  157:    {
         -:  158:      template<typename _ForwardIterator>
         -:  159:	static _GLIBCXX20_CONSTEXPR void
-function _ZNSt12_Destroy_auxILb0EE9__destroyIPSt10shared_ptrIN7testing8internal15ExpectationBaseEEEEvT_S8_ called 4 returned 100% blocks executed 50%
-        4:  160:	__destroy(_ForwardIterator __first, _ForwardIterator __last)
+function _ZNSt12_Destroy_auxILb0EE9__destroyIPSt10shared_ptrIN7testing8internal15ExpectationBaseEEEEvT_S8_ called 6 returned 100% blocks executed 50%
+        6:  160:	__destroy(_ForwardIterator __first, _ForwardIterator __last)
         -:  161:	{
-       4*:  162:	  for (; __first != __last; ++__first)
-        4:  162-block  0
-        4:  162-block  1
+       6*:  162:	  for (; __first != __last; ++__first)
+        6:  162-block  0
+        6:  162-block  1
 branch  0 taken 0
-branch  1 taken 4 (fallthrough)
+branch  1 taken 6 (fallthrough)
     #####:  163:	    std::_Destroy(std::__addressof(*__first));
     %%%%%:  163-block  0
 call    0 never executed
 call    1 never executed
-        4:  164:	}
+        6:  164:	}
         -:  165:    };
         -:  166:
         -:  167:  template<>
@@ -219,7 +219,7 @@ function _ZNSt12_Destroy_auxILb1EE9__destroyIPcEEvT_S3_ called 0 returned 0% blo
         -:  179:   */
         -:  180:  template<typename _ForwardIterator>
         -:  181:    _GLIBCXX20_CONSTEXPR inline void
-       4*:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+       6*:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
         -:  183:    {
         -:  184:      typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  185:                       _Value_type;
@@ -233,12 +233,12 @@ function _ZNSt12_Destroy_auxILb1EE9__destroyIPcEEvT_S3_ called 0 returned 0% blo
         -:  193:	return _Destroy_aux<false>::__destroy(__first, __last);
         -:  194:#endif
         -:  195:      std::_Destroy_aux<__has_trivial_destructor(_Value_type)>::
-       4*:  196:	__destroy(__first, __last);
-       4*:  197:    }
+       6*:  196:	__destroy(__first, __last);
+       6*:  197:    }
 ------------------
 _ZSt8_DestroyIPSt10shared_ptrIN7testing8internal15ExpectationBaseEEEvT_S6_:
-function _ZSt8_DestroyIPSt10shared_ptrIN7testing8internal15ExpectationBaseEEEvT_S6_ called 4 returned 100% blocks executed 100%
-        4:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
+function _ZSt8_DestroyIPSt10shared_ptrIN7testing8internal15ExpectationBaseEEEvT_S6_ called 6 returned 100% blocks executed 100%
+        6:  182:    _Destroy(_ForwardIterator __first, _ForwardIterator __last)
         -:  183:    {
         -:  184:      typedef typename iterator_traits<_ForwardIterator>::value_type
         -:  185:                       _Value_type;
@@ -252,10 +252,10 @@ function _ZSt8_DestroyIPSt10shared_ptrIN7testing8internal15ExpectationBaseEEEvT_
         -:  193:	return _Destroy_aux<false>::__destroy(__first, __last);
         -:  194:#endif
         -:  195:      std::_Destroy_aux<__has_trivial_destructor(_Value_type)>::
-        4:  196:	__destroy(__first, __last);
-        4:  196-block  0
-call    0 returned 4
-        4:  197:    }
+        6:  196:	__destroy(__first, __last);
+        6:  196-block  0
+call    0 returned 6
+        6:  197:    }
 ------------------
 _ZSt8_DestroyIPPKN7testing8internal15ExpectationBaseEEvT_S6_:
 function _ZSt8_DestroyIPPKN7testing8internal15ExpectationBaseEEvT_S6_ called 0 returned 0% blocks executed 0%

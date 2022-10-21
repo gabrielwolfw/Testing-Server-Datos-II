@@ -157,7 +157,7 @@
         -:  153:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
         -:  154:      // 3035. std::allocator's constructors should be constexpr
         -:  155:      _GLIBCXX20_CONSTEXPR
-       6*:  156:      allocator() _GLIBCXX_NOTHROW { }
+       8*:  156:      allocator() _GLIBCXX_NOTHROW { }
 ------------------
 _ZNSaISt13_Rb_tree_nodeISt4pairIKPKvN7testing8internal12CallReactionEEEEC2Ev:
 function _ZNSaISt13_Rb_tree_nodeISt4pairIKPKvN7testing8internal12CallReactionEEEEC2Ev called 1 returned 100% blocks executed 100%
@@ -178,10 +178,10 @@ function _ZNSaISt13_Rb_tree_nodeIPN7testing8internal25UntypedFunctionMockerBaseE
 call    0 never executed
 ------------------
 _ZNSaISt10shared_ptrIN7testing8internal15ExpectationBaseEEEC2Ev:
-function _ZNSaISt10shared_ptrIN7testing8internal15ExpectationBaseEEEC2Ev called 4 returned 100% blocks executed 100%
-        4:  156:      allocator() _GLIBCXX_NOTHROW { }
-        4:  156-block  0
-call    0 returned 4
+function _ZNSaISt10shared_ptrIN7testing8internal15ExpectationBaseEEEC2Ev called 6 returned 100% blocks executed 100%
+        6:  156:      allocator() _GLIBCXX_NOTHROW { }
+        6:  156-block  0
+call    0 returned 6
 ------------------
 _ZNSaIPKvEC2Ev:
 function _ZNSaIPKvEC2Ev called 0 returned 0% blocks executed 0%
@@ -258,7 +258,7 @@ call    0 never executed
         -:  171:#if __cpp_constexpr_dynamic_alloc
         -:  172:      constexpr
         -:  173:#endif
-       6*:  174:      ~allocator() _GLIBCXX_NOTHROW { }
+       8*:  174:      ~allocator() _GLIBCXX_NOTHROW { }
 ------------------
 _ZNSaISt13_Rb_tree_nodeISt4pairIKPKvN7testing8internal12CallReactionEEEED2Ev:
 function _ZNSaISt13_Rb_tree_nodeISt4pairIKPKvN7testing8internal12CallReactionEEEED2Ev called 1 returned 100% blocks executed 100%
@@ -279,10 +279,10 @@ function _ZNSaISt13_Rb_tree_nodeIPN7testing8internal25UntypedFunctionMockerBaseE
 call    0 never executed
 ------------------
 _ZNSaISt10shared_ptrIN7testing8internal15ExpectationBaseEEED2Ev:
-function _ZNSaISt10shared_ptrIN7testing8internal15ExpectationBaseEEED2Ev called 4 returned 100% blocks executed 100%
-        4:  174:      ~allocator() _GLIBCXX_NOTHROW { }
-        4:  174-block  0
-call    0 returned 4
+function _ZNSaISt10shared_ptrIN7testing8internal15ExpectationBaseEEED2Ev called 6 returned 100% blocks executed 100%
+        6:  174:      ~allocator() _GLIBCXX_NOTHROW { }
+        6:  174-block  0
+call    0 returned 6
 ------------------
 _ZNSaIPKN7testing8internal15ExpectationBaseEED2Ev:
 function _ZNSaIPKN7testing8internal15ExpectationBaseEED2Ev called 0 returned 0% blocks executed 0%

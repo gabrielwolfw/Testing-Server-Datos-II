@@ -239,8 +239,8 @@
         -:  235:  template<typename _Iter>
         -:  236:    inline _GLIBCXX_CONSTEXPR
         -:  237:    typename iterator_traits<_Iter>::iterator_category
-       7*:  238:    __iterator_category(const _Iter&)
-       7*:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
+       8*:  238:    __iterator_category(const _Iter&)
+       8*:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
 ------------------
 _ZSt19__iterator_categoryIPN7testing8internal13edit_distance8EditTypeEENSt15iterator_traitsIT_E17iterator_categoryERKS6_:
 function _ZSt19__iterator_categoryIPN7testing8internal13edit_distance8EditTypeEENSt15iterator_traitsIT_E17iterator_categoryERKS6_ called 0 returned 0% blocks executed 0%
@@ -267,10 +267,10 @@ function _ZSt19__iterator_categoryIN9__gnu_cxx17__normal_iteratorIPcNSt7__cxx111
         5:  239-block  0
 ------------------
 _ZSt19__iterator_categoryISt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS5_SaIS5_EEEEEENSt15iterator_traitsIT_E17iterator_categoryERKSD_:
-function _ZSt19__iterator_categoryISt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS5_SaIS5_EEEEEENSt15iterator_traitsIT_E17iterator_categoryERKSD_ called 2 returned 100% blocks executed 100%
-        2:  238:    __iterator_category(const _Iter&)
-        2:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
-        2:  239-block  0
+function _ZSt19__iterator_categoryISt16reverse_iteratorIN9__gnu_cxx17__normal_iteratorIPPN7testing9TestSuiteESt6vectorIS5_SaIS5_EEEEEENSt15iterator_traitsIT_E17iterator_categoryERKSD_ called 3 returned 100% blocks executed 100%
+        3:  238:    __iterator_category(const _Iter&)
+        3:  239:    { return typename iterator_traits<_Iter>::iterator_category(); }
+        3:  239-block  0
 ------------------
 _ZSt19__iterator_categoryIPKPKcENSt15iterator_traitsIT_E17iterator_categoryERKS5_:
 function _ZSt19__iterator_categoryIPKPKcENSt15iterator_traitsIT_E17iterator_categoryERKS5_ called 0 returned 0% blocks executed 0%

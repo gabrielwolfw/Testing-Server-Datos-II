@@ -319,18 +319,18 @@ call    0 never executed
         -:  307:
         -:  308:      _GLIBCXX20_CONSTEXPR
         -:  309:      explicit
-       2*:  310:      _Iter_pred(_Predicate __pred)
-       2*:  311:	: _M_pred(_GLIBCXX_MOVE(__pred))
-       2*:  312:      { }
+       3*:  310:      _Iter_pred(_Predicate __pred)
+       3*:  311:	: _M_pred(_GLIBCXX_MOVE(__pred))
+       3*:  312:      { }
 ------------------
 _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal15TestSuiteNameIsEEC2ES4_:
-function _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal15TestSuiteNameIsEEC2ES4_ called 2 returned 100% blocks executed 100%
-        2:  310:      _Iter_pred(_Predicate __pred)
-        2:  311:	: _M_pred(_GLIBCXX_MOVE(__pred))
-        2:  311-block  0
-call    0 returned 2
-call    1 returned 2
-        2:  312:      { }
+function _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal15TestSuiteNameIsEEC2ES4_ called 3 returned 100% blocks executed 100%
+        3:  310:      _Iter_pred(_Predicate __pred)
+        3:  311:	: _M_pred(_GLIBCXX_MOVE(__pred))
+        3:  311-block  0
+call    0 returned 3
+call    1 returned 3
+        3:  312:      { }
 ------------------
 _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal17TestPropertyKeyIsEEC2ES4_:
 function _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal17TestPropertyKeyIsEEC2ES4_ called 0 returned 0% blocks executed 0%
@@ -345,16 +345,16 @@ call    1 never executed
         -:  314:      template<typename _Iterator>
         -:  315:	_GLIBCXX20_CONSTEXPR
         -:  316:	bool
-       1*:  317:	operator()(_Iterator __it)
-       1*:  318:	{ return bool(_M_pred(*__it)); }
+       3*:  317:	operator()(_Iterator __it)
+       3*:  318:	{ return bool(_M_pred(*__it)); }
 ------------------
 _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal15TestSuiteNameIsEEclISt16reverse_iteratorINS_17__normal_iteratorIPPNS2_9TestSuiteESt6vectorISA_SaISA_EEEEEEEbT_:
-function _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal15TestSuiteNameIsEEclISt16reverse_iteratorINS_17__normal_iteratorIPPNS2_9TestSuiteESt6vectorISA_SaISA_EEEEEEEbT_ called 1 returned 100% blocks executed 100%
-        1:  317:	operator()(_Iterator __it)
-        1:  318:	{ return bool(_M_pred(*__it)); }
-        1:  318-block  0
-call    0 returned 1
-call    1 returned 1
+function _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal15TestSuiteNameIsEEclISt16reverse_iteratorINS_17__normal_iteratorIPPNS2_9TestSuiteESt6vectorISA_SaISA_EEEEEEEbT_ called 3 returned 100% blocks executed 100%
+        3:  317:	operator()(_Iterator __it)
+        3:  318:	{ return bool(_M_pred(*__it)); }
+        3:  318-block  0
+call    0 returned 3
+call    1 returned 3
 ------------------
 _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal17TestPropertyKeyIsEEclINS_17__normal_iteratorIPNS2_12TestPropertyESt6vectorIS8_SaIS8_EEEEEEbT_:
 function _ZN9__gnu_cxx5__ops10_Iter_predIN7testing8internal17TestPropertyKeyIsEEclINS_17__normal_iteratorIPNS2_12TestPropertyESt6vectorIS8_SaIS8_EEEEEEbT_ called 0 returned 0% blocks executed 0%
@@ -369,18 +369,18 @@ call    1 never executed
         -:  321:  template<typename _Predicate>
         -:  322:    _GLIBCXX20_CONSTEXPR
         -:  323:    inline _Iter_pred<_Predicate>
-       2*:  324:    __pred_iter(_Predicate __pred)
-       2*:  325:    { return _Iter_pred<_Predicate>(_GLIBCXX_MOVE(__pred)); }
+       3*:  324:    __pred_iter(_Predicate __pred)
+       3*:  325:    { return _Iter_pred<_Predicate>(_GLIBCXX_MOVE(__pred)); }
 ------------------
 _ZN9__gnu_cxx5__ops11__pred_iterIN7testing8internal15TestSuiteNameIsEEENS0_10_Iter_predIT_EES6_:
-function _ZN9__gnu_cxx5__ops11__pred_iterIN7testing8internal15TestSuiteNameIsEEENS0_10_Iter_predIT_EES6_ called 2 returned 100% blocks executed 100%
-        2:  324:    __pred_iter(_Predicate __pred)
-        2:  325:    { return _Iter_pred<_Predicate>(_GLIBCXX_MOVE(__pred)); }
-        2:  325-block  0
-call    0 returned 2
-call    1 returned 2
-call    2 returned 2
-call    3 returned 2
+function _ZN9__gnu_cxx5__ops11__pred_iterIN7testing8internal15TestSuiteNameIsEEENS0_10_Iter_predIT_EES6_ called 3 returned 100% blocks executed 100%
+        3:  324:    __pred_iter(_Predicate __pred)
+        3:  325:    { return _Iter_pred<_Predicate>(_GLIBCXX_MOVE(__pred)); }
+        3:  325-block  0
+call    0 returned 3
+call    1 returned 3
+call    2 returned 3
+call    3 returned 3
 ------------------
 _ZN9__gnu_cxx5__ops11__pred_iterIN7testing8internal17TestPropertyKeyIsEEENS0_10_Iter_predIT_EES6_:
 function _ZN9__gnu_cxx5__ops11__pred_iterIN7testing8internal17TestPropertyKeyIsEEENS0_10_Iter_predIT_EES6_ called 0 returned 0% blocks executed 0%

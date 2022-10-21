@@ -383,11 +383,11 @@ call    0 returned 1
         -:  353:       *  Iteration is done in ascending order according to the keys.
         -:  354:       */
         -:  355:      iterator
-function _ZNSt3mapIPKvN7testing12_GLOBAL__N_115MockObjectStateESt4lessIS1_ESaISt4pairIKS1_S4_EEE5beginEv called 3 returned 100% blocks executed 100%
-        3:  356:      begin() _GLIBCXX_NOEXCEPT
-        3:  357:      { return _M_t.begin(); }
-        3:  357-block  0
-call    0 returned 3
+function _ZNSt3mapIPKvN7testing12_GLOBAL__N_115MockObjectStateESt4lessIS1_ESaISt4pairIKS1_S4_EEE5beginEv called 4 returned 100% blocks executed 100%
+        4:  356:      begin() _GLIBCXX_NOEXCEPT
+        4:  357:      { return _M_t.begin(); }
+        4:  357-block  0
+call    0 returned 4
         -:  358:
         -:  359:      /**
         -:  360:       *  Returns a read-only (constant) iterator that points to the first pair
@@ -404,8 +404,8 @@ call    0 returned 3
         -:  371:       *  according to the keys.
         -:  372:       */
         -:  373:      iterator
-       3*:  374:      end() _GLIBCXX_NOEXCEPT
-       3*:  375:      { return _M_t.end(); }
+       4*:  374:      end() _GLIBCXX_NOEXCEPT
+       4*:  375:      { return _M_t.end(); }
 ------------------
 _ZNSt3mapIPKvN7testing8internal12CallReactionESt4lessIS1_ESaISt4pairIKS1_S4_EEE3endEv:
 function _ZNSt3mapIPKvN7testing8internal12CallReactionESt4lessIS1_ESaISt4pairIKS1_S4_EEE3endEv called 0 returned 0% blocks executed 0%
@@ -415,11 +415,11 @@ function _ZNSt3mapIPKvN7testing8internal12CallReactionESt4lessIS1_ESaISt4pairIKS
 call    0 never executed
 ------------------
 _ZNSt3mapIPKvN7testing12_GLOBAL__N_115MockObjectStateESt4lessIS1_ESaISt4pairIKS1_S4_EEE3endEv:
-function _ZNSt3mapIPKvN7testing12_GLOBAL__N_115MockObjectStateESt4lessIS1_ESaISt4pairIKS1_S4_EEE3endEv called 3 returned 100% blocks executed 100%
-        3:  374:      end() _GLIBCXX_NOEXCEPT
-        3:  375:      { return _M_t.end(); }
-        3:  375-block  0
-call    0 returned 3
+function _ZNSt3mapIPKvN7testing12_GLOBAL__N_115MockObjectStateESt4lessIS1_ESaISt4pairIKS1_S4_EEE3endEv called 4 returned 100% blocks executed 100%
+        4:  374:      end() _GLIBCXX_NOEXCEPT
+        4:  375:      { return _M_t.end(); }
+        4:  375-block  0
+call    0 returned 4
 ------------------
         -:  376:
         -:  377:      /**

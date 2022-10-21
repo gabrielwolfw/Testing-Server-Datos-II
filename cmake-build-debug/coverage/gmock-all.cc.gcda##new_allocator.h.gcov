@@ -80,7 +80,7 @@
         -:   76:#endif
         -:   77:
         -:   78:      _GLIBCXX20_CONSTEXPR
-       6*:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+       8*:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKPKvN7testing8internal12CallReactionEEEEC2Ev:
 function _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKPKvN7testing8internal12CallReactionEEEEC2Ev called 1 returned 100% blocks executed 100%
@@ -95,8 +95,8 @@ function _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeIPN7testing8internal25Unt
     #####:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorISt10shared_ptrIN7testing8internal15ExpectationBaseEEEC2Ev:
-function _ZN9__gnu_cxx13new_allocatorISt10shared_ptrIN7testing8internal15ExpectationBaseEEEC2Ev called 4 returned 100% blocks executed 100%
-        4:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+function _ZN9__gnu_cxx13new_allocatorISt10shared_ptrIN7testing8internal15ExpectationBaseEEEC2Ev called 6 returned 100% blocks executed 100%
+        6:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorIPKvEC2Ev:
 function _ZN9__gnu_cxx13new_allocatorIPKvEC2Ev called 0 returned 0% blocks executed 0%
@@ -152,7 +152,7 @@ function _ZN9__gnu_cxx13new_allocatorIcEC2ERKS1_ called 0 returned 0% blocks exe
         -:   86:	new_allocator(const new_allocator<_Tp1>&) _GLIBCXX_USE_NOEXCEPT { }
         -:   87:
         -:   88:#if __cplusplus <= 201703L
-       6*:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+       8*:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKPKvN7testing8internal12CallReactionEEEED2Ev:
 function _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeISt4pairIKPKvN7testing8internal12CallReactionEEEED2Ev called 1 returned 100% blocks executed 100%
@@ -167,8 +167,8 @@ function _ZN9__gnu_cxx13new_allocatorISt13_Rb_tree_nodeIPN7testing8internal25Unt
     #####:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorISt10shared_ptrIN7testing8internal15ExpectationBaseEEED2Ev:
-function _ZN9__gnu_cxx13new_allocatorISt10shared_ptrIN7testing8internal15ExpectationBaseEEED2Ev called 4 returned 100% blocks executed 100%
-        4:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+function _ZN9__gnu_cxx13new_allocatorISt10shared_ptrIN7testing8internal15ExpectationBaseEEED2Ev called 6 returned 100% blocks executed 100%
+        6:   89:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
 ------------------
 _ZN9__gnu_cxx13new_allocatorIPKN7testing8internal15ExpectationBaseEED2Ev:
 function _ZN9__gnu_cxx13new_allocatorIPKN7testing8internal15ExpectationBaseEED2Ev called 0 returned 0% blocks executed 0%

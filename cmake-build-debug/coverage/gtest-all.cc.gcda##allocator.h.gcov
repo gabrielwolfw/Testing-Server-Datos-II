@@ -157,7 +157,7 @@
         -:  153:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
         -:  154:      // 3035. std::allocator's constructors should be constexpr
         -:  155:      _GLIBCXX20_CONSTEXPR
-      22*:  156:      allocator() _GLIBCXX_NOTHROW { }
+      28*:  156:      allocator() _GLIBCXX_NOTHROW { }
 ------------------
 _ZNSaISt10_List_nodeISt4pairIcPKcEEEC2Ev:
 function _ZNSaISt10_List_nodeISt4pairIcPKcEEEC2Ev called 0 returned 0% blocks executed 0%
@@ -196,10 +196,10 @@ function _ZNSaINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEEC2Ev called 
 call    0 returned 1
 ------------------
 _ZNSaIN7testing14TestPartResultEEC2Ev:
-function _ZNSaIN7testing14TestPartResultEEC2Ev called 5 returned 100% blocks executed 100%
-        5:  156:      allocator() _GLIBCXX_NOTHROW { }
-        5:  156-block  0
-call    0 returned 5
+function _ZNSaIN7testing14TestPartResultEEC2Ev called 7 returned 100% blocks executed 100%
+        7:  156:      allocator() _GLIBCXX_NOTHROW { }
+        7:  156-block  0
+call    0 returned 7
 ------------------
 _ZNSaIPN7testing8internal30ParameterizedTestSuiteInfoBaseEEC2Ev:
 function _ZNSaIPN7testing8internal30ParameterizedTestSuiteInfoBaseEEC2Ev called 1 returned 100% blocks executed 100%
@@ -226,22 +226,22 @@ function _ZNSaIN7testing8internal9TraceInfoEEC2Ev called 0 returned 0% blocks ex
 call    0 never executed
 ------------------
 _ZNSaIN7testing12TestPropertyEEC2Ev:
-function _ZNSaIN7testing12TestPropertyEEC2Ev called 5 returned 100% blocks executed 100%
-        5:  156:      allocator() _GLIBCXX_NOTHROW { }
-        5:  156-block  0
-call    0 returned 5
+function _ZNSaIN7testing12TestPropertyEEC2Ev called 7 returned 100% blocks executed 100%
+        7:  156:      allocator() _GLIBCXX_NOTHROW { }
+        7:  156-block  0
+call    0 returned 7
 ------------------
 _ZNSaIPN7testing8TestInfoEEC2Ev:
-function _ZNSaIPN7testing8TestInfoEEC2Ev called 2 returned 100% blocks executed 100%
-        2:  156:      allocator() _GLIBCXX_NOTHROW { }
-        2:  156-block  0
-call    0 returned 2
-------------------
-_ZNSaIiEC2Ev:
-function _ZNSaIiEC2Ev called 3 returned 100% blocks executed 100%
+function _ZNSaIPN7testing8TestInfoEEC2Ev called 3 returned 100% blocks executed 100%
         3:  156:      allocator() _GLIBCXX_NOTHROW { }
         3:  156-block  0
 call    0 returned 3
+------------------
+_ZNSaIiEC2Ev:
+function _ZNSaIiEC2Ev called 4 returned 100% blocks executed 100%
+        4:  156:      allocator() _GLIBCXX_NOTHROW { }
+        4:  156-block  0
+call    0 returned 4
 ------------------
 _ZNSaIPN7testing17TestEventListenerEEC2Ev:
 function _ZNSaIPN7testing17TestEventListenerEEC2Ev called 1 returned 100% blocks executed 100%
@@ -332,7 +332,7 @@ call    0 never executed
         -:  171:#if __cpp_constexpr_dynamic_alloc
         -:  172:      constexpr
         -:  173:#endif
-      26*:  174:      ~allocator() _GLIBCXX_NOTHROW { }
+      32*:  174:      ~allocator() _GLIBCXX_NOTHROW { }
 ------------------
 _ZNSaISt10_List_nodeISt4pairIcPKcEEED2Ev:
 function _ZNSaISt10_List_nodeISt4pairIcPKcEEED2Ev called 0 returned 0% blocks executed 0%
@@ -341,10 +341,10 @@ function _ZNSaISt10_List_nodeISt4pairIcPKcEEED2Ev called 0 returned 0% blocks ex
 call    0 never executed
 ------------------
 _ZNSaIN7testing14TestPartResultEED2Ev:
-function _ZNSaIN7testing14TestPartResultEED2Ev called 5 returned 100% blocks executed 100%
-        5:  174:      ~allocator() _GLIBCXX_NOTHROW { }
-        5:  174-block  0
-call    0 returned 5
+function _ZNSaIN7testing14TestPartResultEED2Ev called 7 returned 100% blocks executed 100%
+        7:  174:      ~allocator() _GLIBCXX_NOTHROW { }
+        7:  174-block  0
+call    0 returned 7
 ------------------
 _ZNSaIPN7testing8internal30ParameterizedTestSuiteInfoBaseEED2Ev:
 function _ZNSaIPN7testing8internal30ParameterizedTestSuiteInfoBaseEED2Ev called 1 returned 100% blocks executed 100%
@@ -401,22 +401,22 @@ function _ZNSaIN7testing8internal9TraceInfoEED2Ev called 0 returned 0% blocks ex
 call    0 never executed
 ------------------
 _ZNSaIN7testing12TestPropertyEED2Ev:
-function _ZNSaIN7testing12TestPropertyEED2Ev called 5 returned 100% blocks executed 100%
-        5:  174:      ~allocator() _GLIBCXX_NOTHROW { }
-        5:  174-block  0
-call    0 returned 5
+function _ZNSaIN7testing12TestPropertyEED2Ev called 7 returned 100% blocks executed 100%
+        7:  174:      ~allocator() _GLIBCXX_NOTHROW { }
+        7:  174-block  0
+call    0 returned 7
 ------------------
 _ZNSaIPN7testing8TestInfoEED2Ev:
-function _ZNSaIPN7testing8TestInfoEED2Ev called 2 returned 100% blocks executed 100%
-        2:  174:      ~allocator() _GLIBCXX_NOTHROW { }
-        2:  174-block  0
-call    0 returned 2
-------------------
-_ZNSaIiED2Ev:
-function _ZNSaIiED2Ev called 3 returned 100% blocks executed 100%
+function _ZNSaIPN7testing8TestInfoEED2Ev called 3 returned 100% blocks executed 100%
         3:  174:      ~allocator() _GLIBCXX_NOTHROW { }
         3:  174-block  0
 call    0 returned 3
+------------------
+_ZNSaIiED2Ev:
+function _ZNSaIiED2Ev called 4 returned 100% blocks executed 100%
+        4:  174:      ~allocator() _GLIBCXX_NOTHROW { }
+        4:  174-block  0
+call    0 returned 4
 ------------------
 _ZNSaIPN7testing17TestEventListenerEED2Ev:
 function _ZNSaIPN7testing17TestEventListenerEED2Ev called 1 returned 100% blocks executed 100%
