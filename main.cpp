@@ -3,14 +3,13 @@
 #include <gmock/gmock.h>
 #include "serverMethods.cpp"
 
-
 using namespace std;
 
-
+//Path mat de la imagen de prueba a usar
 const Mat image = imread("/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/stitchTry.png",IMREAD_COLOR);
 
 
-//clase funciones: contiene los metodos usados en el server
+//Clase que permite llamar a las funciones que no esten dentro del API
 class funciones{
 public:
     bool segmentImage_(const Mat& img,const int blockWidth, vector<cv::Mat>& blocks){
@@ -19,6 +18,7 @@ public:
     }
 };
 
+//La clase que permite generar la función/metodo 1
 class applySegmenting{
 public:
     bool get_SegmentImage_(funciones& funcion1,const Mat& img,const int blockWidth, vector<cv::Mat>& blocks){
@@ -30,6 +30,7 @@ public:
         }
     }
 };
+//La clase que permite generar la función/metodo 2
 class applyFilters{
 public:
     bool get_gray_scale(ImageProcessing& funcion2){
@@ -42,6 +43,7 @@ public:
     }
 };
 
+//La clase que permite generar la función/metodo 3
 class applyFilters2{
 public:
     bool get_gaussian_blur(ImageProcessing& funcion3){
@@ -55,36 +57,39 @@ public:
 };
 
 
-//Crear un TEST para el mockObject "mockSegmentingImg"
+//MOCK de segmentar Imagen
 class MockSegmentingImg: public funciones{
 public:
     MOCK_METHOD(bool,segmentImage_,(const Mat& img,const int blockWidth, vector<cv::Mat>& blocks));
 };
 
+//MOCK del Filtro Gray Scale
 class MockFilterGray: public ImageProcessing{
 public:
     MOCK_METHOD(bool,gray_scale,(Mat *_source, Mat *_destiny));
 };
 
+//MOCK del Filtro Gaussian
 class MockFilterGaussian: public ImageProcessing{
 public:
     MOCK_METHOD(bool,gaussian_blur,(Mat *_source, Mat *_destiny));
 };
 
+//Prueba del uso de segmentar la imagen
 TEST(PruebaSegmentar,Prueba1){
     vector<Mat> blocks;
     MockSegmentingImg mockSegmentingImg;
     applySegmenting Segment_image;
     EXPECT_TRUE(Segment_image.get_SegmentImage_(mockSegmentingImg,image,65,blocks));
 }
-
+//Prueba del uso del filtro gray scale
 TEST(PruebaFiltroGray,Prueba2){
     vector<Mat> blocksGray;
     MockFilterGray mockFilterGray;
     applyFilters grayImg;
     EXPECT_TRUE(grayImg.get_gray_scale(mockFilterGray));
 }
-
+//Prueba del uso del filtro gaussian blur
 TEST(PruebaFiltroGaussian,Prueba3){
     vector<Mat> blocksGaussian;
     MockFilterGaussian mockFilterGaussian;

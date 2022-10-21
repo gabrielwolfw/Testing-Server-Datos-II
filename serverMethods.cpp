@@ -22,6 +22,9 @@
 using namespace std;
 using namespace cv;
 
+
+
+//Clase que contiene a los filtros usados en el proyecto.
 class ImageProcessing{
 private: //atributes
     int width;
@@ -88,10 +91,11 @@ int ImageProcessing::gamma_correction() {
         return 0;
     }
 }
-
+//Constructor que se conecta con el archivo main.cpp de los test
 ImageProcessing::ImageProcessing() {}
 
 
+//Función que permite segmentar la imagen original
 int Segment_image(const cv::Mat& img, const int blockWidth, std::vector<cv::Mat>& blocks){
     // Checking if the image was passed correctly
     if (!img.data || img.empty())
