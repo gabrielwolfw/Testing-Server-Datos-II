@@ -21,10 +21,15 @@ link_directories( ${Boost_LIBRARY_DIR})
 target_link_libraries( Server ${OpenCV_LIBS})
 target_link_libraries( Server ${Boost_LIBRARIES})
 
+add_executable(test_tuto main.cpp )
+add_executable(method serverMethods.cpp)
 
 
+target_link_libraries( method ${OpenCV_LIBS})
+target_link_libraries( method ${Boost_LIBRARIES})
 
-add_executable(test_tuto main.cpp)
+target_link_libraries( test_tuto ${OpenCV_LIBS})
+target_link_libraries( test_tuto ${Boost_LIBRARIES})
 
 target_link_libraries(Server
         gtest

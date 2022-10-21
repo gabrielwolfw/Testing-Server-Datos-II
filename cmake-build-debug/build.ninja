@@ -84,9 +84,10 @@ build Server: CXX_EXECUTABLE_LINKER__Server_Debug CMakeFiles/Server.dir/server.c
 build cmake_object_order_depends_target_test_tuto: phony || cmake_object_order_depends_target_gmock cmake_object_order_depends_target_gmock_main cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main
 
 build CMakeFiles/test_tuto.dir/main.cpp.o: CXX_COMPILER__test_tuto_Debug /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/main.cpp || cmake_object_order_depends_target_test_tuto
+  DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_SERIALIZATION_DYN_LINK -DBOOST_SYSTEM_DYN_LINK
   DEP_FILE = CMakeFiles/test_tuto.dir/main.cpp.o.d
   FLAGS = -fprofile-arcs -ftest-coverage -g
-  INCLUDES = -I/usr/local/include/opencv4 -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock
+  INCLUDES = -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/include -isystem /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock -isystem /usr/local/include/opencv4
   OBJECT_DIR = CMakeFiles/test_tuto.dir
   OBJECT_FILE_DIR = CMakeFiles/test_tuto.dir
 
@@ -98,14 +99,48 @@ build CMakeFiles/test_tuto.dir/main.cpp.o: CXX_COMPILER__test_tuto_Debug /home/g
 #############################################
 # Link the executable test_tuto
 
-build test_tuto: CXX_EXECUTABLE_LINKER__test_tuto_Debug CMakeFiles/test_tuto.dir/main.cpp.o | lib/libgtestd.a lib/libgtest_maind.a lib/libgmock_maind.a lib/libgmockd.a lib/libgtestd.a || lib/libgmock_maind.a lib/libgmockd.a lib/libgtest_maind.a lib/libgtestd.a
+build test_tuto: CXX_EXECUTABLE_LINKER__test_tuto_Debug CMakeFiles/test_tuto.dir/main.cpp.o | /usr/local/lib/libopencv_gapi.so.4.6.0 /usr/local/lib/libopencv_highgui.so.4.6.0 /usr/local/lib/libopencv_ml.so.4.6.0 /usr/local/lib/libopencv_objdetect.so.4.6.0 /usr/local/lib/libopencv_photo.so.4.6.0 /usr/local/lib/libopencv_stitching.so.4.6.0 /usr/local/lib/libopencv_video.so.4.6.0 /usr/local/lib/libopencv_videoio.so.4.6.0 /usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0 /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.74.0 /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.74.0 lib/libgtestd.a lib/libgtest_maind.a lib/libgmock_maind.a /usr/local/lib/libopencv_imgcodecs.so.4.6.0 /usr/local/lib/libopencv_dnn.so.4.6.0 /usr/local/lib/libopencv_calib3d.so.4.6.0 /usr/local/lib/libopencv_features2d.so.4.6.0 /usr/local/lib/libopencv_flann.so.4.6.0 /usr/local/lib/libopencv_imgproc.so.4.6.0 /usr/local/lib/libopencv_core.so.4.6.0 lib/libgmockd.a lib/libgtestd.a || lib/libgmock_maind.a lib/libgmockd.a lib/libgtest_maind.a lib/libgtestd.a
   FLAGS = -fprofile-arcs -ftest-coverage -g
-  LINK_LIBRARIES = lib/libgtestd.a  lib/libgtest_maind.a  lib/libgmock_maind.a  lib/libgmockd.a  lib/libgtestd.a
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib  /usr/local/lib/libopencv_gapi.so.4.6.0  /usr/local/lib/libopencv_highgui.so.4.6.0  /usr/local/lib/libopencv_ml.so.4.6.0  /usr/local/lib/libopencv_objdetect.so.4.6.0  /usr/local/lib/libopencv_photo.so.4.6.0  /usr/local/lib/libopencv_stitching.so.4.6.0  /usr/local/lib/libopencv_video.so.4.6.0  /usr/local/lib/libopencv_videoio.so.4.6.0  /usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0  /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.74.0  /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.74.0  lib/libgtestd.a  lib/libgtest_maind.a  lib/libgmock_maind.a  /usr/local/lib/libopencv_imgcodecs.so.4.6.0  /usr/local/lib/libopencv_dnn.so.4.6.0  /usr/local/lib/libopencv_calib3d.so.4.6.0  /usr/local/lib/libopencv_features2d.so.4.6.0  /usr/local/lib/libopencv_flann.so.4.6.0  /usr/local/lib/libopencv_imgproc.so.4.6.0  /usr/local/lib/libopencv_core.so.4.6.0  lib/libgmockd.a  lib/libgtestd.a
   OBJECT_DIR = CMakeFiles/test_tuto.dir
   POST_BUILD = :
   PRE_LINK = :
   TARGET_FILE = test_tuto
   TARGET_PDB = test_tuto.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target method
+
+
+#############################################
+# Order-only phony target for method
+
+build cmake_object_order_depends_target_method: phony || CMakeFiles/method.dir
+
+build CMakeFiles/method.dir/serverMethods.cpp.o: CXX_COMPILER__method_Debug /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/serverMethods.cpp || cmake_object_order_depends_target_method
+  DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_SERIALIZATION_DYN_LINK -DBOOST_SYSTEM_DYN_LINK
+  DEP_FILE = CMakeFiles/method.dir/serverMethods.cpp.o.d
+  FLAGS = -fprofile-arcs -ftest-coverage -g
+  INCLUDES = -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest/include -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googletest -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/include -I/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock -isystem /usr/local/include/opencv4
+  OBJECT_DIR = CMakeFiles/method.dir
+  OBJECT_FILE_DIR = CMakeFiles/method.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target method
+
+
+#############################################
+# Link the executable method
+
+build method: CXX_EXECUTABLE_LINKER__method_Debug CMakeFiles/method.dir/serverMethods.cpp.o | /usr/local/lib/libopencv_gapi.so.4.6.0 /usr/local/lib/libopencv_highgui.so.4.6.0 /usr/local/lib/libopencv_ml.so.4.6.0 /usr/local/lib/libopencv_objdetect.so.4.6.0 /usr/local/lib/libopencv_photo.so.4.6.0 /usr/local/lib/libopencv_stitching.so.4.6.0 /usr/local/lib/libopencv_video.so.4.6.0 /usr/local/lib/libopencv_videoio.so.4.6.0 /usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0 /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.74.0 /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.74.0 /usr/local/lib/libopencv_imgcodecs.so.4.6.0 /usr/local/lib/libopencv_dnn.so.4.6.0 /usr/local/lib/libopencv_calib3d.so.4.6.0 /usr/local/lib/libopencv_features2d.so.4.6.0 /usr/local/lib/libopencv_flann.so.4.6.0 /usr/local/lib/libopencv_imgproc.so.4.6.0 /usr/local/lib/libopencv_core.so.4.6.0
+  FLAGS = -fprofile-arcs -ftest-coverage -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib  /usr/local/lib/libopencv_gapi.so.4.6.0  /usr/local/lib/libopencv_highgui.so.4.6.0  /usr/local/lib/libopencv_ml.so.4.6.0  /usr/local/lib/libopencv_objdetect.so.4.6.0  /usr/local/lib/libopencv_photo.so.4.6.0  /usr/local/lib/libopencv_stitching.so.4.6.0  /usr/local/lib/libopencv_video.so.4.6.0  /usr/local/lib/libopencv_videoio.so.4.6.0  /usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0  /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.74.0  /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.74.0  /usr/local/lib/libopencv_imgcodecs.so.4.6.0  /usr/local/lib/libopencv_dnn.so.4.6.0  /usr/local/lib/libopencv_calib3d.so.4.6.0  /usr/local/lib/libopencv_features2d.so.4.6.0  /usr/local/lib/libopencv_flann.so.4.6.0  /usr/local/lib/libopencv_imgproc.so.4.6.0  /usr/local/lib/libopencv_core.so.4.6.0
+  OBJECT_DIR = CMakeFiles/method.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = method
+  TARGET_PDB = method.dbg
 
 
 #############################################
@@ -589,7 +624,7 @@ build libgtestd.a: phony lib/libgtestd.a
 #############################################
 # Folder: /home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug
 
-build all: phony Server test_tuto test/all
+build all: phony Server test_tuto method test/all
 
 # =============================================================================
 

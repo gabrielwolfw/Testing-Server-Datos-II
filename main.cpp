@@ -1,19 +1,19 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "server.cpp"
+#include "serverMethods.cpp"
 
 
 using namespace std;
 
 
-const Mat image = imread("stitchTry.png",IMREAD_COLOR);
+const Mat image = imread("/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/stitchTry.png",IMREAD_COLOR);
 
 //clase funciones: contiene los metodos usados en el server
 class funciones{
 public:
     bool segmentImage_(const Mat& img,const int blockWidth, vector<cv::Mat>& blocks){
-        int segmentImg = Segment_image(img, blockWidth,blocks);
+        Segment_image(img, blockWidth, blocks);
         return 1;
     }
 };
@@ -21,7 +21,7 @@ public:
 class applySegmenting{
 public:
     bool get_SegmentImage_(funciones& funcion1,const Mat& img,const int blockWidth, vector<cv::Mat>& blocks){
-        if(!(img.empty())){
+        if(!(image.empty())){
             funcion1.segmentImage_(img,blockWidth,blocks);
             return true;
         }else{
@@ -43,8 +43,8 @@ public:
 TEST(PruebaSegmentar,Prueba1){
     vector<Mat> blocks;
     MockSegmentingImg mockSegmentingImg;
-    applySegmenting segmentImg;
-    EXPECT_TRUE(segmentImg.get_SegmentImage_(mockSegmentingImg,image,65,blocks));
+    applySegmenting Segment_image;
+    EXPECT_TRUE(Segment_image.get_SegmentImage_(mockSegmentingImg,image,65,blocks));
 }
 
 
