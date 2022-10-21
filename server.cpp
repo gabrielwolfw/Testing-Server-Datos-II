@@ -17,8 +17,15 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+
 using namespace std;
 using namespace cv;
+
+
+
+
 
 
 class ImageProcessing{
@@ -245,19 +252,6 @@ int main() {
     ImageProcessing ImageGamma = ImageProcessing(Result.cols, Result.rows,75,3.0, &Result, &GammaApplyed);
     ImageGamma.gamma_correction();
 
-
-
-    /*ImageProcessing ImageGamma = ImageProcessing(Result.cols, Result.rows,75,3.0, &Result, &GammaApplyed);
-    ImageGamma.gamma_correction();
-    Mat BlurApplyed;
-    ImageProcessing ImageBlur = ImageProcessing(Result.cols, Result.rows,100,3.0, &Result, &BlurApplyed);
-    ImageBlur.gaussian_blur();
-    Mat BrightApplyed;
-    ImageProcessing ImageBright = ImageProcessing(Result.cols, Result.rows,100,3.0, &Result, &BrightApplyed);
-    ImageBright.bright_control();
-    Mat GrayApplyed;
-    ImageProcessing ImageGray= ImageProcessing(Result.cols, Result.rows,100,3.0, &Result, &GrayApplyed);
-    ImageGray.gray_scale(); */
 
     const int blockw = 50; //Se asigna el tamaño a los segmentos
 

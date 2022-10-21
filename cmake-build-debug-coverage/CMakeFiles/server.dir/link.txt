@@ -1,0 +1,1 @@
+/usr/bin/c++ -fprofile-arcs -ftest-coverage -g CMakeFiles/server.dir/server.cpp.o -o server  lib/libgtestd.a lib/libgtest_maind.a lib/libgmock_maind.a lib/libgmockd.a lib/libgtestd.a 
