@@ -25,9 +25,8 @@ target_link_libraries( Server ${Boost_LIBRARIES})
 
 
 add_executable(test_tuto main.cpp)
-add_executable(server server.cpp)
 
-target_link_libraries(server
+target_link_libraries(Server
         gtest
         gtest_main
         gmock_main)

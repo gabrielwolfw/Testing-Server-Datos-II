@@ -7,19 +7,20 @@
 using namespace std;
 
 
-cons Mat image = imread("stitchTry.png",IMREAD_COLOR);
+const Mat image = imread("stitchTry.png",IMREAD_COLOR);
 
 //clase funciones: contiene los metodos usados en el server
 class funciones{
 public:
     bool segmentImage_(const Mat& img,const int blockWidth, vector<cv::Mat>& blocks){
         int segmentImg = Segment_image(img, blockWidth,blocks);
+        return 1;
     }
 };
 
 class applySegmenting{
 public:
-    bool get_SegmentImage_(funciones& funcion1,onst Mat& img,const int blockWidth, vector<cv::Mat>& blocks){
+    bool get_SegmentImage_(funciones& funcion1,const Mat& img,const int blockWidth, vector<cv::Mat>& blocks){
         if(!(img.empty())){
             funcion1.segmentImage_(img,blockWidth,blocks);
             return true;
@@ -54,6 +55,7 @@ TEST(PruebaSegmentar,Prueba1){
  * @return
  */
 int main(int argc, char *argv[]) {
+
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
