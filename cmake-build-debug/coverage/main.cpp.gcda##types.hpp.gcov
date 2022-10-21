@@ -1,0 +1,2446 @@
+        -:    0:Source:/usr/local/include/opencv4/opencv2/core/types.hpp
+        -:    0:Graph:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/CMakeFiles/test_tuto.dir/main.cpp.gcno
+        -:    0:Data:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/CMakeFiles/test_tuto.dir/main.cpp.gcda
+        -:    0:Runs:1
+        -:    1:/*M///////////////////////////////////////////////////////////////////////////////////////
+        -:    2://
+        -:    3://  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+        -:    4://
+        -:    5://  By downloading, copying, installing or using the software you agree to this license.
+        -:    6://  If you do not agree to this license, do not download, install,
+        -:    7://  copy or use the software.
+        -:    8://
+        -:    9://
+        -:   10://                          License Agreement
+        -:   11://                For Open Source Computer Vision Library
+        -:   12://
+        -:   13:// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.
+        -:   14:// Copyright (C) 2009, Willow Garage Inc., all rights reserved.
+        -:   15:// Copyright (C) 2013, OpenCV Foundation, all rights reserved.
+        -:   16:// Third party copyrights are property of their respective owners.
+        -:   17://
+        -:   18:// Redistribution and use in source and binary forms, with or without modification,
+        -:   19:// are permitted provided that the following conditions are met:
+        -:   20://
+        -:   21://   * Redistribution's of source code must retain the above copyright notice,
+        -:   22://     this list of conditions and the following disclaimer.
+        -:   23://
+        -:   24://   * Redistribution's in binary form must reproduce the above copyright notice,
+        -:   25://     this list of conditions and the following disclaimer in the documentation
+        -:   26://     and/or other materials provided with the distribution.
+        -:   27://
+        -:   28://   * The name of the copyright holders may not be used to endorse or promote products
+        -:   29://     derived from this software without specific prior written permission.
+        -:   30://
+        -:   31:// This software is provided by the copyright holders and contributors "as is" and
+        -:   32:// any express or implied warranties, including, but not limited to, the implied
+        -:   33:// warranties of merchantability and fitness for a particular purpose are disclaimed.
+        -:   34:// In no event shall the Intel Corporation or contributors be liable for any direct,
+        -:   35:// indirect, incidental, special, exemplary, or consequential damages
+        -:   36:// (including, but not limited to, procurement of substitute goods or services;
+        -:   37:// loss of use, data, or profits; or business interruption) however caused
+        -:   38:// and on any theory of liability, whether in contract, strict liability,
+        -:   39:// or tort (including negligence or otherwise) arising in any way out of
+        -:   40:// the use of this software, even if advised of the possibility of such damage.
+        -:   41://
+        -:   42://M*/
+        -:   43:
+        -:   44:#ifndef OPENCV_CORE_TYPES_HPP
+        -:   45:#define OPENCV_CORE_TYPES_HPP
+        -:   46:
+        -:   47:#ifndef __cplusplus
+        -:   48:#  error types.hpp header must be compiled as C++
+        -:   49:#endif
+        -:   50:
+        -:   51:#include <climits>
+        -:   52:#include <cfloat>
+        -:   53:#include <vector>
+        -:   54:#include <limits>
+        -:   55:
+        -:   56:#include "opencv2/core/cvdef.h"
+        -:   57:#include "opencv2/core/cvstd.hpp"
+        -:   58:#include "opencv2/core/matx.hpp"
+        -:   59:
+        -:   60:namespace cv
+        -:   61:{
+        -:   62:
+        -:   63://! @addtogroup core_basic
+        -:   64://! @{
+        -:   65:
+        -:   66://////////////////////////////// Complex //////////////////////////////
+        -:   67:
+        -:   68:/** @brief  A complex number class.
+        -:   69:
+        -:   70:  The template class is similar and compatible with std::complex, however it provides slightly
+        -:   71:  more convenient access to the real and imaginary parts using through the simple field access, as opposite
+        -:   72:  to std::complex::real() and std::complex::imag().
+        -:   73:*/
+        -:   74:template<typename _Tp> class Complex
+        -:   75:{
+        -:   76:public:
+        -:   77:
+        -:   78:    //! default constructor
+        -:   79:    Complex();
+        -:   80:    Complex( _Tp _re, _Tp _im = 0 );
+        -:   81:
+        -:   82:    //! conversion to another data type
+        -:   83:    template<typename T2> operator Complex<T2>() const;
+        -:   84:    //! conjugation
+        -:   85:    Complex conj() const;
+        -:   86:
+        -:   87:    _Tp re, im; //< the real and the imaginary parts
+        -:   88:};
+        -:   89:
+        -:   90:typedef Complex<float> Complexf;
+        -:   91:typedef Complex<double> Complexd;
+        -:   92:
+        -:   93:template<typename _Tp> class DataType< Complex<_Tp> >
+        -:   94:{
+        -:   95:public:
+        -:   96:    typedef Complex<_Tp> value_type;
+        -:   97:    typedef value_type   work_type;
+        -:   98:    typedef _Tp          channel_type;
+        -:   99:
+        -:  100:    enum { generic_type = 0,
+        -:  101:           channels     = 2,
+        -:  102:           fmt          = DataType<channel_type>::fmt + ((channels - 1) << 8)
+        -:  103:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  104:           ,depth        = DataType<channel_type>::depth
+        -:  105:           ,type         = CV_MAKETYPE(depth, channels)
+        -:  106:#endif
+        -:  107:    };
+        -:  108:
+        -:  109:    typedef Vec<channel_type, channels> vec_type;
+        -:  110:};
+        -:  111:
+        -:  112:namespace traits {
+        -:  113:template<typename _Tp>
+        -:  114:struct Depth< Complex<_Tp> > { enum { value = Depth<_Tp>::value }; };
+        -:  115:template<typename _Tp>
+        -:  116:struct Type< Complex<_Tp> > { enum { value = CV_MAKETYPE(Depth<_Tp>::value, 2) }; };
+        -:  117:} // namespace
+        -:  118:
+        -:  119:
+        -:  120://////////////////////////////// Point_ ////////////////////////////////
+        -:  121:
+        -:  122:/** @brief Template class for 2D points specified by its coordinates `x` and `y`.
+        -:  123:
+        -:  124:An instance of the class is interchangeable with C structures, CvPoint and CvPoint2D32f . There is
+        -:  125:also a cast operator to convert point coordinates to the specified type. The conversion from
+        -:  126:floating-point coordinates to integer coordinates is done by rounding. Commonly, the conversion
+        -:  127:uses this operation for each of the coordinates. Besides the class members listed in the
+        -:  128:declaration above, the following operations on points are implemented:
+        -:  129:@code
+        -:  130:    pt1 = pt2 + pt3;
+        -:  131:    pt1 = pt2 - pt3;
+        -:  132:    pt1 = pt2 * a;
+        -:  133:    pt1 = a * pt2;
+        -:  134:    pt1 = pt2 / a;
+        -:  135:    pt1 += pt2;
+        -:  136:    pt1 -= pt2;
+        -:  137:    pt1 *= a;
+        -:  138:    pt1 /= a;
+        -:  139:    double value = norm(pt); // L2 norm
+        -:  140:    pt1 == pt2;
+        -:  141:    pt1 != pt2;
+        -:  142:@endcode
+        -:  143:For your convenience, the following type aliases are defined:
+        -:  144:@code
+        -:  145:    typedef Point_<int> Point2i;
+        -:  146:    typedef Point2i Point;
+        -:  147:    typedef Point_<float> Point2f;
+        -:  148:    typedef Point_<double> Point2d;
+        -:  149:@endcode
+        -:  150:Example:
+        -:  151:@code
+        -:  152:    Point2f a(0.3f, 0.f), b(0.f, 0.4f);
+        -:  153:    Point pt = (a + b)*10.f;
+        -:  154:    cout << pt.x << ", " << pt.y << endl;
+        -:  155:@endcode
+        -:  156:*/
+        -:  157:template<typename _Tp> class Point_
+        -:  158:{
+        -:  159:public:
+        -:  160:    typedef _Tp value_type;
+        -:  161:
+        -:  162:    //! default constructor
+        -:  163:    Point_();
+        -:  164:    Point_(_Tp _x, _Tp _y);
+        -:  165:#if (defined(__GNUC__) && __GNUC__ < 5) && !defined(__clang__)  // GCC 4.x bug. Details: https://github.com/opencv/opencv/pull/20837
+        -:  166:    Point_(const Point_& pt);
+        -:  167:    Point_(Point_&& pt) CV_NOEXCEPT = default;
+        -:  168:#elif OPENCV_ABI_COMPATIBILITY < 500
+        -:  169:    Point_(const Point_& pt) = default;
+        -:  170:    Point_(Point_&& pt) CV_NOEXCEPT = default;
+        -:  171:#endif
+        -:  172:    Point_(const Size_<_Tp>& sz);
+        -:  173:    Point_(const Vec<_Tp, 2>& v);
+        -:  174:
+        -:  175:#if (defined(__GNUC__) && __GNUC__ < 5) && !defined(__clang__)  // GCC 4.x bug. Details: https://github.com/opencv/opencv/pull/20837
+        -:  176:    Point_& operator = (const Point_& pt);
+        -:  177:    Point_& operator = (Point_&& pt) CV_NOEXCEPT = default;
+        -:  178:#elif OPENCV_ABI_COMPATIBILITY < 500
+        -:  179:    Point_& operator = (const Point_& pt) = default;
+        -:  180:    Point_& operator = (Point_&& pt) CV_NOEXCEPT = default;
+        -:  181:#endif
+        -:  182:    //! conversion to another data type
+        -:  183:    template<typename _Tp2> operator Point_<_Tp2>() const;
+        -:  184:
+        -:  185:    //! conversion to the old-style C structures
+        -:  186:    operator Vec<_Tp, 2>() const;
+        -:  187:
+        -:  188:    //! dot product
+        -:  189:    _Tp dot(const Point_& pt) const;
+        -:  190:    //! dot product computed in double-precision arithmetics
+        -:  191:    double ddot(const Point_& pt) const;
+        -:  192:    //! cross-product
+        -:  193:    double cross(const Point_& pt) const;
+        -:  194:    //! checks whether the point is inside the specified rectangle
+        -:  195:    bool inside(const Rect_<_Tp>& r) const;
+        -:  196:    _Tp x; //!< x coordinate of the point
+        -:  197:    _Tp y; //!< y coordinate of the point
+        -:  198:};
+        -:  199:
+        -:  200:typedef Point_<int> Point2i;
+        -:  201:typedef Point_<int64> Point2l;
+        -:  202:typedef Point_<float> Point2f;
+        -:  203:typedef Point_<double> Point2d;
+        -:  204:typedef Point2i Point;
+        -:  205:
+        -:  206:template<typename _Tp> class DataType< Point_<_Tp> >
+        -:  207:{
+        -:  208:public:
+        -:  209:    typedef Point_<_Tp>                               value_type;
+        -:  210:    typedef Point_<typename DataType<_Tp>::work_type> work_type;
+        -:  211:    typedef _Tp                                       channel_type;
+        -:  212:
+        -:  213:    enum { generic_type = 0,
+        -:  214:           channels     = 2,
+        -:  215:           fmt          = traits::SafeFmt<channel_type>::fmt + ((channels - 1) << 8)
+        -:  216:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  217:           ,depth        = DataType<channel_type>::depth
+        -:  218:           ,type         = CV_MAKETYPE(depth, channels)
+        -:  219:#endif
+        -:  220:         };
+        -:  221:
+        -:  222:    typedef Vec<channel_type, channels> vec_type;
+        -:  223:};
+        -:  224:
+        -:  225:namespace traits {
+        -:  226:template<typename _Tp>
+        -:  227:struct Depth< Point_<_Tp> > { enum { value = Depth<_Tp>::value }; };
+        -:  228:template<typename _Tp>
+        -:  229:struct Type< Point_<_Tp> > { enum { value = CV_MAKETYPE(Depth<_Tp>::value, 2) }; };
+        -:  230:} // namespace
+        -:  231:
+        -:  232:
+        -:  233://////////////////////////////// Point3_ ////////////////////////////////
+        -:  234:
+        -:  235:/** @brief Template class for 3D points specified by its coordinates `x`, `y` and `z`.
+        -:  236:
+        -:  237:An instance of the class is interchangeable with the C structure CvPoint2D32f . Similarly to
+        -:  238:Point_ , the coordinates of 3D points can be converted to another type. The vector arithmetic and
+        -:  239:comparison operations are also supported.
+        -:  240:
+        -:  241:The following Point3_\<\> aliases are available:
+        -:  242:@code
+        -:  243:    typedef Point3_<int> Point3i;
+        -:  244:    typedef Point3_<float> Point3f;
+        -:  245:    typedef Point3_<double> Point3d;
+        -:  246:@endcode
+        -:  247:@see cv::Point3i, cv::Point3f and cv::Point3d
+        -:  248:*/
+        -:  249:template<typename _Tp> class Point3_
+        -:  250:{
+        -:  251:public:
+        -:  252:    typedef _Tp value_type;
+        -:  253:
+        -:  254:    //! default constructor
+        -:  255:    Point3_();
+        -:  256:    Point3_(_Tp _x, _Tp _y, _Tp _z);
+        -:  257:#if OPENCV_ABI_COMPATIBILITY < 500
+        -:  258:    Point3_(const Point3_& pt) = default;
+        -:  259:    Point3_(Point3_&& pt) CV_NOEXCEPT = default;
+        -:  260:#endif
+        -:  261:    explicit Point3_(const Point_<_Tp>& pt);
+        -:  262:    Point3_(const Vec<_Tp, 3>& v);
+        -:  263:
+        -:  264:#if OPENCV_ABI_COMPATIBILITY < 500
+        -:  265:    Point3_& operator = (const Point3_& pt) = default;
+        -:  266:    Point3_& operator = (Point3_&& pt) CV_NOEXCEPT = default;
+        -:  267:#endif
+        -:  268:    //! conversion to another data type
+        -:  269:    template<typename _Tp2> operator Point3_<_Tp2>() const;
+        -:  270:    //! conversion to cv::Vec<>
+        -:  271:    operator Vec<_Tp, 3>() const;
+        -:  272:
+        -:  273:    //! dot product
+        -:  274:    _Tp dot(const Point3_& pt) const;
+        -:  275:    //! dot product computed in double-precision arithmetics
+        -:  276:    double ddot(const Point3_& pt) const;
+        -:  277:    //! cross product of the 2 3D points
+        -:  278:    Point3_ cross(const Point3_& pt) const;
+        -:  279:    _Tp x; //!< x coordinate of the 3D point
+        -:  280:    _Tp y; //!< y coordinate of the 3D point
+        -:  281:    _Tp z; //!< z coordinate of the 3D point
+        -:  282:};
+        -:  283:
+        -:  284:typedef Point3_<int> Point3i;
+        -:  285:typedef Point3_<float> Point3f;
+        -:  286:typedef Point3_<double> Point3d;
+        -:  287:
+        -:  288:template<typename _Tp> class DataType< Point3_<_Tp> >
+        -:  289:{
+        -:  290:public:
+        -:  291:    typedef Point3_<_Tp>                               value_type;
+        -:  292:    typedef Point3_<typename DataType<_Tp>::work_type> work_type;
+        -:  293:    typedef _Tp                                        channel_type;
+        -:  294:
+        -:  295:    enum { generic_type = 0,
+        -:  296:           channels     = 3,
+        -:  297:           fmt          = traits::SafeFmt<channel_type>::fmt + ((channels - 1) << 8)
+        -:  298:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  299:           ,depth        = DataType<channel_type>::depth
+        -:  300:           ,type         = CV_MAKETYPE(depth, channels)
+        -:  301:#endif
+        -:  302:         };
+        -:  303:
+        -:  304:    typedef Vec<channel_type, channels> vec_type;
+        -:  305:};
+        -:  306:
+        -:  307:namespace traits {
+        -:  308:template<typename _Tp>
+        -:  309:struct Depth< Point3_<_Tp> > { enum { value = Depth<_Tp>::value }; };
+        -:  310:template<typename _Tp>
+        -:  311:struct Type< Point3_<_Tp> > { enum { value = CV_MAKETYPE(Depth<_Tp>::value, 3) }; };
+        -:  312:} // namespace
+        -:  313:
+        -:  314://////////////////////////////// Size_ ////////////////////////////////
+        -:  315:
+        -:  316:/** @brief Template class for specifying the size of an image or rectangle.
+        -:  317:
+        -:  318:The class includes two members called width and height. The structure can be converted to and from
+        -:  319:the old OpenCV structures CvSize and CvSize2D32f . The same set of arithmetic and comparison
+        -:  320:operations as for Point_ is available.
+        -:  321:
+        -:  322:OpenCV defines the following Size_\<\> aliases:
+        -:  323:@code
+        -:  324:    typedef Size_<int> Size2i;
+        -:  325:    typedef Size2i Size;
+        -:  326:    typedef Size_<float> Size2f;
+        -:  327:@endcode
+        -:  328:*/
+        -:  329:template<typename _Tp> class Size_
+        -:  330:{
+        -:  331:public:
+        -:  332:    typedef _Tp value_type;
+        -:  333:
+        -:  334:    //! default constructor
+        -:  335:    Size_();
+        -:  336:    Size_(_Tp _width, _Tp _height);
+        -:  337:#if OPENCV_ABI_COMPATIBILITY < 500
+        -:  338:    Size_(const Size_& sz) = default;
+        -:  339:    Size_(Size_&& sz) CV_NOEXCEPT = default;
+        -:  340:#endif
+        -:  341:    Size_(const Point_<_Tp>& pt);
+        -:  342:
+        -:  343:#if OPENCV_ABI_COMPATIBILITY < 500
+        -:  344:    Size_& operator = (const Size_& sz) = default;
+        -:  345:    Size_& operator = (Size_&& sz) CV_NOEXCEPT = default;
+        -:  346:#endif
+        -:  347:    //! the area (width*height)
+        -:  348:    _Tp area() const;
+        -:  349:    //! aspect ratio (width/height)
+        -:  350:    double aspectRatio() const;
+        -:  351:    //! true if empty
+        -:  352:    bool empty() const;
+        -:  353:
+        -:  354:    //! conversion of another data type.
+        -:  355:    template<typename _Tp2> operator Size_<_Tp2>() const;
+        -:  356:
+        -:  357:    _Tp width; //!< the width
+        -:  358:    _Tp height; //!< the height
+        -:  359:};
+        -:  360:
+        -:  361:typedef Size_<int> Size2i;
+        -:  362:typedef Size_<int64> Size2l;
+        -:  363:typedef Size_<float> Size2f;
+        -:  364:typedef Size_<double> Size2d;
+        -:  365:typedef Size2i Size;
+        -:  366:
+        -:  367:template<typename _Tp> class DataType< Size_<_Tp> >
+        -:  368:{
+        -:  369:public:
+        -:  370:    typedef Size_<_Tp>                               value_type;
+        -:  371:    typedef Size_<typename DataType<_Tp>::work_type> work_type;
+        -:  372:    typedef _Tp                                      channel_type;
+        -:  373:
+        -:  374:    enum { generic_type = 0,
+        -:  375:           channels     = 2,
+        -:  376:           fmt          = DataType<channel_type>::fmt + ((channels - 1) << 8)
+        -:  377:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  378:           ,depth        = DataType<channel_type>::depth
+        -:  379:           ,type         = CV_MAKETYPE(depth, channels)
+        -:  380:#endif
+        -:  381:         };
+        -:  382:
+        -:  383:    typedef Vec<channel_type, channels> vec_type;
+        -:  384:};
+        -:  385:
+        -:  386:namespace traits {
+        -:  387:template<typename _Tp>
+        -:  388:struct Depth< Size_<_Tp> > { enum { value = Depth<_Tp>::value }; };
+        -:  389:template<typename _Tp>
+        -:  390:struct Type< Size_<_Tp> > { enum { value = CV_MAKETYPE(Depth<_Tp>::value, 2) }; };
+        -:  391:} // namespace
+        -:  392:
+        -:  393://////////////////////////////// Rect_ ////////////////////////////////
+        -:  394:
+        -:  395:/** @brief Template class for 2D rectangles
+        -:  396:
+        -:  397:described by the following parameters:
+        -:  398:-   Coordinates of the top-left corner. This is a default interpretation of Rect_::x and Rect_::y
+        -:  399:    in OpenCV. Though, in your algorithms you may count x and y from the bottom-left corner.
+        -:  400:-   Rectangle width and height.
+        -:  401:
+        -:  402:OpenCV typically assumes that the top and left boundary of the rectangle are inclusive, while the
+        -:  403:right and bottom boundaries are not. For example, the method Rect_::contains returns true if
+        -:  404:
+        -:  405:\f[x  \leq pt.x < x+width,
+        -:  406:      y  \leq pt.y < y+height\f]
+        -:  407:
+        -:  408:Virtually every loop over an image ROI in OpenCV (where ROI is specified by Rect_\<int\> ) is
+        -:  409:implemented as:
+        -:  410:@code
+        -:  411:    for(int y = roi.y; y < roi.y + roi.height; y++)
+        -:  412:        for(int x = roi.x; x < roi.x + roi.width; x++)
+        -:  413:        {
+        -:  414:            // ...
+        -:  415:        }
+        -:  416:@endcode
+        -:  417:In addition to the class members, the following operations on rectangles are implemented:
+        -:  418:-   \f$\texttt{rect} = \texttt{rect} \pm \texttt{point}\f$ (shifting a rectangle by a certain offset)
+        -:  419:-   \f$\texttt{rect} = \texttt{rect} \pm \texttt{size}\f$ (expanding or shrinking a rectangle by a
+        -:  420:    certain amount)
+        -:  421:-   rect += point, rect -= point, rect += size, rect -= size (augmenting operations)
+        -:  422:-   rect = rect1 & rect2 (rectangle intersection)
+        -:  423:-   rect = rect1 | rect2 (minimum area rectangle containing rect1 and rect2 )
+        -:  424:-   rect &= rect1, rect |= rect1 (and the corresponding augmenting operations)
+        -:  425:-   rect == rect1, rect != rect1 (rectangle comparison)
+        -:  426:
+        -:  427:This is an example how the partial ordering on rectangles can be established (rect1 \f$\subseteq\f$
+        -:  428:rect2):
+        -:  429:@code
+        -:  430:    template<typename _Tp> inline bool
+        -:  431:    operator <= (const Rect_<_Tp>& r1, const Rect_<_Tp>& r2)
+        -:  432:    {
+        -:  433:        return (r1 & r2) == r1;
+        -:  434:    }
+        -:  435:@endcode
+        -:  436:For your convenience, the Rect_\<\> alias is available: cv::Rect
+        -:  437:*/
+        -:  438:template<typename _Tp> class Rect_
+        -:  439:{
+        -:  440:public:
+        -:  441:    typedef _Tp value_type;
+        -:  442:
+        -:  443:    //! default constructor
+        -:  444:    Rect_();
+        -:  445:    Rect_(_Tp _x, _Tp _y, _Tp _width, _Tp _height);
+        -:  446:#if OPENCV_ABI_COMPATIBILITY < 500
+        -:  447:    Rect_(const Rect_& r) = default;
+        -:  448:    Rect_(Rect_&& r) CV_NOEXCEPT = default;
+        -:  449:#endif
+        -:  450:    Rect_(const Point_<_Tp>& org, const Size_<_Tp>& sz);
+        -:  451:    Rect_(const Point_<_Tp>& pt1, const Point_<_Tp>& pt2);
+        -:  452:
+        -:  453:#if OPENCV_ABI_COMPATIBILITY < 500
+        -:  454:    Rect_& operator = (const Rect_& r) = default;
+        -:  455:    Rect_& operator = (Rect_&& r) CV_NOEXCEPT = default;
+        -:  456:#endif
+        -:  457:    //! the top-left corner
+        -:  458:    Point_<_Tp> tl() const;
+        -:  459:    //! the bottom-right corner
+        -:  460:    Point_<_Tp> br() const;
+        -:  461:
+        -:  462:    //! size (width, height) of the rectangle
+        -:  463:    Size_<_Tp> size() const;
+        -:  464:    //! area (width*height) of the rectangle
+        -:  465:    _Tp area() const;
+        -:  466:    //! true if empty
+        -:  467:    bool empty() const;
+        -:  468:
+        -:  469:    //! conversion to another data type
+        -:  470:    template<typename _Tp2> operator Rect_<_Tp2>() const;
+        -:  471:
+        -:  472:    //! checks whether the rectangle contains the point
+        -:  473:    bool contains(const Point_<_Tp>& pt) const;
+        -:  474:
+        -:  475:    _Tp x; //!< x coordinate of the top-left corner
+        -:  476:    _Tp y; //!< y coordinate of the top-left corner
+        -:  477:    _Tp width; //!< width of the rectangle
+        -:  478:    _Tp height; //!< height of the rectangle
+        -:  479:};
+        -:  480:
+        -:  481:typedef Rect_<int> Rect2i;
+        -:  482:typedef Rect_<float> Rect2f;
+        -:  483:typedef Rect_<double> Rect2d;
+        -:  484:typedef Rect2i Rect;
+        -:  485:
+        -:  486:template<typename _Tp> class DataType< Rect_<_Tp> >
+        -:  487:{
+        -:  488:public:
+        -:  489:    typedef Rect_<_Tp>                               value_type;
+        -:  490:    typedef Rect_<typename DataType<_Tp>::work_type> work_type;
+        -:  491:    typedef _Tp                                      channel_type;
+        -:  492:
+        -:  493:    enum { generic_type = 0,
+        -:  494:           channels     = 4,
+        -:  495:           fmt          = traits::SafeFmt<channel_type>::fmt + ((channels - 1) << 8)
+        -:  496:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  497:           ,depth        = DataType<channel_type>::depth
+        -:  498:           ,type         = CV_MAKETYPE(depth, channels)
+        -:  499:#endif
+        -:  500:         };
+        -:  501:
+        -:  502:    typedef Vec<channel_type, channels> vec_type;
+        -:  503:};
+        -:  504:
+        -:  505:namespace traits {
+        -:  506:template<typename _Tp>
+        -:  507:struct Depth< Rect_<_Tp> > { enum { value = Depth<_Tp>::value }; };
+        -:  508:template<typename _Tp>
+        -:  509:struct Type< Rect_<_Tp> > { enum { value = CV_MAKETYPE(Depth<_Tp>::value, 4) }; };
+        -:  510:} // namespace
+        -:  511:
+        -:  512:///////////////////////////// RotatedRect /////////////////////////////
+        -:  513:
+        -:  514:/** @brief The class represents rotated (i.e. not up-right) rectangles on a plane.
+        -:  515:
+        -:  516:Each rectangle is specified by the center point (mass center), length of each side (represented by
+        -:  517:#Size2f structure) and the rotation angle in degrees.
+        -:  518:
+        -:  519:The sample below demonstrates how to use RotatedRect:
+        -:  520:@snippet snippets/core_various.cpp RotatedRect_demo
+        -:  521:![image](pics/rotatedrect.png)
+        -:  522:
+        -:  523:@sa CamShift, fitEllipse, minAreaRect, CvBox2D
+        -:  524:*/
+        -:  525:class CV_EXPORTS RotatedRect
+        -:  526:{
+        -:  527:public:
+        -:  528:    //! default constructor
+        -:  529:    RotatedRect();
+        -:  530:    /** full constructor
+        -:  531:    @param center The rectangle mass center.
+        -:  532:    @param size Width and height of the rectangle.
+        -:  533:    @param angle The rotation angle in a clockwise direction. When the angle is 0, 90, 180, 270 etc.,
+        -:  534:    the rectangle becomes an up-right rectangle.
+        -:  535:    */
+        -:  536:    RotatedRect(const Point2f& center, const Size2f& size, float angle);
+        -:  537:    /**
+        -:  538:    Any 3 end points of the RotatedRect. They must be given in order (either clockwise or
+        -:  539:    anticlockwise).
+        -:  540:     */
+        -:  541:    RotatedRect(const Point2f& point1, const Point2f& point2, const Point2f& point3);
+        -:  542:
+        -:  543:    /** returns 4 vertices of the rectangle
+        -:  544:    @param pts The points array for storing rectangle vertices. The order is bottomLeft, topLeft, topRight, bottomRight.
+        -:  545:    */
+        -:  546:    void points(Point2f pts[]) const;
+        -:  547:    //! returns the minimal up-right integer rectangle containing the rotated rectangle
+        -:  548:    Rect boundingRect() const;
+        -:  549:    //! returns the minimal (exact) floating point rectangle containing the rotated rectangle, not intended for use with images
+        -:  550:    Rect_<float> boundingRect2f() const;
+        -:  551:    //! returns the rectangle mass center
+        -:  552:    Point2f center;
+        -:  553:    //! returns width and height of the rectangle
+        -:  554:    Size2f size;
+        -:  555:    //! returns the rotation angle. When the angle is 0, 90, 180, 270 etc., the rectangle becomes an up-right rectangle.
+        -:  556:    float angle;
+        -:  557:};
+        -:  558:
+        -:  559:template<> class DataType< RotatedRect >
+        -:  560:{
+        -:  561:public:
+        -:  562:    typedef RotatedRect  value_type;
+        -:  563:    typedef value_type   work_type;
+        -:  564:    typedef float        channel_type;
+        -:  565:
+        -:  566:    enum { generic_type = 0,
+        -:  567:           channels     = (int)sizeof(value_type)/sizeof(channel_type), // 5
+        -:  568:           fmt          = traits::SafeFmt<channel_type>::fmt + ((channels - 1) << 8)
+        -:  569:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  570:           ,depth        = DataType<channel_type>::depth
+        -:  571:           ,type         = CV_MAKETYPE(depth, channels)
+        -:  572:#endif
+        -:  573:         };
+        -:  574:
+        -:  575:    typedef Vec<channel_type, channels> vec_type;
+        -:  576:};
+        -:  577:
+        -:  578:namespace traits {
+        -:  579:template<>
+        -:  580:struct Depth< RotatedRect > { enum { value = Depth<float>::value }; };
+        -:  581:template<>
+        -:  582:struct Type< RotatedRect > { enum { value = CV_MAKETYPE(Depth<float>::value, (int)sizeof(RotatedRect)/sizeof(float)) }; };
+        -:  583:} // namespace
+        -:  584:
+        -:  585:
+        -:  586://////////////////////////////// Range /////////////////////////////////
+        -:  587:
+        -:  588:/** @brief Template class specifying a continuous subsequence (slice) of a sequence.
+        -:  589:
+        -:  590:The class is used to specify a row or a column span in a matrix ( Mat ) and for many other purposes.
+        -:  591:Range(a,b) is basically the same as a:b in Matlab or a..b in Python. As in Python, start is an
+        -:  592:inclusive left boundary of the range and end is an exclusive right boundary of the range. Such a
+        -:  593:half-opened interval is usually denoted as \f$[start,end)\f$ .
+        -:  594:
+        -:  595:The static method Range::all() returns a special variable that means "the whole sequence" or "the
+        -:  596:whole range", just like " : " in Matlab or " ... " in Python. All the methods and functions in
+        -:  597:OpenCV that take Range support this special Range::all() value. But, of course, in case of your own
+        -:  598:custom processing, you will probably have to check and handle it explicitly:
+        -:  599:@code
+        -:  600:    void my_function(..., const Range& r, ....)
+        -:  601:    {
+        -:  602:        if(r == Range::all()) {
+        -:  603:            // process all the data
+        -:  604:        }
+        -:  605:        else {
+        -:  606:            // process [r.start, r.end)
+        -:  607:        }
+        -:  608:    }
+        -:  609:@endcode
+        -:  610:*/
+        -:  611:class CV_EXPORTS Range
+        -:  612:{
+        -:  613:public:
+        -:  614:    Range();
+        -:  615:    Range(int _start, int _end);
+        -:  616:    int size() const;
+        -:  617:    bool empty() const;
+        -:  618:    static Range all();
+        -:  619:
+        -:  620:    int start, end;
+        -:  621:};
+        -:  622:
+        -:  623:template<> class DataType<Range>
+        -:  624:{
+        -:  625:public:
+        -:  626:    typedef Range      value_type;
+        -:  627:    typedef value_type work_type;
+        -:  628:    typedef int        channel_type;
+        -:  629:
+        -:  630:    enum { generic_type = 0,
+        -:  631:           channels     = 2,
+        -:  632:           fmt          = traits::SafeFmt<channel_type>::fmt + ((channels - 1) << 8)
+        -:  633:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  634:           ,depth        = DataType<channel_type>::depth
+        -:  635:           ,type         = CV_MAKETYPE(depth, channels)
+        -:  636:#endif
+        -:  637:         };
+        -:  638:
+        -:  639:    typedef Vec<channel_type, channels> vec_type;
+        -:  640:};
+        -:  641:
+        -:  642:namespace traits {
+        -:  643:template<>
+        -:  644:struct Depth< Range > { enum { value = Depth<int>::value }; };
+        -:  645:template<>
+        -:  646:struct Type< Range > { enum { value = CV_MAKETYPE(Depth<int>::value, 2) }; };
+        -:  647:} // namespace
+        -:  648:
+        -:  649:
+        -:  650://////////////////////////////// Scalar_ ///////////////////////////////
+        -:  651:
+        -:  652:/** @brief Template class for a 4-element vector derived from Vec.
+        -:  653:
+        -:  654:Being derived from Vec\<_Tp, 4\> , Scalar\_ and Scalar can be used just as typical 4-element
+        -:  655:vectors. In addition, they can be converted to/from CvScalar . The type Scalar is widely used in
+        -:  656:OpenCV to pass pixel values.
+        -:  657:*/
+        -:  658:template<typename _Tp> class Scalar_ : public Vec<_Tp, 4>
+        -:  659:{
+        -:  660:public:
+        -:  661:    //! default constructor
+        -:  662:    Scalar_();
+        -:  663:    Scalar_(_Tp v0, _Tp v1, _Tp v2=0, _Tp v3=0);
+        -:  664:    Scalar_(_Tp v0);
+        -:  665:
+        -:  666:    Scalar_(const Scalar_& s);
+        -:  667:    Scalar_(Scalar_&& s) CV_NOEXCEPT;
+        -:  668:
+        -:  669:    Scalar_& operator=(const Scalar_& s);
+        -:  670:    Scalar_& operator=(Scalar_&& s) CV_NOEXCEPT;
+        -:  671:
+        -:  672:    template<typename _Tp2, int cn>
+        -:  673:    Scalar_(const Vec<_Tp2, cn>& v);
+        -:  674:
+        -:  675:    //! returns a scalar with all elements set to v0
+        -:  676:    static Scalar_<_Tp> all(_Tp v0);
+        -:  677:
+        -:  678:    //! conversion to another data type
+        -:  679:    template<typename T2> operator Scalar_<T2>() const;
+        -:  680:
+        -:  681:    //! per-element product
+        -:  682:    Scalar_<_Tp> mul(const Scalar_<_Tp>& a, double scale=1 ) const;
+        -:  683:
+        -:  684:    //! returns (v0, -v1, -v2, -v3)
+        -:  685:    Scalar_<_Tp> conj() const;
+        -:  686:
+        -:  687:    //! returns true iff v1 == v2 == v3 == 0
+        -:  688:    bool isReal() const;
+        -:  689:};
+        -:  690:
+        -:  691:typedef Scalar_<double> Scalar;
+        -:  692:
+        -:  693:template<typename _Tp> class DataType< Scalar_<_Tp> >
+        -:  694:{
+        -:  695:public:
+        -:  696:    typedef Scalar_<_Tp>                               value_type;
+        -:  697:    typedef Scalar_<typename DataType<_Tp>::work_type> work_type;
+        -:  698:    typedef _Tp                                        channel_type;
+        -:  699:
+        -:  700:    enum { generic_type = 0,
+        -:  701:           channels     = 4,
+        -:  702:           fmt          = traits::SafeFmt<channel_type>::fmt + ((channels - 1) << 8)
+        -:  703:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  704:           ,depth        = DataType<channel_type>::depth
+        -:  705:           ,type         = CV_MAKETYPE(depth, channels)
+        -:  706:#endif
+        -:  707:         };
+        -:  708:
+        -:  709:    typedef Vec<channel_type, channels> vec_type;
+        -:  710:};
+        -:  711:
+        -:  712:namespace traits {
+        -:  713:template<typename _Tp>
+        -:  714:struct Depth< Scalar_<_Tp> > { enum { value = Depth<_Tp>::value }; };
+        -:  715:template<typename _Tp>
+        -:  716:struct Type< Scalar_<_Tp> > { enum { value = CV_MAKETYPE(Depth<_Tp>::value, 4) }; };
+        -:  717:} // namespace
+        -:  718:
+        -:  719:
+        -:  720://///////////////////////////// KeyPoint ////////////////////////////////
+        -:  721:
+        -:  722:/** @brief Data structure for salient point detectors.
+        -:  723:
+        -:  724:The class instance stores a keypoint, i.e. a point feature found by one of many available keypoint
+        -:  725:detectors, such as Harris corner detector, #FAST, %StarDetector, %SURF, %SIFT etc.
+        -:  726:
+        -:  727:The keypoint is characterized by the 2D position, scale (proportional to the diameter of the
+        -:  728:neighborhood that needs to be taken into account), orientation and some other parameters. The
+        -:  729:keypoint neighborhood is then analyzed by another algorithm that builds a descriptor (usually
+        -:  730:represented as a feature vector). The keypoints representing the same object in different images
+        -:  731:can then be matched using %KDTree or another method.
+        -:  732:*/
+        -:  733:class CV_EXPORTS_W_SIMPLE KeyPoint
+        -:  734:{
+        -:  735:public:
+        -:  736:    //! the default constructor
+        -:  737:    CV_WRAP KeyPoint();
+        -:  738:    /**
+        -:  739:    @param pt x & y coordinates of the keypoint
+        -:  740:    @param size keypoint diameter
+        -:  741:    @param angle keypoint orientation
+        -:  742:    @param response keypoint detector response on the keypoint (that is, strength of the keypoint)
+        -:  743:    @param octave pyramid octave in which the keypoint has been detected
+        -:  744:    @param class_id object id
+        -:  745:     */
+        -:  746:    KeyPoint(Point2f pt, float size, float angle=-1, float response=0, int octave=0, int class_id=-1);
+        -:  747:    /**
+        -:  748:    @param x x-coordinate of the keypoint
+        -:  749:    @param y y-coordinate of the keypoint
+        -:  750:    @param size keypoint diameter
+        -:  751:    @param angle keypoint orientation
+        -:  752:    @param response keypoint detector response on the keypoint (that is, strength of the keypoint)
+        -:  753:    @param octave pyramid octave in which the keypoint has been detected
+        -:  754:    @param class_id object id
+        -:  755:     */
+        -:  756:    CV_WRAP KeyPoint(float x, float y, float size, float angle=-1, float response=0, int octave=0, int class_id=-1);
+        -:  757:
+        -:  758:    size_t hash() const;
+        -:  759:
+        -:  760:    /**
+        -:  761:    This method converts vector of keypoints to vector of points or the reverse, where each keypoint is
+        -:  762:    assigned the same size and the same orientation.
+        -:  763:
+        -:  764:    @param keypoints Keypoints obtained from any feature detection algorithm like SIFT/SURF/ORB
+        -:  765:    @param points2f Array of (x,y) coordinates of each keypoint
+        -:  766:    @param keypointIndexes Array of indexes of keypoints to be converted to points. (Acts like a mask to
+        -:  767:    convert only specified keypoints)
+        -:  768:    */
+        -:  769:    CV_WRAP static void convert(const std::vector<KeyPoint>& keypoints,
+        -:  770:                                CV_OUT std::vector<Point2f>& points2f,
+        -:  771:                                const std::vector<int>& keypointIndexes=std::vector<int>());
+        -:  772:    /** @overload
+        -:  773:    @param points2f Array of (x,y) coordinates of each keypoint
+        -:  774:    @param keypoints Keypoints obtained from any feature detection algorithm like SIFT/SURF/ORB
+        -:  775:    @param size keypoint diameter
+        -:  776:    @param response keypoint detector response on the keypoint (that is, strength of the keypoint)
+        -:  777:    @param octave pyramid octave in which the keypoint has been detected
+        -:  778:    @param class_id object id
+        -:  779:    */
+        -:  780:    CV_WRAP static void convert(const std::vector<Point2f>& points2f,
+        -:  781:                                CV_OUT std::vector<KeyPoint>& keypoints,
+        -:  782:                                float size=1, float response=1, int octave=0, int class_id=-1);
+        -:  783:
+        -:  784:    /**
+        -:  785:    This method computes overlap for pair of keypoints. Overlap is the ratio between area of keypoint
+        -:  786:    regions' intersection and area of keypoint regions' union (considering keypoint region as circle).
+        -:  787:    If they don't overlap, we get zero. If they coincide at same location with same size, we get 1.
+        -:  788:    @param kp1 First keypoint
+        -:  789:    @param kp2 Second keypoint
+        -:  790:    */
+        -:  791:    CV_WRAP static float overlap(const KeyPoint& kp1, const KeyPoint& kp2);
+        -:  792:
+        -:  793:    CV_PROP_RW Point2f pt; //!< coordinates of the keypoints
+        -:  794:    CV_PROP_RW float size; //!< diameter of the meaningful keypoint neighborhood
+        -:  795:    CV_PROP_RW float angle; //!< computed orientation of the keypoint (-1 if not applicable);
+        -:  796:                            //!< it's in [0,360) degrees and measured relative to
+        -:  797:                            //!< image coordinate system, ie in clockwise.
+        -:  798:    CV_PROP_RW float response; //!< the response by which the most strong keypoints have been selected. Can be used for the further sorting or subsampling
+        -:  799:    CV_PROP_RW int octave; //!< octave (pyramid layer) from which the keypoint has been extracted
+        -:  800:    CV_PROP_RW int class_id; //!< object class (if the keypoints need to be clustered by an object they belong to)
+        -:  801:};
+        -:  802:
+        -:  803:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  804:template<> class DataType<KeyPoint>
+        -:  805:{
+        -:  806:public:
+        -:  807:    typedef KeyPoint      value_type;
+        -:  808:    typedef float         work_type;
+        -:  809:    typedef float         channel_type;
+        -:  810:
+        -:  811:    enum { generic_type = 0,
+        -:  812:           depth        = DataType<channel_type>::depth,
+        -:  813:           channels     = (int)(sizeof(value_type)/sizeof(channel_type)), // 7
+        -:  814:           fmt          = DataType<channel_type>::fmt + ((channels - 1) << 8),
+        -:  815:           type         = CV_MAKETYPE(depth, channels)
+        -:  816:         };
+        -:  817:
+        -:  818:    typedef Vec<channel_type, channels> vec_type;
+        -:  819:};
+        -:  820:#endif
+        -:  821:
+        -:  822:
+        -:  823://////////////////////////////// DMatch /////////////////////////////////
+        -:  824:
+        -:  825:/** @brief Class for matching keypoint descriptors
+        -:  826:
+        -:  827:query descriptor index, train descriptor index, train image index, and distance between
+        -:  828:descriptors.
+        -:  829:*/
+        -:  830:class CV_EXPORTS_W_SIMPLE DMatch
+        -:  831:{
+        -:  832:public:
+        -:  833:    CV_WRAP DMatch();
+        -:  834:    CV_WRAP DMatch(int _queryIdx, int _trainIdx, float _distance);
+        -:  835:    CV_WRAP DMatch(int _queryIdx, int _trainIdx, int _imgIdx, float _distance);
+        -:  836:
+        -:  837:    CV_PROP_RW int queryIdx; //!< query descriptor index
+        -:  838:    CV_PROP_RW int trainIdx; //!< train descriptor index
+        -:  839:    CV_PROP_RW int imgIdx;   //!< train image index
+        -:  840:
+        -:  841:    CV_PROP_RW float distance;
+        -:  842:
+        -:  843:    // less is better
+        -:  844:    bool operator<(const DMatch &m) const;
+        -:  845:};
+        -:  846:
+        -:  847:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  848:template<> class DataType<DMatch>
+        -:  849:{
+        -:  850:public:
+        -:  851:    typedef DMatch      value_type;
+        -:  852:    typedef int         work_type;
+        -:  853:    typedef int         channel_type;
+        -:  854:
+        -:  855:    enum { generic_type = 0,
+        -:  856:           depth        = DataType<channel_type>::depth,
+        -:  857:           channels     = (int)(sizeof(value_type)/sizeof(channel_type)), // 4
+        -:  858:           fmt          = DataType<channel_type>::fmt + ((channels - 1) << 8),
+        -:  859:           type         = CV_MAKETYPE(depth, channels)
+        -:  860:         };
+        -:  861:
+        -:  862:    typedef Vec<channel_type, channels> vec_type;
+        -:  863:};
+        -:  864:#endif
+        -:  865:
+        -:  866:
+        -:  867:///////////////////////////// TermCriteria //////////////////////////////
+        -:  868:
+        -:  869:/** @brief The class defining termination criteria for iterative algorithms.
+        -:  870:
+        -:  871:You can initialize it by default constructor and then override any parameters, or the structure may
+        -:  872:be fully initialized using the advanced variant of the constructor.
+        -:  873:*/
+        -:  874:class CV_EXPORTS TermCriteria
+        -:  875:{
+        -:  876:public:
+        -:  877:    /**
+        -:  878:      Criteria type, can be one of: COUNT, EPS or COUNT + EPS
+        -:  879:    */
+        -:  880:    enum Type
+        -:  881:    {
+        -:  882:        COUNT=1, //!< the maximum number of iterations or elements to compute
+        -:  883:        MAX_ITER=COUNT, //!< ditto
+        -:  884:        EPS=2 //!< the desired accuracy or change in parameters at which the iterative algorithm stops
+        -:  885:    };
+        -:  886:
+        -:  887:    //! default constructor
+        -:  888:    TermCriteria();
+        -:  889:    /**
+        -:  890:    @param type The type of termination criteria, one of TermCriteria::Type
+        -:  891:    @param maxCount The maximum number of iterations or elements to compute.
+        -:  892:    @param epsilon The desired accuracy or change in parameters at which the iterative algorithm stops.
+        -:  893:    */
+        -:  894:    TermCriteria(int type, int maxCount, double epsilon);
+        -:  895:
+        -:  896:    inline bool isValid() const
+        -:  897:    {
+        -:  898:        const bool isCount = (type & COUNT) && maxCount > 0;
+        -:  899:        const bool isEps = (type & EPS) && !cvIsNaN(epsilon);
+        -:  900:        return isCount || isEps;
+        -:  901:    }
+        -:  902:
+        -:  903:    int type; //!< the type of termination criteria: COUNT, EPS or COUNT + EPS
+        -:  904:    int maxCount; //!< the maximum number of iterations/elements
+        -:  905:    double epsilon; //!< the desired accuracy
+        -:  906:};
+        -:  907:
+        -:  908:
+        -:  909://! @} core_basic
+        -:  910:
+        -:  911:///////////////////////// raster image moments //////////////////////////
+        -:  912:
+        -:  913://! @addtogroup imgproc_shape
+        -:  914://! @{
+        -:  915:
+        -:  916:/** @brief struct returned by cv::moments
+        -:  917:
+        -:  918:The spatial moments \f$\texttt{Moments::m}_{ji}\f$ are computed as:
+        -:  919:
+        -:  920:\f[\texttt{m} _{ji}= \sum _{x,y}  \left ( \texttt{array} (x,y)  \cdot x^j  \cdot y^i \right )\f]
+        -:  921:
+        -:  922:The central moments \f$\texttt{Moments::mu}_{ji}\f$ are computed as:
+        -:  923:
+        -:  924:\f[\texttt{mu} _{ji}= \sum _{x,y}  \left ( \texttt{array} (x,y)  \cdot (x -  \bar{x} )^j  \cdot (y -  \bar{y} )^i \right )\f]
+        -:  925:
+        -:  926:where \f$(\bar{x}, \bar{y})\f$ is the mass center:
+        -:  927:
+        -:  928:\f[\bar{x} = \frac{\texttt{m}_{10}}{\texttt{m}_{00}} , \; \bar{y} = \frac{\texttt{m}_{01}}{\texttt{m}_{00}}\f]
+        -:  929:
+        -:  930:The normalized central moments \f$\texttt{Moments::nu}_{ij}\f$ are computed as:
+        -:  931:
+        -:  932:\f[\texttt{nu} _{ji}= \frac{\texttt{mu}_{ji}}{\texttt{m}_{00}^{(i+j)/2+1}} .\f]
+        -:  933:
+        -:  934:@note
+        -:  935:\f$\texttt{mu}_{00}=\texttt{m}_{00}\f$, \f$\texttt{nu}_{00}=1\f$
+        -:  936:\f$\texttt{nu}_{10}=\texttt{mu}_{10}=\texttt{mu}_{01}=\texttt{mu}_{10}=0\f$ , hence the values are not
+        -:  937:stored.
+        -:  938:
+        -:  939:The moments of a contour are defined in the same way but computed using the Green's formula (see
+        -:  940:<http://en.wikipedia.org/wiki/Green_theorem>). So, due to a limited raster resolution, the moments
+        -:  941:computed for a contour are slightly different from the moments computed for the same rasterized
+        -:  942:contour.
+        -:  943:
+        -:  944:@note
+        -:  945:Since the contour moments are computed using Green formula, you may get seemingly odd results for
+        -:  946:contours with self-intersections, e.g. a zero area (m00) for butterfly-shaped contours.
+        -:  947: */
+        -:  948:class CV_EXPORTS_W_MAP Moments
+        -:  949:{
+        -:  950:public:
+        -:  951:    //! the default constructor
+        -:  952:    Moments();
+        -:  953:    //! the full constructor
+        -:  954:    Moments(double m00, double m10, double m01, double m20, double m11,
+        -:  955:            double m02, double m30, double m21, double m12, double m03 );
+        -:  956:    ////! the conversion from CvMoments
+        -:  957:    //Moments( const CvMoments& moments );
+        -:  958:    ////! the conversion to CvMoments
+        -:  959:    //operator CvMoments() const;
+        -:  960:
+        -:  961:    //! @name spatial moments
+        -:  962:    //! @{
+        -:  963:    CV_PROP_RW double  m00, m10, m01, m20, m11, m02, m30, m21, m12, m03;
+        -:  964:    //! @}
+        -:  965:
+        -:  966:    //! @name central moments
+        -:  967:    //! @{
+        -:  968:    CV_PROP_RW double  mu20, mu11, mu02, mu30, mu21, mu12, mu03;
+        -:  969:    //! @}
+        -:  970:
+        -:  971:    //! @name central normalized moments
+        -:  972:    //! @{
+        -:  973:    CV_PROP_RW double  nu20, nu11, nu02, nu30, nu21, nu12, nu03;
+        -:  974:    //! @}
+        -:  975:};
+        -:  976:
+        -:  977:template<> class DataType<Moments>
+        -:  978:{
+        -:  979:public:
+        -:  980:    typedef Moments     value_type;
+        -:  981:    typedef double      work_type;
+        -:  982:    typedef double      channel_type;
+        -:  983:
+        -:  984:    enum { generic_type = 0,
+        -:  985:           channels     = (int)(sizeof(value_type)/sizeof(channel_type)), // 24
+        -:  986:           fmt          = DataType<channel_type>::fmt + ((channels - 1) << 8)
+        -:  987:#ifdef OPENCV_TRAITS_ENABLE_DEPRECATED
+        -:  988:           ,depth        = DataType<channel_type>::depth
+        -:  989:           ,type         = CV_MAKETYPE(depth, channels)
+        -:  990:#endif
+        -:  991:         };
+        -:  992:
+        -:  993:    typedef Vec<channel_type, channels> vec_type;
+        -:  994:};
+        -:  995:
+        -:  996:namespace traits {
+        -:  997:template<>
+        -:  998:struct Depth< Moments > { enum { value = Depth<double>::value }; };
+        -:  999:template<>
+        -: 1000:struct Type< Moments > { enum { value = CV_MAKETYPE(Depth<double>::value, (int)(sizeof(Moments)/sizeof(double))) }; };
+        -: 1001:} // namespace
+        -: 1002:
+        -: 1003://! @} imgproc_shape
+        -: 1004:
+        -: 1005://! @cond IGNORED
+        -: 1006:
+        -: 1007://///////////////////////////////////////////////////////////////////////
+        -: 1008:///////////////////////////// Implementation ////////////////////////////
+        -: 1009://///////////////////////////////////////////////////////////////////////
+        -: 1010:
+        -: 1011://////////////////////////////// Complex ////////////////////////////////
+        -: 1012:
+        -: 1013:template<typename _Tp> inline
+        -: 1014:Complex<_Tp>::Complex()
+        -: 1015:    : re(0), im(0) {}
+        -: 1016:
+        -: 1017:template<typename _Tp> inline
+        -: 1018:Complex<_Tp>::Complex( _Tp _re, _Tp _im )
+        -: 1019:    : re(_re), im(_im) {}
+        -: 1020:
+        -: 1021:template<typename _Tp> template<typename T2> inline
+        -: 1022:Complex<_Tp>::operator Complex<T2>() const
+        -: 1023:{
+        -: 1024:    return Complex<T2>(saturate_cast<T2>(re), saturate_cast<T2>(im));
+        -: 1025:}
+        -: 1026:
+        -: 1027:template<typename _Tp> inline
+        -: 1028:Complex<_Tp> Complex<_Tp>::conj() const
+        -: 1029:{
+        -: 1030:    return Complex<_Tp>(re, -im);
+        -: 1031:}
+        -: 1032:
+        -: 1033:
+        -: 1034:template<typename _Tp> static inline
+        -: 1035:bool operator == (const Complex<_Tp>& a, const Complex<_Tp>& b)
+        -: 1036:{
+        -: 1037:    return a.re == b.re && a.im == b.im;
+        -: 1038:}
+        -: 1039:
+        -: 1040:template<typename _Tp> static inline
+        -: 1041:bool operator != (const Complex<_Tp>& a, const Complex<_Tp>& b)
+        -: 1042:{
+        -: 1043:    return a.re != b.re || a.im != b.im;
+        -: 1044:}
+        -: 1045:
+        -: 1046:template<typename _Tp> static inline
+        -: 1047:Complex<_Tp> operator + (const Complex<_Tp>& a, const Complex<_Tp>& b)
+        -: 1048:{
+        -: 1049:    return Complex<_Tp>( a.re + b.re, a.im + b.im );
+        -: 1050:}
+        -: 1051:
+        -: 1052:template<typename _Tp> static inline
+        -: 1053:Complex<_Tp>& operator += (Complex<_Tp>& a, const Complex<_Tp>& b)
+        -: 1054:{
+        -: 1055:    a.re += b.re; a.im += b.im;
+        -: 1056:    return a;
+        -: 1057:}
+        -: 1058:
+        -: 1059:template<typename _Tp> static inline
+        -: 1060:Complex<_Tp> operator - (const Complex<_Tp>& a, const Complex<_Tp>& b)
+        -: 1061:{
+        -: 1062:    return Complex<_Tp>( a.re - b.re, a.im - b.im );
+        -: 1063:}
+        -: 1064:
+        -: 1065:template<typename _Tp> static inline
+        -: 1066:Complex<_Tp>& operator -= (Complex<_Tp>& a, const Complex<_Tp>& b)
+        -: 1067:{
+        -: 1068:    a.re -= b.re; a.im -= b.im;
+        -: 1069:    return a;
+        -: 1070:}
+        -: 1071:
+        -: 1072:template<typename _Tp> static inline
+        -: 1073:Complex<_Tp> operator - (const Complex<_Tp>& a)
+        -: 1074:{
+        -: 1075:    return Complex<_Tp>(-a.re, -a.im);
+        -: 1076:}
+        -: 1077:
+        -: 1078:template<typename _Tp> static inline
+        -: 1079:Complex<_Tp> operator * (const Complex<_Tp>& a, const Complex<_Tp>& b)
+        -: 1080:{
+        -: 1081:    return Complex<_Tp>( a.re*b.re - a.im*b.im, a.re*b.im + a.im*b.re );
+        -: 1082:}
+        -: 1083:
+        -: 1084:template<typename _Tp> static inline
+        -: 1085:Complex<_Tp> operator * (const Complex<_Tp>& a, _Tp b)
+        -: 1086:{
+        -: 1087:    return Complex<_Tp>( a.re*b, a.im*b );
+        -: 1088:}
+        -: 1089:
+        -: 1090:template<typename _Tp> static inline
+        -: 1091:Complex<_Tp> operator * (_Tp b, const Complex<_Tp>& a)
+        -: 1092:{
+        -: 1093:    return Complex<_Tp>( a.re*b, a.im*b );
+        -: 1094:}
+        -: 1095:
+        -: 1096:template<typename _Tp> static inline
+        -: 1097:Complex<_Tp> operator + (const Complex<_Tp>& a, _Tp b)
+        -: 1098:{
+        -: 1099:    return Complex<_Tp>( a.re + b, a.im );
+        -: 1100:}
+        -: 1101:
+        -: 1102:template<typename _Tp> static inline
+        -: 1103:Complex<_Tp> operator - (const Complex<_Tp>& a, _Tp b)
+        -: 1104:{ return Complex<_Tp>( a.re - b, a.im ); }
+        -: 1105:
+        -: 1106:template<typename _Tp> static inline
+        -: 1107:Complex<_Tp> operator + (_Tp b, const Complex<_Tp>& a)
+        -: 1108:{
+        -: 1109:    return Complex<_Tp>( a.re + b, a.im );
+        -: 1110:}
+        -: 1111:
+        -: 1112:template<typename _Tp> static inline
+        -: 1113:Complex<_Tp> operator - (_Tp b, const Complex<_Tp>& a)
+        -: 1114:{
+        -: 1115:    return Complex<_Tp>( b - a.re, -a.im );
+        -: 1116:}
+        -: 1117:
+        -: 1118:template<typename _Tp> static inline
+        -: 1119:Complex<_Tp>& operator += (Complex<_Tp>& a, _Tp b)
+        -: 1120:{
+        -: 1121:    a.re += b; return a;
+        -: 1122:}
+        -: 1123:
+        -: 1124:template<typename _Tp> static inline
+        -: 1125:Complex<_Tp>& operator -= (Complex<_Tp>& a, _Tp b)
+        -: 1126:{
+        -: 1127:    a.re -= b; return a;
+        -: 1128:}
+        -: 1129:
+        -: 1130:template<typename _Tp> static inline
+        -: 1131:Complex<_Tp>& operator *= (Complex<_Tp>& a, _Tp b)
+        -: 1132:{
+        -: 1133:    a.re *= b; a.im *= b; return a;
+        -: 1134:}
+        -: 1135:
+        -: 1136:template<typename _Tp> static inline
+        -: 1137:double abs(const Complex<_Tp>& a)
+        -: 1138:{
+        -: 1139:    return std::sqrt( (double)a.re*a.re + (double)a.im*a.im);
+        -: 1140:}
+        -: 1141:
+        -: 1142:template<typename _Tp> static inline
+        -: 1143:Complex<_Tp> operator / (const Complex<_Tp>& a, const Complex<_Tp>& b)
+        -: 1144:{
+        -: 1145:    double t = 1./((double)b.re*b.re + (double)b.im*b.im);
+        -: 1146:    return Complex<_Tp>( (_Tp)((a.re*b.re + a.im*b.im)*t),
+        -: 1147:                        (_Tp)((-a.re*b.im + a.im*b.re)*t) );
+        -: 1148:}
+        -: 1149:
+        -: 1150:template<typename _Tp> static inline
+        -: 1151:Complex<_Tp>& operator /= (Complex<_Tp>& a, const Complex<_Tp>& b)
+        -: 1152:{
+        -: 1153:    a = a / b;
+        -: 1154:    return a;
+        -: 1155:}
+        -: 1156:
+        -: 1157:template<typename _Tp> static inline
+        -: 1158:Complex<_Tp> operator / (const Complex<_Tp>& a, _Tp b)
+        -: 1159:{
+        -: 1160:    _Tp t = (_Tp)1/b;
+        -: 1161:    return Complex<_Tp>( a.re*t, a.im*t );
+        -: 1162:}
+        -: 1163:
+        -: 1164:template<typename _Tp> static inline
+        -: 1165:Complex<_Tp> operator / (_Tp b, const Complex<_Tp>& a)
+        -: 1166:{
+        -: 1167:    return Complex<_Tp>(b)/a;
+        -: 1168:}
+        -: 1169:
+        -: 1170:template<typename _Tp> static inline
+        -: 1171:Complex<_Tp> operator /= (const Complex<_Tp>& a, _Tp b)
+        -: 1172:{
+        -: 1173:    _Tp t = (_Tp)1/b;
+        -: 1174:    a.re *= t; a.im *= t; return a;
+        -: 1175:}
+        -: 1176:
+        -: 1177:
+        -: 1178:
+        -: 1179://////////////////////////////// 2D Point ///////////////////////////////
+        -: 1180:
+        -: 1181:template<typename _Tp> inline
+        -: 1182:Point_<_Tp>::Point_()
+        -: 1183:    : x(0), y(0) {}
+        -: 1184:
+        -: 1185:template<typename _Tp> inline
+        -: 1186:Point_<_Tp>::Point_(_Tp _x, _Tp _y)
+        -: 1187:    : x(_x), y(_y) {}
+        -: 1188:
+        -: 1189:#if (defined(__GNUC__) && __GNUC__ < 5) && !defined(__clang__)  // GCC 4.x bug. Details: https://github.com/opencv/opencv/pull/20837
+        -: 1190:template<typename _Tp> inline
+        -: 1191:Point_<_Tp>::Point_(const Point_& pt)
+        -: 1192:    : x(pt.x), y(pt.y) {}
+        -: 1193:#endif
+        -: 1194:
+        -: 1195:template<typename _Tp> inline
+        -: 1196:Point_<_Tp>::Point_(const Size_<_Tp>& sz)
+        -: 1197:    : x(sz.width), y(sz.height) {}
+        -: 1198:
+        -: 1199:template<typename _Tp> inline
+        -: 1200:Point_<_Tp>::Point_(const Vec<_Tp,2>& v)
+        -: 1201:    : x(v[0]), y(v[1]) {}
+        -: 1202:
+        -: 1203:#if (defined(__GNUC__) && __GNUC__ < 5) && !defined(__clang__)  // GCC 4.x bug. Details: https://github.com/opencv/opencv/pull/20837
+        -: 1204:template<typename _Tp> inline
+        -: 1205:Point_<_Tp>& Point_<_Tp>::operator = (const Point_& pt)
+        -: 1206:{
+        -: 1207:    x = pt.x; y = pt.y;
+        -: 1208:    return *this;
+        -: 1209:}
+        -: 1210:#endif
+        -: 1211:
+        -: 1212:template<typename _Tp> template<typename _Tp2> inline
+        -: 1213:Point_<_Tp>::operator Point_<_Tp2>() const
+        -: 1214:{
+        -: 1215:    return Point_<_Tp2>(saturate_cast<_Tp2>(x), saturate_cast<_Tp2>(y));
+        -: 1216:}
+        -: 1217:
+        -: 1218:template<typename _Tp> inline
+        -: 1219:Point_<_Tp>::operator Vec<_Tp, 2>() const
+        -: 1220:{
+        -: 1221:    return Vec<_Tp, 2>(x, y);
+        -: 1222:}
+        -: 1223:
+        -: 1224:template<typename _Tp> inline
+        -: 1225:_Tp Point_<_Tp>::dot(const Point_& pt) const
+        -: 1226:{
+        -: 1227:    return saturate_cast<_Tp>(x*pt.x + y*pt.y);
+        -: 1228:}
+        -: 1229:
+        -: 1230:template<typename _Tp> inline
+        -: 1231:double Point_<_Tp>::ddot(const Point_& pt) const
+        -: 1232:{
+        -: 1233:    return (double)x*(double)(pt.x) + (double)y*(double)(pt.y);
+        -: 1234:}
+        -: 1235:
+        -: 1236:template<typename _Tp> inline
+        -: 1237:double Point_<_Tp>::cross(const Point_& pt) const
+        -: 1238:{
+        -: 1239:    return (double)x*pt.y - (double)y*pt.x;
+        -: 1240:}
+        -: 1241:
+        -: 1242:template<typename _Tp> inline bool
+        -: 1243:Point_<_Tp>::inside( const Rect_<_Tp>& r ) const
+        -: 1244:{
+        -: 1245:    return r.contains(*this);
+        -: 1246:}
+        -: 1247:
+        -: 1248:
+        -: 1249:template<typename _Tp> static inline
+        -: 1250:Point_<_Tp>& operator += (Point_<_Tp>& a, const Point_<_Tp>& b)
+        -: 1251:{
+        -: 1252:    a.x += b.x;
+        -: 1253:    a.y += b.y;
+        -: 1254:    return a;
+        -: 1255:}
+        -: 1256:
+        -: 1257:template<typename _Tp> static inline
+        -: 1258:Point_<_Tp>& operator -= (Point_<_Tp>& a, const Point_<_Tp>& b)
+        -: 1259:{
+        -: 1260:    a.x -= b.x;
+        -: 1261:    a.y -= b.y;
+        -: 1262:    return a;
+        -: 1263:}
+        -: 1264:
+        -: 1265:template<typename _Tp> static inline
+        -: 1266:Point_<_Tp>& operator *= (Point_<_Tp>& a, int b)
+        -: 1267:{
+        -: 1268:    a.x = saturate_cast<_Tp>(a.x * b);
+        -: 1269:    a.y = saturate_cast<_Tp>(a.y * b);
+        -: 1270:    return a;
+        -: 1271:}
+        -: 1272:
+        -: 1273:template<typename _Tp> static inline
+        -: 1274:Point_<_Tp>& operator *= (Point_<_Tp>& a, float b)
+        -: 1275:{
+        -: 1276:    a.x = saturate_cast<_Tp>(a.x * b);
+        -: 1277:    a.y = saturate_cast<_Tp>(a.y * b);
+        -: 1278:    return a;
+        -: 1279:}
+        -: 1280:
+        -: 1281:template<typename _Tp> static inline
+        -: 1282:Point_<_Tp>& operator *= (Point_<_Tp>& a, double b)
+        -: 1283:{
+        -: 1284:    a.x = saturate_cast<_Tp>(a.x * b);
+        -: 1285:    a.y = saturate_cast<_Tp>(a.y * b);
+        -: 1286:    return a;
+        -: 1287:}
+        -: 1288:
+        -: 1289:template<typename _Tp> static inline
+        -: 1290:Point_<_Tp>& operator /= (Point_<_Tp>& a, int b)
+        -: 1291:{
+        -: 1292:    a.x = saturate_cast<_Tp>(a.x / b);
+        -: 1293:    a.y = saturate_cast<_Tp>(a.y / b);
+        -: 1294:    return a;
+        -: 1295:}
+        -: 1296:
+        -: 1297:template<typename _Tp> static inline
+        -: 1298:Point_<_Tp>& operator /= (Point_<_Tp>& a, float b)
+        -: 1299:{
+        -: 1300:    a.x = saturate_cast<_Tp>(a.x / b);
+        -: 1301:    a.y = saturate_cast<_Tp>(a.y / b);
+        -: 1302:    return a;
+        -: 1303:}
+        -: 1304:
+        -: 1305:template<typename _Tp> static inline
+        -: 1306:Point_<_Tp>& operator /= (Point_<_Tp>& a, double b)
+        -: 1307:{
+        -: 1308:    a.x = saturate_cast<_Tp>(a.x / b);
+        -: 1309:    a.y = saturate_cast<_Tp>(a.y / b);
+        -: 1310:    return a;
+        -: 1311:}
+        -: 1312:
+        -: 1313:template<typename _Tp> static inline
+        -: 1314:double norm(const Point_<_Tp>& pt)
+        -: 1315:{
+        -: 1316:    return std::sqrt((double)pt.x*pt.x + (double)pt.y*pt.y);
+        -: 1317:}
+        -: 1318:
+        -: 1319:template<typename _Tp> static inline
+        -: 1320:bool operator == (const Point_<_Tp>& a, const Point_<_Tp>& b)
+        -: 1321:{
+        -: 1322:    return a.x == b.x && a.y == b.y;
+        -: 1323:}
+        -: 1324:
+        -: 1325:template<typename _Tp> static inline
+        -: 1326:bool operator != (const Point_<_Tp>& a, const Point_<_Tp>& b)
+        -: 1327:{
+        -: 1328:    return a.x != b.x || a.y != b.y;
+        -: 1329:}
+        -: 1330:
+        -: 1331:template<typename _Tp> static inline
+        -: 1332:Point_<_Tp> operator + (const Point_<_Tp>& a, const Point_<_Tp>& b)
+        -: 1333:{
+        -: 1334:    return Point_<_Tp>( saturate_cast<_Tp>(a.x + b.x), saturate_cast<_Tp>(a.y + b.y) );
+        -: 1335:}
+        -: 1336:
+        -: 1337:template<typename _Tp> static inline
+        -: 1338:Point_<_Tp> operator - (const Point_<_Tp>& a, const Point_<_Tp>& b)
+        -: 1339:{
+        -: 1340:    return Point_<_Tp>( saturate_cast<_Tp>(a.x - b.x), saturate_cast<_Tp>(a.y - b.y) );
+        -: 1341:}
+        -: 1342:
+        -: 1343:template<typename _Tp> static inline
+        -: 1344:Point_<_Tp> operator - (const Point_<_Tp>& a)
+        -: 1345:{
+        -: 1346:    return Point_<_Tp>( saturate_cast<_Tp>(-a.x), saturate_cast<_Tp>(-a.y) );
+        -: 1347:}
+        -: 1348:
+        -: 1349:template<typename _Tp> static inline
+        -: 1350:Point_<_Tp> operator * (const Point_<_Tp>& a, int b)
+        -: 1351:{
+        -: 1352:    return Point_<_Tp>( saturate_cast<_Tp>(a.x*b), saturate_cast<_Tp>(a.y*b) );
+        -: 1353:}
+        -: 1354:
+        -: 1355:template<typename _Tp> static inline
+        -: 1356:Point_<_Tp> operator * (int a, const Point_<_Tp>& b)
+        -: 1357:{
+        -: 1358:    return Point_<_Tp>( saturate_cast<_Tp>(b.x*a), saturate_cast<_Tp>(b.y*a) );
+        -: 1359:}
+        -: 1360:
+        -: 1361:template<typename _Tp> static inline
+        -: 1362:Point_<_Tp> operator * (const Point_<_Tp>& a, float b)
+        -: 1363:{
+        -: 1364:    return Point_<_Tp>( saturate_cast<_Tp>(a.x*b), saturate_cast<_Tp>(a.y*b) );
+        -: 1365:}
+        -: 1366:
+        -: 1367:template<typename _Tp> static inline
+        -: 1368:Point_<_Tp> operator * (float a, const Point_<_Tp>& b)
+        -: 1369:{
+        -: 1370:    return Point_<_Tp>( saturate_cast<_Tp>(b.x*a), saturate_cast<_Tp>(b.y*a) );
+        -: 1371:}
+        -: 1372:
+        -: 1373:template<typename _Tp> static inline
+        -: 1374:Point_<_Tp> operator * (const Point_<_Tp>& a, double b)
+        -: 1375:{
+        -: 1376:    return Point_<_Tp>( saturate_cast<_Tp>(a.x*b), saturate_cast<_Tp>(a.y*b) );
+        -: 1377:}
+        -: 1378:
+        -: 1379:template<typename _Tp> static inline
+        -: 1380:Point_<_Tp> operator * (double a, const Point_<_Tp>& b)
+        -: 1381:{
+        -: 1382:    return Point_<_Tp>( saturate_cast<_Tp>(b.x*a), saturate_cast<_Tp>(b.y*a) );
+        -: 1383:}
+        -: 1384:
+        -: 1385:template<typename _Tp> static inline
+        -: 1386:Point_<_Tp> operator * (const Matx<_Tp, 2, 2>& a, const Point_<_Tp>& b)
+        -: 1387:{
+        -: 1388:    Matx<_Tp, 2, 1> tmp = a * Vec<_Tp,2>(b.x, b.y);
+        -: 1389:    return Point_<_Tp>(tmp.val[0], tmp.val[1]);
+        -: 1390:}
+        -: 1391:
+        -: 1392:template<typename _Tp> static inline
+        -: 1393:Point3_<_Tp> operator * (const Matx<_Tp, 3, 3>& a, const Point_<_Tp>& b)
+        -: 1394:{
+        -: 1395:    Matx<_Tp, 3, 1> tmp = a * Vec<_Tp,3>(b.x, b.y, 1);
+        -: 1396:    return Point3_<_Tp>(tmp.val[0], tmp.val[1], tmp.val[2]);
+        -: 1397:}
+        -: 1398:
+        -: 1399:template<typename _Tp> static inline
+        -: 1400:Point_<_Tp> operator / (const Point_<_Tp>& a, int b)
+        -: 1401:{
+        -: 1402:    Point_<_Tp> tmp(a);
+        -: 1403:    tmp /= b;
+        -: 1404:    return tmp;
+        -: 1405:}
+        -: 1406:
+        -: 1407:template<typename _Tp> static inline
+        -: 1408:Point_<_Tp> operator / (const Point_<_Tp>& a, float b)
+        -: 1409:{
+        -: 1410:    Point_<_Tp> tmp(a);
+        -: 1411:    tmp /= b;
+        -: 1412:    return tmp;
+        -: 1413:}
+        -: 1414:
+        -: 1415:template<typename _Tp> static inline
+        -: 1416:Point_<_Tp> operator / (const Point_<_Tp>& a, double b)
+        -: 1417:{
+        -: 1418:    Point_<_Tp> tmp(a);
+        -: 1419:    tmp /= b;
+        -: 1420:    return tmp;
+        -: 1421:}
+        -: 1422:
+        -: 1423:
+        -: 1424:template<typename _AccTp> static inline _AccTp normL2Sqr(const Point_<int>& pt);
+        -: 1425:template<typename _AccTp> static inline _AccTp normL2Sqr(const Point_<int64>& pt);
+        -: 1426:template<typename _AccTp> static inline _AccTp normL2Sqr(const Point_<float>& pt);
+        -: 1427:template<typename _AccTp> static inline _AccTp normL2Sqr(const Point_<double>& pt);
+        -: 1428:
+        -: 1429:template<> inline int normL2Sqr<int>(const Point_<int>& pt) { return pt.dot(pt); }
+        -: 1430:template<> inline int64 normL2Sqr<int64>(const Point_<int64>& pt) { return pt.dot(pt); }
+        -: 1431:template<> inline float normL2Sqr<float>(const Point_<float>& pt) { return pt.dot(pt); }
+        -: 1432:template<> inline double normL2Sqr<double>(const Point_<int>& pt) { return pt.dot(pt); }
+        -: 1433:
+        -: 1434:template<> inline double normL2Sqr<double>(const Point_<float>& pt) { return pt.ddot(pt); }
+        -: 1435:template<> inline double normL2Sqr<double>(const Point_<double>& pt) { return pt.ddot(pt); }
+        -: 1436:
+        -: 1437:
+        -: 1438:
+        -: 1439://////////////////////////////// 3D Point ///////////////////////////////
+        -: 1440:
+        -: 1441:template<typename _Tp> inline
+        -: 1442:Point3_<_Tp>::Point3_()
+        -: 1443:    : x(0), y(0), z(0) {}
+        -: 1444:
+        -: 1445:template<typename _Tp> inline
+        -: 1446:Point3_<_Tp>::Point3_(_Tp _x, _Tp _y, _Tp _z)
+        -: 1447:    : x(_x), y(_y), z(_z) {}
+        -: 1448:
+        -: 1449:template<typename _Tp> inline
+        -: 1450:Point3_<_Tp>::Point3_(const Point_<_Tp>& pt)
+        -: 1451:    : x(pt.x), y(pt.y), z(_Tp()) {}
+        -: 1452:
+        -: 1453:template<typename _Tp> inline
+        -: 1454:Point3_<_Tp>::Point3_(const Vec<_Tp, 3>& v)
+        -: 1455:    : x(v[0]), y(v[1]), z(v[2]) {}
+        -: 1456:
+        -: 1457:template<typename _Tp> template<typename _Tp2> inline
+        -: 1458:Point3_<_Tp>::operator Point3_<_Tp2>() const
+        -: 1459:{
+        -: 1460:    return Point3_<_Tp2>(saturate_cast<_Tp2>(x), saturate_cast<_Tp2>(y), saturate_cast<_Tp2>(z));
+        -: 1461:}
+        -: 1462:
+        -: 1463:template<typename _Tp> inline
+        -: 1464:Point3_<_Tp>::operator Vec<_Tp, 3>() const
+        -: 1465:{
+        -: 1466:    return Vec<_Tp, 3>(x, y, z);
+        -: 1467:}
+        -: 1468:
+        -: 1469:template<typename _Tp> inline
+        -: 1470:_Tp Point3_<_Tp>::dot(const Point3_& pt) const
+        -: 1471:{
+        -: 1472:    return saturate_cast<_Tp>(x*pt.x + y*pt.y + z*pt.z);
+        -: 1473:}
+        -: 1474:
+        -: 1475:template<typename _Tp> inline
+        -: 1476:double Point3_<_Tp>::ddot(const Point3_& pt) const
+        -: 1477:{
+        -: 1478:    return (double)x*pt.x + (double)y*pt.y + (double)z*pt.z;
+        -: 1479:}
+        -: 1480:
+        -: 1481:template<typename _Tp> inline
+        -: 1482:Point3_<_Tp> Point3_<_Tp>::cross(const Point3_<_Tp>& pt) const
+        -: 1483:{
+        -: 1484:    return Point3_<_Tp>(y*pt.z - z*pt.y, z*pt.x - x*pt.z, x*pt.y - y*pt.x);
+        -: 1485:}
+        -: 1486:
+        -: 1487:
+        -: 1488:template<typename _Tp> static inline
+        -: 1489:Point3_<_Tp>& operator += (Point3_<_Tp>& a, const Point3_<_Tp>& b)
+        -: 1490:{
+        -: 1491:    a.x += b.x;
+        -: 1492:    a.y += b.y;
+        -: 1493:    a.z += b.z;
+        -: 1494:    return a;
+        -: 1495:}
+        -: 1496:
+        -: 1497:template<typename _Tp> static inline
+        -: 1498:Point3_<_Tp>& operator -= (Point3_<_Tp>& a, const Point3_<_Tp>& b)
+        -: 1499:{
+        -: 1500:    a.x -= b.x;
+        -: 1501:    a.y -= b.y;
+        -: 1502:    a.z -= b.z;
+        -: 1503:    return a;
+        -: 1504:}
+        -: 1505:
+        -: 1506:template<typename _Tp> static inline
+        -: 1507:Point3_<_Tp>& operator *= (Point3_<_Tp>& a, int b)
+        -: 1508:{
+        -: 1509:    a.x = saturate_cast<_Tp>(a.x * b);
+        -: 1510:    a.y = saturate_cast<_Tp>(a.y * b);
+        -: 1511:    a.z = saturate_cast<_Tp>(a.z * b);
+        -: 1512:    return a;
+        -: 1513:}
+        -: 1514:
+        -: 1515:template<typename _Tp> static inline
+        -: 1516:Point3_<_Tp>& operator *= (Point3_<_Tp>& a, float b)
+        -: 1517:{
+        -: 1518:    a.x = saturate_cast<_Tp>(a.x * b);
+        -: 1519:    a.y = saturate_cast<_Tp>(a.y * b);
+        -: 1520:    a.z = saturate_cast<_Tp>(a.z * b);
+        -: 1521:    return a;
+        -: 1522:}
+        -: 1523:
+        -: 1524:template<typename _Tp> static inline
+        -: 1525:Point3_<_Tp>& operator *= (Point3_<_Tp>& a, double b)
+        -: 1526:{
+        -: 1527:    a.x = saturate_cast<_Tp>(a.x * b);
+        -: 1528:    a.y = saturate_cast<_Tp>(a.y * b);
+        -: 1529:    a.z = saturate_cast<_Tp>(a.z * b);
+        -: 1530:    return a;
+        -: 1531:}
+        -: 1532:
+        -: 1533:template<typename _Tp> static inline
+        -: 1534:Point3_<_Tp>& operator /= (Point3_<_Tp>& a, int b)
+        -: 1535:{
+        -: 1536:    a.x = saturate_cast<_Tp>(a.x / b);
+        -: 1537:    a.y = saturate_cast<_Tp>(a.y / b);
+        -: 1538:    a.z = saturate_cast<_Tp>(a.z / b);
+        -: 1539:    return a;
+        -: 1540:}
+        -: 1541:
+        -: 1542:template<typename _Tp> static inline
+        -: 1543:Point3_<_Tp>& operator /= (Point3_<_Tp>& a, float b)
+        -: 1544:{
+        -: 1545:    a.x = saturate_cast<_Tp>(a.x / b);
+        -: 1546:    a.y = saturate_cast<_Tp>(a.y / b);
+        -: 1547:    a.z = saturate_cast<_Tp>(a.z / b);
+        -: 1548:    return a;
+        -: 1549:}
+        -: 1550:
+        -: 1551:template<typename _Tp> static inline
+        -: 1552:Point3_<_Tp>& operator /= (Point3_<_Tp>& a, double b)
+        -: 1553:{
+        -: 1554:    a.x = saturate_cast<_Tp>(a.x / b);
+        -: 1555:    a.y = saturate_cast<_Tp>(a.y / b);
+        -: 1556:    a.z = saturate_cast<_Tp>(a.z / b);
+        -: 1557:    return a;
+        -: 1558:}
+        -: 1559:
+        -: 1560:template<typename _Tp> static inline
+        -: 1561:double norm(const Point3_<_Tp>& pt)
+        -: 1562:{
+        -: 1563:    return std::sqrt((double)pt.x*pt.x + (double)pt.y*pt.y + (double)pt.z*pt.z);
+        -: 1564:}
+        -: 1565:
+        -: 1566:template<typename _Tp> static inline
+        -: 1567:bool operator == (const Point3_<_Tp>& a, const Point3_<_Tp>& b)
+        -: 1568:{
+        -: 1569:    return a.x == b.x && a.y == b.y && a.z == b.z;
+        -: 1570:}
+        -: 1571:
+        -: 1572:template<typename _Tp> static inline
+        -: 1573:bool operator != (const Point3_<_Tp>& a, const Point3_<_Tp>& b)
+        -: 1574:{
+        -: 1575:    return a.x != b.x || a.y != b.y || a.z != b.z;
+        -: 1576:}
+        -: 1577:
+        -: 1578:template<typename _Tp> static inline
+        -: 1579:Point3_<_Tp> operator + (const Point3_<_Tp>& a, const Point3_<_Tp>& b)
+        -: 1580:{
+        -: 1581:    return Point3_<_Tp>( saturate_cast<_Tp>(a.x + b.x), saturate_cast<_Tp>(a.y + b.y), saturate_cast<_Tp>(a.z + b.z));
+        -: 1582:}
+        -: 1583:
+        -: 1584:template<typename _Tp> static inline
+        -: 1585:Point3_<_Tp> operator - (const Point3_<_Tp>& a, const Point3_<_Tp>& b)
+        -: 1586:{
+        -: 1587:    return Point3_<_Tp>( saturate_cast<_Tp>(a.x - b.x), saturate_cast<_Tp>(a.y - b.y), saturate_cast<_Tp>(a.z - b.z));
+        -: 1588:}
+        -: 1589:
+        -: 1590:template<typename _Tp> static inline
+        -: 1591:Point3_<_Tp> operator - (const Point3_<_Tp>& a)
+        -: 1592:{
+        -: 1593:    return Point3_<_Tp>( saturate_cast<_Tp>(-a.x), saturate_cast<_Tp>(-a.y), saturate_cast<_Tp>(-a.z) );
+        -: 1594:}
+        -: 1595:
+        -: 1596:template<typename _Tp> static inline
+        -: 1597:Point3_<_Tp> operator * (const Point3_<_Tp>& a, int b)
+        -: 1598:{
+        -: 1599:    return Point3_<_Tp>( saturate_cast<_Tp>(a.x*b), saturate_cast<_Tp>(a.y*b), saturate_cast<_Tp>(a.z*b) );
+        -: 1600:}
+        -: 1601:
+        -: 1602:template<typename _Tp> static inline
+        -: 1603:Point3_<_Tp> operator * (int a, const Point3_<_Tp>& b)
+        -: 1604:{
+        -: 1605:    return Point3_<_Tp>( saturate_cast<_Tp>(b.x * a), saturate_cast<_Tp>(b.y * a), saturate_cast<_Tp>(b.z * a) );
+        -: 1606:}
+        -: 1607:
+        -: 1608:template<typename _Tp> static inline
+        -: 1609:Point3_<_Tp> operator * (const Point3_<_Tp>& a, float b)
+        -: 1610:{
+        -: 1611:    return Point3_<_Tp>( saturate_cast<_Tp>(a.x * b), saturate_cast<_Tp>(a.y * b), saturate_cast<_Tp>(a.z * b) );
+        -: 1612:}
+        -: 1613:
+        -: 1614:template<typename _Tp> static inline
+        -: 1615:Point3_<_Tp> operator * (float a, const Point3_<_Tp>& b)
+        -: 1616:{
+        -: 1617:    return Point3_<_Tp>( saturate_cast<_Tp>(b.x * a), saturate_cast<_Tp>(b.y * a), saturate_cast<_Tp>(b.z * a) );
+        -: 1618:}
+        -: 1619:
+        -: 1620:template<typename _Tp> static inline
+        -: 1621:Point3_<_Tp> operator * (const Point3_<_Tp>& a, double b)
+        -: 1622:{
+        -: 1623:    return Point3_<_Tp>( saturate_cast<_Tp>(a.x * b), saturate_cast<_Tp>(a.y * b), saturate_cast<_Tp>(a.z * b) );
+        -: 1624:}
+        -: 1625:
+        -: 1626:template<typename _Tp> static inline
+        -: 1627:Point3_<_Tp> operator * (double a, const Point3_<_Tp>& b)
+        -: 1628:{
+        -: 1629:    return Point3_<_Tp>( saturate_cast<_Tp>(b.x * a), saturate_cast<_Tp>(b.y * a), saturate_cast<_Tp>(b.z * a) );
+        -: 1630:}
+        -: 1631:
+        -: 1632:template<typename _Tp> static inline
+        -: 1633:Point3_<_Tp> operator * (const Matx<_Tp, 3, 3>& a, const Point3_<_Tp>& b)
+        -: 1634:{
+        -: 1635:    Matx<_Tp, 3, 1> tmp = a * Vec<_Tp,3>(b.x, b.y, b.z);
+        -: 1636:    return Point3_<_Tp>(tmp.val[0], tmp.val[1], tmp.val[2]);
+        -: 1637:}
+        -: 1638:
+        -: 1639:template<typename _Tp> static inline
+        -: 1640:Matx<_Tp, 4, 1> operator * (const Matx<_Tp, 4, 4>& a, const Point3_<_Tp>& b)
+        -: 1641:{
+        -: 1642:    return a * Matx<_Tp, 4, 1>(b.x, b.y, b.z, 1);
+        -: 1643:}
+        -: 1644:
+        -: 1645:template<typename _Tp> static inline
+        -: 1646:Point3_<_Tp> operator / (const Point3_<_Tp>& a, int b)
+        -: 1647:{
+        -: 1648:    Point3_<_Tp> tmp(a);
+        -: 1649:    tmp /= b;
+        -: 1650:    return tmp;
+        -: 1651:}
+        -: 1652:
+        -: 1653:template<typename _Tp> static inline
+        -: 1654:Point3_<_Tp> operator / (const Point3_<_Tp>& a, float b)
+        -: 1655:{
+        -: 1656:    Point3_<_Tp> tmp(a);
+        -: 1657:    tmp /= b;
+        -: 1658:    return tmp;
+        -: 1659:}
+        -: 1660:
+        -: 1661:template<typename _Tp> static inline
+        -: 1662:Point3_<_Tp> operator / (const Point3_<_Tp>& a, double b)
+        -: 1663:{
+        -: 1664:    Point3_<_Tp> tmp(a);
+        -: 1665:    tmp /= b;
+        -: 1666:    return tmp;
+        -: 1667:}
+        -: 1668:
+        -: 1669:
+        -: 1670:
+        -: 1671:////////////////////////////////// Size /////////////////////////////////
+        -: 1672:
+        -: 1673:template<typename _Tp> inline
+function _ZN2cv5Size_IiEC2Ev called 0 returned 0% blocks executed 0%
+    #####: 1674:Size_<_Tp>::Size_()
+    #####: 1675:    : width(0), height(0) {}
+        -: 1676:
+        -: 1677:template<typename _Tp> inline
+function _ZN2cv5Size_IiEC2Eii called 0 returned 0% blocks executed 0%
+    #####: 1678:Size_<_Tp>::Size_(_Tp _width, _Tp _height)
+    #####: 1679:    : width(_width), height(_height) {}
+        -: 1680:
+        -: 1681:template<typename _Tp> inline
+        -: 1682:Size_<_Tp>::Size_(const Point_<_Tp>& pt)
+        -: 1683:    : width(pt.x), height(pt.y) {}
+        -: 1684:
+        -: 1685:template<typename _Tp> template<typename _Tp2> inline
+        -: 1686:Size_<_Tp>::operator Size_<_Tp2>() const
+        -: 1687:{
+        -: 1688:    return Size_<_Tp2>(saturate_cast<_Tp2>(width), saturate_cast<_Tp2>(height));
+        -: 1689:}
+        -: 1690:
+        -: 1691:template<typename _Tp> inline
+        -: 1692:_Tp Size_<_Tp>::area() const
+        -: 1693:{
+        -: 1694:    const _Tp result = width * height;
+        -: 1695:    CV_DbgAssert(!std::numeric_limits<_Tp>::is_integer
+        -: 1696:        || width == 0 || result / width == height); // make sure the result fits in the return value
+        -: 1697:    return result;
+        -: 1698:}
+        -: 1699:
+        -: 1700:template<typename _Tp> inline
+        -: 1701:double Size_<_Tp>::aspectRatio() const
+        -: 1702:{
+        -: 1703:    return width / static_cast<double>(height);
+        -: 1704:}
+        -: 1705:
+        -: 1706:template<typename _Tp> inline
+        -: 1707:bool Size_<_Tp>::empty() const
+        -: 1708:{
+        -: 1709:    return width <= 0 || height <= 0;
+        -: 1710:}
+        -: 1711:
+        -: 1712:
+        -: 1713:template<typename _Tp> static inline
+        -: 1714:Size_<_Tp>& operator *= (Size_<_Tp>& a, _Tp b)
+        -: 1715:{
+        -: 1716:    a.width *= b;
+        -: 1717:    a.height *= b;
+        -: 1718:    return a;
+        -: 1719:}
+        -: 1720:
+        -: 1721:template<typename _Tp> static inline
+        -: 1722:Size_<_Tp> operator * (const Size_<_Tp>& a, _Tp b)
+        -: 1723:{
+        -: 1724:    Size_<_Tp> tmp(a);
+        -: 1725:    tmp *= b;
+        -: 1726:    return tmp;
+        -: 1727:}
+        -: 1728:
+        -: 1729:template<typename _Tp> static inline
+        -: 1730:Size_<_Tp>& operator /= (Size_<_Tp>& a, _Tp b)
+        -: 1731:{
+        -: 1732:    a.width /= b;
+        -: 1733:    a.height /= b;
+        -: 1734:    return a;
+        -: 1735:}
+        -: 1736:
+        -: 1737:template<typename _Tp> static inline
+        -: 1738:Size_<_Tp> operator / (const Size_<_Tp>& a, _Tp b)
+        -: 1739:{
+        -: 1740:    Size_<_Tp> tmp(a);
+        -: 1741:    tmp /= b;
+        -: 1742:    return tmp;
+        -: 1743:}
+        -: 1744:
+        -: 1745:template<typename _Tp> static inline
+        -: 1746:Size_<_Tp>& operator += (Size_<_Tp>& a, const Size_<_Tp>& b)
+        -: 1747:{
+        -: 1748:    a.width += b.width;
+        -: 1749:    a.height += b.height;
+        -: 1750:    return a;
+        -: 1751:}
+        -: 1752:
+        -: 1753:template<typename _Tp> static inline
+        -: 1754:Size_<_Tp> operator + (const Size_<_Tp>& a, const Size_<_Tp>& b)
+        -: 1755:{
+        -: 1756:    Size_<_Tp> tmp(a);
+        -: 1757:    tmp += b;
+        -: 1758:    return tmp;
+        -: 1759:}
+        -: 1760:
+        -: 1761:template<typename _Tp> static inline
+        -: 1762:Size_<_Tp>& operator -= (Size_<_Tp>& a, const Size_<_Tp>& b)
+        -: 1763:{
+        -: 1764:    a.width -= b.width;
+        -: 1765:    a.height -= b.height;
+        -: 1766:    return a;
+        -: 1767:}
+        -: 1768:
+        -: 1769:template<typename _Tp> static inline
+        -: 1770:Size_<_Tp> operator - (const Size_<_Tp>& a, const Size_<_Tp>& b)
+        -: 1771:{
+        -: 1772:    Size_<_Tp> tmp(a);
+        -: 1773:    tmp -= b;
+        -: 1774:    return tmp;
+        -: 1775:}
+        -: 1776:
+        -: 1777:template<typename _Tp> static inline
+        -: 1778:bool operator == (const Size_<_Tp>& a, const Size_<_Tp>& b)
+        -: 1779:{
+        -: 1780:    return a.width == b.width && a.height == b.height;
+        -: 1781:}
+        -: 1782:
+        -: 1783:template<typename _Tp> static inline
+        -: 1784:bool operator != (const Size_<_Tp>& a, const Size_<_Tp>& b)
+        -: 1785:{
+        -: 1786:    return !(a == b);
+        -: 1787:}
+        -: 1788:
+        -: 1789:
+        -: 1790:
+        -: 1791:////////////////////////////////// Rect /////////////////////////////////
+        -: 1792:
+        -: 1793:template<typename _Tp> inline
+        -: 1794:Rect_<_Tp>::Rect_()
+        -: 1795:    : x(0), y(0), width(0), height(0) {}
+        -: 1796:
+        -: 1797:template<typename _Tp> inline
+function _ZN2cv5Rect_IiEC2Eiiii called 10 returned 100% blocks executed 100%
+       10: 1798:Rect_<_Tp>::Rect_(_Tp _x, _Tp _y, _Tp _width, _Tp _height)
+       10: 1799:    : x(_x), y(_y), width(_width), height(_height) {}
+        -: 1800:
+        -: 1801:template<typename _Tp> inline
+        -: 1802:Rect_<_Tp>::Rect_(const Point_<_Tp>& org, const Size_<_Tp>& sz)
+        -: 1803:    : x(org.x), y(org.y), width(sz.width), height(sz.height) {}
+        -: 1804:
+        -: 1805:template<typename _Tp> inline
+        -: 1806:Rect_<_Tp>::Rect_(const Point_<_Tp>& pt1, const Point_<_Tp>& pt2)
+        -: 1807:{
+        -: 1808:    x = std::min(pt1.x, pt2.x);
+        -: 1809:    y = std::min(pt1.y, pt2.y);
+        -: 1810:    width = std::max(pt1.x, pt2.x) - x;
+        -: 1811:    height = std::max(pt1.y, pt2.y) - y;
+        -: 1812:}
+        -: 1813:
+        -: 1814:template<typename _Tp> inline
+        -: 1815:Point_<_Tp> Rect_<_Tp>::tl() const
+        -: 1816:{
+        -: 1817:    return Point_<_Tp>(x,y);
+        -: 1818:}
+        -: 1819:
+        -: 1820:template<typename _Tp> inline
+        -: 1821:Point_<_Tp> Rect_<_Tp>::br() const
+        -: 1822:{
+        -: 1823:    return Point_<_Tp>(x + width, y + height);
+        -: 1824:}
+        -: 1825:
+        -: 1826:template<typename _Tp> inline
+        -: 1827:Size_<_Tp> Rect_<_Tp>::size() const
+        -: 1828:{
+        -: 1829:    return Size_<_Tp>(width, height);
+        -: 1830:}
+        -: 1831:
+        -: 1832:template<typename _Tp> inline
+        -: 1833:_Tp Rect_<_Tp>::area() const
+        -: 1834:{
+        -: 1835:    const _Tp result = width * height;
+        -: 1836:    CV_DbgAssert(!std::numeric_limits<_Tp>::is_integer
+        -: 1837:        || width == 0 || result / width == height); // make sure the result fits in the return value
+        -: 1838:    return result;
+        -: 1839:}
+        -: 1840:
+        -: 1841:template<typename _Tp> inline
+        -: 1842:bool Rect_<_Tp>::empty() const
+        -: 1843:{
+        -: 1844:    return width <= 0 || height <= 0;
+        -: 1845:}
+        -: 1846:
+        -: 1847:template<typename _Tp> template<typename _Tp2> inline
+        -: 1848:Rect_<_Tp>::operator Rect_<_Tp2>() const
+        -: 1849:{
+        -: 1850:    return Rect_<_Tp2>(saturate_cast<_Tp2>(x), saturate_cast<_Tp2>(y), saturate_cast<_Tp2>(width), saturate_cast<_Tp2>(height));
+        -: 1851:}
+        -: 1852:
+        -: 1853:template<typename _Tp> inline
+        -: 1854:bool Rect_<_Tp>::contains(const Point_<_Tp>& pt) const
+        -: 1855:{
+        -: 1856:    return x <= pt.x && pt.x < x + width && y <= pt.y && pt.y < y + height;
+        -: 1857:}
+        -: 1858:
+        -: 1859:
+        -: 1860:template<typename _Tp> static inline
+        -: 1861:Rect_<_Tp>& operator += ( Rect_<_Tp>& a, const Point_<_Tp>& b )
+        -: 1862:{
+        -: 1863:    a.x += b.x;
+        -: 1864:    a.y += b.y;
+        -: 1865:    return a;
+        -: 1866:}
+        -: 1867:
+        -: 1868:template<typename _Tp> static inline
+        -: 1869:Rect_<_Tp>& operator -= ( Rect_<_Tp>& a, const Point_<_Tp>& b )
+        -: 1870:{
+        -: 1871:    a.x -= b.x;
+        -: 1872:    a.y -= b.y;
+        -: 1873:    return a;
+        -: 1874:}
+        -: 1875:
+        -: 1876:template<typename _Tp> static inline
+        -: 1877:Rect_<_Tp>& operator += ( Rect_<_Tp>& a, const Size_<_Tp>& b )
+        -: 1878:{
+        -: 1879:    a.width += b.width;
+        -: 1880:    a.height += b.height;
+        -: 1881:    return a;
+        -: 1882:}
+        -: 1883:
+        -: 1884:template<typename _Tp> static inline
+        -: 1885:Rect_<_Tp>& operator -= ( Rect_<_Tp>& a, const Size_<_Tp>& b )
+        -: 1886:{
+        -: 1887:    const _Tp width = a.width - b.width;
+        -: 1888:    const _Tp height = a.height - b.height;
+        -: 1889:    CV_DbgAssert(width >= 0 && height >= 0);
+        -: 1890:    a.width = width;
+        -: 1891:    a.height = height;
+        -: 1892:    return a;
+        -: 1893:}
+        -: 1894:
+        -: 1895:template<typename _Tp> static inline
+        -: 1896:Rect_<_Tp>& operator &= ( Rect_<_Tp>& a, const Rect_<_Tp>& b )
+        -: 1897:{
+        -: 1898:    if (a.empty() || b.empty()) {
+        -: 1899:        a = Rect();
+        -: 1900:        return a;
+        -: 1901:    }
+        -: 1902:    const Rect_<_Tp>& Rx_min = (a.x < b.x) ? a : b;
+        -: 1903:    const Rect_<_Tp>& Rx_max = (a.x < b.x) ? b : a;
+        -: 1904:    const Rect_<_Tp>& Ry_min = (a.y < b.y) ? a : b;
+        -: 1905:    const Rect_<_Tp>& Ry_max = (a.y < b.y) ? b : a;
+        -: 1906:    // Looking at the formula below, we will compute Rx_min.width - (Rx_max.x - Rx_min.x)
+        -: 1907:    // but we want to avoid overflows. Rx_min.width >= 0 and (Rx_max.x - Rx_min.x) >= 0
+        -: 1908:    // by definition so the difference does not overflow. The only thing that can overflow
+        -: 1909:    // is (Rx_max.x - Rx_min.x). And it can only overflow if Rx_min.x < 0.
+        -: 1910:    // Let us first deal with the following case.
+        -: 1911:    if ((Rx_min.x < 0 && Rx_min.x + Rx_min.width < Rx_max.x) ||
+        -: 1912:        (Ry_min.y < 0 && Ry_min.y + Ry_min.height < Ry_max.y)) {
+        -: 1913:        a = Rect();
+        -: 1914:        return a;
+        -: 1915:    }
+        -: 1916:    // We now know that either Rx_min.x >= 0, or
+        -: 1917:    // Rx_min.x < 0 && Rx_min.x + Rx_min.width >= Rx_max.x and therefore
+        -: 1918:    // Rx_min.width >= (Rx_max.x - Rx_min.x) which means (Rx_max.x - Rx_min.x)
+        -: 1919:    // is inferior to a valid int and therefore does not overflow.
+        -: 1920:    a.width = std::min(Rx_min.width - (Rx_max.x - Rx_min.x), Rx_max.width);
+        -: 1921:    a.height = std::min(Ry_min.height - (Ry_max.y - Ry_min.y), Ry_max.height);
+        -: 1922:    a.x = Rx_max.x;
+        -: 1923:    a.y = Ry_max.y;
+        -: 1924:    if (a.empty())
+        -: 1925:        a = Rect();
+        -: 1926:    return a;
+        -: 1927:}
+        -: 1928:
+        -: 1929:template<typename _Tp> static inline
+        -: 1930:Rect_<_Tp>& operator |= ( Rect_<_Tp>& a, const Rect_<_Tp>& b )
+        -: 1931:{
+        -: 1932:    if (a.empty()) {
+        -: 1933:        a = b;
+        -: 1934:    }
+        -: 1935:    else if (!b.empty()) {
+        -: 1936:        _Tp x1 = std::min(a.x, b.x);
+        -: 1937:        _Tp y1 = std::min(a.y, b.y);
+        -: 1938:        a.width = std::max(a.x + a.width, b.x + b.width) - x1;
+        -: 1939:        a.height = std::max(a.y + a.height, b.y + b.height) - y1;
+        -: 1940:        a.x = x1;
+        -: 1941:        a.y = y1;
+        -: 1942:    }
+        -: 1943:    return a;
+        -: 1944:}
+        -: 1945:
+        -: 1946:template<typename _Tp> static inline
+        -: 1947:bool operator == (const Rect_<_Tp>& a, const Rect_<_Tp>& b)
+        -: 1948:{
+        -: 1949:    return a.x == b.x && a.y == b.y && a.width == b.width && a.height == b.height;
+        -: 1950:}
+        -: 1951:
+        -: 1952:template<typename _Tp> static inline
+        -: 1953:bool operator != (const Rect_<_Tp>& a, const Rect_<_Tp>& b)
+        -: 1954:{
+        -: 1955:    return a.x != b.x || a.y != b.y || a.width != b.width || a.height != b.height;
+        -: 1956:}
+        -: 1957:
+        -: 1958:template<typename _Tp> static inline
+        -: 1959:Rect_<_Tp> operator + (const Rect_<_Tp>& a, const Point_<_Tp>& b)
+        -: 1960:{
+        -: 1961:    return Rect_<_Tp>( a.x + b.x, a.y + b.y, a.width, a.height );
+        -: 1962:}
+        -: 1963:
+        -: 1964:template<typename _Tp> static inline
+        -: 1965:Rect_<_Tp> operator - (const Rect_<_Tp>& a, const Point_<_Tp>& b)
+        -: 1966:{
+        -: 1967:    return Rect_<_Tp>( a.x - b.x, a.y - b.y, a.width, a.height );
+        -: 1968:}
+        -: 1969:
+        -: 1970:template<typename _Tp> static inline
+        -: 1971:Rect_<_Tp> operator + (const Rect_<_Tp>& a, const Size_<_Tp>& b)
+        -: 1972:{
+        -: 1973:    return Rect_<_Tp>( a.x, a.y, a.width + b.width, a.height + b.height );
+        -: 1974:}
+        -: 1975:
+        -: 1976:template<typename _Tp> static inline
+        -: 1977:Rect_<_Tp> operator - (const Rect_<_Tp>& a, const Size_<_Tp>& b)
+        -: 1978:{
+        -: 1979:    const _Tp width = a.width - b.width;
+        -: 1980:    const _Tp height = a.height - b.height;
+        -: 1981:    CV_DbgAssert(width >= 0 && height >= 0);
+        -: 1982:    return Rect_<_Tp>( a.x, a.y, width, height );
+        -: 1983:}
+        -: 1984:
+        -: 1985:template<typename _Tp> static inline
+        -: 1986:Rect_<_Tp> operator & (const Rect_<_Tp>& a, const Rect_<_Tp>& b)
+        -: 1987:{
+        -: 1988:    Rect_<_Tp> c = a;
+        -: 1989:    return c &= b;
+        -: 1990:}
+        -: 1991:
+        -: 1992:template<typename _Tp> static inline
+        -: 1993:Rect_<_Tp> operator | (const Rect_<_Tp>& a, const Rect_<_Tp>& b)
+        -: 1994:{
+        -: 1995:    Rect_<_Tp> c = a;
+        -: 1996:    return c |= b;
+        -: 1997:}
+        -: 1998:
+        -: 1999:/**
+        -: 2000: * @brief measure dissimilarity between two sample sets
+        -: 2001: *
+        -: 2002: * computes the complement of the Jaccard Index as described in <https://en.wikipedia.org/wiki/Jaccard_index>.
+        -: 2003: * For rectangles this reduces to computing the intersection over the union.
+        -: 2004: */
+        -: 2005:template<typename _Tp> static inline
+        -: 2006:double jaccardDistance(const Rect_<_Tp>& a, const Rect_<_Tp>& b) {
+        -: 2007:    _Tp Aa = a.area();
+        -: 2008:    _Tp Ab = b.area();
+        -: 2009:
+        -: 2010:    if ((Aa + Ab) <= std::numeric_limits<_Tp>::epsilon()) {
+        -: 2011:        // jaccard_index = 1 -> distance = 0
+        -: 2012:        return 0.0;
+        -: 2013:    }
+        -: 2014:
+        -: 2015:    double Aab = (a & b).area();
+        -: 2016:    // distance = 1 - jaccard_index
+        -: 2017:    return 1.0 - Aab / (Aa + Ab - Aab);
+        -: 2018:}
+        -: 2019:
+        -: 2020:////////////////////////////// RotatedRect //////////////////////////////
+        -: 2021:
+        -: 2022:inline
+        -: 2023:RotatedRect::RotatedRect()
+        -: 2024:    : center(), size(), angle(0) {}
+        -: 2025:
+        -: 2026:inline
+        -: 2027:RotatedRect::RotatedRect(const Point2f& _center, const Size2f& _size, float _angle)
+        -: 2028:    : center(_center), size(_size), angle(_angle) {}
+        -: 2029:
+        -: 2030:///////////////////////////////// Range /////////////////////////////////
+        -: 2031:
+        -: 2032:inline
+        -: 2033:Range::Range()
+        -: 2034:    : start(0), end(0) {}
+        -: 2035:
+        -: 2036:inline
+        -: 2037:Range::Range(int _start, int _end)
+        -: 2038:    : start(_start), end(_end) {}
+        -: 2039:
+        -: 2040:inline
+        -: 2041:int Range::size() const
+        -: 2042:{
+        -: 2043:    return end - start;
+        -: 2044:}
+        -: 2045:
+        -: 2046:inline
+        -: 2047:bool Range::empty() const
+        -: 2048:{
+        -: 2049:    return start == end;
+        -: 2050:}
+        -: 2051:
+        -: 2052:inline
+        -: 2053:Range Range::all()
+        -: 2054:{
+        -: 2055:    return Range(INT_MIN, INT_MAX);
+        -: 2056:}
+        -: 2057:
+        -: 2058:
+        -: 2059:static inline
+        -: 2060:bool operator == (const Range& r1, const Range& r2)
+        -: 2061:{
+        -: 2062:    return r1.start == r2.start && r1.end == r2.end;
+        -: 2063:}
+        -: 2064:
+        -: 2065:static inline
+        -: 2066:bool operator != (const Range& r1, const Range& r2)
+        -: 2067:{
+        -: 2068:    return !(r1 == r2);
+        -: 2069:}
+        -: 2070:
+        -: 2071:static inline
+        -: 2072:bool operator !(const Range& r)
+        -: 2073:{
+        -: 2074:    return r.start == r.end;
+        -: 2075:}
+        -: 2076:
+        -: 2077:static inline
+        -: 2078:Range operator & (const Range& r1, const Range& r2)
+        -: 2079:{
+        -: 2080:    Range r(std::max(r1.start, r2.start), std::min(r1.end, r2.end));
+        -: 2081:    r.end = std::max(r.end, r.start);
+        -: 2082:    return r;
+        -: 2083:}
+        -: 2084:
+        -: 2085:static inline
+        -: 2086:Range& operator &= (Range& r1, const Range& r2)
+        -: 2087:{
+        -: 2088:    r1 = r1 & r2;
+        -: 2089:    return r1;
+        -: 2090:}
+        -: 2091:
+        -: 2092:static inline
+        -: 2093:Range operator + (const Range& r1, int delta)
+        -: 2094:{
+        -: 2095:    return Range(r1.start + delta, r1.end + delta);
+        -: 2096:}
+        -: 2097:
+        -: 2098:static inline
+        -: 2099:Range operator + (int delta, const Range& r1)
+        -: 2100:{
+        -: 2101:    return Range(r1.start + delta, r1.end + delta);
+        -: 2102:}
+        -: 2103:
+        -: 2104:static inline
+        -: 2105:Range operator - (const Range& r1, int delta)
+        -: 2106:{
+        -: 2107:    return r1 + (-delta);
+        -: 2108:}
+        -: 2109:
+        -: 2110:
+        -: 2111:
+        -: 2112:///////////////////////////////// Scalar ////////////////////////////////
+        -: 2113:
+        -: 2114:template<typename _Tp> inline
+        -: 2115:Scalar_<_Tp>::Scalar_()
+        -: 2116:{
+        -: 2117:    this->val[0] = this->val[1] = this->val[2] = this->val[3] = 0;
+        -: 2118:}
+        -: 2119:
+        -: 2120:template<typename _Tp> inline
+        -: 2121:Scalar_<_Tp>::Scalar_(_Tp v0, _Tp v1, _Tp v2, _Tp v3)
+        -: 2122:{
+        -: 2123:    this->val[0] = v0;
+        -: 2124:    this->val[1] = v1;
+        -: 2125:    this->val[2] = v2;
+        -: 2126:    this->val[3] = v3;
+        -: 2127:}
+        -: 2128:
+        -: 2129:template<typename _Tp> inline
+        -: 2130:Scalar_<_Tp>::Scalar_(const Scalar_<_Tp>& s) : Vec<_Tp, 4>(s) {
+        -: 2131:}
+        -: 2132:
+        -: 2133:template<typename _Tp> inline
+        -: 2134:Scalar_<_Tp>::Scalar_(Scalar_<_Tp>&& s) CV_NOEXCEPT {
+        -: 2135:    this->val[0] = std::move(s.val[0]);
+        -: 2136:    this->val[1] = std::move(s.val[1]);
+        -: 2137:    this->val[2] = std::move(s.val[2]);
+        -: 2138:    this->val[3] = std::move(s.val[3]);
+        -: 2139:}
+        -: 2140:
+        -: 2141:template<typename _Tp> inline
+        -: 2142:Scalar_<_Tp>& Scalar_<_Tp>::operator=(const Scalar_<_Tp>& s) {
+        -: 2143:    this->val[0] = s.val[0];
+        -: 2144:    this->val[1] = s.val[1];
+        -: 2145:    this->val[2] = s.val[2];
+        -: 2146:    this->val[3] = s.val[3];
+        -: 2147:    return *this;
+        -: 2148:}
+        -: 2149:
+        -: 2150:template<typename _Tp> inline
+        -: 2151:Scalar_<_Tp>& Scalar_<_Tp>::operator=(Scalar_<_Tp>&& s) CV_NOEXCEPT {
+        -: 2152:    this->val[0] = std::move(s.val[0]);
+        -: 2153:    this->val[1] = std::move(s.val[1]);
+        -: 2154:    this->val[2] = std::move(s.val[2]);
+        -: 2155:    this->val[3] = std::move(s.val[3]);
+        -: 2156:    return *this;
+        -: 2157:}
+        -: 2158:
+        -: 2159:template<typename _Tp> template<typename _Tp2, int cn> inline
+        -: 2160:Scalar_<_Tp>::Scalar_(const Vec<_Tp2, cn>& v)
+        -: 2161:{
+        -: 2162:    int i;
+        -: 2163:    for( i = 0; i < (cn < 4 ? cn : 4); i++ )
+        -: 2164:        this->val[i] = cv::saturate_cast<_Tp>(v.val[i]);
+        -: 2165:    for( ; i < 4; i++ )
+        -: 2166:        this->val[i] = 0;
+        -: 2167:}
+        -: 2168:
+        -: 2169:template<typename _Tp> inline
+        -: 2170:Scalar_<_Tp>::Scalar_(_Tp v0)
+        -: 2171:{
+        -: 2172:    this->val[0] = v0;
+        -: 2173:    this->val[1] = this->val[2] = this->val[3] = 0;
+        -: 2174:}
+        -: 2175:
+        -: 2176:template<typename _Tp> inline
+        -: 2177:Scalar_<_Tp> Scalar_<_Tp>::all(_Tp v0)
+        -: 2178:{
+        -: 2179:    return Scalar_<_Tp>(v0, v0, v0, v0);
+        -: 2180:}
+        -: 2181:
+        -: 2182:
+        -: 2183:template<typename _Tp> inline
+        -: 2184:Scalar_<_Tp> Scalar_<_Tp>::mul(const Scalar_<_Tp>& a, double scale ) const
+        -: 2185:{
+        -: 2186:    return Scalar_<_Tp>(saturate_cast<_Tp>(this->val[0] * a.val[0] * scale),
+        -: 2187:                        saturate_cast<_Tp>(this->val[1] * a.val[1] * scale),
+        -: 2188:                        saturate_cast<_Tp>(this->val[2] * a.val[2] * scale),
+        -: 2189:                        saturate_cast<_Tp>(this->val[3] * a.val[3] * scale));
+        -: 2190:}
+        -: 2191:
+        -: 2192:template<typename _Tp> inline
+        -: 2193:Scalar_<_Tp> Scalar_<_Tp>::conj() const
+        -: 2194:{
+        -: 2195:    return Scalar_<_Tp>(saturate_cast<_Tp>( this->val[0]),
+        -: 2196:                        saturate_cast<_Tp>(-this->val[1]),
+        -: 2197:                        saturate_cast<_Tp>(-this->val[2]),
+        -: 2198:                        saturate_cast<_Tp>(-this->val[3]));
+        -: 2199:}
+        -: 2200:
+        -: 2201:template<typename _Tp> inline
+        -: 2202:bool Scalar_<_Tp>::isReal() const
+        -: 2203:{
+        -: 2204:    return this->val[1] == 0 && this->val[2] == 0 && this->val[3] == 0;
+        -: 2205:}
+        -: 2206:
+        -: 2207:
+        -: 2208:template<typename _Tp> template<typename T2> inline
+        -: 2209:Scalar_<_Tp>::operator Scalar_<T2>() const
+        -: 2210:{
+        -: 2211:    return Scalar_<T2>(saturate_cast<T2>(this->val[0]),
+        -: 2212:                       saturate_cast<T2>(this->val[1]),
+        -: 2213:                       saturate_cast<T2>(this->val[2]),
+        -: 2214:                       saturate_cast<T2>(this->val[3]));
+        -: 2215:}
+        -: 2216:
+        -: 2217:
+        -: 2218:template<typename _Tp> static inline
+        -: 2219:Scalar_<_Tp>& operator += (Scalar_<_Tp>& a, const Scalar_<_Tp>& b)
+        -: 2220:{
+        -: 2221:    a.val[0] += b.val[0];
+        -: 2222:    a.val[1] += b.val[1];
+        -: 2223:    a.val[2] += b.val[2];
+        -: 2224:    a.val[3] += b.val[3];
+        -: 2225:    return a;
+        -: 2226:}
+        -: 2227:
+        -: 2228:template<typename _Tp> static inline
+        -: 2229:Scalar_<_Tp>& operator -= (Scalar_<_Tp>& a, const Scalar_<_Tp>& b)
+        -: 2230:{
+        -: 2231:    a.val[0] -= b.val[0];
+        -: 2232:    a.val[1] -= b.val[1];
+        -: 2233:    a.val[2] -= b.val[2];
+        -: 2234:    a.val[3] -= b.val[3];
+        -: 2235:    return a;
+        -: 2236:}
+        -: 2237:
+        -: 2238:template<typename _Tp> static inline
+        -: 2239:Scalar_<_Tp>& operator *= ( Scalar_<_Tp>& a, _Tp v )
+        -: 2240:{
+        -: 2241:    a.val[0] *= v;
+        -: 2242:    a.val[1] *= v;
+        -: 2243:    a.val[2] *= v;
+        -: 2244:    a.val[3] *= v;
+        -: 2245:    return a;
+        -: 2246:}
+        -: 2247:
+        -: 2248:template<typename _Tp> static inline
+        -: 2249:bool operator == ( const Scalar_<_Tp>& a, const Scalar_<_Tp>& b )
+        -: 2250:{
+        -: 2251:    return a.val[0] == b.val[0] && a.val[1] == b.val[1] &&
+        -: 2252:           a.val[2] == b.val[2] && a.val[3] == b.val[3];
+        -: 2253:}
+        -: 2254:
+        -: 2255:template<typename _Tp> static inline
+        -: 2256:bool operator != ( const Scalar_<_Tp>& a, const Scalar_<_Tp>& b )
+        -: 2257:{
+        -: 2258:    return a.val[0] != b.val[0] || a.val[1] != b.val[1] ||
+        -: 2259:           a.val[2] != b.val[2] || a.val[3] != b.val[3];
+        -: 2260:}
+        -: 2261:
+        -: 2262:template<typename _Tp> static inline
+        -: 2263:Scalar_<_Tp> operator + (const Scalar_<_Tp>& a, const Scalar_<_Tp>& b)
+        -: 2264:{
+        -: 2265:    return Scalar_<_Tp>(a.val[0] + b.val[0],
+        -: 2266:                        a.val[1] + b.val[1],
+        -: 2267:                        a.val[2] + b.val[2],
+        -: 2268:                        a.val[3] + b.val[3]);
+        -: 2269:}
+        -: 2270:
+        -: 2271:template<typename _Tp> static inline
+        -: 2272:Scalar_<_Tp> operator - (const Scalar_<_Tp>& a, const Scalar_<_Tp>& b)
+        -: 2273:{
+        -: 2274:    return Scalar_<_Tp>(saturate_cast<_Tp>(a.val[0] - b.val[0]),
+        -: 2275:                        saturate_cast<_Tp>(a.val[1] - b.val[1]),
+        -: 2276:                        saturate_cast<_Tp>(a.val[2] - b.val[2]),
+        -: 2277:                        saturate_cast<_Tp>(a.val[3] - b.val[3]));
+        -: 2278:}
+        -: 2279:
+        -: 2280:template<typename _Tp> static inline
+        -: 2281:Scalar_<_Tp> operator * (const Scalar_<_Tp>& a, _Tp alpha)
+        -: 2282:{
+        -: 2283:    return Scalar_<_Tp>(a.val[0] * alpha,
+        -: 2284:                        a.val[1] * alpha,
+        -: 2285:                        a.val[2] * alpha,
+        -: 2286:                        a.val[3] * alpha);
+        -: 2287:}
+        -: 2288:
+        -: 2289:template<typename _Tp> static inline
+        -: 2290:Scalar_<_Tp> operator * (_Tp alpha, const Scalar_<_Tp>& a)
+        -: 2291:{
+        -: 2292:    return a*alpha;
+        -: 2293:}
+        -: 2294:
+        -: 2295:template<typename _Tp> static inline
+        -: 2296:Scalar_<_Tp> operator - (const Scalar_<_Tp>& a)
+        -: 2297:{
+        -: 2298:    return Scalar_<_Tp>(saturate_cast<_Tp>(-a.val[0]),
+        -: 2299:                        saturate_cast<_Tp>(-a.val[1]),
+        -: 2300:                        saturate_cast<_Tp>(-a.val[2]),
+        -: 2301:                        saturate_cast<_Tp>(-a.val[3]));
+        -: 2302:}
+        -: 2303:
+        -: 2304:
+        -: 2305:template<typename _Tp> static inline
+        -: 2306:Scalar_<_Tp> operator * (const Scalar_<_Tp>& a, const Scalar_<_Tp>& b)
+        -: 2307:{
+        -: 2308:    return Scalar_<_Tp>(saturate_cast<_Tp>(a[0]*b[0] - a[1]*b[1] - a[2]*b[2] - a[3]*b[3]),
+        -: 2309:                        saturate_cast<_Tp>(a[0]*b[1] + a[1]*b[0] + a[2]*b[3] - a[3]*b[2]),
+        -: 2310:                        saturate_cast<_Tp>(a[0]*b[2] - a[1]*b[3] + a[2]*b[0] + a[3]*b[1]),
+        -: 2311:                        saturate_cast<_Tp>(a[0]*b[3] + a[1]*b[2] - a[2]*b[1] + a[3]*b[0]));
+        -: 2312:}
+        -: 2313:
+        -: 2314:template<typename _Tp> static inline
+        -: 2315:Scalar_<_Tp>& operator *= (Scalar_<_Tp>& a, const Scalar_<_Tp>& b)
+        -: 2316:{
+        -: 2317:    a = a * b;
+        -: 2318:    return a;
+        -: 2319:}
+        -: 2320:
+        -: 2321:template<typename _Tp> static inline
+        -: 2322:Scalar_<_Tp> operator / (const Scalar_<_Tp>& a, _Tp alpha)
+        -: 2323:{
+        -: 2324:    return Scalar_<_Tp>(a.val[0] / alpha,
+        -: 2325:                        a.val[1] / alpha,
+        -: 2326:                        a.val[2] / alpha,
+        -: 2327:                        a.val[3] / alpha);
+        -: 2328:}
+        -: 2329:
+        -: 2330:template<typename _Tp> static inline
+        -: 2331:Scalar_<float> operator / (const Scalar_<float>& a, float alpha)
+        -: 2332:{
+        -: 2333:    float s = 1 / alpha;
+        -: 2334:    return Scalar_<float>(a.val[0] * s, a.val[1] * s, a.val[2] * s, a.val[3] * s);
+        -: 2335:}
+        -: 2336:
+        -: 2337:template<typename _Tp> static inline
+        -: 2338:Scalar_<double> operator / (const Scalar_<double>& a, double alpha)
+        -: 2339:{
+        -: 2340:    double s = 1 / alpha;
+        -: 2341:    return Scalar_<double>(a.val[0] * s, a.val[1] * s, a.val[2] * s, a.val[3] * s);
+        -: 2342:}
+        -: 2343:
+        -: 2344:template<typename _Tp> static inline
+        -: 2345:Scalar_<_Tp>& operator /= (Scalar_<_Tp>& a, _Tp alpha)
+        -: 2346:{
+        -: 2347:    a = a / alpha;
+        -: 2348:    return a;
+        -: 2349:}
+        -: 2350:
+        -: 2351:template<typename _Tp> static inline
+        -: 2352:Scalar_<_Tp> operator / (_Tp a, const Scalar_<_Tp>& b)
+        -: 2353:{
+        -: 2354:    _Tp s = a / (b[0]*b[0] + b[1]*b[1] + b[2]*b[2] + b[3]*b[3]);
+        -: 2355:    return b.conj() * s;
+        -: 2356:}
+        -: 2357:
+        -: 2358:template<typename _Tp> static inline
+        -: 2359:Scalar_<_Tp> operator / (const Scalar_<_Tp>& a, const Scalar_<_Tp>& b)
+        -: 2360:{
+        -: 2361:    return a * ((_Tp)1 / b);
+        -: 2362:}
+        -: 2363:
+        -: 2364:template<typename _Tp> static inline
+        -: 2365:Scalar_<_Tp>& operator /= (Scalar_<_Tp>& a, const Scalar_<_Tp>& b)
+        -: 2366:{
+        -: 2367:    a = a / b;
+        -: 2368:    return a;
+        -: 2369:}
+        -: 2370:
+        -: 2371:template<typename _Tp> static inline
+        -: 2372:Scalar operator * (const Matx<_Tp, 4, 4>& a, const Scalar& b)
+        -: 2373:{
+        -: 2374:    Matx<double, 4, 1> c((Matx<double, 4, 4>)a, b, Matx_MatMulOp());
+        -: 2375:    return reinterpret_cast<const Scalar&>(c);
+        -: 2376:}
+        -: 2377:
+        -: 2378:template<> inline
+        -: 2379:Scalar operator * (const Matx<double, 4, 4>& a, const Scalar& b)
+        -: 2380:{
+        -: 2381:    Matx<double, 4, 1> c(a, b, Matx_MatMulOp());
+        -: 2382:    return reinterpret_cast<const Scalar&>(c);
+        -: 2383:}
+        -: 2384:
+        -: 2385:
+        -: 2386:
+        -: 2387://////////////////////////////// KeyPoint ///////////////////////////////
+        -: 2388:
+        -: 2389:inline
+        -: 2390:KeyPoint::KeyPoint()
+        -: 2391:    : pt(0,0), size(0), angle(-1), response(0), octave(0), class_id(-1) {}
+        -: 2392:
+        -: 2393:inline
+        -: 2394:KeyPoint::KeyPoint(Point2f _pt, float _size, float _angle, float _response, int _octave, int _class_id)
+        -: 2395:    : pt(_pt), size(_size), angle(_angle), response(_response), octave(_octave), class_id(_class_id) {}
+        -: 2396:
+        -: 2397:inline
+        -: 2398:KeyPoint::KeyPoint(float x, float y, float _size, float _angle, float _response, int _octave, int _class_id)
+        -: 2399:    : pt(x, y), size(_size), angle(_angle), response(_response), octave(_octave), class_id(_class_id) {}
+        -: 2400:
+        -: 2401:
+        -: 2402:
+        -: 2403:///////////////////////////////// DMatch ////////////////////////////////
+        -: 2404:
+        -: 2405:inline
+        -: 2406:DMatch::DMatch()
+        -: 2407:    : queryIdx(-1), trainIdx(-1), imgIdx(-1), distance(FLT_MAX) {}
+        -: 2408:
+        -: 2409:inline
+        -: 2410:DMatch::DMatch(int _queryIdx, int _trainIdx, float _distance)
+        -: 2411:    : queryIdx(_queryIdx), trainIdx(_trainIdx), imgIdx(-1), distance(_distance) {}
+        -: 2412:
+        -: 2413:inline
+        -: 2414:DMatch::DMatch(int _queryIdx, int _trainIdx, int _imgIdx, float _distance)
+        -: 2415:    : queryIdx(_queryIdx), trainIdx(_trainIdx), imgIdx(_imgIdx), distance(_distance) {}
+        -: 2416:
+        -: 2417:inline
+        -: 2418:bool DMatch::operator < (const DMatch &m) const
+        -: 2419:{
+        -: 2420:    return distance < m.distance;
+        -: 2421:}
+        -: 2422:
+        -: 2423:
+        -: 2424:
+        -: 2425:////////////////////////////// TermCriteria /////////////////////////////
+        -: 2426:
+        -: 2427:inline
+        -: 2428:TermCriteria::TermCriteria()
+        -: 2429:    : type(0), maxCount(0), epsilon(0) {}
+        -: 2430:
+        -: 2431:inline
+        -: 2432:TermCriteria::TermCriteria(int _type, int _maxCount, double _epsilon)
+        -: 2433:    : type(_type), maxCount(_maxCount), epsilon(_epsilon) {}
+        -: 2434:
+        -: 2435://! @endcond
+        -: 2436:
+        -: 2437:} // cv
+        -: 2438:
+        -: 2439:#endif //OPENCV_CORE_TYPES_HPP

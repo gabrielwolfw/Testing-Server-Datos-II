@@ -1,0 +1,2373 @@
+        -:    0:Source:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/src/gmock-spec-builders.cc
+        -:    0:Graph:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.gcno
+        -:    0:Data:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.gcda
+        -:    0:Runs:1
+        -:    1:// Copyright 2007, Google Inc.
+        -:    2:// All rights reserved.
+        -:    3://
+        -:    4:// Redistribution and use in source and binary forms, with or without
+        -:    5:// modification, are permitted provided that the following conditions are
+        -:    6:// met:
+        -:    7://
+        -:    8://     * Redistributions of source code must retain the above copyright
+        -:    9:// notice, this list of conditions and the following disclaimer.
+        -:   10://     * Redistributions in binary form must reproduce the above
+        -:   11:// copyright notice, this list of conditions and the following disclaimer
+        -:   12:// in the documentation and/or other materials provided with the
+        -:   13:// distribution.
+        -:   14://     * Neither the name of Google Inc. nor the names of its
+        -:   15:// contributors may be used to endorse or promote products derived from
+        -:   16:// this software without specific prior written permission.
+        -:   17://
+        -:   18:// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+        -:   19:// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+        -:   20:// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+        -:   21:// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+        -:   22:// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+        -:   23:// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+        -:   24:// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+        -:   25:// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+        -:   26:// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        -:   27:// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        -:   28:// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        -:   29:
+        -:   30:
+        -:   31:// Google Mock - a framework for writing C++ mock classes.
+        -:   32://
+        -:   33:// This file implements the spec builder syntax (ON_CALL and
+        -:   34:// EXPECT_CALL).
+        -:   35:
+        -:   36:#include "gmock/gmock-spec-builders.h"
+        -:   37:
+        -:   38:#include <stdlib.h>
+        -:   39:
+        -:   40:#include <iostream>  // NOLINT
+        -:   41:#include <map>
+        -:   42:#include <memory>
+        -:   43:#include <set>
+        -:   44:#include <string>
+        -:   45:#include <vector>
+        -:   46:
+        -:   47:#include "gmock/gmock.h"
+        -:   48:#include "gtest/gtest.h"
+        -:   49:#include "gtest/internal/gtest-port.h"
+        -:   50:
+        -:   51:#if GTEST_OS_CYGWIN || GTEST_OS_LINUX || GTEST_OS_MAC
+        -:   52:# include <unistd.h>  // NOLINT
+        -:   53:#endif
+        -:   54:
+        -:   55:// Silence C4800 (C4800: 'int *const ': forcing value
+        -:   56:// to bool 'true' or 'false') for MSVC 15
+        -:   57:#ifdef _MSC_VER
+        -:   58:#if _MSC_VER == 1900
+        -:   59:#  pragma warning(push)
+        -:   60:#  pragma warning(disable:4800)
+        -:   61:#endif
+        -:   62:#endif
+        -:   63:
+        -:   64:namespace testing {
+        -:   65:namespace internal {
+        -:   66:
+        -:   67:// Protects the mock object registry (in class Mock), all function
+        -:   68:// mockers, and all expectations.
+        -:   69:GTEST_API_ GTEST_DEFINE_STATIC_MUTEX_(g_gmock_mutex);
+        -:   70:
+        -:   71:// Logs a message including file and line number information.
+function _ZN7testing8internal15LogWithLocationENS0_11LogSeverityEPKciRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 0 returned 0% blocks executed 0%
+    #####:   72:GTEST_API_ void LogWithLocation(testing::internal::LogSeverity severity,
+        -:   73:                                const char* file, int line,
+        -:   74:                                const std::string& message) {
+    #####:   75:  ::std::ostringstream s;
+    %%%%%:   75-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   76:  s << internal::FormatFileLocation(file, line) << " " << message
+    %%%%%:   76-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   76-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   76-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:   76-block  3
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   76-block  4
+call   12 never executed
+    $$$$$:   76-block  5
+call   13 never executed
+    $$$$$:   76-block  6
+    #####:   77:    << ::std::endl;
+    %%%%%:   77-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   78:  Log(severity, s.str(), 0);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   78-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   78-block  1
+call    6 never executed
+    $$$$$:   78-block  2
+call    7 never executed
+    $$$$$:   78-block  3
+    #####:   79:}
+call    0 never executed
+    $$$$$:   79-block  0
+call    1 never executed
+        -:   80:
+        -:   81:// Constructs an ExpectationBase object.
+function _ZN7testing8internal15ExpectationBaseC2EPKciRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 0 returned 0% blocks executed 0%
+    #####:   82:ExpectationBase::ExpectationBase(const char* a_file, int a_line,
+    #####:   83:                                 const std::string& a_source_text)
+    #####:   84:    : file_(a_file),
+    #####:   85:      line_(a_line),
+    #####:   86:      source_text_(a_source_text),
+    #####:   87:      cardinality_specified_(false),
+    #####:   88:      cardinality_(Exactly(1)),
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   89:      call_count_(0),
+    #####:   90:      retired_(false),
+    #####:   91:      extra_matcher_specified_(false),
+    #####:   92:      repeated_action_specified_(false),
+    #####:   93:      retires_on_saturation_(false),
+    #####:   94:      last_clause_(kNone),
+    #####:   95:      action_count_checked_(false) {}
+    %%%%%:   95-block  0
+call    0 never executed
+    %%%%%:   95-block  1
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   95-block  2
+    $$$$$:   95-block  3
+call    6 never executed
+    $$$$$:   95-block  4
+call    7 never executed
+    $$$$$:   95-block  5
+call    8 never executed
+    $$$$$:   95-block  6
+call    9 never executed
+        -:   96:
+        -:   97:// Destructs an ExpectationBase object.
+    #####:   98:ExpectationBase::~ExpectationBase() {}
+------------------
+_ZN7testing8internal15ExpectationBaseD0Ev:
+function _ZN7testing8internal15ExpectationBaseD0Ev called 0 returned 0% blocks executed 0%
+    #####:   98:ExpectationBase::~ExpectationBase() {}
+    %%%%%:   98-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN7testing8internal15ExpectationBaseD2Ev:
+function _ZN7testing8internal15ExpectationBaseD2Ev called 0 returned 0% blocks executed 0%
+    #####:   98:ExpectationBase::~ExpectationBase() {}
+    %%%%%:   98-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+------------------
+        -:   99:
+        -:  100:// Explicitly specifies the cardinality of this expectation.  Used by
+        -:  101:// the subclasses to implement the .Times() clause.
+function _ZN7testing8internal15ExpectationBase18SpecifyCardinalityERKNS_11CardinalityE called 0 returned 0% blocks executed 0%
+    #####:  102:void ExpectationBase::SpecifyCardinality(const Cardinality& a_cardinality) {
+    #####:  103:  cardinality_specified_ = true;
+    #####:  104:  cardinality_ = a_cardinality;
+    %%%%%:  104-block  0
+call    0 never executed
+    #####:  105:}
+        -:  106:
+        -:  107:// Retires all pre-requisites of this expectation.
+function _ZN7testing8internal15ExpectationBase22RetireAllPreRequisitesEv called 0 returned 0% blocks executed 0%
+    #####:  108:void ExpectationBase::RetireAllPreRequisites()
+        -:  109:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(g_gmock_mutex) {
+    #####:  110:  if (is_retired()) {
+    %%%%%:  110-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  110-block  1
+branch  3 never executed
+branch  4 never executed
+        -:  111:    // We can take this short-cut as we never retire an expectation
+        -:  112:    // until we have retired all its pre-requisites.
+    #####:  113:    return;
+    %%%%%:  113-block  0
+        -:  114:  }
+        -:  115:
+    #####:  116:  ::std::vector<ExpectationBase*> expectations(1, this);
+    %%%%%:  116-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  116-block  1
+call    4 never executed
+    $$$$$:  116-block  2
+    $$$$$:  116-block  3
+    #####:  117:  while (!expectations.empty()) {
+    %%%%%:  117-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  118:    ExpectationBase* exp = expectations.back();
+    %%%%%:  118-block  0
+call    0 never executed
+    #####:  119:    expectations.pop_back();
+call    0 never executed
+        -:  120:
+    #####:  121:    for (ExpectationSet::const_iterator it =
+    #####:  122:             exp->immediate_prerequisites_.begin();
+call    0 never executed
+    #####:  123:         it != exp->immediate_prerequisites_.end(); ++it) {
+    %%%%%:  123-block  0
+call    0 never executed
+    %%%%%:  123-block  1
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  124:      ExpectationBase* next = it->expectation_base().get();
+    %%%%%:  124-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  125:      if (!next->is_retired()) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  125-block  0
+branch  3 never executed
+branch  4 never executed
+    #####:  126:        next->Retire();
+    %%%%%:  126-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  127:        expectations.push_back(next);
+    %%%%%:  127-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  128:      }
+        -:  129:    }
+        -:  130:  }
+    #####:  131:}
+    %%%%%:  131-block  0
+call    0 never executed
+    $$$$$:  131-block  1
+call    1 never executed
+        -:  132:
+        -:  133:// Returns true if and only if all pre-requisites of this expectation
+        -:  134:// have been satisfied.
+function _ZNK7testing8internal15ExpectationBase28AllPrerequisitesAreSatisfiedEv called 0 returned 0% blocks executed 0%
+    #####:  135:bool ExpectationBase::AllPrerequisitesAreSatisfied() const
+        -:  136:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(g_gmock_mutex) {
+    #####:  137:  g_gmock_mutex.AssertHeld();
+    %%%%%:  137-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  138:  ::std::vector<const ExpectationBase*> expectations(1, this);
+    %%%%%:  138-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  138-block  1
+call    4 never executed
+    $$$$$:  138-block  2
+    $$$$$:  138-block  3
+    #####:  139:  while (!expectations.empty()) {
+    %%%%%:  139-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  140:    const ExpectationBase* exp = expectations.back();
+    %%%%%:  140-block  0
+call    0 never executed
+    #####:  141:    expectations.pop_back();
+call    0 never executed
+        -:  142:
+    #####:  143:    for (ExpectationSet::const_iterator it =
+    #####:  144:             exp->immediate_prerequisites_.begin();
+call    0 never executed
+    #####:  145:         it != exp->immediate_prerequisites_.end(); ++it) {
+    %%%%%:  145-block  0
+call    0 never executed
+    %%%%%:  145-block  1
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  146:      const ExpectationBase* next = it->expectation_base().get();
+    %%%%%:  146-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  147:      if (!next->IsSatisfied()) return false;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  147-block  0
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  147-block  1
+    #####:  148:      expectations.push_back(next);
+    %%%%%:  148-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  149:    }
+        -:  150:  }
+    #####:  151:  return true;
+    %%%%%:  151-block  0
+    #####:  152:}
+    %%%%%:  152-block  0
+call    0 never executed
+    $$$$$:  152-block  1
+call    1 never executed
+        -:  153:
+        -:  154:// Adds unsatisfied pre-requisites of this expectation to 'result'.
+function _ZNK7testing8internal15ExpectationBase28FindUnsatisfiedPrerequisitesEPNS_14ExpectationSetE called 0 returned 0% blocks executed 0%
+    #####:  155:void ExpectationBase::FindUnsatisfiedPrerequisites(ExpectationSet* result) const
+        -:  156:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(g_gmock_mutex) {
+    #####:  157:  g_gmock_mutex.AssertHeld();
+    %%%%%:  157-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  158:  ::std::vector<const ExpectationBase*> expectations(1, this);
+    %%%%%:  158-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  158-block  1
+call    4 never executed
+    $$$$$:  158-block  2
+    $$$$$:  158-block  3
+    #####:  159:  while (!expectations.empty()) {
+    %%%%%:  159-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  160:    const ExpectationBase* exp = expectations.back();
+    %%%%%:  160-block  0
+call    0 never executed
+    #####:  161:    expectations.pop_back();
+call    0 never executed
+        -:  162:
+    #####:  163:    for (ExpectationSet::const_iterator it =
+    #####:  164:             exp->immediate_prerequisites_.begin();
+call    0 never executed
+    #####:  165:         it != exp->immediate_prerequisites_.end(); ++it) {
+    %%%%%:  165-block  0
+call    0 never executed
+    %%%%%:  165-block  1
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  166:      const ExpectationBase* next = it->expectation_base().get();
+    %%%%%:  166-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  167:
+    #####:  168:      if (next->IsSatisfied()) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  168-block  0
+branch  3 never executed
+branch  4 never executed
+        -:  169:        // If *it is satisfied and has a call count of 0, some of its
+        -:  170:        // pre-requisites may not be satisfied yet.
+    #####:  171:        if (next->call_count_ == 0) {
+    %%%%%:  171-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  172:          expectations.push_back(next);
+    %%%%%:  172-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  173:        }
+        -:  174:      } else {
+        -:  175:        // Now that we know next is unsatisfied, we are not so interested
+        -:  176:        // in whether its pre-requisites are satisfied.  Therefore we
+        -:  177:        // don't iterate into it here.
+    #####:  178:        *result += *it;
+    %%%%%:  178-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  179:      }
+        -:  180:    }
+        -:  181:  }
+    #####:  182:}
+    %%%%%:  182-block  0
+call    0 never executed
+    $$$$$:  182-block  1
+call    1 never executed
+        -:  183:
+        -:  184:// Describes how many times a function call matching this
+        -:  185:// expectation has occurred.
+function _ZNK7testing8internal15ExpectationBase19DescribeCallCountToEPSo called 0 returned 0% blocks executed 0%
+    #####:  186:void ExpectationBase::DescribeCallCountTo(::std::ostream* os) const
+        -:  187:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(g_gmock_mutex) {
+    #####:  188:  g_gmock_mutex.AssertHeld();
+    %%%%%:  188-block  0
+call    0 never executed
+        -:  189:
+        -:  190:  // Describes how many times the function is expected to be called.
+    #####:  191:  *os << "         Expected: to be ";
+call    0 never executed
+    #####:  192:  cardinality().DescribeTo(os);
+call    0 never executed
+call    1 never executed
+    #####:  193:  *os << "\n           Actual: ";
+call    0 never executed
+    #####:  194:  Cardinality::DescribeActualCallCountTo(call_count(), os);
+call    0 never executed
+call    1 never executed
+        -:  195:
+        -:  196:  // Describes the state of the expectation (e.g. is it satisfied?
+        -:  197:  // is it active?).
+    #####:  198:  *os << " - " << (IsOverSaturated() ? "over-saturated" :
+    #####:  199:                   IsSaturated() ? "saturated" :
+    %%%%%:  199-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  199-block  1
+    %%%%%:  199-block  2
+    #####:  200:                   IsSatisfied() ? "satisfied" : "unsatisfied")
+    %%%%%:  200-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  200-block  1
+    %%%%%:  200-block  2
+        -:  201:      << " and "
+    #####:  202:      << (is_retired() ? "retired" : "active");
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  202-block  0
+    %%%%%:  202-block  1
+    %%%%%:  202-block  2
+call    4 never executed
+call    5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  202-block  3
+    %%%%%:  202-block  4
+    %%%%%:  202-block  5
+call    9 never executed
+    #####:  203:}
+        -:  204:
+        -:  205:// Checks the action count (i.e. the number of WillOnce() and
+        -:  206:// WillRepeatedly() clauses) against the cardinality if this hasn't
+        -:  207:// been done before.  Prints a warning if there are too many or too
+        -:  208:// few actions.
+function _ZNK7testing8internal15ExpectationBase25CheckActionCountIfNotDoneEv called 0 returned 0% blocks executed 0%
+    #####:  209:void ExpectationBase::CheckActionCountIfNotDone() const
+        -:  210:    GTEST_LOCK_EXCLUDED_(mutex_) {
+    #####:  211:  bool should_check = false;
+        -:  212:  {
+    #####:  213:    MutexLock l(&mutex_);
+    %%%%%:  213-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  214:    if (!action_count_checked_) {
+    %%%%%:  214-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  215:      action_count_checked_ = true;
+    #####:  216:      should_check = true;
+    %%%%%:  216-block  0
+        -:  217:    }
+    #####:  218:  }
+    %%%%%:  218-block  0
+call    0 never executed
+        -:  219:
+    #####:  220:  if (should_check) {
+branch  0 never executed
+branch  1 never executed
+    #####:  221:    if (!cardinality_specified_) {
+    %%%%%:  221-block  0
+branch  0 never executed
+branch  1 never executed
+        -:  222:      // The cardinality was inferred - no need to check the action
+        -:  223:      // count against it.
+    #####:  224:      return;
+    %%%%%:  224-block  0
+    %%%%%:  224-block  1
+        -:  225:    }
+        -:  226:
+        -:  227:    // The cardinality was explicitly specified.
+    #####:  228:    const int action_count = static_cast<int>(untyped_actions_.size());
+    %%%%%:  228-block  0
+call    0 never executed
+    #####:  229:    const int upper_bound = cardinality().ConservativeUpperBound();
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  230:    const int lower_bound = cardinality().ConservativeLowerBound();
+    %%%%%:  230-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  231:    bool too_many;  // True if there are too many actions, or false
+        -:  232:    // if there are too few.
+    #####:  233:    if (action_count > upper_bound ||
+    %%%%%:  233-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  233-block  1
+branch  2 never executed
+branch  3 never executed
+    #####:  234:        (action_count == upper_bound && repeated_action_specified_)) {
+    %%%%%:  234-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  235:      too_many = true;
+    %%%%%:  235-block  0
+    #####:  236:    } else if (0 < action_count && action_count < lower_bound &&
+    %%%%%:  236-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  236-block  1
+branch  2 never executed
+branch  3 never executed
+    #####:  237:               !repeated_action_specified_) {
+    %%%%%:  237-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  238:      too_many = false;
+    %%%%%:  238-block  0
+        -:  239:    } else {
+    #####:  240:      return;
+    %%%%%:  240-block  0
+        -:  241:    }
+        -:  242:
+    #####:  243:    ::std::stringstream ss;
+    %%%%%:  243-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  244:    DescribeLocationTo(&ss);
+    %%%%%:  244-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  245:    ss << "Too " << (too_many ? "many" : "few")
+        -:  246:       << " actions specified in " << source_text() << "...\n"
+    #####:  247:       << "Expected to be ";
+    %%%%%:  247-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  247-block  1
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  247-block  2
+    %%%%%:  247-block  3
+    %%%%%:  247-block  4
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:  247-block  5
+call    8 never executed
+branch  9 never executed
+branch 10 never executed
+    %%%%%:  247-block  6
+call   11 never executed
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    %%%%%:  247-block  7
+call   15 never executed
+branch 16 never executed
+branch 17 never executed
+    %%%%%:  247-block  8
+call   18 never executed
+branch 19 never executed
+branch 20 never executed
+    #####:  248:    cardinality().DescribeTo(&ss);
+    %%%%%:  248-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  249:    ss << ", but has " << (too_many ? "" : "only ")
+    %%%%%:  249-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  249-block  1
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  249-block  2
+    %%%%%:  249-block  3
+    %%%%%:  249-block  4
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+        -:  250:       << action_count << " WillOnce()"
+    #####:  251:       << (action_count == 1 ? "" : "s");
+    %%%%%:  251-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  251-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  251-block  2
+branch  6 never executed
+branch  7 never executed
+    %%%%%:  251-block  3
+    %%%%%:  251-block  4
+    %%%%%:  251-block  5
+call    8 never executed
+branch  9 never executed
+branch 10 never executed
+    #####:  252:    if (repeated_action_specified_) {
+    %%%%%:  252-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  253:      ss << " and a WillRepeatedly()";
+    %%%%%:  253-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  254:    }
+    #####:  255:    ss << ".";
+    %%%%%:  255-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  256:    Log(kWarning, ss.str(), -1);  // -1 means "don't print stack trace".
+    %%%%%:  256-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  256-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  256-block  2
+call    6 never executed
+    $$$$$:  256-block  3
+call    7 never executed
+    $$$$$:  256-block  4
+    #####:  257:  }
+call    0 never executed
+    $$$$$:  257-block  0
+call    1 never executed
+        -:  258:}
+        -:  259:
+        -:  260:// Implements the .Times() clause.
+function _ZN7testing8internal15ExpectationBase12UntypedTimesERKNS_11CardinalityE called 0 returned 0% blocks executed 0%
+    #####:  261:void ExpectationBase::UntypedTimes(const Cardinality& a_cardinality) {
+    #####:  262:  if (last_clause_ == kTimes) {
+    %%%%%:  262-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  263:    ExpectSpecProperty(false,
+    %%%%%:  263-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  263-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  263-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:  263-block  3
+call    9 never executed
+    $$$$$:  263-block  4
+    $$$$$:  263-block  5
+call   10 never executed
+    $$$$$:  263-block  6
+call   11 never executed
+        -:  264:                       ".Times() cannot appear "
+        -:  265:                       "more than once in an EXPECT_CALL().");
+        -:  266:  } else {
+    #####:  267:    ExpectSpecProperty(last_clause_ < kTimes,
+    %%%%%:  267-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  267-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  267-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:  267-block  3
+call    9 never executed
+    $$$$$:  267-block  4
+    $$$$$:  267-block  5
+call   10 never executed
+        -:  268:                       ".Times() cannot appear after "
+        -:  269:                       ".InSequence(), .WillOnce(), .WillRepeatedly(), "
+        -:  270:                       "or .RetiresOnSaturation().");
+        -:  271:  }
+    #####:  272:  last_clause_ = kTimes;
+        -:  273:
+    #####:  274:  SpecifyCardinality(a_cardinality);
+    %%%%%:  274-block  0
+call    0 never executed
+    #####:  275:}
+        -:  276:
+        -:  277:// Points to the implicit sequence introduced by a living InSequence
+        -:  278:// object (if any) in the current thread or NULL.
+        -:  279:GTEST_API_ ThreadLocal<Sequence*> g_gmock_implicit_sequence;
+        -:  280:
+        -:  281:// Reports an uninteresting call (whose description is in msg) in the
+        -:  282:// manner specified by 'reaction'.
+function _ZN7testing8internal23ReportUninterestingCallENS0_12CallReactionERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 0 returned 0% blocks executed 0%
+    #####:  283:void ReportUninterestingCall(CallReaction reaction, const std::string& msg) {
+        -:  284:  // Include a stack trace only if --gmock_verbose=info is specified.
+        -:  285:  const int stack_frames_to_skip =
+    #####:  286:      GMOCK_FLAG(verbose) == kInfoVerbosity ? 3 : -1;
+    %%%%%:  286-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  286-block  1
+    %%%%%:  286-block  2
+    #####:  287:  switch (reaction) {
+    %%%%%:  287-block  0
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  288:    case kAllow:
+    #####:  289:      Log(kInfo, msg, stack_frames_to_skip);
+    %%%%%:  289-block  0
+call    0 never executed
+    #####:  290:      break;
+    #####:  291:    case kWarn:
+    #####:  292:      Log(kWarning,
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  293:          msg +
+    %%%%%:  293-block  0
+call    0 never executed
+    %%%%%:  293-block  1
+call    1 never executed
+    $$$$$:  293-block  2
+call    2 never executed
+        -:  294:              "\nNOTE: You can safely ignore the above warning unless this "
+        -:  295:              "call should not happen.  Do not suppress it by blindly adding "
+        -:  296:              "an EXPECT_CALL() if you don't mean to enforce the call.  "
+        -:  297:              "See "
+        -:  298:              "https://github.com/google/googletest/blob/master/docs/"
+        -:  299:              "gmock_cook_book.md#"
+        -:  300:              "knowing-when-to-expect for details.\n",
+        -:  301:          stack_frames_to_skip);
+    #####:  302:      break;
+    #####:  303:    default:  // FAIL
+    #####:  304:      Expect(false, nullptr, -1, msg);
+    %%%%%:  304-block  0
+call    0 never executed
+        -:  305:  }
+    #####:  306:}
+    %%%%%:  306-block  0
+        -:  307:
+function _ZN7testing8internal25UntypedFunctionMockerBaseC2Ev called 2 returned 100% blocks executed 100%
+        2:  308:UntypedFunctionMockerBase::UntypedFunctionMockerBase()
+        2:  309:    : mock_obj_(nullptr), name_("") {}
+        2:  309-block  0
+call    0 returned 2
+call    1 returned 2
+        -:  310:
+       2*:  311:UntypedFunctionMockerBase::~UntypedFunctionMockerBase() {}
+------------------
+_ZN7testing8internal25UntypedFunctionMockerBaseD0Ev:
+function _ZN7testing8internal25UntypedFunctionMockerBaseD0Ev called 0 returned 0% blocks executed 0%
+    #####:  311:UntypedFunctionMockerBase::~UntypedFunctionMockerBase() {}
+    %%%%%:  311-block  0
+call    0 never executed
+call    1 never executed
+------------------
+_ZN7testing8internal25UntypedFunctionMockerBaseD2Ev:
+function _ZN7testing8internal25UntypedFunctionMockerBaseD2Ev called 2 returned 100% blocks executed 100%
+        2:  311:UntypedFunctionMockerBase::~UntypedFunctionMockerBase() {}
+        2:  311-block  0
+call    0 returned 2
+call    1 returned 2
+------------------
+        -:  312:
+        -:  313:// Sets the mock object this mock method belongs to, and registers
+        -:  314:// this information in the global mock registry.  Will be called
+        -:  315:// whenever an EXPECT_CALL() or ON_CALL() is executed on this mock
+        -:  316:// method.
+function _ZN7testing8internal25UntypedFunctionMockerBase13RegisterOwnerEPKv called 0 returned 0% blocks executed 0%
+    #####:  317:void UntypedFunctionMockerBase::RegisterOwner(const void* mock_obj)
+        -:  318:    GTEST_LOCK_EXCLUDED_(g_gmock_mutex) {
+        -:  319:  {
+    #####:  320:    MutexLock l(&g_gmock_mutex);
+    %%%%%:  320-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  321:    mock_obj_ = mock_obj;
+    #####:  322:  }
+    %%%%%:  322-block  0
+call    0 never executed
+    #####:  323:  Mock::Register(mock_obj, this);
+call    0 never executed
+    #####:  324:}
+        -:  325:
+        -:  326:// Sets the mock object this mock method belongs to, and sets the name
+        -:  327:// of the mock function.  Will be called upon each invocation of this
+        -:  328:// mock function.
+function _ZN7testing8internal25UntypedFunctionMockerBase15SetOwnerAndNameEPKvPKc called 0 returned 0% blocks executed 0%
+    #####:  329:void UntypedFunctionMockerBase::SetOwnerAndName(const void* mock_obj,
+        -:  330:                                                const char* name)
+        -:  331:    GTEST_LOCK_EXCLUDED_(g_gmock_mutex) {
+        -:  332:  // We protect name_ under g_gmock_mutex in case this mock function
+        -:  333:  // is called from two threads concurrently.
+    #####:  334:  MutexLock l(&g_gmock_mutex);
+    %%%%%:  334-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  335:  mock_obj_ = mock_obj;
+    #####:  336:  name_ = name;
+    #####:  337:}
+    %%%%%:  337-block  0
+call    0 never executed
+        -:  338:
+        -:  339:// Returns the name of the function being mocked.  Must be called
+        -:  340:// after RegisterOwner() or SetOwnerAndName() has been called.
+function _ZNK7testing8internal25UntypedFunctionMockerBase10MockObjectEv called 0 returned 0% blocks executed 0%
+    #####:  341:const void* UntypedFunctionMockerBase::MockObject() const
+        -:  342:    GTEST_LOCK_EXCLUDED_(g_gmock_mutex) {
+        -:  343:  const void* mock_obj;
+        -:  344:  {
+        -:  345:    // We protect mock_obj_ under g_gmock_mutex in case this mock
+        -:  346:    // function is called from two threads concurrently.
+    #####:  347:    MutexLock l(&g_gmock_mutex);
+    %%%%%:  347-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  348:    Assert(mock_obj_ != nullptr, __FILE__, __LINE__,
+    %%%%%:  348-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  348-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  348-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:  348-block  3
+call    9 never executed
+    $$$$$:  348-block  4
+    $$$$$:  348-block  5
+call   10 never executed
+    $$$$$:  348-block  6
+        -:  349:           "MockObject() must not be called before RegisterOwner() or "
+        -:  350:           "SetOwnerAndName() has been called.");
+    #####:  351:    mock_obj = mock_obj_;
+    #####:  352:  }
+call    0 never executed
+    $$$$$:  352-block  0
+call    1 never executed
+    #####:  353:  return mock_obj;
+    %%%%%:  353-block  0
+        -:  354:}
+        -:  355:
+        -:  356:// Returns the name of this mock method.  Must be called after
+        -:  357:// SetOwnerAndName() has been called.
+function _ZNK7testing8internal25UntypedFunctionMockerBase4NameEv called 0 returned 0% blocks executed 0%
+    #####:  358:const char* UntypedFunctionMockerBase::Name() const
+        -:  359:    GTEST_LOCK_EXCLUDED_(g_gmock_mutex) {
+        -:  360:  const char* name;
+        -:  361:  {
+        -:  362:    // We protect name_ under g_gmock_mutex in case this mock
+        -:  363:    // function is called from two threads concurrently.
+    #####:  364:    MutexLock l(&g_gmock_mutex);
+    %%%%%:  364-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  365:    Assert(name_ != nullptr, __FILE__, __LINE__,
+    %%%%%:  365-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  365-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  365-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:  365-block  3
+call    9 never executed
+    $$$$$:  365-block  4
+    $$$$$:  365-block  5
+call   10 never executed
+    $$$$$:  365-block  6
+        -:  366:           "Name() must not be called before SetOwnerAndName() has "
+        -:  367:           "been called.");
+    #####:  368:    name = name_;
+    #####:  369:  }
+call    0 never executed
+    $$$$$:  369-block  0
+call    1 never executed
+    #####:  370:  return name;
+    %%%%%:  370-block  0
+        -:  371:}
+        -:  372:
+        -:  373:// Calculates the result of invoking this mock function with the given
+        -:  374:// arguments, prints it, and returns it.  The caller is responsible
+        -:  375:// for deleting the result.
+function _ZN7testing8internal25UntypedFunctionMockerBase17UntypedInvokeWithEPv called 0 returned 0% blocks executed 0%
+    #####:  376:UntypedActionResultHolderBase* UntypedFunctionMockerBase::UntypedInvokeWith(
+        -:  377:    void* const untyped_args) GTEST_LOCK_EXCLUDED_(g_gmock_mutex) {
+        -:  378:  // See the definition of untyped_expectations_ for why access to it
+        -:  379:  // is unprotected here.
+    #####:  380:  if (untyped_expectations_.size() == 0) {
+    %%%%%:  380-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  381:    // No expectation is set on this mock method - we have an
+        -:  382:    // uninteresting call.
+        -:  383:
+        -:  384:    // We must get Google Mock's reaction on uninteresting calls
+        -:  385:    // made on this mock object BEFORE performing the action,
+        -:  386:    // because the action may DELETE the mock object and make the
+        -:  387:    // following expression meaningless.
+        -:  388:    const CallReaction reaction =
+    #####:  389:        Mock::GetReactionOnUninterestingCalls(MockObject());
+    %%%%%:  389-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  389-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  390:
+        -:  391:    // True if and only if we need to print this call's arguments and return
+        -:  392:    // value.  This definition must be kept in sync with
+        -:  393:    // the behavior of ReportUninterestingCall().
+        -:  394:    const bool need_to_report_uninteresting_call =
+        -:  395:        // If the user allows this uninteresting call, we print it
+        -:  396:        // only when they want informational messages.
+    #####:  397:        reaction == kAllow ? LogIsVisible(kInfo) :
+    %%%%%:  397-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  397-block  1
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  397-block  2
+    %%%%%:  397-block  3
+        -:  398:                           // If the user wants this to be a warning, we print
+        -:  399:                           // it only when they want to see warnings.
+        -:  400:            reaction == kWarn
+    #####:  401:                ? LogIsVisible(kWarning)
+    %%%%%:  401-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  401-block  1
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  401-block  2
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  401-block  3
+    %%%%%:  401-block  4
+        -:  402:                :
+        -:  403:                // Otherwise, the user wants this to be an error, and we
+        -:  404:                // should always print detailed information in the error.
+    #####:  405:                true;
+        -:  406:
+    #####:  407:    if (!need_to_report_uninteresting_call) {
+    %%%%%:  407-block  0
+branch  0 never executed
+branch  1 never executed
+        -:  408:      // Perform the action without printing the call information.
+    #####:  409:      return this->UntypedPerformDefaultAction(
+    %%%%%:  409-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  410:          untyped_args, "Function call: " + std::string(Name()));
+    %%%%%:  410-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  410-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  410-block  2
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+    %%%%%:  410-block  3
+    %%%%%:  410-block  4
+call   10 never executed
+call   11 never executed
+call   12 never executed
+    $$$$$:  410-block  5
+call   13 never executed
+    $$$$$:  410-block  6
+    $$$$$:  410-block  7
+call   14 never executed
+    $$$$$:  410-block  8
+    $$$$$:  410-block  9
+call   15 never executed
+    $$$$$:  410-block 10
+        -:  411:    }
+        -:  412:
+        -:  413:    // Warns about the uninteresting call.
+    #####:  414:    ::std::stringstream ss;
+    %%%%%:  414-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  415:    this->UntypedDescribeUninterestingCall(untyped_args, &ss);
+    %%%%%:  415-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  416:
+        -:  417:    // Calculates the function result.
+        -:  418:    UntypedActionResultHolderBase* const result =
+    #####:  419:        this->UntypedPerformDefaultAction(untyped_args, ss.str());
+    %%%%%:  419-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  419-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  419-block  2
+call    6 never executed
+    $$$$$:  419-block  3
+call    7 never executed
+    $$$$$:  419-block  4
+        -:  420:
+        -:  421:    // Prints the function result.
+    #####:  422:    if (result != nullptr) result->PrintAsActionResult(&ss);
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  422-block  0
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+        -:  423:
+    #####:  424:    ReportUninterestingCall(reaction, ss.str());
+    %%%%%:  424-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  424-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  424-block  2
+call    6 never executed
+    $$$$$:  424-block  3
+call    7 never executed
+    $$$$$:  424-block  4
+    #####:  425:    return result;
+    #####:  426:  }
+call    0 never executed
+    $$$$$:  426-block  0
+call    1 never executed
+        -:  427:
+    #####:  428:  bool is_excessive = false;
+    #####:  429:  ::std::stringstream ss;
+    %%%%%:  429-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  430:  ::std::stringstream why;
+    %%%%%:  430-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  431:  ::std::stringstream loc;
+    %%%%%:  431-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  432:  const void* untyped_action = nullptr;
+        -:  433:
+        -:  434:  // The UntypedFindMatchingExpectation() function acquires and
+        -:  435:  // releases g_gmock_mutex.
+        -:  436:
+        -:  437:  const ExpectationBase* const untyped_expectation =
+    #####:  438:      this->UntypedFindMatchingExpectation(untyped_args, &untyped_action,
+    %%%%%:  438-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  439:                                           &is_excessive, &ss, &why);
+    #####:  440:  const bool found = untyped_expectation != nullptr;
+        -:  441:
+        -:  442:  // True if and only if we need to print the call's arguments
+        -:  443:  // and return value.
+        -:  444:  // This definition must be kept in sync with the uses of Expect()
+        -:  445:  // and Log() in this function.
+        -:  446:  const bool need_to_report_call =
+    #####:  447:      !found || is_excessive || LogIsVisible(kInfo);
+    %%%%%:  447-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  447-block  1
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  447-block  2
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  447-block  3
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  447-block  4
+    %%%%%:  447-block  5
+    #####:  448:  if (!need_to_report_call) {
+    %%%%%:  448-block  0
+branch  0 never executed
+branch  1 never executed
+        -:  449:    // Perform the action without printing the call information.
+    #####:  450:    return untyped_action == nullptr
+    #####:  451:               ? this->UntypedPerformDefaultAction(untyped_args, "")
+    %%%%%:  451-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  451-block  1
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  451-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  451-block  3
+    %%%%%:  451-block  4
+call    9 never executed
+    %%%%%:  451-block  5
+branch 10 never executed
+branch 11 never executed
+    %%%%%:  451-block  6
+call   12 never executed
+    %%%%%:  451-block  7
+    $$$$$:  451-block  8
+branch 13 never executed
+branch 14 never executed
+    $$$$$:  451-block  9
+call   15 never executed
+    $$$$$:  451-block 10
+    $$$$$:  451-block 11
+branch 16 never executed
+branch 17 never executed
+    $$$$$:  451-block 12
+call   18 never executed
+    $$$$$:  451-block 13
+    #####:  452:               : this->UntypedPerformAction(untyped_action, untyped_args);
+    %%%%%:  452-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  452-block  1
+    %%%%%:  452-block  2
+branch  3 never executed
+branch  4 never executed
+        -:  453:  }
+        -:  454:
+    #####:  455:  ss << "    Function call: " << Name();
+    %%%%%:  455-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  455-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  455-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    #####:  456:  this->UntypedPrintArgs(untyped_args, &ss);
+    %%%%%:  456-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  457:
+        -:  458:  // In case the action deletes a piece of the expectation, we
+        -:  459:  // generate the message beforehand.
+    #####:  460:  if (found && !is_excessive) {
+    %%%%%:  460-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  460-block  1
+branch  2 never executed
+branch  3 never executed
+    #####:  461:    untyped_expectation->DescribeLocationTo(&loc);
+    %%%%%:  461-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  462:  }
+        -:  463:
+    #####:  464:  UntypedActionResultHolderBase* result = nullptr;
+        -:  465:
+function _ZZN7testing8internal25UntypedFunctionMockerBase17UntypedInvokeWithEPvENKUlvE_clEv called 0 returned 0% blocks executed 0%
+    #####:  466:  auto perform_action = [&] {
+    #####:  467:    return untyped_action == nullptr
+    #####:  468:               ? this->UntypedPerformDefaultAction(untyped_args, ss.str())
+    %%%%%:  468-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  468-block  1
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  468-block  2
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:  468-block  3
+    %%%%%:  468-block  4
+call    8 never executed
+    %%%%%:  468-block  5
+    $$$$$:  468-block  6
+branch  9 never executed
+branch 10 never executed
+    $$$$$:  468-block  7
+call   11 never executed
+    #####:  469:               : this->UntypedPerformAction(untyped_action, untyped_args);
+    %%%%%:  469-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  469-block  1
+    %%%%%:  469-block  2
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  469-block  3
+    #####:  470:  };
+function _ZZN7testing8internal25UntypedFunctionMockerBase17UntypedInvokeWithEPvENKUlvE0_clEv called 0 returned 0% blocks executed 0%
+    #####:  471:  auto handle_failures = [&] {
+    #####:  472:    ss << "\n" << why.str();
+    %%%%%:  472-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  472-block  1
+call    5 never executed
+    $$$$$:  472-block  2
+call    6 never executed
+    $$$$$:  472-block  3
+call    7 never executed
+        -:  473:
+    #####:  474:    if (!found) {
+branch  0 never executed
+branch  1 never executed
+        -:  475:      // No expectation matches this call - reports a failure.
+    #####:  476:      Expect(false, nullptr, -1, ss.str());
+    %%%%%:  476-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  476-block  1
+call    4 never executed
+    $$$$$:  476-block  2
+call    5 never executed
+    $$$$$:  476-block  3
+call    6 never executed
+    #####:  477:    } else if (is_excessive) {
+    %%%%%:  477-block  0
+branch  0 never executed
+branch  1 never executed
+        -:  478:      // We had an upper-bound violation and the failure message is in ss.
+    #####:  479:      Expect(false, untyped_expectation->file(), untyped_expectation->line(),
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  480:             ss.str());
+    %%%%%:  480-block  0
+call    0 never executed
+    %%%%%:  480-block  1
+call    1 never executed
+    $$$$$:  480-block  2
+call    2 never executed
+    $$$$$:  480-block  3
+call    3 never executed
+        -:  481:    } else {
+        -:  482:      // We had an expected call and the matching expectation is
+        -:  483:      // described in ss.
+    #####:  484:      Log(kInfo, loc.str() + ss.str(), 2);
+    %%%%%:  484-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  484-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  484-block  2
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+    %%%%%:  484-block  3
+call   10 never executed
+call   11 never executed
+call   12 never executed
+    $$$$$:  484-block  4
+call   13 never executed
+    $$$$$:  484-block  5
+    $$$$$:  484-block  6
+call   14 never executed
+    $$$$$:  484-block  7
+    $$$$$:  484-block  8
+call   15 never executed
+        -:  485:    }
+    #####:  486:  };
+    %%%%%:  486-block  0
+        -:  487:#if GTEST_HAS_EXCEPTIONS
+        -:  488:  try {
+    #####:  489:    result = perform_action();
+    %%%%%:  489-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    =====:  490:  } catch (...) {
+    $$$$$:  490-block  0
+    $$$$$:  490-block  1
+call    0 never executed
+    =====:  491:    handle_failures();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    =====:  492:    throw;
+    $$$$$:  492-block  0
+call    0 never executed
+    =====:  493:  }
+    $$$$$:  493-block  0
+call    0 never executed
+        -:  494:#else
+        -:  495:  result = perform_action();
+        -:  496:#endif
+        -:  497:
+    #####:  498:  if (result != nullptr) result->PrintAsActionResult(&ss);
+    %%%%%:  498-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  498-block  1
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  499:  handle_failures();
+    %%%%%:  499-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  500:  return result;
+    %%%%%:  500-block  0
+    #####:  501:}
+    %%%%%:  501-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    $$$$$:  501-block  1
+call    3 never executed
+    $$$$$:  501-block  2
+call    4 never executed
+    $$$$$:  501-block  3
+call    5 never executed
+        -:  502:
+        -:  503:// Returns an Expectation object that references and co-owns exp,
+        -:  504:// which must be an expectation on this mock function.
+function _ZN7testing8internal25UntypedFunctionMockerBase11GetHandleOfEPNS0_15ExpectationBaseE called 0 returned 0% blocks executed 0%
+    #####:  505:Expectation UntypedFunctionMockerBase::GetHandleOf(ExpectationBase* exp) {
+        -:  506:  // See the definition of untyped_expectations_ for why access to it
+        -:  507:  // is unprotected here.
+    #####:  508:  for (UntypedExpectations::const_iterator it =
+    #####:  509:           untyped_expectations_.begin();
+    %%%%%:  509-block  0
+call    0 never executed
+call    1 never executed
+    #####:  510:       it != untyped_expectations_.end(); ++it) {
+    %%%%%:  510-block  0
+call    0 never executed
+    %%%%%:  510-block  1
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  511:    if (it->get() == exp) {
+    %%%%%:  511-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  512:      return Expectation(*it);
+    %%%%%:  512-block  0
+call    0 never executed
+call    1 never executed
+        -:  513:    }
+        -:  514:  }
+        -:  515:
+    #####:  516:  Assert(false, __FILE__, __LINE__, "Cannot find expectation.");
+    %%%%%:  516-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  516-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  516-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:  516-block  3
+call    9 never executed
+    $$$$$:  516-block  4
+    $$$$$:  516-block  5
+call   10 never executed
+    #####:  517:  return Expectation();
+call    0 never executed
+        -:  518:  // The above statement is just to make the code compile, and will
+        -:  519:  // never be executed.
+        -:  520:}
+        -:  521:
+        -:  522:// Verifies that all expectations on this mock function have been
+        -:  523:// satisfied.  Reports one or more Google Test non-fatal failures
+        -:  524:// and returns false if not.
+function _ZN7testing8internal25UntypedFunctionMockerBase32VerifyAndClearExpectationsLockedEv called 2 returned 100% blocks executed 34%
+        2:  525:bool UntypedFunctionMockerBase::VerifyAndClearExpectationsLocked()
+        -:  526:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(g_gmock_mutex) {
+        2:  527:  g_gmock_mutex.AssertHeld();
+        2:  527-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  528:  bool expectations_met = true;
+        2:  529:  for (UntypedExpectations::const_iterator it =
+        2:  530:           untyped_expectations_.begin();
+        2:  530-block  0
+call    0 returned 2
+call    1 returned 2
+       2*:  531:       it != untyped_expectations_.end(); ++it) {
+    %%%%%:  531-block  0
+call    0 never executed
+        2:  531-block  1
+call    1 returned 2
+call    2 returned 2
+branch  3 taken 0
+branch  4 taken 2 (fallthrough)
+    #####:  532:    ExpectationBase* const untyped_expectation = it->get();
+    %%%%%:  532-block  0
+call    0 never executed
+call    1 never executed
+    #####:  533:    if (untyped_expectation->IsOverSaturated()) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  533-block  0
+branch  3 never executed
+branch  4 never executed
+        -:  534:      // There was an upper-bound violation.  Since the error was
+        -:  535:      // already reported when it occurred, there is no need to do
+        -:  536:      // anything here.
+    #####:  537:      expectations_met = false;
+    %%%%%:  537-block  0
+    #####:  538:    } else if (!untyped_expectation->IsSatisfied()) {
+    %%%%%:  538-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  538-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:  539:      expectations_met = false;
+    #####:  540:      ::std::stringstream ss;
+    %%%%%:  540-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  541:      ss  << "Actual function call count doesn't match "
+    #####:  542:          << untyped_expectation->source_text() << "...\n";
+    %%%%%:  542-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  542-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  542-block  2
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+        -:  543:      // No need to show the source file location of the expectation
+        -:  544:      // in the description, as the Expect() call that follows already
+        -:  545:      // takes care of it.
+    #####:  546:      untyped_expectation->MaybeDescribeExtraMatcherTo(&ss);
+    %%%%%:  546-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  547:      untyped_expectation->DescribeCallCountTo(&ss);
+    %%%%%:  547-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  548:      Expect(false, untyped_expectation->file(),
+    %%%%%:  548-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  549:             untyped_expectation->line(), ss.str());
+    %%%%%:  549-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  549-block  1
+call    3 never executed
+    $$$$$:  549-block  2
+call    4 never executed
+    $$$$$:  549-block  3
+    #####:  550:    }
+call    0 never executed
+    $$$$$:  550-block  0
+call    1 never executed
+        -:  551:  }
+        -:  552:
+        -:  553:  // Deleting our expectations may trigger other mock objects to be deleted, for
+        -:  554:  // example if an action contains a reference counted smart pointer to that
+        -:  555:  // mock object, and that is the last reference. So if we delete our
+        -:  556:  // expectations within the context of the global mutex we may deadlock when
+        -:  557:  // this method is called again. Instead, make a copy of the set of
+        -:  558:  // expectations to delete, clear our set within the mutex, and then clear the
+        -:  559:  // copied set outside of it.
+        2:  560:  UntypedExpectations expectations_to_delete;
+        2:  560-block  0
+call    0 returned 2
+        2:  561:  untyped_expectations_.swap(expectations_to_delete);
+call    0 returned 2
+        -:  562:
+        2:  563:  g_gmock_mutex.Unlock();
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  564:  expectations_to_delete.clear();
+        2:  564-block  0
+call    0 returned 2
+        2:  565:  g_gmock_mutex.Lock();
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  566:
+        2:  567:  return expectations_met;
+        2:  567-block  0
+        2:  568:}
+        2:  568-block  0
+call    0 returned 2
+    $$$$$:  568-block  1
+call    1 never executed
+        -:  569:
+function _ZN7testing8internal17intToCallReactionEi called 0 returned 0% blocks executed 0%
+    #####:  570:CallReaction intToCallReaction(int mock_behavior) {
+    #####:  571:  if (mock_behavior >= kAllow && mock_behavior <= kFail) {
+    %%%%%:  571-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  571-block  1
+branch  2 never executed
+branch  3 never executed
+    #####:  572:    return static_cast<internal::CallReaction>(mock_behavior);
+    %%%%%:  572-block  0
+        -:  573:  }
+    #####:  574:  return kWarn;
+    %%%%%:  574-block  0
+        -:  575:}
+        -:  576:
+        -:  577:}  // namespace internal
+        -:  578:
+        -:  579:// Class Mock.
+        -:  580:
+        -:  581:namespace {
+        -:  582:
+        -:  583:typedef std::set<internal::UntypedFunctionMockerBase*> FunctionMockers;
+        -:  584:
+        -:  585:// The current state of a mock object.  Such information is needed for
+        -:  586:// detecting leaked mock objects and explicitly verifying a mock's
+        -:  587:// expectations.
+        -:  588:struct MockObjectState {
+function _ZN7testing12_GLOBAL__N_115MockObjectStateC2Ev called 0 returned 0% blocks executed 0%
+    #####:  589:  MockObjectState()
+    #####:  590:      : first_used_file(nullptr), first_used_line(-1), leakable(false) {}
+    %%%%%:  590-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  591:
+        -:  592:  // Where in the source file an ON_CALL or EXPECT_CALL is first
+        -:  593:  // invoked on this mock object.
+        -:  594:  const char* first_used_file;
+        -:  595:  int first_used_line;
+        -:  596:  ::std::string first_used_test_suite;
+        -:  597:  ::std::string first_used_test;
+        -:  598:  bool leakable;  // true if and only if it's OK to leak the object.
+        -:  599:  FunctionMockers function_mockers;  // All registered methods of the object.
+        -:  600:};
+        -:  601:
+        -:  602:// A global registry holding the state of all mock objects that are
+        -:  603:// alive.  A mock object is added to this registry the first time
+        -:  604:// Mock::AllowLeak(), ON_CALL(), or EXPECT_CALL() is called on it.  It
+        -:  605:// is removed from the registry in the mock object's destructor.
+        -:  606:class MockObjectRegistry {
+        -:  607: public:
+        -:  608:  // Maps a mock object (identified by its address) to its state.
+        -:  609:  typedef std::map<const void*, MockObjectState> StateMap;
+        -:  610:
+        -:  611:  // This destructor will be called when a program exits, after all
+        -:  612:  // tests in it have been run.  By then, there should be no mock
+        -:  613:  // object alive.  Therefore we report any living object as test
+        -:  614:  // failure, unless the user explicitly asked us to ignore it.
+function _ZN7testing12_GLOBAL__N_118MockObjectRegistryD2Ev called 1 returned 100% blocks executed 29%
+        2:  615:  ~MockObjectRegistry() {
+        1:  616:    if (!GMOCK_FLAG(catch_leaked_mocks))
+        1:  616-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:  617:      return;
+    %%%%%:  617-block  0
+        -:  618:
+        1:  619:    int leaked_count = 0;
+        1:  620:    for (StateMap::const_iterator it = states_.begin(); it != states_.end();
+        1:  620-block  0
+call    0 returned 1
+call    1 returned 1
+        1:  620-block  1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+branch  5 taken 0
+branch  6 taken 1 (fallthrough)
+    #####:  621:         ++it) {
+    %%%%%:  621-block  0
+call    0 never executed
+    #####:  622:      if (it->second.leakable)  // The user said it's fine to leak this object.
+    %%%%%:  622-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  623:        continue;
+    %%%%%:  623-block  0
+        -:  624:
+        -:  625:      // FIXME: Print the type of the leaked object.
+        -:  626:      // This can help the user identify the leaked object.
+    #####:  627:      std::cout << "\n";
+    %%%%%:  627-block  0
+call    0 never executed
+    #####:  628:      const MockObjectState& state = it->second;
+call    0 never executed
+    #####:  629:      std::cout << internal::FormatFileLocation(state.first_used_file,
+call    0 never executed
+    #####:  630:                                                state.first_used_line);
+call    0 never executed
+call    1 never executed
+    #####:  631:      std::cout << " ERROR: this mock object";
+call    0 never executed
+    #####:  632:      if (state.first_used_test != "") {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  633:        std::cout << " (used in test " << state.first_used_test_suite << "."
+    #####:  634:                  << state.first_used_test << ")";
+    %%%%%:  634-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+        -:  635:      }
+    #####:  636:      std::cout << " should be deleted but never is. Its address is @"
+    %%%%%:  636-block  0
+call    0 never executed
+    #####:  637:           << it->first << ".";
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  638:      leaked_count++;
+        -:  639:    }
+        1:  640:    if (leaked_count > 0) {
+        1:  640-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:  641:      std::cout << "\nERROR: " << leaked_count << " leaked mock "
+    %%%%%:  641-block  0
+call    0 never executed
+        -:  642:                << (leaked_count == 1 ? "object" : "objects")
+        -:  643:                << " found at program exit. Expectations on a mock object are "
+        -:  644:                   "verified when the object is destructed. Leaking a mock "
+        -:  645:                   "means that its expectations aren't verified, which is "
+        -:  646:                   "usually a test bug. If you really intend to leak a mock, "
+        -:  647:                   "you can suppress this error using "
+        -:  648:                   "testing::Mock::AllowLeak(mock_object), or you may use a "
+    #####:  649:                   "fake or stub instead of a mock.\n";
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  649-block  0
+    %%%%%:  649-block  1
+    %%%%%:  649-block  2
+call    4 never executed
+call    5 never executed
+    #####:  650:      std::cout.flush();
+call    0 never executed
+    #####:  651:      ::std::cerr.flush();
+call    0 never executed
+        -:  652:      // RUN_ALL_TESTS() has already returned when this destructor is
+        -:  653:      // called.  Therefore we cannot use the normal Google Test
+        -:  654:      // failure reporting mechanism.
+    #####:  655:      _exit(1);  // We cannot call exit() as it is not reentrant and
+call    0 never executed
+        -:  656:                 // may already have been called.
+        -:  657:    }
+       1*:  658:  }
+        1:  658-block  0
+        1:  658-block  1
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1:  658-block  2
+    %%%%%:  658-block  3
+        -:  659:
+function _ZN7testing12_GLOBAL__N_118MockObjectRegistry6statesEv called 4 returned 100% blocks executed 100%
+        4:  660:  StateMap& states() { return states_; }
+        4:  660-block  0
+        -:  661:
+        -:  662: private:
+        -:  663:  StateMap states_;
+        -:  664:};
+        -:  665:
+        -:  666:// Protected by g_gmock_mutex.
+        -:  667:MockObjectRegistry g_mock_object_registry;
+        -:  668:
+        -:  669:// Maps a mock object to the reaction Google Mock should have when an
+        -:  670:// uninteresting method is called.  Protected by g_gmock_mutex.
+        -:  671:std::map<const void*, internal::CallReaction> g_uninteresting_call_reaction;
+        -:  672:
+        -:  673:// Sets the reaction Google Mock should have when an uninteresting
+        -:  674:// method of the given mock object is called.
+function _ZN7testing12_GLOBAL__N_131SetReactionOnUninterestingCallsEPKvNS_8internal12CallReactionE called 0 returned 0% blocks executed 0%
+    #####:  675:void SetReactionOnUninterestingCalls(const void* mock_obj,
+        -:  676:                                     internal::CallReaction reaction)
+        -:  677:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  678:  internal::MutexLock l(&internal::g_gmock_mutex);
+    %%%%%:  678-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  679:  g_uninteresting_call_reaction[mock_obj] = reaction;
+    %%%%%:  679-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  680:}
+    %%%%%:  680-block  0
+call    0 never executed
+    $$$$$:  680-block  1
+call    1 never executed
+        -:  681:
+        -:  682:}  // namespace
+        -:  683:
+        -:  684:// Tells Google Mock to allow uninteresting calls on the given mock
+        -:  685:// object.
+function _ZN7testing4Mock23AllowUninterestingCallsEPKv called 0 returned 0% blocks executed 0%
+    #####:  686:void Mock::AllowUninterestingCalls(const void* mock_obj)
+        -:  687:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  688:  SetReactionOnUninterestingCalls(mock_obj, internal::kAllow);
+    %%%%%:  688-block  0
+call    0 never executed
+    #####:  689:}
+        -:  690:
+        -:  691:// Tells Google Mock to warn the user about uninteresting calls on the
+        -:  692:// given mock object.
+function _ZN7testing4Mock22WarnUninterestingCallsEPKv called 0 returned 0% blocks executed 0%
+    #####:  693:void Mock::WarnUninterestingCalls(const void* mock_obj)
+        -:  694:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  695:  SetReactionOnUninterestingCalls(mock_obj, internal::kWarn);
+    %%%%%:  695-block  0
+call    0 never executed
+    #####:  696:}
+        -:  697:
+        -:  698:// Tells Google Mock to fail uninteresting calls on the given mock
+        -:  699:// object.
+function _ZN7testing4Mock22FailUninterestingCallsEPKv called 0 returned 0% blocks executed 0%
+    #####:  700:void Mock::FailUninterestingCalls(const void* mock_obj)
+        -:  701:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  702:  SetReactionOnUninterestingCalls(mock_obj, internal::kFail);
+    %%%%%:  702-block  0
+call    0 never executed
+    #####:  703:}
+        -:  704:
+        -:  705:// Tells Google Mock the given mock object is being destroyed and its
+        -:  706:// entry in the call-reaction table should be removed.
+function _ZN7testing4Mock22UnregisterCallReactionEPKv called 0 returned 0% blocks executed 0%
+    #####:  707:void Mock::UnregisterCallReaction(const void* mock_obj)
+        -:  708:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  709:  internal::MutexLock l(&internal::g_gmock_mutex);
+    %%%%%:  709-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  710:  g_uninteresting_call_reaction.erase(mock_obj);
+    %%%%%:  710-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  711:}
+    %%%%%:  711-block  0
+call    0 never executed
+    $$$$$:  711-block  1
+call    1 never executed
+        -:  712:
+        -:  713:// Returns the reaction Google Mock will have on uninteresting calls
+        -:  714:// made on the given mock object.
+function _ZN7testing4Mock31GetReactionOnUninterestingCallsEPKv called 0 returned 0% blocks executed 0%
+    #####:  715:internal::CallReaction Mock::GetReactionOnUninterestingCalls(
+        -:  716:    const void* mock_obj)
+        -:  717:        GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  718:  internal::MutexLock l(&internal::g_gmock_mutex);
+    %%%%%:  718-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  719:  return (g_uninteresting_call_reaction.count(mock_obj) == 0) ?
+    %%%%%:  719-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  719-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:  720:      internal::intToCallReaction(GMOCK_FLAG(default_mock_behavior)) :
+    %%%%%:  720-block  0
+call    0 never executed
+    #####:  721:      g_uninteresting_call_reaction[mock_obj];
+    %%%%%:  721-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  721-block  1
+    %%%%%:  721-block  2
+    #####:  722:}
+    %%%%%:  722-block  0
+call    0 never executed
+    $$$$$:  722-block  1
+call    1 never executed
+        -:  723:
+        -:  724:// Tells Google Mock to ignore mock_obj when checking for leaked mock
+        -:  725:// objects.
+function _ZN7testing4Mock9AllowLeakEPKv called 0 returned 0% blocks executed 0%
+    #####:  726:void Mock::AllowLeak(const void* mock_obj)
+        -:  727:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  728:  internal::MutexLock l(&internal::g_gmock_mutex);
+    %%%%%:  728-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  729:  g_mock_object_registry.states()[mock_obj].leakable = true;
+    %%%%%:  729-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  730:}
+    %%%%%:  730-block  0
+call    0 never executed
+    $$$$$:  730-block  1
+call    1 never executed
+        -:  731:
+        -:  732:// Verifies and clears all expectations on the given mock object.  If
+        -:  733:// the expectations aren't satisfied, generates one or more Google
+        -:  734:// Test non-fatal failures and returns false.
+function _ZN7testing4Mock26VerifyAndClearExpectationsEPv called 0 returned 0% blocks executed 0%
+    #####:  735:bool Mock::VerifyAndClearExpectations(void* mock_obj)
+        -:  736:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  737:  internal::MutexLock l(&internal::g_gmock_mutex);
+    %%%%%:  737-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  738:  return VerifyAndClearExpectationsLocked(mock_obj);
+    %%%%%:  738-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  738-block  1
+    %%%%%:  738-block  2
+    #####:  739:}
+    %%%%%:  739-block  0
+call    0 never executed
+    $$$$$:  739-block  1
+call    1 never executed
+        -:  740:
+        -:  741:// Verifies all expectations on the given mock object and clears its
+        -:  742:// default actions and expectations.  Returns true if and only if the
+        -:  743:// verification was successful.
+function _ZN7testing4Mock14VerifyAndClearEPv called 0 returned 0% blocks executed 0%
+    #####:  744:bool Mock::VerifyAndClear(void* mock_obj)
+        -:  745:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  746:  internal::MutexLock l(&internal::g_gmock_mutex);
+    %%%%%:  746-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  747:  ClearDefaultActionsLocked(mock_obj);
+    %%%%%:  747-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  748:  return VerifyAndClearExpectationsLocked(mock_obj);
+    %%%%%:  748-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  748-block  1
+    %%%%%:  748-block  2
+    #####:  749:}
+    %%%%%:  749-block  0
+call    0 never executed
+    $$$$$:  749-block  1
+call    1 never executed
+        -:  750:
+        -:  751:// Verifies and clears all expectations on the given mock object.  If
+        -:  752:// the expectations aren't satisfied, generates one or more Google
+        -:  753:// Test non-fatal failures and returns false.
+function _ZN7testing4Mock32VerifyAndClearExpectationsLockedEPv called 0 returned 0% blocks executed 0%
+    #####:  754:bool Mock::VerifyAndClearExpectationsLocked(void* mock_obj)
+        -:  755:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(internal::g_gmock_mutex) {
+    #####:  756:  internal::g_gmock_mutex.AssertHeld();
+    %%%%%:  756-block  0
+call    0 never executed
+    #####:  757:  if (g_mock_object_registry.states().count(mock_obj) == 0) {
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  758:    // No EXPECT_CALL() was set on the given mock object.
+    #####:  759:    return true;
+    %%%%%:  759-block  0
+        -:  760:  }
+        -:  761:
+        -:  762:  // Verifies and clears the expectations on each mock method in the
+        -:  763:  // given mock object.
+    #####:  764:  bool expectations_met = true;
+        -:  765:  FunctionMockers& mockers =
+    #####:  766:      g_mock_object_registry.states()[mock_obj].function_mockers;
+    %%%%%:  766-block  0
+call    0 never executed
+call    1 never executed
+    #####:  767:  for (FunctionMockers::const_iterator it = mockers.begin();
+call    0 never executed
+    #####:  768:       it != mockers.end(); ++it) {
+    %%%%%:  768-block  0
+call    0 never executed
+    %%%%%:  768-block  1
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  769:    if (!(*it)->VerifyAndClearExpectationsLocked()) {
+    %%%%%:  769-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  769-block  1
+branch  4 never executed
+branch  5 never executed
+    #####:  770:      expectations_met = false;
+    %%%%%:  770-block  0
+        -:  771:    }
+        -:  772:  }
+        -:  773:
+        -:  774:  // We don't clear the content of mockers, as they may still be
+        -:  775:  // needed by ClearDefaultActionsLocked().
+    #####:  776:  return expectations_met;
+    %%%%%:  776-block  0
+        -:  777:}
+        -:  778:
+function _ZN7testing4Mock7IsNaggyEPv called 0 returned 0% blocks executed 0%
+    #####:  779:bool Mock::IsNaggy(void* mock_obj)
+        -:  780:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  781:  return Mock::GetReactionOnUninterestingCalls(mock_obj) == internal::kWarn;
+    %%%%%:  781-block  0
+call    0 never executed
+        -:  782:}
+function _ZN7testing4Mock6IsNiceEPv called 0 returned 0% blocks executed 0%
+    #####:  783:bool Mock::IsNice(void* mock_obj)
+        -:  784:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  785:  return Mock::GetReactionOnUninterestingCalls(mock_obj) == internal::kAllow;
+    %%%%%:  785-block  0
+call    0 never executed
+        -:  786:}
+function _ZN7testing4Mock8IsStrictEPv called 0 returned 0% blocks executed 0%
+    #####:  787:bool Mock::IsStrict(void* mock_obj)
+        -:  788:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  789:  return Mock::GetReactionOnUninterestingCalls(mock_obj) == internal::kFail;
+    %%%%%:  789-block  0
+call    0 never executed
+        -:  790:}
+        -:  791:
+        -:  792:// Registers a mock object and a mock method it owns.
+function _ZN7testing4Mock8RegisterEPKvPNS_8internal25UntypedFunctionMockerBaseE called 0 returned 0% blocks executed 0%
+    #####:  793:void Mock::Register(const void* mock_obj,
+        -:  794:                    internal::UntypedFunctionMockerBase* mocker)
+        -:  795:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  796:  internal::MutexLock l(&internal::g_gmock_mutex);
+    %%%%%:  796-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  797:  g_mock_object_registry.states()[mock_obj].function_mockers.insert(mocker);
+    %%%%%:  797-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  797-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:  798:}
+    %%%%%:  798-block  0
+call    0 never executed
+    $$$$$:  798-block  1
+call    1 never executed
+        -:  799:
+        -:  800:// Tells Google Mock where in the source code mock_obj is used in an
+        -:  801:// ON_CALL or EXPECT_CALL.  In case mock_obj is leaked, this
+        -:  802:// information helps the user identify which object it is.
+function _ZN7testing4Mock31RegisterUseByOnCallOrExpectCallEPKvPKci called 0 returned 0% blocks executed 0%
+    #####:  803:void Mock::RegisterUseByOnCallOrExpectCall(const void* mock_obj,
+        -:  804:                                           const char* file, int line)
+        -:  805:    GTEST_LOCK_EXCLUDED_(internal::g_gmock_mutex) {
+    #####:  806:  internal::MutexLock l(&internal::g_gmock_mutex);
+    %%%%%:  806-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  807:  MockObjectState& state = g_mock_object_registry.states()[mock_obj];
+    %%%%%:  807-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  808:  if (state.first_used_file == nullptr) {
+    %%%%%:  808-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  809:    state.first_used_file = file;
+    #####:  810:    state.first_used_line = line;
+        -:  811:    const TestInfo* const test_info =
+    #####:  812:        UnitTest::GetInstance()->current_test_info();
+    %%%%%:  812-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  812-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  813:    if (test_info != nullptr) {
+    %%%%%:  813-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  814:      state.first_used_test_suite = test_info->test_suite_name();
+    %%%%%:  814-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  815:      state.first_used_test = test_info->name();
+    %%%%%:  815-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  816:    }
+        -:  817:  }
+    #####:  818:}
+    %%%%%:  818-block  0
+call    0 never executed
+    $$$$$:  818-block  1
+call    1 never executed
+        -:  819:
+        -:  820:// Unregisters a mock method; removes the owning mock object from the
+        -:  821:// registry when the last mock method associated with it has been
+        -:  822:// unregistered.  This is called only in the destructor of
+        -:  823:// FunctionMockerBase.
+function _ZN7testing4Mock16UnregisterLockedEPNS_8internal25UntypedFunctionMockerBaseE called 2 returned 100% blocks executed 55%
+        2:  824:void Mock::UnregisterLocked(internal::UntypedFunctionMockerBase* mocker)
+        -:  825:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(internal::g_gmock_mutex) {
+        2:  826:  internal::g_gmock_mutex.AssertHeld();
+        2:  826-block  0
+call    0 returned 2
+        2:  827:  for (MockObjectRegistry::StateMap::iterator it =
+        2:  828:           g_mock_object_registry.states().begin();
+call    0 returned 2
+call    1 returned 2
+       2*:  829:       it != g_mock_object_registry.states().end(); ++it) {
+    %%%%%:  829-block  0
+call    0 never executed
+        2:  829-block  1
+call    1 returned 2
+call    2 returned 2
+call    3 returned 2
+branch  4 taken 0
+branch  5 taken 2 (fallthrough)
+    #####:  830:    FunctionMockers& mockers = it->second.function_mockers;
+    %%%%%:  830-block  0
+call    0 never executed
+    #####:  831:    if (mockers.erase(mocker) > 0) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  831-block  0
+branch  3 never executed
+branch  4 never executed
+        -:  832:      // mocker was in mockers and has been just removed.
+    #####:  833:      if (mockers.empty()) {
+    %%%%%:  833-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  834:        g_mock_object_registry.states().erase(it);
+    %%%%%:  834-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  835:      }
+    #####:  836:      return;
+    %%%%%:  836-block  0
+        -:  837:    }
+        -:  838:  }
+        -:  839:}
+        -:  840:
+        -:  841:// Clears all ON_CALL()s set on the given mock object.
+function _ZN7testing4Mock25ClearDefaultActionsLockedEPv called 0 returned 0% blocks executed 0%
+    #####:  842:void Mock::ClearDefaultActionsLocked(void* mock_obj)
+        -:  843:    GTEST_EXCLUSIVE_LOCK_REQUIRED_(internal::g_gmock_mutex) {
+    #####:  844:  internal::g_gmock_mutex.AssertHeld();
+    %%%%%:  844-block  0
+call    0 never executed
+        -:  845:
+    #####:  846:  if (g_mock_object_registry.states().count(mock_obj) == 0) {
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  847:    // No ON_CALL() was set on the given mock object.
+    #####:  848:    return;
+    %%%%%:  848-block  0
+        -:  849:  }
+        -:  850:
+        -:  851:  // Clears the default actions for each mock method in the given mock
+        -:  852:  // object.
+        -:  853:  FunctionMockers& mockers =
+    #####:  854:      g_mock_object_registry.states()[mock_obj].function_mockers;
+    %%%%%:  854-block  0
+call    0 never executed
+call    1 never executed
+    #####:  855:  for (FunctionMockers::const_iterator it = mockers.begin();
+call    0 never executed
+    #####:  856:       it != mockers.end(); ++it) {
+    %%%%%:  856-block  0
+call    0 never executed
+    %%%%%:  856-block  1
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  857:    (*it)->ClearDefaultActionsLocked();
+    %%%%%:  857-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  858:  }
+        -:  859:
+        -:  860:  // We don't clear the content of mockers, as they may still be
+        -:  861:  // needed by VerifyAndClearExpectationsLocked().
+        -:  862:}
+        -:  863:
+function _ZN7testing11ExpectationC2Ev called 0 returned 0% blocks executed 0%
+    #####:  864:Expectation::Expectation() {}
+    %%%%%:  864-block  0
+call    0 never executed
+        -:  865:
+function _ZN7testing11ExpectationC2ERKSt10shared_ptrINS_8internal15ExpectationBaseEE called 0 returned 0% blocks executed 0%
+    #####:  866:Expectation::Expectation(
+    #####:  867:    const std::shared_ptr<internal::ExpectationBase>& an_expectation_base)
+    #####:  868:    : expectation_base_(an_expectation_base) {}
+    %%%%%:  868-block  0
+call    0 never executed
+        -:  869:
+function _ZN7testing11ExpectationD2Ev called 0 returned 0% blocks executed 0%
+    #####:  870:Expectation::~Expectation() {}
+    %%%%%:  870-block  0
+call    0 never executed
+        -:  871:
+        -:  872:// Adds an expectation to a sequence.
+function _ZNK7testing8Sequence14AddExpectationERKNS_11ExpectationE called 0 returned 0% blocks executed 0%
+    #####:  873:void Sequence::AddExpectation(const Expectation& expectation) const {
+    #####:  874:  if (*last_expectation_ != expectation) {
+    %%%%%:  874-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  875:    if (last_expectation_->expectation_base() != nullptr) {
+    %%%%%:  875-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  876:      expectation.expectation_base()->immediate_prerequisites_
+call    0 never executed
+call    1 never executed
+    #####:  877:          += *last_expectation_;
+    %%%%%:  877-block  0
+call    0 never executed
+call    1 never executed
+        -:  878:    }
+    #####:  879:    *last_expectation_ = expectation;
+    %%%%%:  879-block  0
+call    0 never executed
+call    1 never executed
+        -:  880:  }
+    #####:  881:}
+        -:  882:
+        -:  883:// Creates the implicit sequence if there isn't one.
+function _ZN7testing10InSequenceC2Ev called 0 returned 0% blocks executed 0%
+    #####:  884:InSequence::InSequence() {
+    #####:  885:  if (internal::g_gmock_implicit_sequence.get() == nullptr) {
+    %%%%%:  885-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  886:    internal::g_gmock_implicit_sequence.set(new Sequence);
+    %%%%%:  886-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  886-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    $$$$$:  886-block  2
+call    7 never executed
+    #####:  887:    sequence_created_ = true;
+    %%%%%:  887-block  0
+        -:  888:  } else {
+    #####:  889:    sequence_created_ = false;
+    %%%%%:  889-block  0
+        -:  890:  }
+    #####:  891:}
+    %%%%%:  891-block  0
+        -:  892:
+        -:  893:// Deletes the implicit sequence if it was created by the constructor
+        -:  894:// of this object.
+function _ZN7testing10InSequenceD2Ev called 0 returned 0% blocks executed 0%
+    #####:  895:InSequence::~InSequence() {
+    #####:  896:  if (sequence_created_) {
+    %%%%%:  896-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  897:    delete internal::g_gmock_implicit_sequence.get();
+    %%%%%:  897-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  897-block  1
+call    3 never executed
+call    4 never executed
+    #####:  898:    internal::g_gmock_implicit_sequence.set(nullptr);
+    %%%%%:  898-block  0
+call    0 never executed
+        -:  899:  }
+    #####:  900:}
+        -:  901:
+        -:  902:}  // namespace testing
+        -:  903:
+        -:  904:#ifdef _MSC_VER
+        -:  905:#if _MSC_VER == 1900
+        -:  906:#  pragma warning(pop)
+        -:  907:#endif
+        -:  908:#endif

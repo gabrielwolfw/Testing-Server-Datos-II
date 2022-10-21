@@ -1,0 +1,235 @@
+        -:    0:Source:/usr/local/include/opencv4/opencv2/core/cvstd.inl.hpp
+        -:    0:Graph:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/CMakeFiles/test_tuto.dir/main.cpp.gcno
+        -:    0:Data:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/CMakeFiles/test_tuto.dir/main.cpp.gcda
+        -:    0:Runs:1
+        -:    1:/*M///////////////////////////////////////////////////////////////////////////////////////
+        -:    2://
+        -:    3://  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+        -:    4://
+        -:    5://  By downloading, copying, installing or using the software you agree to this license.
+        -:    6://  If you do not agree to this license, do not download, install,
+        -:    7://  copy or use the software.
+        -:    8://
+        -:    9://
+        -:   10://                          License Agreement
+        -:   11://                For Open Source Computer Vision Library
+        -:   12://
+        -:   13:// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.
+        -:   14:// Copyright (C) 2009, Willow Garage Inc., all rights reserved.
+        -:   15:// Copyright (C) 2013, OpenCV Foundation, all rights reserved.
+        -:   16:// Third party copyrights are property of their respective owners.
+        -:   17://
+        -:   18:// Redistribution and use in source and binary forms, with or without modification,
+        -:   19:// are permitted provided that the following conditions are met:
+        -:   20://
+        -:   21://   * Redistribution's of source code must retain the above copyright notice,
+        -:   22://     this list of conditions and the following disclaimer.
+        -:   23://
+        -:   24://   * Redistribution's in binary form must reproduce the above copyright notice,
+        -:   25://     this list of conditions and the following disclaimer in the documentation
+        -:   26://     and/or other materials provided with the distribution.
+        -:   27://
+        -:   28://   * The name of the copyright holders may not be used to endorse or promote products
+        -:   29://     derived from this software without specific prior written permission.
+        -:   30://
+        -:   31:// This software is provided by the copyright holders and contributors "as is" and
+        -:   32:// any express or implied warranties, including, but not limited to, the implied
+        -:   33:// warranties of merchantability and fitness for a particular purpose are disclaimed.
+        -:   34:// In no event shall the Intel Corporation or contributors be liable for any direct,
+        -:   35:// indirect, incidental, special, exemplary, or consequential damages
+        -:   36:// (including, but not limited to, procurement of substitute goods or services;
+        -:   37:// loss of use, data, or profits; or business interruption) however caused
+        -:   38:// and on any theory of liability, whether in contract, strict liability,
+        -:   39:// or tort (including negligence or otherwise) arising in any way out of
+        -:   40:// the use of this software, even if advised of the possibility of such damage.
+        -:   41://
+        -:   42://M*/
+        -:   43:
+        -:   44:#ifndef OPENCV_CORE_CVSTDINL_HPP
+        -:   45:#define OPENCV_CORE_CVSTDINL_HPP
+        -:   46:
+        -:   47:#include <complex>
+        -:   48:#include <ostream>
+        -:   49:#include <sstream>
+        -:   50:
+        -:   51://! @cond IGNORED
+        -:   52:
+        -:   53:#ifdef _MSC_VER
+        -:   54:#pragma warning( push )
+        -:   55:#pragma warning( disable: 4127 )
+        -:   56:#endif
+        -:   57:
+        -:   58:namespace cv
+        -:   59:{
+        -:   60:
+        -:   61:template<typename _Tp> class DataType< std::complex<_Tp> >
+        -:   62:{
+        -:   63:public:
+        -:   64:    typedef std::complex<_Tp>  value_type;
+        -:   65:    typedef value_type         work_type;
+        -:   66:    typedef _Tp                channel_type;
+        -:   67:
+        -:   68:    enum { generic_type = 0,
+        -:   69:           depth        = DataType<channel_type>::depth,
+        -:   70:           channels     = 2,
+        -:   71:           fmt          = DataType<channel_type>::fmt + ((channels - 1) << 8),
+        -:   72:           type         = CV_MAKETYPE(depth, channels) };
+        -:   73:
+        -:   74:    typedef Vec<channel_type, channels> vec_type;
+        -:   75:};
+        -:   76:
+        -:   77:static inline
+function _ZN2cvlsERSoNS_3PtrINS_9FormattedEEE called 0 returned 0% blocks executed 0%
+    #####:   78:std::ostream& operator << (std::ostream& out, Ptr<Formatted> fmtd)
+        -:   79:{
+    #####:   80:    fmtd->reset();
+    %%%%%:   80-block  0
+call    0 never executed
+call    1 never executed
+    #####:   81:    for(const char* str = fmtd->next(); str; str = fmtd->next())
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+    %%%%%:   81-block  0
+branch  4 never executed
+branch  5 never executed
+    #####:   82:        out << str;
+    %%%%%:   82-block  0
+call    0 never executed
+    #####:   83:    return out;
+    %%%%%:   83-block  0
+        -:   84:}
+        -:   85:
+        -:   86:static inline
+function _ZN2cvlsERSoRKNS_3MatE called 0 returned 0% blocks executed 0%
+    #####:   87:std::ostream& operator << (std::ostream& out, const Mat& mtx)
+        -:   88:{
+    #####:   89:    return out << Formatter::get()->format(mtx);
+    %%%%%:   89-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:   89-block  1
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   89-block  2
+call    8 never executed
+call    9 never executed
+    %%%%%:   89-block  3
+    $$$$$:   89-block  4
+call   10 never executed
+    $$$$$:   89-block  5
+    $$$$$:   89-block  6
+call   11 never executed
+        -:   90:}
+        -:   91:
+        -:   92:static inline
+        -:   93:std::ostream& operator << (std::ostream& out, const UMat& m)
+        -:   94:{
+        -:   95:    return out << m.getMat(ACCESS_READ);
+        -:   96:}
+        -:   97:
+        -:   98:template<typename _Tp> static inline
+        -:   99:std::ostream& operator << (std::ostream& out, const Complex<_Tp>& c)
+        -:  100:{
+        -:  101:    return out << "(" << c.re << "," << c.im << ")";
+        -:  102:}
+        -:  103:
+        -:  104:template<typename _Tp> static inline
+        -:  105:std::ostream& operator << (std::ostream& out, const std::vector<Point_<_Tp> >& vec)
+        -:  106:{
+        -:  107:    return out << Formatter::get()->format(Mat(vec));
+        -:  108:}
+        -:  109:
+        -:  110:
+        -:  111:template<typename _Tp> static inline
+        -:  112:std::ostream& operator << (std::ostream& out, const std::vector<Point3_<_Tp> >& vec)
+        -:  113:{
+        -:  114:    return out << Formatter::get()->format(Mat(vec));
+        -:  115:}
+        -:  116:
+        -:  117:
+        -:  118:template<typename _Tp, int m, int n> static inline
+        -:  119:std::ostream& operator << (std::ostream& out, const Matx<_Tp, m, n>& matx)
+        -:  120:{
+        -:  121:    return out << Formatter::get()->format(Mat(matx));
+        -:  122:}
+        -:  123:
+        -:  124:template<typename _Tp> static inline
+        -:  125:std::ostream& operator << (std::ostream& out, const Point_<_Tp>& p)
+        -:  126:{
+        -:  127:    out << "[" << p.x << ", " << p.y << "]";
+        -:  128:    return out;
+        -:  129:}
+        -:  130:
+        -:  131:template<typename _Tp> static inline
+        -:  132:std::ostream& operator << (std::ostream& out, const Point3_<_Tp>& p)
+        -:  133:{
+        -:  134:    out << "[" << p.x << ", " << p.y << ", " << p.z << "]";
+        -:  135:    return out;
+        -:  136:}
+        -:  137:
+        -:  138:template<typename _Tp, int n> static inline
+        -:  139:std::ostream& operator << (std::ostream& out, const Vec<_Tp, n>& vec)
+        -:  140:{
+        -:  141:    out << "[";
+        -:  142:    if (cv::traits::Depth<_Tp>::value <= CV_32S)
+        -:  143:    {
+        -:  144:        for (int i = 0; i < n - 1; ++i) {
+        -:  145:            out << (int)vec[i] << ", ";
+        -:  146:        }
+        -:  147:        out << (int)vec[n-1] << "]";
+        -:  148:    }
+        -:  149:    else
+        -:  150:    {
+        -:  151:        for (int i = 0; i < n - 1; ++i) {
+        -:  152:            out << vec[i] << ", ";
+        -:  153:        }
+        -:  154:        out << vec[n-1] << "]";
+        -:  155:    }
+        -:  156:
+        -:  157:    return out;
+        -:  158:}
+        -:  159:
+        -:  160:template<typename _Tp> static inline
+        -:  161:std::ostream& operator << (std::ostream& out, const Size_<_Tp>& size)
+        -:  162:{
+        -:  163:    return out << "[" << size.width << " x " << size.height << "]";
+        -:  164:}
+        -:  165:
+        -:  166:template<typename _Tp> static inline
+        -:  167:std::ostream& operator << (std::ostream& out, const Rect_<_Tp>& rect)
+        -:  168:{
+        -:  169:    return out << "[" << rect.width << " x " << rect.height << " from (" << rect.x << ", " << rect.y << ")]";
+        -:  170:}
+        -:  171:
+        -:  172:static inline std::ostream& operator << (std::ostream& out, const MatSize& msize)
+        -:  173:{
+        -:  174:    int i, dims = msize.dims();
+        -:  175:    for( i = 0; i < dims; i++ )
+        -:  176:    {
+        -:  177:        out << msize[i];
+        -:  178:        if( i < dims-1 )
+        -:  179:            out << " x ";
+        -:  180:    }
+        -:  181:    return out;
+        -:  182:}
+        -:  183:
+        -:  184:static inline std::ostream &operator<< (std::ostream &s, cv::Range &r)
+        -:  185:{
+        -:  186:    return s << "[" << r.start << " : " << r.end << ")";
+        -:  187:}
+        -:  188:
+        -:  189:} // cv
+        -:  190:
+        -:  191:#ifdef _MSC_VER
+        -:  192:#pragma warning( pop )
+        -:  193:#endif
+        -:  194:
+        -:  195://! @endcond
+        -:  196:
+        -:  197:#endif // OPENCV_CORE_CVSTDINL_HPP

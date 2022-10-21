@@ -1,0 +1,1246 @@
+        -:    0:Source:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/test/googlemock/src/gmock-matchers.cc
+        -:    0:Graph:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.gcno
+        -:    0:Data:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/test/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.gcda
+        -:    0:Runs:1
+        -:    1:// Copyright 2007, Google Inc.
+        -:    2:// All rights reserved.
+        -:    3://
+        -:    4:// Redistribution and use in source and binary forms, with or without
+        -:    5:// modification, are permitted provided that the following conditions are
+        -:    6:// met:
+        -:    7://
+        -:    8://     * Redistributions of source code must retain the above copyright
+        -:    9:// notice, this list of conditions and the following disclaimer.
+        -:   10://     * Redistributions in binary form must reproduce the above
+        -:   11:// copyright notice, this list of conditions and the following disclaimer
+        -:   12:// in the documentation and/or other materials provided with the
+        -:   13:// distribution.
+        -:   14://     * Neither the name of Google Inc. nor the names of its
+        -:   15:// contributors may be used to endorse or promote products derived from
+        -:   16:// this software without specific prior written permission.
+        -:   17://
+        -:   18:// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+        -:   19:// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+        -:   20:// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+        -:   21:// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+        -:   22:// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+        -:   23:// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+        -:   24:// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+        -:   25:// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+        -:   26:// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        -:   27:// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+        -:   28:// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        -:   29:
+        -:   30:
+        -:   31:// Google Mock - a framework for writing C++ mock classes.
+        -:   32://
+        -:   33:// This file implements Matcher<const string&>, Matcher<string>, and
+        -:   34:// utilities for defining matchers.
+        -:   35:
+        -:   36:#include "gmock/gmock-matchers.h"
+        -:   37:
+        -:   38:#include <string.h>
+        -:   39:#include <iostream>
+        -:   40:#include <sstream>
+        -:   41:#include <string>
+        -:   42:
+        -:   43:namespace testing {
+        -:   44:namespace internal {
+        -:   45:
+        -:   46:// Returns the description for a matcher defined using the MATCHER*()
+        -:   47:// macro where the user-supplied description string is "", if
+        -:   48:// 'negation' is false; otherwise returns the description of the
+        -:   49:// negation of the matcher.  'param_values' contains a list of strings
+        -:   50:// that are the print-out of the matcher's parameters.
+function _ZN7testing8internal24FormatMatcherDescriptionEbPKcRKSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS9_EE called 0 returned 0% blocks executed 0%
+    #####:   51:GTEST_API_ std::string FormatMatcherDescription(bool negation,
+        -:   52:                                                const char* matcher_name,
+        -:   53:                                                const Strings& param_values) {
+    #####:   54:  std::string result = ConvertIdentifierNameToWords(matcher_name);
+    %%%%%:   54-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   55:  if (param_values.size() >= 1) result += " " + JoinAsTuple(param_values);
+    %%%%%:   55-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   55-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   55-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:   55-block  3
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:   55-block  4
+call   12 never executed
+call   13 never executed
+    $$$$$:   55-block  5
+call   14 never executed
+    $$$$$:   55-block  6
+    $$$$$:   55-block  7
+call   15 never executed
+    $$$$$:   55-block  8
+    #####:   56:  return negation ? "not (" + result + ")" : result;
+    %%%%%:   56-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:   56-block  1
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:   56-block  2
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   56-block  3
+call    8 never executed
+branch  9 never executed
+branch 10 never executed
+    %%%%%:   56-block  4
+branch 11 never executed
+branch 12 never executed
+    %%%%%:   56-block  5
+call   13 never executed
+    %%%%%:   56-block  6
+    $$$$$:   56-block  7
+branch 14 never executed
+branch 15 never executed
+    $$$$$:   56-block  8
+call   16 never executed
+    $$$$$:   56-block  9
+    #####:   57:}
+    %%%%%:   57-block  0
+call    0 never executed
+    $$$$$:   57-block  1
+call    1 never executed
+        -:   58:
+        -:   59:// FindMaxBipartiteMatching and its helper class.
+        -:   60://
+        -:   61:// Uses the well-known Ford-Fulkerson max flow method to find a maximum
+        -:   62:// bipartite matching. Flow is considered to be from left to right.
+        -:   63:// There is an implicit source node that is connected to all of the left
+        -:   64:// nodes, and an implicit sink node that is connected to all of the
+        -:   65:// right nodes. All edges have unit capacity.
+        -:   66://
+        -:   67:// Neither the flow graph nor the residual flow graph are represented
+        -:   68:// explicitly. Instead, they are implied by the information in 'graph' and
+        -:   69:// a vector<int> called 'left_' whose elements are initialized to the
+        -:   70:// value kUnused. This represents the initial state of the algorithm,
+        -:   71:// where the flow graph is empty, and the residual flow graph has the
+        -:   72:// following edges:
+        -:   73://   - An edge from source to each left_ node
+        -:   74://   - An edge from each right_ node to sink
+        -:   75://   - An edge from each left_ node to each right_ node, if the
+        -:   76://     corresponding edge exists in 'graph'.
+        -:   77://
+        -:   78:// When the TryAugment() method adds a flow, it sets left_[l] = r for some
+        -:   79:// nodes l and r. This induces the following changes:
+        -:   80://   - The edges (source, l), (l, r), and (r, sink) are added to the
+        -:   81://     flow graph.
+        -:   82://   - The same three edges are removed from the residual flow graph.
+        -:   83://   - The reverse edges (l, source), (r, l), and (sink, r) are added
+        -:   84://     to the residual flow graph, which is a directional graph
+        -:   85://     representing unused flow capacity.
+        -:   86://
+        -:   87:// When the method augments a flow (moving left_[l] from some r1 to some
+        -:   88:// other r2), this can be thought of as "undoing" the above steps with
+        -:   89:// respect to r1 and "redoing" them with respect to r2.
+        -:   90://
+        -:   91:// It bears repeating that the flow graph and residual flow graph are
+        -:   92:// never represented explicitly, but can be derived by looking at the
+        -:   93:// information in 'graph' and in left_.
+        -:   94://
+        -:   95:// As an optimization, there is a second vector<int> called right_ which
+        -:   96:// does not provide any new information. Instead, it enables more
+        -:   97:// efficient queries about edges entering or leaving the right-side nodes
+        -:   98:// of the flow or residual flow graphs. The following invariants are
+        -:   99:// maintained:
+        -:  100://
+        -:  101:// left[l] == kUnused or right[left[l]] == l
+        -:  102:// right[r] == kUnused or left[right[r]] == r
+        -:  103://
+        -:  104:// . [ source ]                                        .
+        -:  105:// .   |||                                             .
+        -:  106:// .   |||                                             .
+        -:  107:// .   ||\--> left[0]=1  ---\    right[0]=-1 ----\     .
+        -:  108:// .   ||                   |                    |     .
+        -:  109:// .   |\---> left[1]=-1    \--> right[1]=0  ---\|     .
+        -:  110:// .   |                                        ||     .
+        -:  111:// .   \----> left[2]=2  ------> right[2]=2  --\||     .
+        -:  112:// .                                           |||     .
+        -:  113:// .         elements           matchers       vvv     .
+        -:  114:// .                                         [ sink ]  .
+        -:  115://
+        -:  116:// See Also:
+        -:  117://   [1] Cormen, et al (2001). "Section 26.2: The Ford-Fulkerson method".
+        -:  118://       "Introduction to Algorithms (Second ed.)", pp. 651-664.
+        -:  119://   [2] "Ford-Fulkerson algorithm", Wikipedia,
+        -:  120://       'http://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm'
+        -:  121:class MaxBipartiteMatchState {
+        -:  122: public:
+function _ZN7testing8internal22MaxBipartiteMatchStateC2ERKNS0_11MatchMatrixE called 0 returned 0% blocks executed 0%
+    #####:  123:  explicit MaxBipartiteMatchState(const MatchMatrix& graph)
+    #####:  124:      : graph_(&graph),
+    #####:  125:        left_(graph_->LhsSize(), kUnused),
+    %%%%%:  125-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  125-block  1
+call    5 never executed
+    $$$$$:  125-block  2
+call    6 never executed
+    $$$$$:  125-block  3
+call    7 never executed
+    #####:  126:        right_(graph_->RhsSize(), kUnused) {}
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  126-block  0
+call    5 never executed
+    $$$$$:  126-block  1
+call    6 never executed
+    $$$$$:  126-block  2
+    $$$$$:  126-block  3
+call    7 never executed
+        -:  127:
+        -:  128:  // Returns the edges of a maximal match, each in the form {left, right}.
+function _ZN7testing8internal22MaxBipartiteMatchState7ComputeEv called 0 returned 0% blocks executed 0%
+    #####:  129:  ElementMatcherPairs Compute() {
+        -:  130:    // 'seen' is used for path finding { 0: unseen, 1: seen }.
+    #####:  131:    ::std::vector<char> seen;
+    %%%%%:  131-block  0
+call    0 never executed
+        -:  132:    // Searches the residual flow graph for a path from each left node to
+        -:  133:    // the sink in the residual flow graph, and if one is found, add flow
+        -:  134:    // to the graph. It's okay to search through the left nodes once. The
+        -:  135:    // edge from the implicit source node to each previously-visited left
+        -:  136:    // node will have flow if that left node has any path to the sink
+        -:  137:    // whatsoever. Subsequent augmentations can only add flow to the
+        -:  138:    // network, and cannot take away that previous flow unit from the source.
+        -:  139:    // Since the source-to-left edge can only carry one flow unit (or,
+        -:  140:    // each element can be matched to only one matcher), there is no need
+        -:  141:    // to visit the left nodes more than once looking for augmented paths.
+        -:  142:    // The flow is known to be possible or impossible by looking at the
+        -:  143:    // node once.
+    #####:  144:    for (size_t ilhs = 0; ilhs < graph_->LhsSize(); ++ilhs) {
+    %%%%%:  144-block  0
+    %%%%%:  144-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  145:      // Reset the path-marking vector and try to find a path from
+        -:  146:      // source to sink starting at the left_[ilhs] node.
+    #####:  147:      GTEST_CHECK_(left_[ilhs] == kUnused)
+    %%%%%:  147-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  147-block  1
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  147-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  147-block  3
+call    9 never executed
+    %%%%%:  147-block  4
+call   10 never executed
+    $$$$$:  147-block  5
+call   11 never executed
+    $$$$$:  147-block  6
+    #####:  148:          << "ilhs: " << ilhs << ", left_[ilhs]: " << left_[ilhs];
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  148-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  148-block  1
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  148-block  2
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:  148-block  3
+call   12 never executed
+call   13 never executed
+branch 14 never executed
+branch 15 never executed
+        -:  149:      // 'seen' initialized to 'graph_->RhsSize()' copies of 0.
+    #####:  150:      seen.assign(graph_->RhsSize(), 0);
+    %%%%%:  150-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    $$$$$:  150-block  1
+    #####:  151:      TryAugment(ilhs, &seen);
+    %%%%%:  151-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  152:    }
+    #####:  153:    ElementMatcherPairs result;
+    %%%%%:  153-block  0
+call    0 never executed
+    #####:  154:    for (size_t ilhs = 0; ilhs < left_.size(); ++ilhs) {
+    %%%%%:  154-block  0
+    %%%%%:  154-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  155:      size_t irhs = left_[ilhs];
+    %%%%%:  155-block  0
+call    0 never executed
+    #####:  156:      if (irhs == kUnused) continue;
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  156-block  0
+    #####:  157:      result.push_back(ElementMatcherPair(ilhs, irhs));
+    %%%%%:  157-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  157-block  1
+    $$$$$:  157-block  2
+        -:  158:    }
+    #####:  159:    return result;
+    %%%%%:  159-block  0
+    %%%%%:  159-block  1
+    #####:  160:  }
+    %%%%%:  160-block  0
+call    0 never executed
+    $$$$$:  160-block  1
+call    1 never executed
+        -:  161:
+        -:  162: private:
+        -:  163:  static const size_t kUnused = static_cast<size_t>(-1);
+        -:  164:
+        -:  165:  // Perform a depth-first search from left node ilhs to the sink.  If a
+        -:  166:  // path is found, flow is added to the network by linking the left and
+        -:  167:  // right vector elements corresponding each segment of the path.
+        -:  168:  // Returns true if a path to sink was found, which means that a unit of
+        -:  169:  // flow was added to the network. The 'seen' vector elements correspond
+        -:  170:  // to right nodes and are marked to eliminate cycles from the search.
+        -:  171:  //
+        -:  172:  // Left nodes will only be explored at most once because they
+        -:  173:  // are accessible from at most one right node in the residual flow
+        -:  174:  // graph.
+        -:  175:  //
+        -:  176:  // Note that left_[ilhs] is the only element of left_ that TryAugment will
+        -:  177:  // potentially transition from kUnused to another value. Any other
+        -:  178:  // left_ element holding kUnused before TryAugment will be holding it
+        -:  179:  // when TryAugment returns.
+        -:  180:  //
+function _ZN7testing8internal22MaxBipartiteMatchState10TryAugmentEmPSt6vectorIcSaIcEE called 0 returned 0% blocks executed 0%
+    #####:  181:  bool TryAugment(size_t ilhs, ::std::vector<char>* seen) {
+    #####:  182:    for (size_t irhs = 0; irhs < graph_->RhsSize(); ++irhs) {
+    %%%%%:  182-block  0
+    %%%%%:  182-block  1
+    %%%%%:  182-block  2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  183:      if ((*seen)[irhs]) continue;
+    %%%%%:  183-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  183-block  1
+    #####:  184:      if (!graph_->HasEdge(ilhs, irhs)) continue;
+    %%%%%:  184-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  184-block  1
+        -:  185:      // There's an available edge from ilhs to irhs.
+    #####:  186:      (*seen)[irhs] = 1;
+    %%%%%:  186-block  0
+call    0 never executed
+        -:  187:      // Next a search is performed to determine whether
+        -:  188:      // this edge is a dead end or leads to the sink.
+        -:  189:      //
+        -:  190:      // right_[irhs] == kUnused means that there is residual flow from
+        -:  191:      // right node irhs to the sink, so we can use that to finish this
+        -:  192:      // flow path and return success.
+        -:  193:      //
+        -:  194:      // Otherwise there is residual flow to some ilhs. We push flow
+        -:  195:      // along that path and call ourselves recursively to see if this
+        -:  196:      // ultimately leads to sink.
+    #####:  197:      if (right_[irhs] == kUnused || TryAugment(right_[irhs], seen)) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  197-block  0
+call    3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  197-block  1
+    %%%%%:  197-block  2
+    %%%%%:  197-block  3
+branch  7 never executed
+branch  8 never executed
+        -:  198:        // Add flow from left_[ilhs] to right_[irhs].
+    #####:  199:        left_[ilhs] = irhs;
+    %%%%%:  199-block  0
+call    0 never executed
+    #####:  200:        right_[irhs] = ilhs;
+call    0 never executed
+    #####:  201:        return true;
+        -:  202:      }
+        -:  203:    }
+    #####:  204:    return false;
+    %%%%%:  204-block  0
+        -:  205:  }
+        -:  206:
+        -:  207:  const MatchMatrix* graph_;  // not owned
+        -:  208:  // Each element of the left_ vector represents a left hand side node
+        -:  209:  // (i.e. an element) and each element of right_ is a right hand side
+        -:  210:  // node (i.e. a matcher). The values in the left_ vector indicate
+        -:  211:  // outflow from that node to a node on the right_ side. The values
+        -:  212:  // in the right_ indicate inflow, and specify which left_ node is
+        -:  213:  // feeding that right_ node, if any. For example, left_[3] == 1 means
+        -:  214:  // there's a flow from element #3 to matcher #1. Such a flow would also
+        -:  215:  // be redundantly represented in the right_ vector as right_[1] == 3.
+        -:  216:  // Elements of left_ and right_ are either kUnused or mutually
+        -:  217:  // referent. Mutually referent means that left_[right_[i]] = i and
+        -:  218:  // right_[left_[i]] = i.
+        -:  219:  ::std::vector<size_t> left_;
+        -:  220:  ::std::vector<size_t> right_;
+        -:  221:};
+        -:  222:
+        -:  223:const size_t MaxBipartiteMatchState::kUnused;
+        -:  224:
+function _ZN7testing8internal24FindMaxBipartiteMatchingERKNS0_11MatchMatrixE called 0 returned 0% blocks executed 0%
+    #####:  225:GTEST_API_ ElementMatcherPairs FindMaxBipartiteMatching(const MatchMatrix& g) {
+    #####:  226:  return MaxBipartiteMatchState(g).Compute();
+    %%%%%:  226-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  226-block  1
+call    4 never executed
+    %%%%%:  226-block  2
+    $$$$$:  226-block  3
+call    5 never executed
+        -:  227:}
+        -:  228:
+function _ZN7testing8internalL24LogElementMatcherPairVecERKSt6vectorISt4pairImmESaIS3_EEPSo called 0 returned 0% blocks executed 0%
+    #####:  229:static void LogElementMatcherPairVec(const ElementMatcherPairs& pairs,
+        -:  230:                                     ::std::ostream* stream) {
+        -:  231:  typedef ElementMatcherPairs::const_iterator Iter;
+    #####:  232:  ::std::ostream& os = *stream;
+    #####:  233:  os << "{";
+    %%%%%:  233-block  0
+call    0 never executed
+    #####:  234:  const char* sep = "";
+    #####:  235:  for (Iter it = pairs.begin(); it != pairs.end(); ++it) {
+call    0 never executed
+    %%%%%:  235-block  0
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+        -:  236:    os << sep << "\n  ("
+    #####:  237:       << "element #" << it->first << ", "
+    %%%%%:  237-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  237-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  237-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  237-block  3
+call    9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+    #####:  238:       << "matcher #" << it->second << ")";
+    %%%%%:  238-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  238-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  238-block  2
+call    6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+    %%%%%:  238-block  3
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+    #####:  239:    sep = ",";
+    %%%%%:  239-block  0
+call    0 never executed
+        -:  240:  }
+    #####:  241:  os << "\n}";
+    %%%%%:  241-block  0
+call    0 never executed
+    #####:  242:}
+        -:  243:
+function _ZN7testing8internal11MatchMatrix9NextGraphEv called 0 returned 0% blocks executed 0%
+    #####:  244:bool MatchMatrix::NextGraph() {
+    #####:  245:  for (size_t ilhs = 0; ilhs < LhsSize(); ++ilhs) {
+    %%%%%:  245-block  0
+    %%%%%:  245-block  1
+    %%%%%:  245-block  2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  246:    for (size_t irhs = 0; irhs < RhsSize(); ++irhs) {
+    %%%%%:  246-block  0
+    %%%%%:  246-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  247:      char& b = matched_[SpaceIndex(ilhs, irhs)];
+    %%%%%:  247-block  0
+call    0 never executed
+call    1 never executed
+    #####:  248:      if (!b) {
+branch  0 never executed
+branch  1 never executed
+    #####:  249:        b = 1;
+    #####:  250:        return true;
+    %%%%%:  250-block  0
+        -:  251:      }
+    #####:  252:      b = 0;
+    %%%%%:  252-block  0
+        -:  253:    }
+        -:  254:  }
+    #####:  255:  return false;
+    %%%%%:  255-block  0
+        -:  256:}
+        -:  257:
+function _ZN7testing8internal11MatchMatrix9RandomizeEv called 0 returned 0% blocks executed 0%
+    #####:  258:void MatchMatrix::Randomize() {
+    #####:  259:  for (size_t ilhs = 0; ilhs < LhsSize(); ++ilhs) {
+    %%%%%:  259-block  0
+    %%%%%:  259-block  1
+    %%%%%:  259-block  2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  260:    for (size_t irhs = 0; irhs < RhsSize(); ++irhs) {
+    %%%%%:  260-block  0
+    %%%%%:  260-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  261:      char& b = matched_[SpaceIndex(ilhs, irhs)];
+    %%%%%:  261-block  0
+call    0 never executed
+call    1 never executed
+    #####:  262:      b = static_cast<char>(rand() & 1);  // NOLINT
+call    0 never executed
+        -:  263:    }
+        -:  264:  }
+    #####:  265:}
+        -:  266:
+function _ZNK7testing8internal11MatchMatrix11DebugStringB5cxx11Ev called 0 returned 0% blocks executed 0%
+    #####:  267:std::string MatchMatrix::DebugString() const {
+    #####:  268:  ::std::stringstream ss;
+    %%%%%:  268-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  269:  const char* sep = "";
+    #####:  270:  for (size_t i = 0; i < LhsSize(); ++i) {
+    %%%%%:  270-block  0
+    %%%%%:  270-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  271:    ss << sep;
+    %%%%%:  271-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  272:    for (size_t j = 0; j < RhsSize(); ++j) {
+    %%%%%:  272-block  0
+    %%%%%:  272-block  1
+    %%%%%:  272-block  2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  273:      ss << HasEdge(i, j);
+    %%%%%:  273-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  273-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  274:    }
+    #####:  275:    sep = ";";
+    %%%%%:  275-block  0
+        -:  276:  }
+    #####:  277:  return ss.str();
+    %%%%%:  277-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  277-block  1
+    #####:  278:}
+    %%%%%:  278-block  0
+call    0 never executed
+    $$$$$:  278-block  1
+call    1 never executed
+        -:  279:
+function _ZNK7testing8internal35UnorderedElementsAreMatcherImplBase14DescribeToImplEPSo called 0 returned 0% blocks executed 0%
+    #####:  280:void UnorderedElementsAreMatcherImplBase::DescribeToImpl(
+        -:  281:    ::std::ostream* os) const {
+    #####:  282:  switch (match_flags()) {
+    %%%%%:  282-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  283:    case UnorderedMatcherRequire::ExactMatch:
+    #####:  284:      if (matcher_describers_.empty()) {
+    %%%%%:  284-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  285:        *os << "is empty";
+    %%%%%:  285-block  0
+call    0 never executed
+    #####:  286:        return;
+        -:  287:      }
+    #####:  288:      if (matcher_describers_.size() == 1) {
+    %%%%%:  288-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  289:        *os << "has " << Elements(1) << " and that element ";
+    %%%%%:  289-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  289-block  1
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:  289-block  2
+call    8 never executed
+    $$$$$:  289-block  3
+call    9 never executed
+    $$$$$:  289-block  4
+call   10 never executed
+    #####:  290:        matcher_describers_[0]->DescribeTo(os);
+call    0 never executed
+call    1 never executed
+    #####:  291:        return;
+        -:  292:      }
+    #####:  293:      *os << "has " << Elements(matcher_describers_.size())
+    %%%%%:  293-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  293-block  1
+call    6 never executed
+    $$$$$:  293-block  2
+call    7 never executed
+    #####:  294:          << " and there exists some permutation of elements such that:\n";
+    %%%%%:  294-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  295:      break;
+    #####:  296:    case UnorderedMatcherRequire::Superset:
+    #####:  297:      *os << "a surjection from elements to requirements exists such that:\n";
+    %%%%%:  297-block  0
+call    0 never executed
+    #####:  298:      break;
+    #####:  299:    case UnorderedMatcherRequire::Subset:
+    #####:  300:      *os << "an injection from elements to requirements exists such that:\n";
+    %%%%%:  300-block  0
+call    0 never executed
+    #####:  301:      break;
+        -:  302:  }
+        -:  303:
+    #####:  304:  const char* sep = "";
+    #####:  305:  for (size_t i = 0; i != matcher_describers_.size(); ++i) {
+    %%%%%:  305-block  0
+    %%%%%:  305-block  1
+    %%%%%:  305-block  2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  306:    *os << sep;
+    %%%%%:  306-block  0
+call    0 never executed
+    #####:  307:    if (match_flags() == UnorderedMatcherRequire::ExactMatch) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  308:      *os << " - element #" << i << " ";
+    %%%%%:  308-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  309:    } else {
+    #####:  310:      *os << " - an element ";
+    %%%%%:  310-block  0
+call    0 never executed
+        -:  311:    }
+    #####:  312:    matcher_describers_[i]->DescribeTo(os);
+    %%%%%:  312-block  0
+call    0 never executed
+call    1 never executed
+    #####:  313:    if (match_flags() == UnorderedMatcherRequire::ExactMatch) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  314:      sep = ", and\n";
+    %%%%%:  314-block  0
+        -:  315:    } else {
+    #####:  316:      sep = "\n";
+    %%%%%:  316-block  0
+        -:  317:    }
+        -:  318:  }
+        -:  319:}
+        -:  320:
+function _ZNK7testing8internal35UnorderedElementsAreMatcherImplBase22DescribeNegationToImplEPSo called 0 returned 0% blocks executed 0%
+    #####:  321:void UnorderedElementsAreMatcherImplBase::DescribeNegationToImpl(
+        -:  322:    ::std::ostream* os) const {
+    #####:  323:  switch (match_flags()) {
+    %%%%%:  323-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  324:    case UnorderedMatcherRequire::ExactMatch:
+    #####:  325:      if (matcher_describers_.empty()) {
+    %%%%%:  325-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  326:        *os << "isn't empty";
+    %%%%%:  326-block  0
+call    0 never executed
+    #####:  327:        return;
+        -:  328:      }
+    #####:  329:      if (matcher_describers_.size() == 1) {
+    %%%%%:  329-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  330:        *os << "doesn't have " << Elements(1) << ", or has " << Elements(1)
+    %%%%%:  330-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  330-block  1
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:  330-block  2
+call    8 never executed
+branch  9 never executed
+branch 10 never executed
+    %%%%%:  330-block  3
+call   11 never executed
+branch 12 never executed
+branch 13 never executed
+    %%%%%:  330-block  4
+call   14 never executed
+call   15 never executed
+    $$$$$:  330-block  5
+call   16 never executed
+    $$$$$:  330-block  6
+    $$$$$:  330-block  7
+call   17 never executed
+    $$$$$:  330-block  8
+call   18 never executed
+    #####:  331:            << " that ";
+    %%%%%:  331-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  332:        matcher_describers_[0]->DescribeNegationTo(os);
+call    0 never executed
+call    1 never executed
+    #####:  333:        return;
+        -:  334:      }
+    #####:  335:      *os << "doesn't have " << Elements(matcher_describers_.size())
+    %%%%%:  335-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  335-block  1
+call    6 never executed
+    $$$$$:  335-block  2
+call    7 never executed
+    #####:  336:          << ", or there exists no permutation of elements such that:\n";
+    %%%%%:  336-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  337:      break;
+    #####:  338:    case UnorderedMatcherRequire::Superset:
+    #####:  339:      *os << "no surjection from elements to requirements exists such that:\n";
+    %%%%%:  339-block  0
+call    0 never executed
+    #####:  340:      break;
+    #####:  341:    case UnorderedMatcherRequire::Subset:
+    #####:  342:      *os << "no injection from elements to requirements exists such that:\n";
+    %%%%%:  342-block  0
+call    0 never executed
+    #####:  343:      break;
+        -:  344:  }
+    #####:  345:  const char* sep = "";
+    #####:  346:  for (size_t i = 0; i != matcher_describers_.size(); ++i) {
+    %%%%%:  346-block  0
+    %%%%%:  346-block  1
+    %%%%%:  346-block  2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  347:    *os << sep;
+    %%%%%:  347-block  0
+call    0 never executed
+    #####:  348:    if (match_flags() == UnorderedMatcherRequire::ExactMatch) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  349:      *os << " - element #" << i << " ";
+    %%%%%:  349-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  350:    } else {
+    #####:  351:      *os << " - an element ";
+    %%%%%:  351-block  0
+call    0 never executed
+        -:  352:    }
+    #####:  353:    matcher_describers_[i]->DescribeTo(os);
+    %%%%%:  353-block  0
+call    0 never executed
+call    1 never executed
+    #####:  354:    if (match_flags() == UnorderedMatcherRequire::ExactMatch) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  355:      sep = ", and\n";
+    %%%%%:  355-block  0
+        -:  356:    } else {
+    #####:  357:      sep = "\n";
+    %%%%%:  357-block  0
+        -:  358:    }
+        -:  359:  }
+        -:  360:}
+        -:  361:
+        -:  362:// Checks that all matchers match at least one element, and that all
+        -:  363:// elements match at least one matcher. This enables faster matching
+        -:  364:// and better error reporting.
+        -:  365:// Returns false, writing an explanation to 'listener', if and only
+        -:  366:// if the success criteria are not met.
+function _ZNK7testing8internal35UnorderedElementsAreMatcherImplBase17VerifyMatchMatrixERKSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS8_EERKNS0_11MatchMatrixEPNS_19MatchResultListenerE called 0 returned 0% blocks executed 0%
+    #####:  367:bool UnorderedElementsAreMatcherImplBase::VerifyMatchMatrix(
+        -:  368:    const ::std::vector<std::string>& element_printouts,
+        -:  369:    const MatchMatrix& matrix, MatchResultListener* listener) const {
+    #####:  370:  bool result = true;
+    #####:  371:  ::std::vector<char> element_matched(matrix.LhsSize(), 0);
+    %%%%%:  371-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  371-block  1
+call    5 never executed
+    $$$$$:  371-block  2
+    $$$$$:  371-block  3
+    #####:  372:  ::std::vector<char> matcher_matched(matrix.RhsSize(), 0);
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  372-block  0
+call    5 never executed
+    $$$$$:  372-block  1
+    $$$$$:  372-block  2
+        -:  373:
+    #####:  374:  for (size_t ilhs = 0; ilhs < matrix.LhsSize(); ilhs++) {
+    %%%%%:  374-block  0
+    %%%%%:  374-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  375:    for (size_t irhs = 0; irhs < matrix.RhsSize(); irhs++) {
+    %%%%%:  375-block  0
+    %%%%%:  375-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  376:      char matched = matrix.HasEdge(ilhs, irhs);
+    %%%%%:  376-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  377:      element_matched[ilhs] |= matched;
+    %%%%%:  377-block  0
+call    0 never executed
+    #####:  378:      matcher_matched[irhs] |= matched;
+call    0 never executed
+        -:  379:    }
+        -:  380:  }
+        -:  381:
+    #####:  382:  if (match_flags() & UnorderedMatcherRequire::Superset) {
+    %%%%%:  382-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  383:    const char* sep =
+        -:  384:        "where the following matchers don't match any elements:\n";
+    #####:  385:    for (size_t mi = 0; mi < matcher_matched.size(); ++mi) {
+    %%%%%:  385-block  0
+    %%%%%:  385-block  1
+    %%%%%:  385-block  2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  386:      if (matcher_matched[mi]) continue;
+    %%%%%:  386-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  386-block  1
+    #####:  387:      result = false;
+    #####:  388:      if (listener->IsInterested()) {
+    %%%%%:  388-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  389:        *listener << sep << "matcher #" << mi << ": ";
+    %%%%%:  389-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  389-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  389-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  389-block  3
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    #####:  390:        matcher_describers_[mi]->DescribeTo(listener->stream());
+    %%%%%:  390-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  391:        sep = ",\n";
+    %%%%%:  391-block  0
+        -:  392:      }
+        -:  393:    }
+        -:  394:  }
+        -:  395:
+    #####:  396:  if (match_flags() & UnorderedMatcherRequire::Subset) {
+    %%%%%:  396-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  397:    const char* sep =
+        -:  398:        "where the following elements don't match any matchers:\n";
+    #####:  399:    const char* outer_sep = "";
+    #####:  400:    if (!result) {
+    %%%%%:  400-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  401:      outer_sep = "\nand ";
+    %%%%%:  401-block  0
+        -:  402:    }
+    #####:  403:    for (size_t ei = 0; ei < element_matched.size(); ++ei) {
+    %%%%%:  403-block  0
+    %%%%%:  403-block  1
+    %%%%%:  403-block  2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  404:      if (element_matched[ei]) continue;
+    %%%%%:  404-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  404-block  1
+    #####:  405:      result = false;
+    #####:  406:      if (listener->IsInterested()) {
+    %%%%%:  406-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  407:        *listener << outer_sep << sep << "element #" << ei << ": "
+    %%%%%:  407-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  407-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  407-block  2
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  407-block  3
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    %%%%%:  407-block  4
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+    #####:  408:                  << element_printouts[ei];
+    %%%%%:  408-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  409:        sep = ",\n";
+    #####:  410:        outer_sep = "";
+    %%%%%:  410-block  0
+        -:  411:      }
+        -:  412:    }
+        -:  413:  }
+    #####:  414:  return result;
+    %%%%%:  414-block  0
+    #####:  415:}
+    %%%%%:  415-block  0
+call    0 never executed
+call    1 never executed
+    $$$$$:  415-block  1
+call    2 never executed
+    $$$$$:  415-block  2
+call    3 never executed
+        -:  416:
+function _ZNK7testing8internal35UnorderedElementsAreMatcherImplBase11FindPairingERKNS0_11MatchMatrixEPNS_19MatchResultListenerE called 0 returned 0% blocks executed 0%
+    #####:  417:bool UnorderedElementsAreMatcherImplBase::FindPairing(
+        -:  418:    const MatchMatrix& matrix, MatchResultListener* listener) const {
+    #####:  419:  ElementMatcherPairs matches = FindMaxBipartiteMatching(matrix);
+    %%%%%:  419-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  420:
+    #####:  421:  size_t max_flow = matches.size();
+    %%%%%:  421-block  0
+call    0 never executed
+    #####:  422:  if ((match_flags() & UnorderedMatcherRequire::Superset) &&
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  422-block  0
+    %%%%%:  422-block  1
+    %%%%%:  422-block  2
+branch  3 never executed
+branch  4 never executed
+    #####:  423:      max_flow < matrix.RhsSize()) {
+    %%%%%:  423-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  424:    if (listener->IsInterested()) {
+    %%%%%:  424-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  425:      *listener << "where no permutation of the elements can satisfy all "
+    #####:  426:                   "matchers, and the closest match is "
+    %%%%%:  426-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  427:                << max_flow << " of " << matrix.RhsSize()
+    %%%%%:  427-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  427-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  427-block  2
+call    6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+    $$$$$:  427-block  3
+    #####:  428:                << " matchers with the pairings:\n";
+    %%%%%:  428-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  429:      LogElementMatcherPairVec(matches, listener->stream());
+    %%%%%:  429-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  430:    }
+    #####:  431:    return false;
+    %%%%%:  431-block  0
+        -:  432:  }
+    #####:  433:  if ((match_flags() & UnorderedMatcherRequire::Subset) &&
+    %%%%%:  433-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  433-block  1
+    %%%%%:  433-block  2
+    %%%%%:  433-block  3
+branch  3 never executed
+branch  4 never executed
+    #####:  434:      max_flow < matrix.LhsSize()) {
+    %%%%%:  434-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  435:    if (listener->IsInterested()) {
+    %%%%%:  435-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  436:      *listener
+    #####:  437:          << "where not all elements can be matched, and the closest match is "
+    %%%%%:  437-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  438:          << max_flow << " of " << matrix.RhsSize()
+    %%%%%:  438-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  438-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  438-block  2
+call    6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+    $$$$$:  438-block  3
+    #####:  439:          << " matchers with the pairings:\n";
+    %%%%%:  439-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  440:      LogElementMatcherPairVec(matches, listener->stream());
+    %%%%%:  440-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:  441:    }
+    #####:  442:    return false;
+    %%%%%:  442-block  0
+        -:  443:  }
+        -:  444:
+    #####:  445:  if (matches.size() > 1) {
+    %%%%%:  445-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  446:    if (listener->IsInterested()) {
+    %%%%%:  446-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  447:      const char* sep = "where:\n";
+    #####:  448:      for (size_t mi = 0; mi < matches.size(); ++mi) {
+    %%%%%:  448-block  0
+    %%%%%:  448-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  449:        *listener << sep << " - element #" << matches[mi].first
+    %%%%%:  449-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  449-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  449-block  2
+call    6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+    #####:  450:                  << " is matched by matcher #" << matches[mi].second;
+    %%%%%:  450-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  450-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:  451:        sep = ",\n";
+    %%%%%:  451-block  0
+        -:  452:      }
+        -:  453:    }
+        -:  454:  }
+    #####:  455:  return true;
+    %%%%%:  455-block  0
+    #####:  456:}
+    %%%%%:  456-block  0
+call    0 never executed
+    $$$$$:  456-block  1
+call    1 never executed
+        -:  457:
+        -:  458:}  // namespace internal
+        -:  459:}  // namespace testing

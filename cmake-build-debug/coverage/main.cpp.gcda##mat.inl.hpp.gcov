@@ -1,0 +1,3445 @@
+        -:    0:Source:/usr/local/include/opencv4/opencv2/core/mat.inl.hpp
+        -:    0:Graph:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/CMakeFiles/test_tuto.dir/main.cpp.gcno
+        -:    0:Data:/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/cmake-build-debug/CMakeFiles/test_tuto.dir/main.cpp.gcda
+        -:    0:Runs:1
+        -:    1:/*M///////////////////////////////////////////////////////////////////////////////////////
+        -:    2://
+        -:    3://  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+        -:    4://
+        -:    5://  By downloading, copying, installing or using the software you agree to this license.
+        -:    6://  If you do not agree to this license, do not download, install,
+        -:    7://  copy or use the software.
+        -:    8://
+        -:    9://
+        -:   10://                          License Agreement
+        -:   11://                For Open Source Computer Vision Library
+        -:   12://
+        -:   13:// Copyright (C) 2000-2008, Intel Corporation, all rights reserved.
+        -:   14:// Copyright (C) 2009, Willow Garage Inc., all rights reserved.
+        -:   15:// Copyright (C) 2013, OpenCV Foundation, all rights reserved.
+        -:   16:// Copyright (C) 2015, Itseez Inc., all rights reserved.
+        -:   17:// Third party copyrights are property of their respective owners.
+        -:   18://
+        -:   19:// Redistribution and use in source and binary forms, with or without modification,
+        -:   20:// are permitted provided that the following conditions are met:
+        -:   21://
+        -:   22://   * Redistribution's of source code must retain the above copyright notice,
+        -:   23://     this list of conditions and the following disclaimer.
+        -:   24://
+        -:   25://   * Redistribution's in binary form must reproduce the above copyright notice,
+        -:   26://     this list of conditions and the following disclaimer in the documentation
+        -:   27://     and/or other materials provided with the distribution.
+        -:   28://
+        -:   29://   * The name of the copyright holders may not be used to endorse or promote products
+        -:   30://     derived from this software without specific prior written permission.
+        -:   31://
+        -:   32:// This software is provided by the copyright holders and contributors "as is" and
+        -:   33:// any express or implied warranties, including, but not limited to, the implied
+        -:   34:// warranties of merchantability and fitness for a particular purpose are disclaimed.
+        -:   35:// In no event shall the Intel Corporation or contributors be liable for any direct,
+        -:   36:// indirect, incidental, special, exemplary, or consequential damages
+        -:   37:// (including, but not limited to, procurement of substitute goods or services;
+        -:   38:// loss of use, data, or profits; or business interruption) however caused
+        -:   39:// and on any theory of liability, whether in contract, strict liability,
+        -:   40:// or tort (including negligence or otherwise) arising in any way out of
+        -:   41:// the use of this software, even if advised of the possibility of such damage.
+        -:   42://
+        -:   43://M*/
+        -:   44:
+        -:   45:#ifndef OPENCV_CORE_MATRIX_OPERATIONS_HPP
+        -:   46:#define OPENCV_CORE_MATRIX_OPERATIONS_HPP
+        -:   47:
+        -:   48:#ifndef __cplusplus
+        -:   49:#  error mat.inl.hpp header must be compiled as C++
+        -:   50:#endif
+        -:   51:
+        -:   52:#ifdef _MSC_VER
+        -:   53:#pragma warning( push )
+        -:   54:#pragma warning( disable: 4127 )
+        -:   55:#endif
+        -:   56:
+        -:   57:#if defined(CV_SKIP_DISABLE_CLANG_ENUM_WARNINGS)
+        -:   58:  // nothing
+        -:   59:#elif defined(CV_FORCE_DISABLE_CLANG_ENUM_WARNINGS)
+        -:   60:  #define CV_DISABLE_CLANG_ENUM_WARNINGS
+        -:   61:#elif defined(__clang__) && defined(__has_warning)
+        -:   62:  #if __has_warning("-Wdeprecated-enum-enum-conversion") && __has_warning("-Wdeprecated-anon-enum-enum-conversion")
+        -:   63:    #define CV_DISABLE_CLANG_ENUM_WARNINGS
+        -:   64:  #endif
+        -:   65:#endif
+        -:   66:#ifdef CV_DISABLE_CLANG_ENUM_WARNINGS
+        -:   67:#pragma clang diagnostic push
+        -:   68:#pragma clang diagnostic ignored "-Wdeprecated-enum-enum-conversion"
+        -:   69:#pragma clang diagnostic ignored "-Wdeprecated-anon-enum-enum-conversion"
+        -:   70:#endif
+        -:   71:
+        -:   72:namespace cv
+        -:   73:{
+        -:   74:CV__DEBUG_NS_BEGIN
+        -:   75:
+        -:   76:
+        -:   77://! @cond IGNORED
+        -:   78:
+        -:   79:////////////////////////// Custom (raw) type wrapper //////////////////////////
+        -:   80:
+        -:   81:template<typename _Tp> static inline
+        -:   82:int rawType()
+        -:   83:{
+        -:   84:    CV_StaticAssert(sizeof(_Tp) <= CV_CN_MAX, "sizeof(_Tp) is too large");
+        -:   85:    const int elemSize = sizeof(_Tp);
+        -:   86:    return (int)CV_MAKETYPE(CV_8U, elemSize);
+        -:   87:}
+        -:   88:
+        -:   89://////////////////////// Input/Output Arrays ////////////////////////
+        -:   90:
+function _ZN2cv11_InputArray4initEiPKv called 0 returned 0% blocks executed 0%
+    #####:   91:inline void _InputArray::init(int _flags, const void* _obj)
+    #####:   92:{ flags = _flags; obj = (void*)_obj; }
+        -:   93:
+        -:   94:inline void _InputArray::init(int _flags, const void* _obj, Size _sz)
+        -:   95:{ flags = _flags; obj = (void*)_obj; sz = _sz; }
+        -:   96:
+        -:   97:inline void* _InputArray::getObj() const { return obj; }
+        -:   98:inline int _InputArray::getFlags() const { return flags; }
+        -:   99:inline Size _InputArray::getSz() const { return sz; }
+        -:  100:
+function _ZN2cv11_InputArrayC2Ev called 0 returned 0% blocks executed 0%
+    #####:  101:inline _InputArray::_InputArray() { init(0 + NONE, 0); }
+    %%%%%:  101-block  0
+call    0 never executed
+call    1 never executed
+        -:  102:inline _InputArray::_InputArray(int _flags, void* _obj) { init(_flags, _obj); }
+function _ZN2cv11_InputArrayC2ERKNS_3MatE called 0 returned 0% blocks executed 0%
+    #####:  103:inline _InputArray::_InputArray(const Mat& m) { init(MAT+ACCESS_READ, &m); }
+    %%%%%:  103-block  0
+call    0 never executed
+call    1 never executed
+        -:  104:inline _InputArray::_InputArray(const std::vector<Mat>& vec) { init(STD_VECTOR_MAT+ACCESS_READ, &vec); }
+        -:  105:inline _InputArray::_InputArray(const UMat& m) { init(UMAT+ACCESS_READ, &m); }
+        -:  106:inline _InputArray::_InputArray(const std::vector<UMat>& vec) { init(STD_VECTOR_UMAT+ACCESS_READ, &vec); }
+        -:  107:
+        -:  108:template<typename _Tp> inline
+        -:  109:_InputArray::_InputArray(const std::vector<_Tp>& vec)
+        -:  110:{ init(FIXED_TYPE + STD_VECTOR + traits::Type<_Tp>::value + ACCESS_READ, &vec); }
+        -:  111:
+        -:  112:template<typename _Tp, std::size_t _Nm> inline
+        -:  113:_InputArray::_InputArray(const std::array<_Tp, _Nm>& arr)
+        -:  114:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_READ, arr.data(), Size(1, _Nm)); }
+        -:  115:
+        -:  116:template<std::size_t _Nm> inline
+        -:  117:_InputArray::_InputArray(const std::array<Mat, _Nm>& arr)
+        -:  118:{ init(STD_ARRAY_MAT + ACCESS_READ, arr.data(), Size(1, _Nm)); }
+        -:  119:
+        -:  120:inline
+        -:  121:_InputArray::_InputArray(const std::vector<bool>& vec)
+        -:  122:{ init(FIXED_TYPE + STD_BOOL_VECTOR + traits::Type<bool>::value + ACCESS_READ, &vec); }
+        -:  123:
+        -:  124:template<typename _Tp> inline
+        -:  125:_InputArray::_InputArray(const std::vector<std::vector<_Tp> >& vec)
+        -:  126:{ init(FIXED_TYPE + STD_VECTOR_VECTOR + traits::Type<_Tp>::value + ACCESS_READ, &vec); }
+        -:  127:
+        -:  128:template<typename _Tp> inline
+        -:  129:_InputArray::_InputArray(const std::vector<Mat_<_Tp> >& vec)
+        -:  130:{ init(FIXED_TYPE + STD_VECTOR_MAT + traits::Type<_Tp>::value + ACCESS_READ, &vec); }
+        -:  131:
+        -:  132:template<typename _Tp, int m, int n> inline
+        -:  133:_InputArray::_InputArray(const Matx<_Tp, m, n>& mtx)
+        -:  134:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_READ, &mtx, Size(n, m)); }
+        -:  135:
+        -:  136:template<typename _Tp> inline
+        -:  137:_InputArray::_InputArray(const _Tp* vec, int n)
+        -:  138:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_READ, vec, Size(n, 1)); }
+        -:  139:
+        -:  140:template<typename _Tp> inline
+        -:  141:_InputArray::_InputArray(const Mat_<_Tp>& m)
+        -:  142:{ init(FIXED_TYPE + MAT + traits::Type<_Tp>::value + ACCESS_READ, &m); }
+        -:  143:
+        -:  144:inline _InputArray::_InputArray(const double& val)
+        -:  145:{ init(FIXED_TYPE + FIXED_SIZE + MATX + CV_64F + ACCESS_READ, &val, Size(1,1)); }
+        -:  146:
+        -:  147:inline _InputArray::_InputArray(const cuda::GpuMat& d_mat)
+        -:  148:{ init(CUDA_GPU_MAT + ACCESS_READ, &d_mat); }
+        -:  149:
+        -:  150:inline _InputArray::_InputArray(const std::vector<cuda::GpuMat>& d_mat)
+        -:  151:{	init(STD_VECTOR_CUDA_GPU_MAT + ACCESS_READ, &d_mat);}
+        -:  152:
+        -:  153:inline _InputArray::_InputArray(const ogl::Buffer& buf)
+        -:  154:{ init(OPENGL_BUFFER + ACCESS_READ, &buf); }
+        -:  155:
+        -:  156:inline _InputArray::_InputArray(const cuda::HostMem& cuda_mem)
+        -:  157:{ init(CUDA_HOST_MEM + ACCESS_READ, &cuda_mem); }
+        -:  158:
+        -:  159:template<typename _Tp> inline
+        -:  160:_InputArray _InputArray::rawIn(const std::vector<_Tp>& vec)
+        -:  161:{
+        -:  162:    _InputArray v;
+        -:  163:    v.flags = _InputArray::FIXED_TYPE + _InputArray::STD_VECTOR + rawType<_Tp>() + ACCESS_READ;
+        -:  164:    v.obj = (void*)&vec;
+        -:  165:    return v;
+        -:  166:}
+        -:  167:
+        -:  168:template<typename _Tp, std::size_t _Nm> inline
+        -:  169:_InputArray _InputArray::rawIn(const std::array<_Tp, _Nm>& arr)
+        -:  170:{
+        -:  171:    _InputArray v;
+        -:  172:    v.flags = FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_READ;
+        -:  173:    v.obj = (void*)arr.data();
+        -:  174:    v.sz = Size(1, _Nm);
+        -:  175:    return v;
+        -:  176:}
+        -:  177:
+function _ZN2cv11_InputArrayD2Ev called 0 returned 0% blocks executed 0%
+    #####:  178:inline _InputArray::~_InputArray() {}
+        -:  179:
+        -:  180:inline Mat _InputArray::getMat(int i) const
+        -:  181:{
+        -:  182:    if( kind() == MAT && i < 0 )
+        -:  183:        return *(const Mat*)obj;
+        -:  184:    return getMat_(i);
+        -:  185:}
+        -:  186:
+        -:  187:inline bool _InputArray::isMat() const { return kind() == _InputArray::MAT; }
+        -:  188:inline bool _InputArray::isUMat() const  { return kind() == _InputArray::UMAT; }
+        -:  189:inline bool _InputArray::isMatVector() const { return kind() == _InputArray::STD_VECTOR_MAT; }
+        -:  190:inline bool _InputArray::isUMatVector() const  { return kind() == _InputArray::STD_VECTOR_UMAT; }
+        -:  191:inline bool _InputArray::isMatx() const { return kind() == _InputArray::MATX; }
+        -:  192:inline bool _InputArray::isVector() const { return kind() == _InputArray::STD_VECTOR ||
+        -:  193:                                                   kind() == _InputArray::STD_BOOL_VECTOR ||
+        -:  194:                                                   (kind() == _InputArray::MATX && (sz.width <= 1 || sz.height <= 1)); }
+        -:  195:inline bool _InputArray::isGpuMat() const { return kind() == _InputArray::CUDA_GPU_MAT; }
+        -:  196:inline bool _InputArray::isGpuMatVector() const { return kind() == _InputArray::STD_VECTOR_CUDA_GPU_MAT; }
+        -:  197:
+        -:  198:////////////////////////////////////////////////////////////////////////////////////////
+        -:  199:
+        -:  200:inline _OutputArray::_OutputArray() { init(NONE + ACCESS_WRITE, 0); }
+        -:  201:inline _OutputArray::_OutputArray(int _flags, void* _obj) { init(_flags + ACCESS_WRITE, _obj); }
+function _ZN2cv12_OutputArrayC2ERNS_3MatE called 0 returned 0% blocks executed 0%
+    #####:  202:inline _OutputArray::_OutputArray(Mat& m) { init(MAT+ACCESS_WRITE, &m); }
+    %%%%%:  202-block  0
+call    0 never executed
+call    1 never executed
+        -:  203:inline _OutputArray::_OutputArray(std::vector<Mat>& vec) { init(STD_VECTOR_MAT + ACCESS_WRITE, &vec); }
+        -:  204:inline _OutputArray::_OutputArray(UMat& m) { init(UMAT + ACCESS_WRITE, &m); }
+        -:  205:inline _OutputArray::_OutputArray(std::vector<UMat>& vec) { init(STD_VECTOR_UMAT + ACCESS_WRITE, &vec); }
+        -:  206:
+        -:  207:template<typename _Tp> inline
+        -:  208:_OutputArray::_OutputArray(std::vector<_Tp>& vec)
+        -:  209:{ init(FIXED_TYPE + STD_VECTOR + traits::Type<_Tp>::value + ACCESS_WRITE, &vec); }
+        -:  210:
+        -:  211:template<typename _Tp, std::size_t _Nm> inline
+        -:  212:_OutputArray::_OutputArray(std::array<_Tp, _Nm>& arr)
+        -:  213:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_WRITE, arr.data(), Size(1, _Nm)); }
+        -:  214:
+        -:  215:template<std::size_t _Nm> inline
+        -:  216:_OutputArray::_OutputArray(std::array<Mat, _Nm>& arr)
+        -:  217:{ init(STD_ARRAY_MAT + ACCESS_WRITE, arr.data(), Size(1, _Nm)); }
+        -:  218:
+        -:  219:template<typename _Tp> inline
+        -:  220:_OutputArray::_OutputArray(std::vector<std::vector<_Tp> >& vec)
+        -:  221:{ init(FIXED_TYPE + STD_VECTOR_VECTOR + traits::Type<_Tp>::value + ACCESS_WRITE, &vec); }
+        -:  222:
+        -:  223:template<typename _Tp> inline
+        -:  224:_OutputArray::_OutputArray(std::vector<Mat_<_Tp> >& vec)
+        -:  225:{ init(FIXED_TYPE + STD_VECTOR_MAT + traits::Type<_Tp>::value + ACCESS_WRITE, &vec); }
+        -:  226:
+        -:  227:template<typename _Tp> inline
+        -:  228:_OutputArray::_OutputArray(Mat_<_Tp>& m)
+        -:  229:{ init(FIXED_TYPE + MAT + traits::Type<_Tp>::value + ACCESS_WRITE, &m); }
+        -:  230:
+        -:  231:template<typename _Tp, int m, int n> inline
+        -:  232:_OutputArray::_OutputArray(Matx<_Tp, m, n>& mtx)
+        -:  233:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_WRITE, &mtx, Size(n, m)); }
+        -:  234:
+        -:  235:template<typename _Tp> inline
+        -:  236:_OutputArray::_OutputArray(_Tp* vec, int n)
+        -:  237:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_WRITE, vec, Size(n, 1)); }
+        -:  238:
+        -:  239:template<typename _Tp> inline
+        -:  240:_OutputArray::_OutputArray(const std::vector<_Tp>& vec)
+        -:  241:{ init(FIXED_TYPE + FIXED_SIZE + STD_VECTOR + traits::Type<_Tp>::value + ACCESS_WRITE, &vec); }
+        -:  242:
+        -:  243:template<typename _Tp, std::size_t _Nm> inline
+        -:  244:_OutputArray::_OutputArray(const std::array<_Tp, _Nm>& arr)
+        -:  245:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_WRITE, arr.data(), Size(1, _Nm)); }
+        -:  246:
+        -:  247:template<std::size_t _Nm> inline
+        -:  248:_OutputArray::_OutputArray(const std::array<Mat, _Nm>& arr)
+        -:  249:{ init(FIXED_SIZE + STD_ARRAY_MAT + ACCESS_WRITE, arr.data(), Size(1, _Nm)); }
+        -:  250:
+        -:  251:template<typename _Tp> inline
+        -:  252:_OutputArray::_OutputArray(const std::vector<std::vector<_Tp> >& vec)
+        -:  253:{ init(FIXED_TYPE + FIXED_SIZE + STD_VECTOR_VECTOR + traits::Type<_Tp>::value + ACCESS_WRITE, &vec); }
+        -:  254:
+        -:  255:template<typename _Tp> inline
+        -:  256:_OutputArray::_OutputArray(const std::vector<Mat_<_Tp> >& vec)
+        -:  257:{ init(FIXED_TYPE + FIXED_SIZE + STD_VECTOR_MAT + traits::Type<_Tp>::value + ACCESS_WRITE, &vec); }
+        -:  258:
+        -:  259:template<typename _Tp> inline
+        -:  260:_OutputArray::_OutputArray(const Mat_<_Tp>& m)
+        -:  261:{ init(FIXED_TYPE + FIXED_SIZE + MAT + traits::Type<_Tp>::value + ACCESS_WRITE, &m); }
+        -:  262:
+        -:  263:template<typename _Tp, int m, int n> inline
+        -:  264:_OutputArray::_OutputArray(const Matx<_Tp, m, n>& mtx)
+        -:  265:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_WRITE, &mtx, Size(n, m)); }
+        -:  266:
+        -:  267:template<typename _Tp> inline
+        -:  268:_OutputArray::_OutputArray(const _Tp* vec, int n)
+        -:  269:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_WRITE, vec, Size(n, 1)); }
+        -:  270:
+        -:  271:inline _OutputArray::_OutputArray(cuda::GpuMat& d_mat)
+        -:  272:{ init(CUDA_GPU_MAT + ACCESS_WRITE, &d_mat); }
+        -:  273:
+        -:  274:inline _OutputArray::_OutputArray(std::vector<cuda::GpuMat>& d_mat)
+        -:  275:{	init(STD_VECTOR_CUDA_GPU_MAT + ACCESS_WRITE, &d_mat);}
+        -:  276:
+        -:  277:inline _OutputArray::_OutputArray(ogl::Buffer& buf)
+        -:  278:{ init(OPENGL_BUFFER + ACCESS_WRITE, &buf); }
+        -:  279:
+        -:  280:inline _OutputArray::_OutputArray(cuda::HostMem& cuda_mem)
+        -:  281:{ init(CUDA_HOST_MEM + ACCESS_WRITE, &cuda_mem); }
+        -:  282:
+        -:  283:inline _OutputArray::_OutputArray(const Mat& m)
+        -:  284:{ init(FIXED_TYPE + FIXED_SIZE + MAT + ACCESS_WRITE, &m); }
+        -:  285:
+        -:  286:inline _OutputArray::_OutputArray(const std::vector<Mat>& vec)
+        -:  287:{ init(FIXED_SIZE + STD_VECTOR_MAT + ACCESS_WRITE, &vec); }
+        -:  288:
+        -:  289:inline _OutputArray::_OutputArray(const UMat& m)
+        -:  290:{ init(FIXED_TYPE + FIXED_SIZE + UMAT + ACCESS_WRITE, &m); }
+        -:  291:
+        -:  292:inline _OutputArray::_OutputArray(const std::vector<UMat>& vec)
+        -:  293:{ init(FIXED_SIZE + STD_VECTOR_UMAT + ACCESS_WRITE, &vec); }
+        -:  294:
+        -:  295:inline _OutputArray::_OutputArray(const cuda::GpuMat& d_mat)
+        -:  296:{ init(FIXED_TYPE + FIXED_SIZE + CUDA_GPU_MAT + ACCESS_WRITE, &d_mat); }
+        -:  297:
+        -:  298:
+        -:  299:inline _OutputArray::_OutputArray(const ogl::Buffer& buf)
+        -:  300:{ init(FIXED_TYPE + FIXED_SIZE + OPENGL_BUFFER + ACCESS_WRITE, &buf); }
+        -:  301:
+        -:  302:inline _OutputArray::_OutputArray(const cuda::HostMem& cuda_mem)
+        -:  303:{ init(FIXED_TYPE + FIXED_SIZE + CUDA_HOST_MEM + ACCESS_WRITE, &cuda_mem); }
+        -:  304:
+        -:  305:template<typename _Tp> inline
+        -:  306:_OutputArray _OutputArray::rawOut(std::vector<_Tp>& vec)
+        -:  307:{
+        -:  308:    _OutputArray v;
+        -:  309:    v.flags = _InputArray::FIXED_TYPE + _InputArray::STD_VECTOR + rawType<_Tp>() + ACCESS_WRITE;
+        -:  310:    v.obj = (void*)&vec;
+        -:  311:    return v;
+        -:  312:}
+        -:  313:
+        -:  314:template<typename _Tp, std::size_t _Nm> inline
+        -:  315:_OutputArray _OutputArray::rawOut(std::array<_Tp, _Nm>& arr)
+        -:  316:{
+        -:  317:    _OutputArray v;
+        -:  318:    v.flags = FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_WRITE;
+        -:  319:    v.obj = (void*)arr.data();
+        -:  320:    v.sz = Size(1, _Nm);
+        -:  321:    return v;
+        -:  322:}
+        -:  323:
+        -:  324:///////////////////////////////////////////////////////////////////////////////////////////
+        -:  325:
+        -:  326:inline _InputOutputArray::_InputOutputArray() { init(0+ACCESS_RW, 0); }
+        -:  327:inline _InputOutputArray::_InputOutputArray(int _flags, void* _obj) { init(_flags+ACCESS_RW, _obj); }
+        -:  328:inline _InputOutputArray::_InputOutputArray(Mat& m) { init(MAT+ACCESS_RW, &m); }
+        -:  329:inline _InputOutputArray::_InputOutputArray(std::vector<Mat>& vec) { init(STD_VECTOR_MAT+ACCESS_RW, &vec); }
+        -:  330:inline _InputOutputArray::_InputOutputArray(UMat& m) { init(UMAT+ACCESS_RW, &m); }
+        -:  331:inline _InputOutputArray::_InputOutputArray(std::vector<UMat>& vec) { init(STD_VECTOR_UMAT+ACCESS_RW, &vec); }
+        -:  332:
+        -:  333:template<typename _Tp> inline
+        -:  334:_InputOutputArray::_InputOutputArray(std::vector<_Tp>& vec)
+        -:  335:{ init(FIXED_TYPE + STD_VECTOR + traits::Type<_Tp>::value + ACCESS_RW, &vec); }
+        -:  336:
+        -:  337:template<typename _Tp, std::size_t _Nm> inline
+        -:  338:_InputOutputArray::_InputOutputArray(std::array<_Tp, _Nm>& arr)
+        -:  339:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_RW, arr.data(), Size(1, _Nm)); }
+        -:  340:
+        -:  341:template<std::size_t _Nm> inline
+        -:  342:_InputOutputArray::_InputOutputArray(std::array<Mat, _Nm>& arr)
+        -:  343:{ init(STD_ARRAY_MAT + ACCESS_RW, arr.data(), Size(1, _Nm)); }
+        -:  344:
+        -:  345:template<typename _Tp> inline
+        -:  346:_InputOutputArray::_InputOutputArray(std::vector<std::vector<_Tp> >& vec)
+        -:  347:{ init(FIXED_TYPE + STD_VECTOR_VECTOR + traits::Type<_Tp>::value + ACCESS_RW, &vec); }
+        -:  348:
+        -:  349:template<typename _Tp> inline
+        -:  350:_InputOutputArray::_InputOutputArray(std::vector<Mat_<_Tp> >& vec)
+        -:  351:{ init(FIXED_TYPE + STD_VECTOR_MAT + traits::Type<_Tp>::value + ACCESS_RW, &vec); }
+        -:  352:
+        -:  353:template<typename _Tp> inline
+        -:  354:_InputOutputArray::_InputOutputArray(Mat_<_Tp>& m)
+        -:  355:{ init(FIXED_TYPE + MAT + traits::Type<_Tp>::value + ACCESS_RW, &m); }
+        -:  356:
+        -:  357:template<typename _Tp, int m, int n> inline
+        -:  358:_InputOutputArray::_InputOutputArray(Matx<_Tp, m, n>& mtx)
+        -:  359:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_RW, &mtx, Size(n, m)); }
+        -:  360:
+        -:  361:template<typename _Tp> inline
+        -:  362:_InputOutputArray::_InputOutputArray(_Tp* vec, int n)
+        -:  363:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_RW, vec, Size(n, 1)); }
+        -:  364:
+        -:  365:template<typename _Tp> inline
+        -:  366:_InputOutputArray::_InputOutputArray(const std::vector<_Tp>& vec)
+        -:  367:{ init(FIXED_TYPE + FIXED_SIZE + STD_VECTOR + traits::Type<_Tp>::value + ACCESS_RW, &vec); }
+        -:  368:
+        -:  369:template<typename _Tp, std::size_t _Nm> inline
+        -:  370:_InputOutputArray::_InputOutputArray(const std::array<_Tp, _Nm>& arr)
+        -:  371:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_RW, arr.data(), Size(1, _Nm)); }
+        -:  372:
+        -:  373:template<std::size_t _Nm> inline
+        -:  374:_InputOutputArray::_InputOutputArray(const std::array<Mat, _Nm>& arr)
+        -:  375:{ init(FIXED_SIZE + STD_ARRAY_MAT + ACCESS_RW, arr.data(), Size(1, _Nm)); }
+        -:  376:
+        -:  377:template<typename _Tp> inline
+        -:  378:_InputOutputArray::_InputOutputArray(const std::vector<std::vector<_Tp> >& vec)
+        -:  379:{ init(FIXED_TYPE + FIXED_SIZE + STD_VECTOR_VECTOR + traits::Type<_Tp>::value + ACCESS_RW, &vec); }
+        -:  380:
+        -:  381:template<typename _Tp> inline
+        -:  382:_InputOutputArray::_InputOutputArray(const std::vector<Mat_<_Tp> >& vec)
+        -:  383:{ init(FIXED_TYPE + FIXED_SIZE + STD_VECTOR_MAT + traits::Type<_Tp>::value + ACCESS_RW, &vec); }
+        -:  384:
+        -:  385:template<typename _Tp> inline
+        -:  386:_InputOutputArray::_InputOutputArray(const Mat_<_Tp>& m)
+        -:  387:{ init(FIXED_TYPE + FIXED_SIZE + MAT + traits::Type<_Tp>::value + ACCESS_RW, &m); }
+        -:  388:
+        -:  389:template<typename _Tp, int m, int n> inline
+        -:  390:_InputOutputArray::_InputOutputArray(const Matx<_Tp, m, n>& mtx)
+        -:  391:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_RW, &mtx, Size(n, m)); }
+        -:  392:
+        -:  393:template<typename _Tp> inline
+        -:  394:_InputOutputArray::_InputOutputArray(const _Tp* vec, int n)
+        -:  395:{ init(FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_RW, vec, Size(n, 1)); }
+        -:  396:
+        -:  397:inline _InputOutputArray::_InputOutputArray(cuda::GpuMat& d_mat)
+        -:  398:{ init(CUDA_GPU_MAT + ACCESS_RW, &d_mat); }
+        -:  399:
+        -:  400:inline _InputOutputArray::_InputOutputArray(ogl::Buffer& buf)
+        -:  401:{ init(OPENGL_BUFFER + ACCESS_RW, &buf); }
+        -:  402:
+        -:  403:inline _InputOutputArray::_InputOutputArray(cuda::HostMem& cuda_mem)
+        -:  404:{ init(CUDA_HOST_MEM + ACCESS_RW, &cuda_mem); }
+        -:  405:
+        -:  406:inline _InputOutputArray::_InputOutputArray(const Mat& m)
+        -:  407:{ init(FIXED_TYPE + FIXED_SIZE + MAT + ACCESS_RW, &m); }
+        -:  408:
+        -:  409:inline _InputOutputArray::_InputOutputArray(const std::vector<Mat>& vec)
+        -:  410:{ init(FIXED_SIZE + STD_VECTOR_MAT + ACCESS_RW, &vec); }
+        -:  411:
+        -:  412:inline _InputOutputArray::_InputOutputArray(const UMat& m)
+        -:  413:{ init(FIXED_TYPE + FIXED_SIZE + UMAT + ACCESS_RW, &m); }
+        -:  414:
+        -:  415:inline _InputOutputArray::_InputOutputArray(const std::vector<UMat>& vec)
+        -:  416:{ init(FIXED_SIZE + STD_VECTOR_UMAT + ACCESS_RW, &vec); }
+        -:  417:
+        -:  418:inline _InputOutputArray::_InputOutputArray(const cuda::GpuMat& d_mat)
+        -:  419:{ init(FIXED_TYPE + FIXED_SIZE + CUDA_GPU_MAT + ACCESS_RW, &d_mat); }
+        -:  420:
+        -:  421:inline _InputOutputArray::_InputOutputArray(const std::vector<cuda::GpuMat>& d_mat)
+        -:  422:{ init(FIXED_TYPE + FIXED_SIZE + STD_VECTOR_CUDA_GPU_MAT + ACCESS_RW, &d_mat);}
+        -:  423:
+        -:  424:template<> inline _InputOutputArray::_InputOutputArray(std::vector<cuda::GpuMat>& d_mat)
+        -:  425:{ init(FIXED_TYPE + FIXED_SIZE + STD_VECTOR_CUDA_GPU_MAT + ACCESS_RW, &d_mat);}
+        -:  426:
+        -:  427:inline _InputOutputArray::_InputOutputArray(const ogl::Buffer& buf)
+        -:  428:{ init(FIXED_TYPE + FIXED_SIZE + OPENGL_BUFFER + ACCESS_RW, &buf); }
+        -:  429:
+        -:  430:inline _InputOutputArray::_InputOutputArray(const cuda::HostMem& cuda_mem)
+        -:  431:{ init(FIXED_TYPE + FIXED_SIZE + CUDA_HOST_MEM + ACCESS_RW, &cuda_mem); }
+        -:  432:
+        -:  433:template<typename _Tp> inline
+        -:  434:_InputOutputArray _InputOutputArray::rawInOut(std::vector<_Tp>& vec)
+        -:  435:{
+        -:  436:    _InputOutputArray v;
+        -:  437:    v.flags = _InputArray::FIXED_TYPE + _InputArray::STD_VECTOR + rawType<_Tp>() + ACCESS_RW;
+        -:  438:    v.obj = (void*)&vec;
+        -:  439:    return v;
+        -:  440:}
+        -:  441:
+        -:  442:template<typename _Tp, std::size_t _Nm> inline
+        -:  443:_InputOutputArray _InputOutputArray::rawInOut(std::array<_Tp, _Nm>& arr)
+        -:  444:{
+        -:  445:    _InputOutputArray v;
+        -:  446:    v.flags = FIXED_TYPE + FIXED_SIZE + MATX + traits::Type<_Tp>::value + ACCESS_RW;
+        -:  447:    v.obj = (void*)arr.data();
+        -:  448:    v.sz = Size(1, _Nm);
+        -:  449:    return v;
+        -:  450:}
+        -:  451:
+        -:  452:
+        -:  453:template<typename _Tp> static inline _InputArray rawIn(_Tp& v) { return _InputArray::rawIn(v); }
+        -:  454:template<typename _Tp> static inline _OutputArray rawOut(_Tp& v) { return _OutputArray::rawOut(v); }
+        -:  455:template<typename _Tp> static inline _InputOutputArray rawInOut(_Tp& v) { return _InputOutputArray::rawInOut(v); }
+        -:  456:
+        -:  457:CV__DEBUG_NS_END
+        -:  458:
+        -:  459://////////////////////////////////////////// Mat //////////////////////////////////////////
+        -:  460:
+        -:  461:template<typename _Tp> inline
+        -:  462:Mat::Mat(const std::vector<_Tp>& vec, bool copyData)
+        -:  463:    : flags(MAGIC_VAL + traits::Type<_Tp>::value + CV_MAT_CONT_FLAG), dims(2), rows((int)vec.size()),
+        -:  464:      cols(1), data(0), datastart(0), dataend(0), datalimit(0), allocator(0), u(0), size(&rows), step(0)
+        -:  465:{
+        -:  466:    if(vec.empty())
+        -:  467:        return;
+        -:  468:    if( !copyData )
+        -:  469:    {
+        -:  470:        step[0] = step[1] = sizeof(_Tp);
+        -:  471:        datastart = data = (uchar*)&vec[0];
+        -:  472:        datalimit = dataend = datastart + rows * step[0];
+        -:  473:    }
+        -:  474:    else
+        -:  475:        Mat((int)vec.size(), 1, traits::Type<_Tp>::value, (uchar*)&vec[0]).copyTo(*this);
+        -:  476:}
+        -:  477:
+        -:  478:template<typename _Tp, typename> inline
+        -:  479:Mat::Mat(const std::initializer_list<_Tp> list)
+        -:  480:    : Mat()
+        -:  481:{
+        -:  482:    CV_Assert(list.size() != 0);
+        -:  483:    Mat((int)list.size(), 1, traits::Type<_Tp>::value, (uchar*)list.begin()).copyTo(*this);
+        -:  484:}
+        -:  485:
+        -:  486:template<typename _Tp> inline
+        -:  487:Mat::Mat(const std::initializer_list<int> sizes, const std::initializer_list<_Tp> list)
+        -:  488:    : Mat()
+        -:  489:{
+        -:  490:    size_t size_total = 1;
+        -:  491:    for(auto s : sizes)
+        -:  492:        size_total *= s;
+        -:  493:    CV_Assert(list.size() != 0);
+        -:  494:    CV_Assert(size_total == list.size());
+        -:  495:    Mat((int)sizes.size(), (int*)sizes.begin(), traits::Type<_Tp>::value, (uchar*)list.begin()).copyTo(*this);
+        -:  496:}
+        -:  497:
+        -:  498:template<typename _Tp, std::size_t _Nm> inline
+        -:  499:Mat::Mat(const std::array<_Tp, _Nm>& arr, bool copyData)
+        -:  500:    : flags(MAGIC_VAL + traits::Type<_Tp>::value + CV_MAT_CONT_FLAG), dims(2), rows((int)arr.size()),
+        -:  501:      cols(1), data(0), datastart(0), dataend(0), datalimit(0), allocator(0), u(0), size(&rows), step(0)
+        -:  502:{
+        -:  503:    if(arr.empty())
+        -:  504:        return;
+        -:  505:    if( !copyData )
+        -:  506:    {
+        -:  507:        step[0] = step[1] = sizeof(_Tp);
+        -:  508:        datastart = data = (uchar*)arr.data();
+        -:  509:        datalimit = dataend = datastart + rows * step[0];
+        -:  510:    }
+        -:  511:    else
+        -:  512:        Mat((int)arr.size(), 1, traits::Type<_Tp>::value, (uchar*)arr.data()).copyTo(*this);
+        -:  513:}
+        -:  514:
+        -:  515:template<typename _Tp, int n> inline
+        -:  516:Mat::Mat(const Vec<_Tp, n>& vec, bool copyData)
+        -:  517:    : flags(MAGIC_VAL + traits::Type<_Tp>::value + CV_MAT_CONT_FLAG), dims(2), rows(n), cols(1), data(0),
+        -:  518:      datastart(0), dataend(0), datalimit(0), allocator(0), u(0), size(&rows), step(0)
+        -:  519:{
+        -:  520:    if( !copyData )
+        -:  521:    {
+        -:  522:        step[0] = step[1] = sizeof(_Tp);
+        -:  523:        datastart = data = (uchar*)vec.val;
+        -:  524:        datalimit = dataend = datastart + rows * step[0];
+        -:  525:    }
+        -:  526:    else
+        -:  527:        Mat(n, 1, traits::Type<_Tp>::value, (void*)vec.val).copyTo(*this);
+        -:  528:}
+        -:  529:
+        -:  530:
+        -:  531:template<typename _Tp, int m, int n> inline
+        -:  532:Mat::Mat(const Matx<_Tp,m,n>& M, bool copyData)
+        -:  533:    : flags(MAGIC_VAL + traits::Type<_Tp>::value + CV_MAT_CONT_FLAG), dims(2), rows(m), cols(n), data(0),
+        -:  534:      datastart(0), dataend(0), datalimit(0), allocator(0), u(0), size(&rows), step(0)
+        -:  535:{
+        -:  536:    if( !copyData )
+        -:  537:    {
+        -:  538:        step[0] = cols * sizeof(_Tp);
+        -:  539:        step[1] = sizeof(_Tp);
+        -:  540:        datastart = data = (uchar*)M.val;
+        -:  541:        datalimit = dataend = datastart + rows * step[0];
+        -:  542:    }
+        -:  543:    else
+        -:  544:        Mat(m, n, traits::Type<_Tp>::value, (uchar*)M.val).copyTo(*this);
+        -:  545:}
+        -:  546:
+        -:  547:template<typename _Tp> inline
+        -:  548:Mat::Mat(const Point_<_Tp>& pt, bool copyData)
+        -:  549:    : flags(MAGIC_VAL + traits::Type<_Tp>::value + CV_MAT_CONT_FLAG), dims(2), rows(2), cols(1), data(0),
+        -:  550:      datastart(0), dataend(0), datalimit(0), allocator(0), u(0), size(&rows), step(0)
+        -:  551:{
+        -:  552:    if( !copyData )
+        -:  553:    {
+        -:  554:        step[0] = step[1] = sizeof(_Tp);
+        -:  555:        datastart = data = (uchar*)&pt.x;
+        -:  556:        datalimit = dataend = datastart + rows * step[0];
+        -:  557:    }
+        -:  558:    else
+        -:  559:    {
+        -:  560:        create(2, 1, traits::Type<_Tp>::value);
+        -:  561:        ((_Tp*)data)[0] = pt.x;
+        -:  562:        ((_Tp*)data)[1] = pt.y;
+        -:  563:    }
+        -:  564:}
+        -:  565:
+        -:  566:template<typename _Tp> inline
+        -:  567:Mat::Mat(const Point3_<_Tp>& pt, bool copyData)
+        -:  568:    : flags(MAGIC_VAL + traits::Type<_Tp>::value + CV_MAT_CONT_FLAG), dims(2), rows(3), cols(1), data(0),
+        -:  569:      datastart(0), dataend(0), datalimit(0), allocator(0), u(0), size(&rows), step(0)
+        -:  570:{
+        -:  571:    if( !copyData )
+        -:  572:    {
+        -:  573:        step[0] = step[1] = sizeof(_Tp);
+        -:  574:        datastart = data = (uchar*)&pt.x;
+        -:  575:        datalimit = dataend = datastart + rows * step[0];
+        -:  576:    }
+        -:  577:    else
+        -:  578:    {
+        -:  579:        create(3, 1, traits::Type<_Tp>::value);
+        -:  580:        ((_Tp*)data)[0] = pt.x;
+        -:  581:        ((_Tp*)data)[1] = pt.y;
+        -:  582:        ((_Tp*)data)[2] = pt.z;
+        -:  583:    }
+        -:  584:}
+        -:  585:
+        -:  586:template<typename _Tp> inline
+        -:  587:Mat::Mat(const MatCommaInitializer_<_Tp>& commaInitializer)
+        -:  588:    : flags(MAGIC_VAL + traits::Type<_Tp>::value + CV_MAT_CONT_FLAG), dims(0), rows(0), cols(0), data(0),
+        -:  589:      datastart(0), dataend(0), allocator(0), u(0), size(&rows)
+        -:  590:{
+        -:  591:    *this = commaInitializer.operator Mat_<_Tp>();
+        -:  592:}
+        -:  593:
+        -:  594:inline
+        -:  595:Mat Mat::row(int y) const
+        -:  596:{
+        -:  597:    return Mat(*this, Range(y, y + 1), Range::all());
+        -:  598:}
+        -:  599:
+        -:  600:inline
+        -:  601:Mat Mat::col(int x) const
+        -:  602:{
+        -:  603:    return Mat(*this, Range::all(), Range(x, x + 1));
+        -:  604:}
+        -:  605:
+        -:  606:inline
+        -:  607:Mat Mat::rowRange(int startrow, int endrow) const
+        -:  608:{
+        -:  609:    return Mat(*this, Range(startrow, endrow), Range::all());
+        -:  610:}
+        -:  611:
+        -:  612:inline
+        -:  613:Mat Mat::rowRange(const Range& r) const
+        -:  614:{
+        -:  615:    return Mat(*this, r, Range::all());
+        -:  616:}
+        -:  617:
+        -:  618:inline
+        -:  619:Mat Mat::colRange(int startcol, int endcol) const
+        -:  620:{
+        -:  621:    return Mat(*this, Range::all(), Range(startcol, endcol));
+        -:  622:}
+        -:  623:
+        -:  624:inline
+        -:  625:Mat Mat::colRange(const Range& r) const
+        -:  626:{
+        -:  627:    return Mat(*this, Range::all(), r);
+        -:  628:}
+        -:  629:
+        -:  630:inline
+        -:  631:Mat Mat::operator()( Range _rowRange, Range _colRange ) const
+        -:  632:{
+        -:  633:    return Mat(*this, _rowRange, _colRange);
+        -:  634:}
+        -:  635:
+        -:  636:inline
+function _ZNK2cv3MatclERKNS_5Rect_IiEE called 10 returned 100% blocks executed 100%
+       10:  637:Mat Mat::operator()( const Rect& roi ) const
+        -:  638:{
+       10:  639:    return Mat(*this, roi);
+       10:  639-block  0
+call    0 returned 10
+        -:  640:}
+        -:  641:
+        -:  642:inline
+        -:  643:Mat Mat::operator()(const Range* ranges) const
+        -:  644:{
+        -:  645:    return Mat(*this, ranges);
+        -:  646:}
+        -:  647:
+        -:  648:inline
+        -:  649:Mat Mat::operator()(const std::vector<Range>& ranges) const
+        -:  650:{
+        -:  651:    return Mat(*this, ranges);
+        -:  652:}
+        -:  653:
+        -:  654:inline
+        -:  655:bool Mat::isContinuous() const
+        -:  656:{
+        -:  657:    return (flags & CONTINUOUS_FLAG) != 0;
+        -:  658:}
+        -:  659:
+        -:  660:inline
+        -:  661:bool Mat::isSubmatrix() const
+        -:  662:{
+        -:  663:    return (flags & SUBMATRIX_FLAG) != 0;
+        -:  664:}
+        -:  665:
+        -:  666:inline
+        -:  667:size_t Mat::elemSize() const
+        -:  668:{
+        -:  669:    size_t res = dims > 0 ? step.p[dims - 1] : 0;
+        -:  670:    CV_DbgAssert(res != 0);
+        -:  671:    return res;
+        -:  672:}
+        -:  673:
+        -:  674:inline
+        -:  675:size_t Mat::elemSize1() const
+        -:  676:{
+        -:  677:    return CV_ELEM_SIZE1(flags);
+        -:  678:}
+        -:  679:
+        -:  680:inline
+        -:  681:int Mat::type() const
+        -:  682:{
+        -:  683:    return CV_MAT_TYPE(flags);
+        -:  684:}
+        -:  685:
+        -:  686:inline
+        -:  687:int Mat::depth() const
+        -:  688:{
+        -:  689:    return CV_MAT_DEPTH(flags);
+        -:  690:}
+        -:  691:
+        -:  692:inline
+        -:  693:int Mat::channels() const
+        -:  694:{
+        -:  695:    return CV_MAT_CN(flags);
+        -:  696:}
+        -:  697:
+        -:  698:inline
+function _ZN2cv3Mat3ptrEi called 0 returned 0% blocks executed 0%
+    #####:  699:uchar* Mat::ptr(int y)
+        -:  700:{
+        -:  701:    CV_DbgAssert( y == 0 || (data && dims >= 1 && (unsigned)y < (unsigned)size.p[0]) );
+    #####:  702:    return data + step.p[0] * y;
+    %%%%%:  702-block  0
+        -:  703:}
+        -:  704:
+        -:  705:inline
+        -:  706:const uchar* Mat::ptr(int y) const
+        -:  707:{
+        -:  708:    CV_DbgAssert( y == 0 || (data && dims >= 1 && (unsigned)y < (unsigned)size.p[0]) );
+        -:  709:    return data + step.p[0] * y;
+        -:  710:}
+        -:  711:
+        -:  712:template<typename _Tp> inline
+        -:  713:_Tp* Mat::ptr(int y)
+        -:  714:{
+        -:  715:    CV_DbgAssert( y == 0 || (data && dims >= 1 && (unsigned)y < (unsigned)size.p[0]) );
+        -:  716:    return (_Tp*)(data + step.p[0] * y);
+        -:  717:}
+        -:  718:
+        -:  719:template<typename _Tp> inline
+        -:  720:const _Tp* Mat::ptr(int y) const
+        -:  721:{
+        -:  722:    CV_DbgAssert( y == 0 || (data && dims >= 1 && (unsigned)y < (unsigned)size.p[0]) );
+        -:  723:    return (const _Tp*)(data + step.p[0] * y);
+        -:  724:}
+        -:  725:
+        -:  726:inline
+        -:  727:uchar* Mat::ptr(int i0, int i1)
+        -:  728:{
+        -:  729:    CV_DbgAssert(dims >= 2);
+        -:  730:    CV_DbgAssert(data);
+        -:  731:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  732:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -:  733:    return data + i0 * step.p[0] + i1 * step.p[1];
+        -:  734:}
+        -:  735:
+        -:  736:inline
+        -:  737:const uchar* Mat::ptr(int i0, int i1) const
+        -:  738:{
+        -:  739:    CV_DbgAssert(dims >= 2);
+        -:  740:    CV_DbgAssert(data);
+        -:  741:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  742:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -:  743:    return data + i0 * step.p[0] + i1 * step.p[1];
+        -:  744:}
+        -:  745:
+        -:  746:template<typename _Tp> inline
+        -:  747:_Tp* Mat::ptr(int i0, int i1)
+        -:  748:{
+        -:  749:    CV_DbgAssert(dims >= 2);
+        -:  750:    CV_DbgAssert(data);
+        -:  751:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  752:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -:  753:    return (_Tp*)(data + i0 * step.p[0] + i1 * step.p[1]);
+        -:  754:}
+        -:  755:
+        -:  756:template<typename _Tp> inline
+        -:  757:const _Tp* Mat::ptr(int i0, int i1) const
+        -:  758:{
+        -:  759:    CV_DbgAssert(dims >= 2);
+        -:  760:    CV_DbgAssert(data);
+        -:  761:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  762:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -:  763:    return (const _Tp*)(data + i0 * step.p[0] + i1 * step.p[1]);
+        -:  764:}
+        -:  765:
+        -:  766:inline
+        -:  767:uchar* Mat::ptr(int i0, int i1, int i2)
+        -:  768:{
+        -:  769:    CV_DbgAssert(dims >= 3);
+        -:  770:    CV_DbgAssert(data);
+        -:  771:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  772:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -:  773:    CV_DbgAssert((unsigned)i2 < (unsigned)size.p[2]);
+        -:  774:    return data + i0 * step.p[0] + i1 * step.p[1] + i2 * step.p[2];
+        -:  775:}
+        -:  776:
+        -:  777:inline
+        -:  778:const uchar* Mat::ptr(int i0, int i1, int i2) const
+        -:  779:{
+        -:  780:    CV_DbgAssert(dims >= 3);
+        -:  781:    CV_DbgAssert(data);
+        -:  782:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  783:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -:  784:    CV_DbgAssert((unsigned)i2 < (unsigned)size.p[2]);
+        -:  785:    return data + i0 * step.p[0] + i1 * step.p[1] + i2 * step.p[2];
+        -:  786:}
+        -:  787:
+        -:  788:template<typename _Tp> inline
+        -:  789:_Tp* Mat::ptr(int i0, int i1, int i2)
+        -:  790:{
+        -:  791:    CV_DbgAssert(dims >= 3);
+        -:  792:    CV_DbgAssert(data);
+        -:  793:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  794:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -:  795:    CV_DbgAssert((unsigned)i2 < (unsigned)size.p[2]);
+        -:  796:    return (_Tp*)(data + i0 * step.p[0] + i1 * step.p[1] + i2 * step.p[2]);
+        -:  797:}
+        -:  798:
+        -:  799:template<typename _Tp> inline
+        -:  800:const _Tp* Mat::ptr(int i0, int i1, int i2) const
+        -:  801:{
+        -:  802:    CV_DbgAssert(dims >= 3);
+        -:  803:    CV_DbgAssert(data);
+        -:  804:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  805:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -:  806:    CV_DbgAssert((unsigned)i2 < (unsigned)size.p[2]);
+        -:  807:    return (const _Tp*)(data + i0 * step.p[0] + i1 * step.p[1] + i2 * step.p[2]);
+        -:  808:}
+        -:  809:
+        -:  810:inline
+        -:  811:uchar* Mat::ptr(const int* idx)
+        -:  812:{
+        -:  813:    int i, d = dims;
+        -:  814:    uchar* p = data;
+        -:  815:    CV_DbgAssert( d >= 1 && p );
+        -:  816:    for( i = 0; i < d; i++ )
+        -:  817:    {
+        -:  818:        CV_DbgAssert( (unsigned)idx[i] < (unsigned)size.p[i] );
+        -:  819:        p += idx[i] * step.p[i];
+        -:  820:    }
+        -:  821:    return p;
+        -:  822:}
+        -:  823:
+        -:  824:inline
+        -:  825:const uchar* Mat::ptr(const int* idx) const
+        -:  826:{
+        -:  827:    int i, d = dims;
+        -:  828:    uchar* p = data;
+        -:  829:    CV_DbgAssert( d >= 1 && p );
+        -:  830:    for( i = 0; i < d; i++ )
+        -:  831:    {
+        -:  832:        CV_DbgAssert( (unsigned)idx[i] < (unsigned)size.p[i] );
+        -:  833:        p += idx[i] * step.p[i];
+        -:  834:    }
+        -:  835:    return p;
+        -:  836:}
+        -:  837:
+        -:  838:template<typename _Tp> inline
+        -:  839:_Tp* Mat::ptr(const int* idx)
+        -:  840:{
+        -:  841:    int i, d = dims;
+        -:  842:    uchar* p = data;
+        -:  843:    CV_DbgAssert( d >= 1 && p );
+        -:  844:    for( i = 0; i < d; i++ )
+        -:  845:    {
+        -:  846:        CV_DbgAssert( (unsigned)idx[i] < (unsigned)size.p[i] );
+        -:  847:        p += idx[i] * step.p[i];
+        -:  848:    }
+        -:  849:    return (_Tp*)p;
+        -:  850:}
+        -:  851:
+        -:  852:template<typename _Tp> inline
+        -:  853:const _Tp* Mat::ptr(const int* idx) const
+        -:  854:{
+        -:  855:    int i, d = dims;
+        -:  856:    uchar* p = data;
+        -:  857:    CV_DbgAssert( d >= 1 && p );
+        -:  858:    for( i = 0; i < d; i++ )
+        -:  859:    {
+        -:  860:        CV_DbgAssert( (unsigned)idx[i] < (unsigned)size.p[i] );
+        -:  861:        p += idx[i] * step.p[i];
+        -:  862:    }
+        -:  863:    return (const _Tp*)p;
+        -:  864:}
+        -:  865:
+        -:  866:template<int n> inline
+        -:  867:uchar* Mat::ptr(const Vec<int, n>& idx)
+        -:  868:{
+        -:  869:    return Mat::ptr(idx.val);
+        -:  870:}
+        -:  871:
+        -:  872:template<int n> inline
+        -:  873:const uchar* Mat::ptr(const Vec<int, n>& idx) const
+        -:  874:{
+        -:  875:    return Mat::ptr(idx.val);
+        -:  876:}
+        -:  877:
+        -:  878:template<typename _Tp, int n> inline
+        -:  879:_Tp* Mat::ptr(const Vec<int, n>& idx)
+        -:  880:{
+        -:  881:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -:  882:    return Mat::ptr<_Tp>(idx.val);
+        -:  883:}
+        -:  884:
+        -:  885:template<typename _Tp, int n> inline
+        -:  886:const _Tp* Mat::ptr(const Vec<int, n>& idx) const
+        -:  887:{
+        -:  888:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -:  889:    return Mat::ptr<_Tp>(idx.val);
+        -:  890:}
+        -:  891:
+        -:  892:
+        -:  893:template<typename _Tp> inline
+        -:  894:_Tp& Mat::at(int i0, int i1)
+        -:  895:{
+        -:  896:    CV_DbgAssert(dims <= 2);
+        -:  897:    CV_DbgAssert(data);
+        -:  898:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  899:    CV_DbgAssert((unsigned)(i1 * DataType<_Tp>::channels) < (unsigned)(size.p[1] * channels()));
+        -:  900:    CV_DbgAssert(CV_ELEM_SIZE1(traits::Depth<_Tp>::value) == elemSize1());
+        -:  901:    return ((_Tp*)(data + step.p[0] * i0))[i1];
+        -:  902:}
+        -:  903:
+        -:  904:template<typename _Tp> inline
+        -:  905:const _Tp& Mat::at(int i0, int i1) const
+        -:  906:{
+        -:  907:    CV_DbgAssert(dims <= 2);
+        -:  908:    CV_DbgAssert(data);
+        -:  909:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -:  910:    CV_DbgAssert((unsigned)(i1 * DataType<_Tp>::channels) < (unsigned)(size.p[1] * channels()));
+        -:  911:    CV_DbgAssert(CV_ELEM_SIZE1(traits::Depth<_Tp>::value) == elemSize1());
+        -:  912:    return ((const _Tp*)(data + step.p[0] * i0))[i1];
+        -:  913:}
+        -:  914:
+        -:  915:template<typename _Tp> inline
+        -:  916:_Tp& Mat::at(Point pt)
+        -:  917:{
+        -:  918:    CV_DbgAssert(dims <= 2);
+        -:  919:    CV_DbgAssert(data);
+        -:  920:    CV_DbgAssert((unsigned)pt.y < (unsigned)size.p[0]);
+        -:  921:    CV_DbgAssert((unsigned)(pt.x * DataType<_Tp>::channels) < (unsigned)(size.p[1] * channels()));
+        -:  922:    CV_DbgAssert(CV_ELEM_SIZE1(traits::Depth<_Tp>::value) == elemSize1());
+        -:  923:    return ((_Tp*)(data + step.p[0] * pt.y))[pt.x];
+        -:  924:}
+        -:  925:
+        -:  926:template<typename _Tp> inline
+        -:  927:const _Tp& Mat::at(Point pt) const
+        -:  928:{
+        -:  929:    CV_DbgAssert(dims <= 2);
+        -:  930:    CV_DbgAssert(data);
+        -:  931:    CV_DbgAssert((unsigned)pt.y < (unsigned)size.p[0]);
+        -:  932:    CV_DbgAssert((unsigned)(pt.x * DataType<_Tp>::channels) < (unsigned)(size.p[1] * channels()));
+        -:  933:    CV_DbgAssert(CV_ELEM_SIZE1(traits::Depth<_Tp>::value) == elemSize1());
+        -:  934:    return ((const _Tp*)(data + step.p[0] * pt.y))[pt.x];
+        -:  935:}
+        -:  936:
+        -:  937:template<typename _Tp> inline
+        -:  938:_Tp& Mat::at(int i0)
+        -:  939:{
+        -:  940:    CV_DbgAssert(dims <= 2);
+        -:  941:    CV_DbgAssert(data);
+        -:  942:    CV_DbgAssert((unsigned)i0 < (unsigned)(size.p[0] * size.p[1]));
+        -:  943:    CV_DbgAssert(elemSize() == sizeof(_Tp));
+        -:  944:    if( isContinuous() || size.p[0] == 1 )
+        -:  945:        return ((_Tp*)data)[i0];
+        -:  946:    if( size.p[1] == 1 )
+        -:  947:        return *(_Tp*)(data + step.p[0] * i0);
+        -:  948:    int i = i0 / cols, j = i0 - i * cols;
+        -:  949:    return ((_Tp*)(data + step.p[0] * i))[j];
+        -:  950:}
+        -:  951:
+        -:  952:template<typename _Tp> inline
+        -:  953:const _Tp& Mat::at(int i0) const
+        -:  954:{
+        -:  955:    CV_DbgAssert(dims <= 2);
+        -:  956:    CV_DbgAssert(data);
+        -:  957:    CV_DbgAssert((unsigned)i0 < (unsigned)(size.p[0] * size.p[1]));
+        -:  958:    CV_DbgAssert(elemSize() == sizeof(_Tp));
+        -:  959:    if( isContinuous() || size.p[0] == 1 )
+        -:  960:        return ((const _Tp*)data)[i0];
+        -:  961:    if( size.p[1] == 1 )
+        -:  962:        return *(const _Tp*)(data + step.p[0] * i0);
+        -:  963:    int i = i0 / cols, j = i0 - i * cols;
+        -:  964:    return ((const _Tp*)(data + step.p[0] * i))[j];
+        -:  965:}
+        -:  966:
+        -:  967:template<typename _Tp> inline
+        -:  968:_Tp& Mat::at(int i0, int i1, int i2)
+        -:  969:{
+        -:  970:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -:  971:    return *(_Tp*)ptr(i0, i1, i2);
+        -:  972:}
+        -:  973:
+        -:  974:template<typename _Tp> inline
+        -:  975:const _Tp& Mat::at(int i0, int i1, int i2) const
+        -:  976:{
+        -:  977:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -:  978:    return *(const _Tp*)ptr(i0, i1, i2);
+        -:  979:}
+        -:  980:
+        -:  981:template<typename _Tp> inline
+        -:  982:_Tp& Mat::at(const int* idx)
+        -:  983:{
+        -:  984:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -:  985:    return *(_Tp*)ptr(idx);
+        -:  986:}
+        -:  987:
+        -:  988:template<typename _Tp> inline
+        -:  989:const _Tp& Mat::at(const int* idx) const
+        -:  990:{
+        -:  991:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -:  992:    return *(const _Tp*)ptr(idx);
+        -:  993:}
+        -:  994:
+        -:  995:template<typename _Tp, int n> inline
+        -:  996:_Tp& Mat::at(const Vec<int, n>& idx)
+        -:  997:{
+        -:  998:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -:  999:    return *(_Tp*)ptr(idx.val);
+        -: 1000:}
+        -: 1001:
+        -: 1002:template<typename _Tp, int n> inline
+        -: 1003:const _Tp& Mat::at(const Vec<int, n>& idx) const
+        -: 1004:{
+        -: 1005:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -: 1006:    return *(const _Tp*)ptr(idx.val);
+        -: 1007:}
+        -: 1008:
+        -: 1009:template<typename _Tp> inline
+        -: 1010:MatConstIterator_<_Tp> Mat::begin() const
+        -: 1011:{
+        -: 1012:    if (empty())
+        -: 1013:        return MatConstIterator_<_Tp>();
+        -: 1014:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -: 1015:    return MatConstIterator_<_Tp>((const Mat_<_Tp>*)this);
+        -: 1016:}
+        -: 1017:
+        -: 1018:template<typename _Tp> inline
+        -: 1019:std::reverse_iterator<MatConstIterator_<_Tp>> Mat::rbegin() const
+        -: 1020:{
+        -: 1021:    if (empty())
+        -: 1022:        return std::reverse_iterator<MatConstIterator_<_Tp>>();
+        -: 1023:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -: 1024:    MatConstIterator_<_Tp> it((const Mat_<_Tp>*)this);
+        -: 1025:    it += total();
+        -: 1026:    return std::reverse_iterator<MatConstIterator_<_Tp>> (it);
+        -: 1027:}
+        -: 1028:
+        -: 1029:template<typename _Tp> inline
+        -: 1030:MatConstIterator_<_Tp> Mat::end() const
+        -: 1031:{
+        -: 1032:    if (empty())
+        -: 1033:        return MatConstIterator_<_Tp>();
+        -: 1034:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -: 1035:    MatConstIterator_<_Tp> it((const Mat_<_Tp>*)this);
+        -: 1036:    it += total();
+        -: 1037:    return it;
+        -: 1038:}
+        -: 1039:
+        -: 1040:template<typename _Tp> inline
+        -: 1041:std::reverse_iterator<MatConstIterator_<_Tp>> Mat::rend() const
+        -: 1042:{
+        -: 1043:    if (empty())
+        -: 1044:        return std::reverse_iterator<MatConstIterator_<_Tp>>();
+        -: 1045:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -: 1046:    return std::reverse_iterator<MatConstIterator_<_Tp>>((const Mat_<_Tp>*)this);
+        -: 1047:}
+        -: 1048:
+        -: 1049:template<typename _Tp> inline
+        -: 1050:MatIterator_<_Tp> Mat::begin()
+        -: 1051:{
+        -: 1052:    if (empty())
+        -: 1053:        return MatIterator_<_Tp>();
+        -: 1054:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -: 1055:    return MatIterator_<_Tp>((Mat_<_Tp>*)this);
+        -: 1056:}
+        -: 1057:
+        -: 1058:template<typename _Tp> inline
+        -: 1059:std::reverse_iterator<MatIterator_<_Tp>> Mat::rbegin()
+        -: 1060:{
+        -: 1061:    if (empty())
+        -: 1062:        return std::reverse_iterator<MatIterator_<_Tp>>();
+        -: 1063:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -: 1064:    MatIterator_<_Tp> it((Mat_<_Tp>*)this);
+        -: 1065:    it += total();
+        -: 1066:    return std::reverse_iterator<MatIterator_<_Tp>>(it);
+        -: 1067:}
+        -: 1068:
+        -: 1069:template<typename _Tp> inline
+        -: 1070:MatIterator_<_Tp> Mat::end()
+        -: 1071:{
+        -: 1072:    if (empty())
+        -: 1073:        return MatIterator_<_Tp>();
+        -: 1074:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -: 1075:    MatIterator_<_Tp> it((Mat_<_Tp>*)this);
+        -: 1076:    it += total();
+        -: 1077:    return it;
+        -: 1078:}
+        -: 1079:
+        -: 1080:template<typename _Tp> inline
+        -: 1081:std::reverse_iterator<MatIterator_<_Tp>> Mat::rend()
+        -: 1082:{
+        -: 1083:    if (empty())
+        -: 1084:        return std::reverse_iterator<MatIterator_<_Tp>>();
+        -: 1085:    CV_DbgAssert( elemSize() == sizeof(_Tp) );
+        -: 1086:    return std::reverse_iterator<MatIterator_<_Tp>>(MatIterator_<_Tp>((Mat_<_Tp>*)this));
+        -: 1087:}
+        -: 1088:
+        -: 1089:template<typename _Tp, typename Functor> inline
+        -: 1090:void Mat::forEach(const Functor& operation) {
+        -: 1091:    this->forEach_impl<_Tp>(operation);
+        -: 1092:}
+        -: 1093:
+        -: 1094:template<typename _Tp, typename Functor> inline
+        -: 1095:void Mat::forEach(const Functor& operation) const {
+        -: 1096:    // call as not const
+        -: 1097:    (const_cast<Mat*>(this))->forEach<_Tp>(operation);
+        -: 1098:}
+        -: 1099:
+        -: 1100:template<typename _Tp> inline
+        -: 1101:Mat::operator std::vector<_Tp>() const
+        -: 1102:{
+        -: 1103:    std::vector<_Tp> v;
+        -: 1104:    copyTo(v);
+        -: 1105:    return v;
+        -: 1106:}
+        -: 1107:
+        -: 1108:template<typename _Tp, std::size_t _Nm> inline
+        -: 1109:Mat::operator std::array<_Tp, _Nm>() const
+        -: 1110:{
+        -: 1111:    std::array<_Tp, _Nm> v;
+        -: 1112:    copyTo(v);
+        -: 1113:    return v;
+        -: 1114:}
+        -: 1115:
+        -: 1116:template<typename _Tp, int n> inline
+        -: 1117:Mat::operator Vec<_Tp, n>() const
+        -: 1118:{
+        -: 1119:    CV_Assert( data && dims <= 2 && (rows == 1 || cols == 1) &&
+        -: 1120:               rows + cols - 1 == n && channels() == 1 );
+        -: 1121:
+        -: 1122:    if( isContinuous() && type() == traits::Type<_Tp>::value )
+        -: 1123:        return Vec<_Tp, n>((_Tp*)data);
+        -: 1124:    Vec<_Tp, n> v;
+        -: 1125:    Mat tmp(rows, cols, traits::Type<_Tp>::value, v.val);
+        -: 1126:    convertTo(tmp, tmp.type());
+        -: 1127:    return v;
+        -: 1128:}
+        -: 1129:
+        -: 1130:template<typename _Tp, int m, int n> inline
+        -: 1131:Mat::operator Matx<_Tp, m, n>() const
+        -: 1132:{
+        -: 1133:    CV_Assert( data && dims <= 2 && rows == m && cols == n && channels() == 1 );
+        -: 1134:
+        -: 1135:    if( isContinuous() && type() == traits::Type<_Tp>::value )
+        -: 1136:        return Matx<_Tp, m, n>((_Tp*)data);
+        -: 1137:    Matx<_Tp, m, n> mtx;
+        -: 1138:    Mat tmp(rows, cols, traits::Type<_Tp>::value, mtx.val);
+        -: 1139:    convertTo(tmp, tmp.type());
+        -: 1140:    return mtx;
+        -: 1141:}
+        -: 1142:
+        -: 1143:template<typename _Tp> inline
+        -: 1144:void Mat::push_back(const _Tp& elem)
+        -: 1145:{
+        -: 1146:    if( !data )
+        -: 1147:    {
+        -: 1148:        *this = Mat(1, 1, traits::Type<_Tp>::value, (void*)&elem).clone();
+        -: 1149:        return;
+        -: 1150:    }
+        -: 1151:    CV_Assert(traits::Type<_Tp>::value == type() && cols == 1
+        -: 1152:              /* && dims == 2 (cols == 1 implies dims == 2) */);
+        -: 1153:    const uchar* tmp = dataend + step[0];
+        -: 1154:    if( !isSubmatrix() && isContinuous() && tmp <= datalimit )
+        -: 1155:    {
+        -: 1156:        *(_Tp*)(data + (size.p[0]++) * step.p[0]) = elem;
+        -: 1157:        dataend = tmp;
+        -: 1158:    }
+        -: 1159:    else
+        -: 1160:        push_back_(&elem);
+        -: 1161:}
+        -: 1162:
+        -: 1163:template<typename _Tp> inline
+        -: 1164:void Mat::push_back(const Mat_<_Tp>& m)
+        -: 1165:{
+        -: 1166:    push_back((const Mat&)m);
+        -: 1167:}
+        -: 1168:
+        -: 1169:template<> inline
+        -: 1170:void Mat::push_back(const MatExpr& expr)
+        -: 1171:{
+        -: 1172:    push_back(static_cast<Mat>(expr));
+        -: 1173:}
+        -: 1174:
+        -: 1175:
+        -: 1176:template<typename _Tp> inline
+        -: 1177:void Mat::push_back(const std::vector<_Tp>& v)
+        -: 1178:{
+        -: 1179:    push_back(Mat(v));
+        -: 1180:}
+        -: 1181:
+        -: 1182:
+        -: 1183:///////////////////////////// MatSize ////////////////////////////
+        -: 1184:
+        -: 1185:inline
+        -: 1186:MatSize::MatSize(int* _p) CV_NOEXCEPT
+        -: 1187:    : p(_p) {}
+        -: 1188:
+        -: 1189:inline
+        -: 1190:int MatSize::dims() const CV_NOEXCEPT
+        -: 1191:{
+        -: 1192:    return (p - 1)[0];
+        -: 1193:}
+        -: 1194:
+        -: 1195:inline
+        -: 1196:Size MatSize::operator()() const
+        -: 1197:{
+        -: 1198:    CV_DbgAssert(dims() <= 2);
+        -: 1199:    return Size(p[1], p[0]);
+        -: 1200:}
+        -: 1201:
+        -: 1202:inline
+        -: 1203:const int& MatSize::operator[](int i) const
+        -: 1204:{
+        -: 1205:    CV_DbgAssert(i < dims());
+        -: 1206:#ifdef __OPENCV_BUILD
+        -: 1207:    CV_DbgAssert(i >= 0);
+        -: 1208:#endif
+        -: 1209:    return p[i];
+        -: 1210:}
+        -: 1211:
+        -: 1212:inline
+        -: 1213:int& MatSize::operator[](int i)
+        -: 1214:{
+        -: 1215:    CV_DbgAssert(i < dims());
+        -: 1216:#ifdef __OPENCV_BUILD
+        -: 1217:    CV_DbgAssert(i >= 0);
+        -: 1218:#endif
+        -: 1219:    return p[i];
+        -: 1220:}
+        -: 1221:
+        -: 1222:inline
+        -: 1223:MatSize::operator const int*() const CV_NOEXCEPT
+        -: 1224:{
+        -: 1225:    return p;
+        -: 1226:}
+        -: 1227:
+        -: 1228:inline
+        -: 1229:bool MatSize::operator != (const MatSize& sz) const CV_NOEXCEPT
+        -: 1230:{
+        -: 1231:    return !(*this == sz);
+        -: 1232:}
+        -: 1233:
+        -: 1234:
+        -: 1235:
+        -: 1236:///////////////////////////// MatStep ////////////////////////////
+        -: 1237:
+        -: 1238:inline
+        -: 1239:MatStep::MatStep() CV_NOEXCEPT
+        -: 1240:{
+        -: 1241:    p = buf; p[0] = p[1] = 0;
+        -: 1242:}
+        -: 1243:
+        -: 1244:inline
+        -: 1245:MatStep::MatStep(size_t s) CV_NOEXCEPT
+        -: 1246:{
+        -: 1247:    p = buf; p[0] = s; p[1] = 0;
+        -: 1248:}
+        -: 1249:
+        -: 1250:inline
+        -: 1251:const size_t& MatStep::operator[](int i) const CV_NOEXCEPT
+        -: 1252:{
+        -: 1253:    return p[i];
+        -: 1254:}
+        -: 1255:
+        -: 1256:inline
+        -: 1257:size_t& MatStep::operator[](int i) CV_NOEXCEPT
+        -: 1258:{
+        -: 1259:    return p[i];
+        -: 1260:}
+        -: 1261:
+        -: 1262:inline MatStep::operator size_t() const
+        -: 1263:{
+        -: 1264:    CV_DbgAssert( p == buf );
+        -: 1265:    return buf[0];
+        -: 1266:}
+        -: 1267:
+        -: 1268:inline MatStep& MatStep::operator = (size_t s)
+        -: 1269:{
+        -: 1270:    CV_DbgAssert( p == buf );
+        -: 1271:    buf[0] = s;
+        -: 1272:    return *this;
+        -: 1273:}
+        -: 1274:
+        -: 1275:
+        -: 1276:
+        -: 1277:////////////////////////////// Mat_<_Tp> ////////////////////////////
+        -: 1278:
+        -: 1279:template<typename _Tp> inline
+        -: 1280:Mat_<_Tp>::Mat_() CV_NOEXCEPT
+        -: 1281:    : Mat()
+        -: 1282:{
+        -: 1283:    flags = (flags & ~CV_MAT_TYPE_MASK) + traits::Type<_Tp>::value;
+        -: 1284:}
+        -: 1285:
+        -: 1286:template<typename _Tp> inline
+        -: 1287:Mat_<_Tp>::Mat_(int _rows, int _cols)
+        -: 1288:    : Mat(_rows, _cols, traits::Type<_Tp>::value)
+        -: 1289:{
+        -: 1290:}
+        -: 1291:
+        -: 1292:template<typename _Tp> inline
+        -: 1293:Mat_<_Tp>::Mat_(int _rows, int _cols, const _Tp& value)
+        -: 1294:    : Mat(_rows, _cols, traits::Type<_Tp>::value)
+        -: 1295:{
+        -: 1296:    *this = value;
+        -: 1297:}
+        -: 1298:
+        -: 1299:template<typename _Tp> inline
+        -: 1300:Mat_<_Tp>::Mat_(Size _sz)
+        -: 1301:    : Mat(_sz.height, _sz.width, traits::Type<_Tp>::value)
+        -: 1302:{}
+        -: 1303:
+        -: 1304:template<typename _Tp> inline
+        -: 1305:Mat_<_Tp>::Mat_(Size _sz, const _Tp& value)
+        -: 1306:    : Mat(_sz.height, _sz.width, traits::Type<_Tp>::value)
+        -: 1307:{
+        -: 1308:    *this = value;
+        -: 1309:}
+        -: 1310:
+        -: 1311:template<typename _Tp> inline
+        -: 1312:Mat_<_Tp>::Mat_(int _dims, const int* _sz)
+        -: 1313:    : Mat(_dims, _sz, traits::Type<_Tp>::value)
+        -: 1314:{}
+        -: 1315:
+        -: 1316:template<typename _Tp> inline
+        -: 1317:Mat_<_Tp>::Mat_(int _dims, const int* _sz, const _Tp& _s)
+        -: 1318:    : Mat(_dims, _sz, traits::Type<_Tp>::value, Scalar(_s))
+        -: 1319:{}
+        -: 1320:
+        -: 1321:template<typename _Tp> inline
+        -: 1322:Mat_<_Tp>::Mat_(int _dims, const int* _sz, _Tp* _data, const size_t* _steps)
+        -: 1323:    : Mat(_dims, _sz, traits::Type<_Tp>::value, _data, _steps)
+        -: 1324:{}
+        -: 1325:
+        -: 1326:template<typename _Tp> inline
+        -: 1327:Mat_<_Tp>::Mat_(const Mat_<_Tp>& m, const Range* ranges)
+        -: 1328:    : Mat(m, ranges)
+        -: 1329:{}
+        -: 1330:
+        -: 1331:template<typename _Tp> inline
+        -: 1332:Mat_<_Tp>::Mat_(const Mat_<_Tp>& m, const std::vector<Range>& ranges)
+        -: 1333:    : Mat(m, ranges)
+        -: 1334:{}
+        -: 1335:
+        -: 1336:template<typename _Tp> inline
+        -: 1337:Mat_<_Tp>::Mat_(const Mat& m)
+        -: 1338:    : Mat()
+        -: 1339:{
+        -: 1340:    flags = (flags & ~CV_MAT_TYPE_MASK) + traits::Type<_Tp>::value;
+        -: 1341:    *this = m;
+        -: 1342:}
+        -: 1343:
+        -: 1344:template<typename _Tp> inline
+        -: 1345:Mat_<_Tp>::Mat_(const Mat_& m)
+        -: 1346:    : Mat(m)
+        -: 1347:{}
+        -: 1348:
+        -: 1349:template<typename _Tp> inline
+        -: 1350:Mat_<_Tp>::Mat_(int _rows, int _cols, _Tp* _data, size_t steps)
+        -: 1351:    : Mat(_rows, _cols, traits::Type<_Tp>::value, _data, steps)
+        -: 1352:{}
+        -: 1353:
+        -: 1354:template<typename _Tp> inline
+        -: 1355:Mat_<_Tp>::Mat_(const Mat_& m, const Range& _rowRange, const Range& _colRange)
+        -: 1356:    : Mat(m, _rowRange, _colRange)
+        -: 1357:{}
+        -: 1358:
+        -: 1359:template<typename _Tp> inline
+        -: 1360:Mat_<_Tp>::Mat_(const Mat_& m, const Rect& roi)
+        -: 1361:    : Mat(m, roi)
+        -: 1362:{}
+        -: 1363:
+        -: 1364:template<typename _Tp> template<int n> inline
+        -: 1365:Mat_<_Tp>::Mat_(const Vec<typename DataType<_Tp>::channel_type, n>& vec, bool copyData)
+        -: 1366:    : Mat(n / DataType<_Tp>::channels, 1, traits::Type<_Tp>::value, (void*)&vec)
+        -: 1367:{
+        -: 1368:    CV_Assert(n%DataType<_Tp>::channels == 0);
+        -: 1369:    if( copyData )
+        -: 1370:        *this = clone();
+        -: 1371:}
+        -: 1372:
+        -: 1373:template<typename _Tp> template<int m, int n> inline
+        -: 1374:Mat_<_Tp>::Mat_(const Matx<typename DataType<_Tp>::channel_type, m, n>& M, bool copyData)
+        -: 1375:    : Mat(m, n / DataType<_Tp>::channels, traits::Type<_Tp>::value, (void*)&M)
+        -: 1376:{
+        -: 1377:    CV_Assert(n % DataType<_Tp>::channels == 0);
+        -: 1378:    if( copyData )
+        -: 1379:        *this = clone();
+        -: 1380:}
+        -: 1381:
+        -: 1382:template<typename _Tp> inline
+        -: 1383:Mat_<_Tp>::Mat_(const Point_<typename DataType<_Tp>::channel_type>& pt, bool copyData)
+        -: 1384:    : Mat(2 / DataType<_Tp>::channels, 1, traits::Type<_Tp>::value, (void*)&pt)
+        -: 1385:{
+        -: 1386:    CV_Assert(2 % DataType<_Tp>::channels == 0);
+        -: 1387:    if( copyData )
+        -: 1388:        *this = clone();
+        -: 1389:}
+        -: 1390:
+        -: 1391:template<typename _Tp> inline
+        -: 1392:Mat_<_Tp>::Mat_(const Point3_<typename DataType<_Tp>::channel_type>& pt, bool copyData)
+        -: 1393:    : Mat(3 / DataType<_Tp>::channels, 1, traits::Type<_Tp>::value, (void*)&pt)
+        -: 1394:{
+        -: 1395:    CV_Assert(3 % DataType<_Tp>::channels == 0);
+        -: 1396:    if( copyData )
+        -: 1397:        *this = clone();
+        -: 1398:}
+        -: 1399:
+        -: 1400:template<typename _Tp> inline
+        -: 1401:Mat_<_Tp>::Mat_(const MatCommaInitializer_<_Tp>& commaInitializer)
+        -: 1402:    : Mat(commaInitializer)
+        -: 1403:{}
+        -: 1404:
+        -: 1405:template<typename _Tp> inline
+        -: 1406:Mat_<_Tp>::Mat_(const std::vector<_Tp>& vec, bool copyData)
+        -: 1407:    : Mat(vec, copyData)
+        -: 1408:{}
+        -: 1409:
+        -: 1410:template<typename _Tp> inline
+        -: 1411:Mat_<_Tp>::Mat_(std::initializer_list<_Tp> list)
+        -: 1412:    : Mat(list)
+        -: 1413:{}
+        -: 1414:
+        -: 1415:template<typename _Tp> inline
+        -: 1416:Mat_<_Tp>::Mat_(const std::initializer_list<int> sizes, std::initializer_list<_Tp> list)
+        -: 1417:    : Mat(sizes, list)
+        -: 1418:{}
+        -: 1419:
+        -: 1420:template<typename _Tp> template<std::size_t _Nm> inline
+        -: 1421:Mat_<_Tp>::Mat_(const std::array<_Tp, _Nm>& arr, bool copyData)
+        -: 1422:    : Mat(arr, copyData)
+        -: 1423:{}
+        -: 1424:
+        -: 1425:template<typename _Tp> inline
+        -: 1426:Mat_<_Tp>& Mat_<_Tp>::operator = (const Mat& m)
+        -: 1427:{
+        -: 1428:    if (m.empty())
+        -: 1429:    {
+        -: 1430:        release();
+        -: 1431:        return *this;
+        -: 1432:    }
+        -: 1433:    if( traits::Type<_Tp>::value == m.type() )
+        -: 1434:    {
+        -: 1435:        Mat::operator = (m);
+        -: 1436:        return *this;
+        -: 1437:    }
+        -: 1438:    if( traits::Depth<_Tp>::value == m.depth() )
+        -: 1439:    {
+        -: 1440:        return (*this = m.reshape(DataType<_Tp>::channels, m.dims, 0));
+        -: 1441:    }
+        -: 1442:    CV_Assert(DataType<_Tp>::channels == m.channels() || m.empty());
+        -: 1443:    m.convertTo(*this, type());
+        -: 1444:    return *this;
+        -: 1445:}
+        -: 1446:
+        -: 1447:template<typename _Tp> inline
+        -: 1448:Mat_<_Tp>& Mat_<_Tp>::operator = (const Mat_& m)
+        -: 1449:{
+        -: 1450:    Mat::operator=(m);
+        -: 1451:    return *this;
+        -: 1452:}
+        -: 1453:
+        -: 1454:template<typename _Tp> inline
+        -: 1455:Mat_<_Tp>& Mat_<_Tp>::operator = (const _Tp& s)
+        -: 1456:{
+        -: 1457:    typedef typename DataType<_Tp>::vec_type VT;
+        -: 1458:    Mat::operator=(Scalar((const VT&)s));
+        -: 1459:    return *this;
+        -: 1460:}
+        -: 1461:
+        -: 1462:template<typename _Tp> inline
+        -: 1463:void Mat_<_Tp>::create(int _rows, int _cols)
+        -: 1464:{
+        -: 1465:    Mat::create(_rows, _cols, traits::Type<_Tp>::value);
+        -: 1466:}
+        -: 1467:
+        -: 1468:template<typename _Tp> inline
+        -: 1469:void Mat_<_Tp>::create(Size _sz)
+        -: 1470:{
+        -: 1471:    Mat::create(_sz, traits::Type<_Tp>::value);
+        -: 1472:}
+        -: 1473:
+        -: 1474:template<typename _Tp> inline
+        -: 1475:void Mat_<_Tp>::create(int _dims, const int* _sz)
+        -: 1476:{
+        -: 1477:    Mat::create(_dims, _sz, traits::Type<_Tp>::value);
+        -: 1478:}
+        -: 1479:
+        -: 1480:template<typename _Tp> inline
+        -: 1481:void Mat_<_Tp>::release()
+        -: 1482:{
+        -: 1483:    Mat::release();
+        -: 1484:    flags = (flags & ~CV_MAT_TYPE_MASK) + traits::Type<_Tp>::value;
+        -: 1485:}
+        -: 1486:
+        -: 1487:template<typename _Tp> inline
+        -: 1488:Mat_<_Tp> Mat_<_Tp>::cross(const Mat_& m) const
+        -: 1489:{
+        -: 1490:    return Mat_<_Tp>(Mat::cross(m));
+        -: 1491:}
+        -: 1492:
+        -: 1493:template<typename _Tp> template<typename T2> inline
+        -: 1494:Mat_<_Tp>::operator Mat_<T2>() const
+        -: 1495:{
+        -: 1496:    return Mat_<T2>(static_cast<const Mat&>(*this));
+        -: 1497:}
+        -: 1498:
+        -: 1499:template<typename _Tp> inline
+        -: 1500:Mat_<_Tp> Mat_<_Tp>::row(int y) const
+        -: 1501:{
+        -: 1502:    return Mat_(*this, Range(y, y+1), Range::all());
+        -: 1503:}
+        -: 1504:
+        -: 1505:template<typename _Tp> inline
+        -: 1506:Mat_<_Tp> Mat_<_Tp>::col(int x) const
+        -: 1507:{
+        -: 1508:    return Mat_(*this, Range::all(), Range(x, x+1));
+        -: 1509:}
+        -: 1510:
+        -: 1511:template<typename _Tp> inline
+        -: 1512:Mat_<_Tp> Mat_<_Tp>::diag(int d) const
+        -: 1513:{
+        -: 1514:    return Mat_(Mat::diag(d));
+        -: 1515:}
+        -: 1516:
+        -: 1517:template<typename _Tp> inline
+        -: 1518:Mat_<_Tp> Mat_<_Tp>::clone() const
+        -: 1519:{
+        -: 1520:    return Mat_(Mat::clone());
+        -: 1521:}
+        -: 1522:
+        -: 1523:template<typename _Tp> inline
+        -: 1524:size_t Mat_<_Tp>::elemSize() const
+        -: 1525:{
+        -: 1526:    CV_DbgAssert( Mat::elemSize() == sizeof(_Tp) );
+        -: 1527:    return sizeof(_Tp);
+        -: 1528:}
+        -: 1529:
+        -: 1530:template<typename _Tp> inline
+        -: 1531:size_t Mat_<_Tp>::elemSize1() const
+        -: 1532:{
+        -: 1533:    CV_DbgAssert( Mat::elemSize1() == sizeof(_Tp) / DataType<_Tp>::channels );
+        -: 1534:    return sizeof(_Tp) / DataType<_Tp>::channels;
+        -: 1535:}
+        -: 1536:
+        -: 1537:template<typename _Tp> inline
+        -: 1538:int Mat_<_Tp>::type() const
+        -: 1539:{
+        -: 1540:    CV_DbgAssert( Mat::type() == traits::Type<_Tp>::value );
+        -: 1541:    return traits::Type<_Tp>::value;
+        -: 1542:}
+        -: 1543:
+        -: 1544:template<typename _Tp> inline
+        -: 1545:int Mat_<_Tp>::depth() const
+        -: 1546:{
+        -: 1547:    CV_DbgAssert( Mat::depth() == traits::Depth<_Tp>::value );
+        -: 1548:    return traits::Depth<_Tp>::value;
+        -: 1549:}
+        -: 1550:
+        -: 1551:template<typename _Tp> inline
+        -: 1552:int Mat_<_Tp>::channels() const
+        -: 1553:{
+        -: 1554:    CV_DbgAssert( Mat::channels() == DataType<_Tp>::channels );
+        -: 1555:    return DataType<_Tp>::channels;
+        -: 1556:}
+        -: 1557:
+        -: 1558:template<typename _Tp> inline
+        -: 1559:size_t Mat_<_Tp>::stepT(int i) const
+        -: 1560:{
+        -: 1561:    return step.p[i] / elemSize();
+        -: 1562:}
+        -: 1563:
+        -: 1564:template<typename _Tp> inline
+        -: 1565:size_t Mat_<_Tp>::step1(int i) const
+        -: 1566:{
+        -: 1567:    return step.p[i] / elemSize1();
+        -: 1568:}
+        -: 1569:
+        -: 1570:template<typename _Tp> inline
+        -: 1571:Mat_<_Tp>& Mat_<_Tp>::adjustROI( int dtop, int dbottom, int dleft, int dright )
+        -: 1572:{
+        -: 1573:    return (Mat_<_Tp>&)(Mat::adjustROI(dtop, dbottom, dleft, dright));
+        -: 1574:}
+        -: 1575:
+        -: 1576:template<typename _Tp> inline
+        -: 1577:Mat_<_Tp> Mat_<_Tp>::operator()( const Range& _rowRange, const Range& _colRange ) const
+        -: 1578:{
+        -: 1579:    return Mat_<_Tp>(*this, _rowRange, _colRange);
+        -: 1580:}
+        -: 1581:
+        -: 1582:template<typename _Tp> inline
+        -: 1583:Mat_<_Tp> Mat_<_Tp>::operator()( const Rect& roi ) const
+        -: 1584:{
+        -: 1585:    return Mat_<_Tp>(*this, roi);
+        -: 1586:}
+        -: 1587:
+        -: 1588:template<typename _Tp> inline
+        -: 1589:Mat_<_Tp> Mat_<_Tp>::operator()( const Range* ranges ) const
+        -: 1590:{
+        -: 1591:    return Mat_<_Tp>(*this, ranges);
+        -: 1592:}
+        -: 1593:
+        -: 1594:template<typename _Tp> inline
+        -: 1595:Mat_<_Tp> Mat_<_Tp>::operator()(const std::vector<Range>& ranges) const
+        -: 1596:{
+        -: 1597:    return Mat_<_Tp>(*this, ranges);
+        -: 1598:}
+        -: 1599:
+        -: 1600:template<typename _Tp> inline
+        -: 1601:_Tp* Mat_<_Tp>::operator [](int y)
+        -: 1602:{
+        -: 1603:    CV_DbgAssert( 0 <= y && y < size.p[0] );
+        -: 1604:    return (_Tp*)(data + y*step.p[0]);
+        -: 1605:}
+        -: 1606:
+        -: 1607:template<typename _Tp> inline
+        -: 1608:const _Tp* Mat_<_Tp>::operator [](int y) const
+        -: 1609:{
+        -: 1610:    CV_DbgAssert( 0 <= y && y < size.p[0] );
+        -: 1611:    return (const _Tp*)(data + y*step.p[0]);
+        -: 1612:}
+        -: 1613:
+        -: 1614:template<typename _Tp> inline
+        -: 1615:_Tp& Mat_<_Tp>::operator ()(int i0, int i1)
+        -: 1616:{
+        -: 1617:    CV_DbgAssert(dims <= 2);
+        -: 1618:    CV_DbgAssert(data);
+        -: 1619:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -: 1620:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -: 1621:    CV_DbgAssert(type() == traits::Type<_Tp>::value);
+        -: 1622:    return ((_Tp*)(data + step.p[0] * i0))[i1];
+        -: 1623:}
+        -: 1624:
+        -: 1625:template<typename _Tp> inline
+        -: 1626:const _Tp& Mat_<_Tp>::operator ()(int i0, int i1) const
+        -: 1627:{
+        -: 1628:    CV_DbgAssert(dims <= 2);
+        -: 1629:    CV_DbgAssert(data);
+        -: 1630:    CV_DbgAssert((unsigned)i0 < (unsigned)size.p[0]);
+        -: 1631:    CV_DbgAssert((unsigned)i1 < (unsigned)size.p[1]);
+        -: 1632:    CV_DbgAssert(type() == traits::Type<_Tp>::value);
+        -: 1633:    return ((const _Tp*)(data + step.p[0] * i0))[i1];
+        -: 1634:}
+        -: 1635:
+        -: 1636:template<typename _Tp> inline
+        -: 1637:_Tp& Mat_<_Tp>::operator ()(Point pt)
+        -: 1638:{
+        -: 1639:    CV_DbgAssert(dims <= 2);
+        -: 1640:    CV_DbgAssert(data);
+        -: 1641:    CV_DbgAssert((unsigned)pt.y < (unsigned)size.p[0]);
+        -: 1642:    CV_DbgAssert((unsigned)pt.x < (unsigned)size.p[1]);
+        -: 1643:    CV_DbgAssert(type() == traits::Type<_Tp>::value);
+        -: 1644:    return ((_Tp*)(data + step.p[0] * pt.y))[pt.x];
+        -: 1645:}
+        -: 1646:
+        -: 1647:template<typename _Tp> inline
+        -: 1648:const _Tp& Mat_<_Tp>::operator ()(Point pt) const
+        -: 1649:{
+        -: 1650:    CV_DbgAssert(dims <= 2);
+        -: 1651:    CV_DbgAssert(data);
+        -: 1652:    CV_DbgAssert((unsigned)pt.y < (unsigned)size.p[0]);
+        -: 1653:    CV_DbgAssert((unsigned)pt.x < (unsigned)size.p[1]);
+        -: 1654:    CV_DbgAssert(type() == traits::Type<_Tp>::value);
+        -: 1655:    return ((const _Tp*)(data + step.p[0] * pt.y))[pt.x];
+        -: 1656:}
+        -: 1657:
+        -: 1658:template<typename _Tp> inline
+        -: 1659:_Tp& Mat_<_Tp>::operator ()(const int* idx)
+        -: 1660:{
+        -: 1661:    return Mat::at<_Tp>(idx);
+        -: 1662:}
+        -: 1663:
+        -: 1664:template<typename _Tp> inline
+        -: 1665:const _Tp& Mat_<_Tp>::operator ()(const int* idx) const
+        -: 1666:{
+        -: 1667:    return Mat::at<_Tp>(idx);
+        -: 1668:}
+        -: 1669:
+        -: 1670:template<typename _Tp> template<int n> inline
+        -: 1671:_Tp& Mat_<_Tp>::operator ()(const Vec<int, n>& idx)
+        -: 1672:{
+        -: 1673:    return Mat::at<_Tp>(idx);
+        -: 1674:}
+        -: 1675:
+        -: 1676:template<typename _Tp> template<int n> inline
+        -: 1677:const _Tp& Mat_<_Tp>::operator ()(const Vec<int, n>& idx) const
+        -: 1678:{
+        -: 1679:    return Mat::at<_Tp>(idx);
+        -: 1680:}
+        -: 1681:
+        -: 1682:template<typename _Tp> inline
+        -: 1683:_Tp& Mat_<_Tp>::operator ()(int i0)
+        -: 1684:{
+        -: 1685:    return this->at<_Tp>(i0);
+        -: 1686:}
+        -: 1687:
+        -: 1688:template<typename _Tp> inline
+        -: 1689:const _Tp& Mat_<_Tp>::operator ()(int i0) const
+        -: 1690:{
+        -: 1691:    return this->at<_Tp>(i0);
+        -: 1692:}
+        -: 1693:
+        -: 1694:template<typename _Tp> inline
+        -: 1695:_Tp& Mat_<_Tp>::operator ()(int i0, int i1, int i2)
+        -: 1696:{
+        -: 1697:    return this->at<_Tp>(i0, i1, i2);
+        -: 1698:}
+        -: 1699:
+        -: 1700:template<typename _Tp> inline
+        -: 1701:const _Tp& Mat_<_Tp>::operator ()(int i0, int i1, int i2) const
+        -: 1702:{
+        -: 1703:    return this->at<_Tp>(i0, i1, i2);
+        -: 1704:}
+        -: 1705:
+        -: 1706:template<typename _Tp> inline
+        -: 1707:Mat_<_Tp>::operator std::vector<_Tp>() const
+        -: 1708:{
+        -: 1709:    std::vector<_Tp> v;
+        -: 1710:    copyTo(v);
+        -: 1711:    return v;
+        -: 1712:}
+        -: 1713:
+        -: 1714:template<typename _Tp> template<std::size_t _Nm> inline
+        -: 1715:Mat_<_Tp>::operator std::array<_Tp, _Nm>() const
+        -: 1716:{
+        -: 1717:    std::array<_Tp, _Nm> a;
+        -: 1718:    copyTo(a);
+        -: 1719:    return a;
+        -: 1720:}
+        -: 1721:
+        -: 1722:template<typename _Tp> template<int n> inline
+        -: 1723:Mat_<_Tp>::operator Vec<typename DataType<_Tp>::channel_type, n>() const
+        -: 1724:{
+        -: 1725:    CV_Assert(n % DataType<_Tp>::channels == 0);
+        -: 1726:
+        -: 1727:#if defined _MSC_VER
+        -: 1728:    const Mat* pMat = (const Mat*)this; // workaround for MSVS <= 2012 compiler bugs (but GCC 4.6 dislikes this workaround)
+        -: 1729:    return pMat->operator Vec<typename DataType<_Tp>::channel_type, n>();
+        -: 1730:#else
+        -: 1731:    return this->Mat::operator Vec<typename DataType<_Tp>::channel_type, n>();
+        -: 1732:#endif
+        -: 1733:}
+        -: 1734:
+        -: 1735:template<typename _Tp> template<int m, int n> inline
+        -: 1736:Mat_<_Tp>::operator Matx<typename DataType<_Tp>::channel_type, m, n>() const
+        -: 1737:{
+        -: 1738:    CV_Assert(n % DataType<_Tp>::channels == 0);
+        -: 1739:
+        -: 1740:#if defined _MSC_VER
+        -: 1741:    const Mat* pMat = (const Mat*)this; // workaround for MSVS <= 2012 compiler bugs (but GCC 4.6 dislikes this workaround)
+        -: 1742:    Matx<typename DataType<_Tp>::channel_type, m, n> res = pMat->operator Matx<typename DataType<_Tp>::channel_type, m, n>();
+        -: 1743:    return res;
+        -: 1744:#else
+        -: 1745:    Matx<typename DataType<_Tp>::channel_type, m, n> res = this->Mat::operator Matx<typename DataType<_Tp>::channel_type, m, n>();
+        -: 1746:    return res;
+        -: 1747:#endif
+        -: 1748:}
+        -: 1749:
+        -: 1750:template<typename _Tp> inline
+        -: 1751:MatConstIterator_<_Tp> Mat_<_Tp>::begin() const
+        -: 1752:{
+        -: 1753:    return Mat::begin<_Tp>();
+        -: 1754:}
+        -: 1755:
+        -: 1756:template<typename _Tp> inline
+        -: 1757:std::reverse_iterator<MatConstIterator_<_Tp>> Mat_<_Tp>::rbegin() const
+        -: 1758:{
+        -: 1759:    return Mat::rbegin<_Tp>();
+        -: 1760:}
+        -: 1761:
+        -: 1762:template<typename _Tp> inline
+        -: 1763:MatConstIterator_<_Tp> Mat_<_Tp>::end() const
+        -: 1764:{
+        -: 1765:    return Mat::end<_Tp>();
+        -: 1766:}
+        -: 1767:
+        -: 1768:template<typename _Tp> inline
+        -: 1769:std::reverse_iterator<MatConstIterator_<_Tp>> Mat_<_Tp>::rend() const
+        -: 1770:{
+        -: 1771:    return Mat::rend<_Tp>();
+        -: 1772:}
+        -: 1773:
+        -: 1774:template<typename _Tp> inline
+        -: 1775:MatIterator_<_Tp> Mat_<_Tp>::begin()
+        -: 1776:{
+        -: 1777:    return Mat::begin<_Tp>();
+        -: 1778:}
+        -: 1779:
+        -: 1780:template<typename _Tp> inline
+        -: 1781:std::reverse_iterator<MatIterator_<_Tp>> Mat_<_Tp>::rbegin()
+        -: 1782:{
+        -: 1783:    return Mat::rbegin<_Tp>();
+        -: 1784:}
+        -: 1785:
+        -: 1786:template<typename _Tp> inline
+        -: 1787:MatIterator_<_Tp> Mat_<_Tp>::end()
+        -: 1788:{
+        -: 1789:    return Mat::end<_Tp>();
+        -: 1790:}
+        -: 1791:
+        -: 1792:template<typename _Tp> inline
+        -: 1793:std::reverse_iterator<MatIterator_<_Tp>> Mat_<_Tp>::rend()
+        -: 1794:{
+        -: 1795:    return Mat::rend<_Tp>();
+        -: 1796:}
+        -: 1797:
+        -: 1798:template<typename _Tp> template<typename Functor> inline
+        -: 1799:void Mat_<_Tp>::forEach(const Functor& operation) {
+        -: 1800:    Mat::forEach<_Tp, Functor>(operation);
+        -: 1801:}
+        -: 1802:
+        -: 1803:template<typename _Tp> template<typename Functor> inline
+        -: 1804:void Mat_<_Tp>::forEach(const Functor& operation) const {
+        -: 1805:    Mat::forEach<_Tp, Functor>(operation);
+        -: 1806:}
+        -: 1807:
+        -: 1808:template<typename _Tp> inline
+        -: 1809:Mat_<_Tp>::Mat_(Mat_&& m)
+        -: 1810:    : Mat(std::move(m))
+        -: 1811:{
+        -: 1812:}
+        -: 1813:
+        -: 1814:template<typename _Tp> inline
+        -: 1815:Mat_<_Tp>& Mat_<_Tp>::operator = (Mat_&& m)
+        -: 1816:{
+        -: 1817:    Mat::operator = (std::move(m));
+        -: 1818:    return *this;
+        -: 1819:}
+        -: 1820:
+        -: 1821:template<typename _Tp> inline
+        -: 1822:Mat_<_Tp>::Mat_(Mat&& m)
+        -: 1823:    : Mat()
+        -: 1824:{
+        -: 1825:    flags = (flags & ~CV_MAT_TYPE_MASK) + traits::Type<_Tp>::value;
+        -: 1826:    *this = std::move(m);
+        -: 1827:}
+        -: 1828:
+        -: 1829:template<typename _Tp> inline
+        -: 1830:Mat_<_Tp>& Mat_<_Tp>::operator = (Mat&& m)
+        -: 1831:{
+        -: 1832:    if (m.empty())
+        -: 1833:    {
+        -: 1834:        release();
+        -: 1835:        return *this;
+        -: 1836:    }
+        -: 1837:    if( traits::Type<_Tp>::value == m.type() )
+        -: 1838:    {
+        -: 1839:        Mat::operator = ((Mat&&)m);
+        -: 1840:        return *this;
+        -: 1841:    }
+        -: 1842:    if( traits::Depth<_Tp>::value == m.depth() )
+        -: 1843:    {
+        -: 1844:        Mat::operator = ((Mat&&)m.reshape(DataType<_Tp>::channels, m.dims, 0));
+        -: 1845:        return *this;
+        -: 1846:    }
+        -: 1847:    CV_DbgAssert(DataType<_Tp>::channels == m.channels());
+        -: 1848:    m.convertTo(*this, type());
+        -: 1849:    return *this;
+        -: 1850:}
+        -: 1851:
+        -: 1852:template<typename _Tp> inline
+        -: 1853:Mat_<_Tp>::Mat_(MatExpr&& e)
+        -: 1854:    : Mat()
+        -: 1855:{
+        -: 1856:    flags = (flags & ~CV_MAT_TYPE_MASK) + traits::Type<_Tp>::value;
+        -: 1857:    *this = Mat(e);
+        -: 1858:}
+        -: 1859:
+        -: 1860:
+        -: 1861:///////////////////////////// SparseMat /////////////////////////////
+        -: 1862:
+        -: 1863:inline
+        -: 1864:SparseMat SparseMat::clone() const
+        -: 1865:{
+        -: 1866:    SparseMat temp;
+        -: 1867:    this->copyTo(temp);
+        -: 1868:    return temp;
+        -: 1869:}
+        -: 1870:
+        -: 1871:inline
+        -: 1872:size_t SparseMat::elemSize() const
+        -: 1873:{
+        -: 1874:    return CV_ELEM_SIZE(flags);
+        -: 1875:}
+        -: 1876:
+        -: 1877:inline
+        -: 1878:size_t SparseMat::elemSize1() const
+        -: 1879:{
+        -: 1880:    return CV_ELEM_SIZE1(flags);
+        -: 1881:}
+        -: 1882:
+        -: 1883:inline
+        -: 1884:int SparseMat::type() const
+        -: 1885:{
+        -: 1886:    return CV_MAT_TYPE(flags);
+        -: 1887:}
+        -: 1888:
+        -: 1889:inline
+        -: 1890:int SparseMat::depth() const
+        -: 1891:{
+        -: 1892:    return CV_MAT_DEPTH(flags);
+        -: 1893:}
+        -: 1894:
+        -: 1895:inline
+        -: 1896:int SparseMat::channels() const
+        -: 1897:{
+        -: 1898:    return CV_MAT_CN(flags);
+        -: 1899:}
+        -: 1900:
+        -: 1901:inline
+        -: 1902:const int* SparseMat::size() const
+        -: 1903:{
+        -: 1904:    return hdr ? hdr->size : 0;
+        -: 1905:}
+        -: 1906:
+        -: 1907:inline
+        -: 1908:int SparseMat::size(int i) const
+        -: 1909:{
+        -: 1910:    if( hdr )
+        -: 1911:    {
+        -: 1912:        CV_DbgAssert((unsigned)i < (unsigned)hdr->dims);
+        -: 1913:        return hdr->size[i];
+        -: 1914:    }
+        -: 1915:    return 0;
+        -: 1916:}
+        -: 1917:
+        -: 1918:inline
+        -: 1919:int SparseMat::dims() const
+        -: 1920:{
+        -: 1921:    return hdr ? hdr->dims : 0;
+        -: 1922:}
+        -: 1923:
+        -: 1924:inline
+        -: 1925:size_t SparseMat::nzcount() const
+        -: 1926:{
+        -: 1927:    return hdr ? hdr->nodeCount : 0;
+        -: 1928:}
+        -: 1929:
+        -: 1930:template<typename _Tp> inline
+        -: 1931:_Tp& SparseMat::ref(int i0, size_t* hashval)
+        -: 1932:{
+        -: 1933:    return *(_Tp*)((SparseMat*)this)->ptr(i0, true, hashval);
+        -: 1934:}
+        -: 1935:
+        -: 1936:template<typename _Tp> inline
+        -: 1937:_Tp& SparseMat::ref(int i0, int i1, size_t* hashval)
+        -: 1938:{
+        -: 1939:    return *(_Tp*)((SparseMat*)this)->ptr(i0, i1, true, hashval);
+        -: 1940:}
+        -: 1941:
+        -: 1942:template<typename _Tp> inline
+        -: 1943:_Tp& SparseMat::ref(int i0, int i1, int i2, size_t* hashval)
+        -: 1944:{
+        -: 1945:    return *(_Tp*)((SparseMat*)this)->ptr(i0, i1, i2, true, hashval);
+        -: 1946:}
+        -: 1947:
+        -: 1948:template<typename _Tp> inline
+        -: 1949:_Tp& SparseMat::ref(const int* idx, size_t* hashval)
+        -: 1950:{
+        -: 1951:    return *(_Tp*)((SparseMat*)this)->ptr(idx, true, hashval);
+        -: 1952:}
+        -: 1953:
+        -: 1954:template<typename _Tp> inline
+        -: 1955:_Tp SparseMat::value(int i0, size_t* hashval) const
+        -: 1956:{
+        -: 1957:    const _Tp* p = (const _Tp*)((SparseMat*)this)->ptr(i0, false, hashval);
+        -: 1958:    return p ? *p : _Tp();
+        -: 1959:}
+        -: 1960:
+        -: 1961:template<typename _Tp> inline
+        -: 1962:_Tp SparseMat::value(int i0, int i1, size_t* hashval) const
+        -: 1963:{
+        -: 1964:    const _Tp* p = (const _Tp*)((SparseMat*)this)->ptr(i0, i1, false, hashval);
+        -: 1965:    return p ? *p : _Tp();
+        -: 1966:}
+        -: 1967:
+        -: 1968:template<typename _Tp> inline
+        -: 1969:_Tp SparseMat::value(int i0, int i1, int i2, size_t* hashval) const
+        -: 1970:{
+        -: 1971:    const _Tp* p = (const _Tp*)((SparseMat*)this)->ptr(i0, i1, i2, false, hashval);
+        -: 1972:    return p ? *p : _Tp();
+        -: 1973:}
+        -: 1974:
+        -: 1975:template<typename _Tp> inline
+        -: 1976:_Tp SparseMat::value(const int* idx, size_t* hashval) const
+        -: 1977:{
+        -: 1978:    const _Tp* p = (const _Tp*)((SparseMat*)this)->ptr(idx, false, hashval);
+        -: 1979:    return p ? *p : _Tp();
+        -: 1980:}
+        -: 1981:
+        -: 1982:template<typename _Tp> inline
+        -: 1983:const _Tp* SparseMat::find(int i0, size_t* hashval) const
+        -: 1984:{
+        -: 1985:    return (const _Tp*)((SparseMat*)this)->ptr(i0, false, hashval);
+        -: 1986:}
+        -: 1987:
+        -: 1988:template<typename _Tp> inline
+        -: 1989:const _Tp* SparseMat::find(int i0, int i1, size_t* hashval) const
+        -: 1990:{
+        -: 1991:    return (const _Tp*)((SparseMat*)this)->ptr(i0, i1, false, hashval);
+        -: 1992:}
+        -: 1993:
+        -: 1994:template<typename _Tp> inline
+        -: 1995:const _Tp* SparseMat::find(int i0, int i1, int i2, size_t* hashval) const
+        -: 1996:{
+        -: 1997:    return (const _Tp*)((SparseMat*)this)->ptr(i0, i1, i2, false, hashval);
+        -: 1998:}
+        -: 1999:
+        -: 2000:template<typename _Tp> inline
+        -: 2001:const _Tp* SparseMat::find(const int* idx, size_t* hashval) const
+        -: 2002:{
+        -: 2003:    return (const _Tp*)((SparseMat*)this)->ptr(idx, false, hashval);
+        -: 2004:}
+        -: 2005:
+        -: 2006:template<typename _Tp> inline
+        -: 2007:_Tp& SparseMat::value(Node* n)
+        -: 2008:{
+        -: 2009:    return *(_Tp*)((uchar*)n + hdr->valueOffset);
+        -: 2010:}
+        -: 2011:
+        -: 2012:template<typename _Tp> inline
+        -: 2013:const _Tp& SparseMat::value(const Node* n) const
+        -: 2014:{
+        -: 2015:    return *(const _Tp*)((const uchar*)n + hdr->valueOffset);
+        -: 2016:}
+        -: 2017:
+        -: 2018:inline
+        -: 2019:SparseMat::Node* SparseMat::node(size_t nidx)
+        -: 2020:{
+        -: 2021:    return (Node*)(void*)&hdr->pool[nidx];
+        -: 2022:}
+        -: 2023:
+        -: 2024:inline
+        -: 2025:const SparseMat::Node* SparseMat::node(size_t nidx) const
+        -: 2026:{
+        -: 2027:    return (const Node*)(const void*)&hdr->pool[nidx];
+        -: 2028:}
+        -: 2029:
+        -: 2030:inline
+        -: 2031:SparseMatIterator SparseMat::begin()
+        -: 2032:{
+        -: 2033:    return SparseMatIterator(this);
+        -: 2034:}
+        -: 2035:
+        -: 2036:inline
+        -: 2037:SparseMatConstIterator SparseMat::begin() const
+        -: 2038:{
+        -: 2039:    return SparseMatConstIterator(this);
+        -: 2040:}
+        -: 2041:
+        -: 2042:inline
+        -: 2043:SparseMatIterator SparseMat::end()
+        -: 2044:{
+        -: 2045:    SparseMatIterator it(this);
+        -: 2046:    it.seekEnd();
+        -: 2047:    return it;
+        -: 2048:}
+        -: 2049:
+        -: 2050:inline
+        -: 2051:SparseMatConstIterator SparseMat::end() const
+        -: 2052:{
+        -: 2053:    SparseMatConstIterator it(this);
+        -: 2054:    it.seekEnd();
+        -: 2055:    return it;
+        -: 2056:}
+        -: 2057:
+        -: 2058:template<typename _Tp> inline
+        -: 2059:SparseMatIterator_<_Tp> SparseMat::begin()
+        -: 2060:{
+        -: 2061:    return SparseMatIterator_<_Tp>(this);
+        -: 2062:}
+        -: 2063:
+        -: 2064:template<typename _Tp> inline
+        -: 2065:SparseMatConstIterator_<_Tp> SparseMat::begin() const
+        -: 2066:{
+        -: 2067:    return SparseMatConstIterator_<_Tp>(this);
+        -: 2068:}
+        -: 2069:
+        -: 2070:template<typename _Tp> inline
+        -: 2071:SparseMatIterator_<_Tp> SparseMat::end()
+        -: 2072:{
+        -: 2073:    SparseMatIterator_<_Tp> it(this);
+        -: 2074:    it.seekEnd();
+        -: 2075:    return it;
+        -: 2076:}
+        -: 2077:
+        -: 2078:template<typename _Tp> inline
+        -: 2079:SparseMatConstIterator_<_Tp> SparseMat::end() const
+        -: 2080:{
+        -: 2081:    SparseMatConstIterator_<_Tp> it(this);
+        -: 2082:    it.seekEnd();
+        -: 2083:    return it;
+        -: 2084:}
+        -: 2085:
+        -: 2086:
+        -: 2087:
+        -: 2088:///////////////////////////// SparseMat_ ////////////////////////////
+        -: 2089:
+        -: 2090:template<typename _Tp> inline
+        -: 2091:SparseMat_<_Tp>::SparseMat_()
+        -: 2092:{
+        -: 2093:    flags = MAGIC_VAL + traits::Type<_Tp>::value;
+        -: 2094:}
+        -: 2095:
+        -: 2096:template<typename _Tp> inline
+        -: 2097:SparseMat_<_Tp>::SparseMat_(int _dims, const int* _sizes)
+        -: 2098:    : SparseMat(_dims, _sizes, traits::Type<_Tp>::value)
+        -: 2099:{}
+        -: 2100:
+        -: 2101:template<typename _Tp> inline
+        -: 2102:SparseMat_<_Tp>::SparseMat_(const SparseMat& m)
+        -: 2103:{
+        -: 2104:    if( m.type() == traits::Type<_Tp>::value )
+        -: 2105:        *this = (const SparseMat_<_Tp>&)m;
+        -: 2106:    else
+        -: 2107:        m.convertTo(*this, traits::Type<_Tp>::value);
+        -: 2108:}
+        -: 2109:
+        -: 2110:template<typename _Tp> inline
+        -: 2111:SparseMat_<_Tp>::SparseMat_(const SparseMat_<_Tp>& m)
+        -: 2112:{
+        -: 2113:    this->flags = m.flags;
+        -: 2114:    this->hdr = m.hdr;
+        -: 2115:    if( this->hdr )
+        -: 2116:        CV_XADD(&this->hdr->refcount, 1);
+        -: 2117:}
+        -: 2118:
+        -: 2119:template<typename _Tp> inline
+        -: 2120:SparseMat_<_Tp>::SparseMat_(const Mat& m)
+        -: 2121:{
+        -: 2122:    SparseMat sm(m);
+        -: 2123:    *this = sm;
+        -: 2124:}
+        -: 2125:
+        -: 2126:template<typename _Tp> inline
+        -: 2127:SparseMat_<_Tp>& SparseMat_<_Tp>::operator = (const SparseMat_<_Tp>& m)
+        -: 2128:{
+        -: 2129:    if( this != &m )
+        -: 2130:    {
+        -: 2131:        if( m.hdr ) CV_XADD(&m.hdr->refcount, 1);
+        -: 2132:        release();
+        -: 2133:        flags = m.flags;
+        -: 2134:        hdr = m.hdr;
+        -: 2135:    }
+        -: 2136:    return *this;
+        -: 2137:}
+        -: 2138:
+        -: 2139:template<typename _Tp> inline
+        -: 2140:SparseMat_<_Tp>& SparseMat_<_Tp>::operator = (const SparseMat& m)
+        -: 2141:{
+        -: 2142:    if( m.type() == traits::Type<_Tp>::value )
+        -: 2143:        return (*this = (const SparseMat_<_Tp>&)m);
+        -: 2144:    m.convertTo(*this, traits::Type<_Tp>::value);
+        -: 2145:    return *this;
+        -: 2146:}
+        -: 2147:
+        -: 2148:template<typename _Tp> inline
+        -: 2149:SparseMat_<_Tp>& SparseMat_<_Tp>::operator = (const Mat& m)
+        -: 2150:{
+        -: 2151:    return (*this = SparseMat(m));
+        -: 2152:}
+        -: 2153:
+        -: 2154:template<typename _Tp> inline
+        -: 2155:SparseMat_<_Tp> SparseMat_<_Tp>::clone() const
+        -: 2156:{
+        -: 2157:    SparseMat_<_Tp> m;
+        -: 2158:    this->copyTo(m);
+        -: 2159:    return m;
+        -: 2160:}
+        -: 2161:
+        -: 2162:template<typename _Tp> inline
+        -: 2163:void SparseMat_<_Tp>::create(int _dims, const int* _sizes)
+        -: 2164:{
+        -: 2165:    SparseMat::create(_dims, _sizes, traits::Type<_Tp>::value);
+        -: 2166:}
+        -: 2167:
+        -: 2168:template<typename _Tp> inline
+        -: 2169:int SparseMat_<_Tp>::type() const
+        -: 2170:{
+        -: 2171:    return traits::Type<_Tp>::value;
+        -: 2172:}
+        -: 2173:
+        -: 2174:template<typename _Tp> inline
+        -: 2175:int SparseMat_<_Tp>::depth() const
+        -: 2176:{
+        -: 2177:    return traits::Depth<_Tp>::value;
+        -: 2178:}
+        -: 2179:
+        -: 2180:template<typename _Tp> inline
+        -: 2181:int SparseMat_<_Tp>::channels() const
+        -: 2182:{
+        -: 2183:    return DataType<_Tp>::channels;
+        -: 2184:}
+        -: 2185:
+        -: 2186:template<typename _Tp> inline
+        -: 2187:_Tp& SparseMat_<_Tp>::ref(int i0, size_t* hashval)
+        -: 2188:{
+        -: 2189:    return SparseMat::ref<_Tp>(i0, hashval);
+        -: 2190:}
+        -: 2191:
+        -: 2192:template<typename _Tp> inline
+        -: 2193:_Tp SparseMat_<_Tp>::operator()(int i0, size_t* hashval) const
+        -: 2194:{
+        -: 2195:    return SparseMat::value<_Tp>(i0, hashval);
+        -: 2196:}
+        -: 2197:
+        -: 2198:template<typename _Tp> inline
+        -: 2199:_Tp& SparseMat_<_Tp>::ref(int i0, int i1, size_t* hashval)
+        -: 2200:{
+        -: 2201:    return SparseMat::ref<_Tp>(i0, i1, hashval);
+        -: 2202:}
+        -: 2203:
+        -: 2204:template<typename _Tp> inline
+        -: 2205:_Tp SparseMat_<_Tp>::operator()(int i0, int i1, size_t* hashval) const
+        -: 2206:{
+        -: 2207:    return SparseMat::value<_Tp>(i0, i1, hashval);
+        -: 2208:}
+        -: 2209:
+        -: 2210:template<typename _Tp> inline
+        -: 2211:_Tp& SparseMat_<_Tp>::ref(int i0, int i1, int i2, size_t* hashval)
+        -: 2212:{
+        -: 2213:    return SparseMat::ref<_Tp>(i0, i1, i2, hashval);
+        -: 2214:}
+        -: 2215:
+        -: 2216:template<typename _Tp> inline
+        -: 2217:_Tp SparseMat_<_Tp>::operator()(int i0, int i1, int i2, size_t* hashval) const
+        -: 2218:{
+        -: 2219:    return SparseMat::value<_Tp>(i0, i1, i2, hashval);
+        -: 2220:}
+        -: 2221:
+        -: 2222:template<typename _Tp> inline
+        -: 2223:_Tp& SparseMat_<_Tp>::ref(const int* idx, size_t* hashval)
+        -: 2224:{
+        -: 2225:    return SparseMat::ref<_Tp>(idx, hashval);
+        -: 2226:}
+        -: 2227:
+        -: 2228:template<typename _Tp> inline
+        -: 2229:_Tp SparseMat_<_Tp>::operator()(const int* idx, size_t* hashval) const
+        -: 2230:{
+        -: 2231:    return SparseMat::value<_Tp>(idx, hashval);
+        -: 2232:}
+        -: 2233:
+        -: 2234:template<typename _Tp> inline
+        -: 2235:SparseMatIterator_<_Tp> SparseMat_<_Tp>::begin()
+        -: 2236:{
+        -: 2237:    return SparseMatIterator_<_Tp>(this);
+        -: 2238:}
+        -: 2239:
+        -: 2240:template<typename _Tp> inline
+        -: 2241:SparseMatConstIterator_<_Tp> SparseMat_<_Tp>::begin() const
+        -: 2242:{
+        -: 2243:    return SparseMatConstIterator_<_Tp>(this);
+        -: 2244:}
+        -: 2245:
+        -: 2246:template<typename _Tp> inline
+        -: 2247:SparseMatIterator_<_Tp> SparseMat_<_Tp>::end()
+        -: 2248:{
+        -: 2249:    SparseMatIterator_<_Tp> it(this);
+        -: 2250:    it.seekEnd();
+        -: 2251:    return it;
+        -: 2252:}
+        -: 2253:
+        -: 2254:template<typename _Tp> inline
+        -: 2255:SparseMatConstIterator_<_Tp> SparseMat_<_Tp>::end() const
+        -: 2256:{
+        -: 2257:    SparseMatConstIterator_<_Tp> it(this);
+        -: 2258:    it.seekEnd();
+        -: 2259:    return it;
+        -: 2260:}
+        -: 2261:
+        -: 2262:
+        -: 2263:
+        -: 2264:////////////////////////// MatConstIterator /////////////////////////
+        -: 2265:
+        -: 2266:inline
+        -: 2267:MatConstIterator::MatConstIterator()
+        -: 2268:    : m(0), elemSize(0), ptr(0), sliceStart(0), sliceEnd(0)
+        -: 2269:{}
+        -: 2270:
+        -: 2271:inline
+        -: 2272:MatConstIterator::MatConstIterator(const Mat* _m)
+        -: 2273:    : m(_m), elemSize(_m->elemSize()), ptr(0), sliceStart(0), sliceEnd(0)
+        -: 2274:{
+        -: 2275:    if( m && m->isContinuous() )
+        -: 2276:    {
+        -: 2277:        CV_Assert(!m->empty());
+        -: 2278:        sliceStart = m->ptr();
+        -: 2279:        sliceEnd = sliceStart + m->total()*elemSize;
+        -: 2280:    }
+        -: 2281:    seek((const int*)0);
+        -: 2282:}
+        -: 2283:
+        -: 2284:inline
+        -: 2285:MatConstIterator::MatConstIterator(const Mat* _m, int _row, int _col)
+        -: 2286:    : m(_m), elemSize(_m->elemSize()), ptr(0), sliceStart(0), sliceEnd(0)
+        -: 2287:{
+        -: 2288:    CV_Assert(m && m->dims <= 2);
+        -: 2289:    if( m->isContinuous() )
+        -: 2290:    {
+        -: 2291:        CV_Assert(!m->empty());
+        -: 2292:        sliceStart = m->ptr();
+        -: 2293:        sliceEnd = sliceStart + m->total()*elemSize;
+        -: 2294:    }
+        -: 2295:    int idx[] = {_row, _col};
+        -: 2296:    seek(idx);
+        -: 2297:}
+        -: 2298:
+        -: 2299:inline
+        -: 2300:MatConstIterator::MatConstIterator(const Mat* _m, Point _pt)
+        -: 2301:    : m(_m), elemSize(_m->elemSize()), ptr(0), sliceStart(0), sliceEnd(0)
+        -: 2302:{
+        -: 2303:    CV_Assert(m && m->dims <= 2);
+        -: 2304:    if( m->isContinuous() )
+        -: 2305:    {
+        -: 2306:        CV_Assert(!m->empty());
+        -: 2307:        sliceStart = m->ptr();
+        -: 2308:        sliceEnd = sliceStart + m->total()*elemSize;
+        -: 2309:    }
+        -: 2310:    int idx[] = {_pt.y, _pt.x};
+        -: 2311:    seek(idx);
+        -: 2312:}
+        -: 2313:
+        -: 2314:inline
+        -: 2315:MatConstIterator::MatConstIterator(const MatConstIterator& it)
+        -: 2316:    : m(it.m), elemSize(it.elemSize), ptr(it.ptr), sliceStart(it.sliceStart), sliceEnd(it.sliceEnd)
+        -: 2317:{}
+        -: 2318:
+        -: 2319:inline
+        -: 2320:MatConstIterator& MatConstIterator::operator = (const MatConstIterator& it )
+        -: 2321:{
+        -: 2322:    m = it.m; elemSize = it.elemSize; ptr = it.ptr;
+        -: 2323:    sliceStart = it.sliceStart; sliceEnd = it.sliceEnd;
+        -: 2324:    return *this;
+        -: 2325:}
+        -: 2326:
+        -: 2327:inline
+        -: 2328:const uchar* MatConstIterator::operator *() const
+        -: 2329:{
+        -: 2330:    return ptr;
+        -: 2331:}
+        -: 2332:
+        -: 2333:inline MatConstIterator& MatConstIterator::operator += (ptrdiff_t ofs)
+        -: 2334:{
+        -: 2335:    if( !m || ofs == 0 )
+        -: 2336:        return *this;
+        -: 2337:    ptrdiff_t ofsb = ofs*elemSize;
+        -: 2338:    ptr += ofsb;
+        -: 2339:    if( ptr < sliceStart || sliceEnd <= ptr )
+        -: 2340:    {
+        -: 2341:        ptr -= ofsb;
+        -: 2342:        seek(ofs, true);
+        -: 2343:    }
+        -: 2344:    return *this;
+        -: 2345:}
+        -: 2346:
+        -: 2347:inline
+        -: 2348:MatConstIterator& MatConstIterator::operator -= (ptrdiff_t ofs)
+        -: 2349:{
+        -: 2350:    return (*this += -ofs);
+        -: 2351:}
+        -: 2352:
+        -: 2353:inline
+        -: 2354:MatConstIterator& MatConstIterator::operator --()
+        -: 2355:{
+        -: 2356:    if( m && (ptr -= elemSize) < sliceStart )
+        -: 2357:    {
+        -: 2358:        ptr += elemSize;
+        -: 2359:        seek(-1, true);
+        -: 2360:    }
+        -: 2361:    return *this;
+        -: 2362:}
+        -: 2363:
+        -: 2364:inline
+        -: 2365:MatConstIterator MatConstIterator::operator --(int)
+        -: 2366:{
+        -: 2367:    MatConstIterator b = *this;
+        -: 2368:    *this += -1;
+        -: 2369:    return b;
+        -: 2370:}
+        -: 2371:
+        -: 2372:inline
+        -: 2373:MatConstIterator& MatConstIterator::operator ++()
+        -: 2374:{
+        -: 2375:    if( m && (ptr += elemSize) >= sliceEnd )
+        -: 2376:    {
+        -: 2377:        ptr -= elemSize;
+        -: 2378:        seek(1, true);
+        -: 2379:    }
+        -: 2380:    return *this;
+        -: 2381:}
+        -: 2382:
+        -: 2383:inline MatConstIterator MatConstIterator::operator ++(int)
+        -: 2384:{
+        -: 2385:    MatConstIterator b = *this;
+        -: 2386:    *this += 1;
+        -: 2387:    return b;
+        -: 2388:}
+        -: 2389:
+        -: 2390:
+        -: 2391:static inline
+        -: 2392:bool operator == (const MatConstIterator& a, const MatConstIterator& b)
+        -: 2393:{
+        -: 2394:    return a.m == b.m && a.ptr == b.ptr;
+        -: 2395:}
+        -: 2396:
+        -: 2397:static inline
+        -: 2398:bool operator != (const MatConstIterator& a, const MatConstIterator& b)
+        -: 2399:{
+        -: 2400:    return !(a == b);
+        -: 2401:}
+        -: 2402:
+        -: 2403:static inline
+        -: 2404:bool operator < (const MatConstIterator& a, const MatConstIterator& b)
+        -: 2405:{
+        -: 2406:    return a.ptr < b.ptr;
+        -: 2407:}
+        -: 2408:
+        -: 2409:static inline
+        -: 2410:bool operator > (const MatConstIterator& a, const MatConstIterator& b)
+        -: 2411:{
+        -: 2412:    return a.ptr > b.ptr;
+        -: 2413:}
+        -: 2414:
+        -: 2415:static inline
+        -: 2416:bool operator <= (const MatConstIterator& a, const MatConstIterator& b)
+        -: 2417:{
+        -: 2418:    return a.ptr <= b.ptr;
+        -: 2419:}
+        -: 2420:
+        -: 2421:static inline
+        -: 2422:bool operator >= (const MatConstIterator& a, const MatConstIterator& b)
+        -: 2423:{
+        -: 2424:    return a.ptr >= b.ptr;
+        -: 2425:}
+        -: 2426:
+        -: 2427:static inline
+        -: 2428:ptrdiff_t operator - (const MatConstIterator& b, const MatConstIterator& a)
+        -: 2429:{
+        -: 2430:    if( a.m != b.m )
+        -: 2431:        return ((size_t)(-1) >> 1);
+        -: 2432:    if( a.sliceEnd == b.sliceEnd )
+        -: 2433:        return (b.ptr - a.ptr)/static_cast<ptrdiff_t>(b.elemSize);
+        -: 2434:
+        -: 2435:    return b.lpos() - a.lpos();
+        -: 2436:}
+        -: 2437:
+        -: 2438:static inline
+        -: 2439:MatConstIterator operator + (const MatConstIterator& a, ptrdiff_t ofs)
+        -: 2440:{
+        -: 2441:    MatConstIterator b = a;
+        -: 2442:    return b += ofs;
+        -: 2443:}
+        -: 2444:
+        -: 2445:static inline
+        -: 2446:MatConstIterator operator + (ptrdiff_t ofs, const MatConstIterator& a)
+        -: 2447:{
+        -: 2448:    MatConstIterator b = a;
+        -: 2449:    return b += ofs;
+        -: 2450:}
+        -: 2451:
+        -: 2452:static inline
+        -: 2453:MatConstIterator operator - (const MatConstIterator& a, ptrdiff_t ofs)
+        -: 2454:{
+        -: 2455:    MatConstIterator b = a;
+        -: 2456:    return b += -ofs;
+        -: 2457:}
+        -: 2458:
+        -: 2459:
+        -: 2460:inline
+        -: 2461:const uchar* MatConstIterator::operator [](ptrdiff_t i) const
+        -: 2462:{
+        -: 2463:    return *(*this + i);
+        -: 2464:}
+        -: 2465:
+        -: 2466:
+        -: 2467:
+        -: 2468:///////////////////////// MatConstIterator_ /////////////////////////
+        -: 2469:
+        -: 2470:template<typename _Tp> inline
+        -: 2471:MatConstIterator_<_Tp>::MatConstIterator_()
+        -: 2472:{}
+        -: 2473:
+        -: 2474:template<typename _Tp> inline
+        -: 2475:MatConstIterator_<_Tp>::MatConstIterator_(const Mat_<_Tp>* _m)
+        -: 2476:    : MatConstIterator(_m)
+        -: 2477:{}
+        -: 2478:
+        -: 2479:template<typename _Tp> inline
+        -: 2480:MatConstIterator_<_Tp>::MatConstIterator_(const Mat_<_Tp>* _m, int _row, int _col)
+        -: 2481:    : MatConstIterator(_m, _row, _col)
+        -: 2482:{}
+        -: 2483:
+        -: 2484:template<typename _Tp> inline
+        -: 2485:MatConstIterator_<_Tp>::MatConstIterator_(const Mat_<_Tp>* _m, Point _pt)
+        -: 2486:    : MatConstIterator(_m, _pt)
+        -: 2487:{}
+        -: 2488:
+        -: 2489:template<typename _Tp> inline
+        -: 2490:MatConstIterator_<_Tp>::MatConstIterator_(const MatConstIterator_& it)
+        -: 2491:    : MatConstIterator(it)
+        -: 2492:{}
+        -: 2493:
+        -: 2494:template<typename _Tp> inline
+        -: 2495:MatConstIterator_<_Tp>& MatConstIterator_<_Tp>::operator = (const MatConstIterator_& it )
+        -: 2496:{
+        -: 2497:    MatConstIterator::operator = (it);
+        -: 2498:    return *this;
+        -: 2499:}
+        -: 2500:
+        -: 2501:template<typename _Tp> inline
+        -: 2502:const _Tp& MatConstIterator_<_Tp>::operator *() const
+        -: 2503:{
+        -: 2504:    return *(_Tp*)(this->ptr);
+        -: 2505:}
+        -: 2506:
+        -: 2507:template<typename _Tp> inline
+        -: 2508:MatConstIterator_<_Tp>& MatConstIterator_<_Tp>::operator += (ptrdiff_t ofs)
+        -: 2509:{
+        -: 2510:    MatConstIterator::operator += (ofs);
+        -: 2511:    return *this;
+        -: 2512:}
+        -: 2513:
+        -: 2514:template<typename _Tp> inline
+        -: 2515:MatConstIterator_<_Tp>& MatConstIterator_<_Tp>::operator -= (ptrdiff_t ofs)
+        -: 2516:{
+        -: 2517:    return (*this += -ofs);
+        -: 2518:}
+        -: 2519:
+        -: 2520:template<typename _Tp> inline
+        -: 2521:MatConstIterator_<_Tp>& MatConstIterator_<_Tp>::operator --()
+        -: 2522:{
+        -: 2523:    MatConstIterator::operator --();
+        -: 2524:    return *this;
+        -: 2525:}
+        -: 2526:
+        -: 2527:template<typename _Tp> inline
+        -: 2528:MatConstIterator_<_Tp> MatConstIterator_<_Tp>::operator --(int)
+        -: 2529:{
+        -: 2530:    MatConstIterator_ b = *this;
+        -: 2531:    MatConstIterator::operator --();
+        -: 2532:    return b;
+        -: 2533:}
+        -: 2534:
+        -: 2535:template<typename _Tp> inline
+        -: 2536:MatConstIterator_<_Tp>& MatConstIterator_<_Tp>::operator ++()
+        -: 2537:{
+        -: 2538:    MatConstIterator::operator ++();
+        -: 2539:    return *this;
+        -: 2540:}
+        -: 2541:
+        -: 2542:template<typename _Tp> inline
+        -: 2543:MatConstIterator_<_Tp> MatConstIterator_<_Tp>::operator ++(int)
+        -: 2544:{
+        -: 2545:    MatConstIterator_ b = *this;
+        -: 2546:    MatConstIterator::operator ++();
+        -: 2547:    return b;
+        -: 2548:}
+        -: 2549:
+        -: 2550:
+        -: 2551:template<typename _Tp> inline
+        -: 2552:Point MatConstIterator_<_Tp>::pos() const
+        -: 2553:{
+        -: 2554:    if( !m )
+        -: 2555:        return Point();
+        -: 2556:    CV_DbgAssert( m->dims <= 2 );
+        -: 2557:    if( m->isContinuous() )
+        -: 2558:    {
+        -: 2559:        ptrdiff_t ofs = (const _Tp*)ptr - (const _Tp*)m->data;
+        -: 2560:        int y = (int)(ofs / m->cols);
+        -: 2561:        int x = (int)(ofs - (ptrdiff_t)y * m->cols);
+        -: 2562:        return Point(x, y);
+        -: 2563:    }
+        -: 2564:    else
+        -: 2565:    {
+        -: 2566:        ptrdiff_t ofs = (uchar*)ptr - m->data;
+        -: 2567:        int y = (int)(ofs / m->step);
+        -: 2568:        int x = (int)((ofs - y * m->step)/sizeof(_Tp));
+        -: 2569:        return Point(x, y);
+        -: 2570:    }
+        -: 2571:}
+        -: 2572:
+        -: 2573:
+        -: 2574:template<typename _Tp> static inline
+        -: 2575:bool operator == (const MatConstIterator_<_Tp>& a, const MatConstIterator_<_Tp>& b)
+        -: 2576:{
+        -: 2577:    return a.m == b.m && a.ptr == b.ptr;
+        -: 2578:}
+        -: 2579:
+        -: 2580:template<typename _Tp> static inline
+        -: 2581:bool operator != (const MatConstIterator_<_Tp>& a, const MatConstIterator_<_Tp>& b)
+        -: 2582:{
+        -: 2583:    return a.m != b.m || a.ptr != b.ptr;
+        -: 2584:}
+        -: 2585:
+        -: 2586:template<typename _Tp> static inline
+        -: 2587:MatConstIterator_<_Tp> operator + (const MatConstIterator_<_Tp>& a, ptrdiff_t ofs)
+        -: 2588:{
+        -: 2589:    MatConstIterator t = (const MatConstIterator&)a + ofs;
+        -: 2590:    return (MatConstIterator_<_Tp>&)t;
+        -: 2591:}
+        -: 2592:
+        -: 2593:template<typename _Tp> static inline
+        -: 2594:MatConstIterator_<_Tp> operator + (ptrdiff_t ofs, const MatConstIterator_<_Tp>& a)
+        -: 2595:{
+        -: 2596:    MatConstIterator t = (const MatConstIterator&)a + ofs;
+        -: 2597:    return (MatConstIterator_<_Tp>&)t;
+        -: 2598:}
+        -: 2599:
+        -: 2600:template<typename _Tp> static inline
+        -: 2601:MatConstIterator_<_Tp> operator - (const MatConstIterator_<_Tp>& a, ptrdiff_t ofs)
+        -: 2602:{
+        -: 2603:    MatConstIterator t = (const MatConstIterator&)a - ofs;
+        -: 2604:    return (MatConstIterator_<_Tp>&)t;
+        -: 2605:}
+        -: 2606:
+        -: 2607:template<typename _Tp> inline
+        -: 2608:const _Tp& MatConstIterator_<_Tp>::operator [](ptrdiff_t i) const
+        -: 2609:{
+        -: 2610:    return *(_Tp*)MatConstIterator::operator [](i);
+        -: 2611:}
+        -: 2612:
+        -: 2613:
+        -: 2614:
+        -: 2615://////////////////////////// MatIterator_ ///////////////////////////
+        -: 2616:
+        -: 2617:template<typename _Tp> inline
+        -: 2618:MatIterator_<_Tp>::MatIterator_()
+        -: 2619:    : MatConstIterator_<_Tp>()
+        -: 2620:{}
+        -: 2621:
+        -: 2622:template<typename _Tp> inline
+        -: 2623:MatIterator_<_Tp>::MatIterator_(Mat_<_Tp>* _m)
+        -: 2624:    : MatConstIterator_<_Tp>(_m)
+        -: 2625:{}
+        -: 2626:
+        -: 2627:template<typename _Tp> inline
+        -: 2628:MatIterator_<_Tp>::MatIterator_(Mat_<_Tp>* _m, int _row, int _col)
+        -: 2629:    : MatConstIterator_<_Tp>(_m, _row, _col)
+        -: 2630:{}
+        -: 2631:
+        -: 2632:template<typename _Tp> inline
+        -: 2633:MatIterator_<_Tp>::MatIterator_(Mat_<_Tp>* _m, Point _pt)
+        -: 2634:    : MatConstIterator_<_Tp>(_m, _pt)
+        -: 2635:{}
+        -: 2636:
+        -: 2637:template<typename _Tp> inline
+        -: 2638:MatIterator_<_Tp>::MatIterator_(Mat_<_Tp>* _m, const int* _idx)
+        -: 2639:    : MatConstIterator_<_Tp>(_m, _idx)
+        -: 2640:{}
+        -: 2641:
+        -: 2642:template<typename _Tp> inline
+        -: 2643:MatIterator_<_Tp>::MatIterator_(const MatIterator_& it)
+        -: 2644:    : MatConstIterator_<_Tp>(it)
+        -: 2645:{}
+        -: 2646:
+        -: 2647:template<typename _Tp> inline
+        -: 2648:MatIterator_<_Tp>& MatIterator_<_Tp>::operator = (const MatIterator_<_Tp>& it )
+        -: 2649:{
+        -: 2650:    MatConstIterator::operator = (it);
+        -: 2651:    return *this;
+        -: 2652:}
+        -: 2653:
+        -: 2654:template<typename _Tp> inline
+        -: 2655:_Tp& MatIterator_<_Tp>::operator *() const
+        -: 2656:{
+        -: 2657:    return *(_Tp*)(this->ptr);
+        -: 2658:}
+        -: 2659:
+        -: 2660:template<typename _Tp> inline
+        -: 2661:MatIterator_<_Tp>& MatIterator_<_Tp>::operator += (ptrdiff_t ofs)
+        -: 2662:{
+        -: 2663:    MatConstIterator::operator += (ofs);
+        -: 2664:    return *this;
+        -: 2665:}
+        -: 2666:
+        -: 2667:template<typename _Tp> inline
+        -: 2668:MatIterator_<_Tp>& MatIterator_<_Tp>::operator -= (ptrdiff_t ofs)
+        -: 2669:{
+        -: 2670:    MatConstIterator::operator += (-ofs);
+        -: 2671:    return *this;
+        -: 2672:}
+        -: 2673:
+        -: 2674:template<typename _Tp> inline
+        -: 2675:MatIterator_<_Tp>& MatIterator_<_Tp>::operator --()
+        -: 2676:{
+        -: 2677:    MatConstIterator::operator --();
+        -: 2678:    return *this;
+        -: 2679:}
+        -: 2680:
+        -: 2681:template<typename _Tp> inline
+        -: 2682:MatIterator_<_Tp> MatIterator_<_Tp>::operator --(int)
+        -: 2683:{
+        -: 2684:    MatIterator_ b = *this;
+        -: 2685:    MatConstIterator::operator --();
+        -: 2686:    return b;
+        -: 2687:}
+        -: 2688:
+        -: 2689:template<typename _Tp> inline
+        -: 2690:MatIterator_<_Tp>& MatIterator_<_Tp>::operator ++()
+        -: 2691:{
+        -: 2692:    MatConstIterator::operator ++();
+        -: 2693:    return *this;
+        -: 2694:}
+        -: 2695:
+        -: 2696:template<typename _Tp> inline
+        -: 2697:MatIterator_<_Tp> MatIterator_<_Tp>::operator ++(int)
+        -: 2698:{
+        -: 2699:    MatIterator_ b = *this;
+        -: 2700:    MatConstIterator::operator ++();
+        -: 2701:    return b;
+        -: 2702:}
+        -: 2703:
+        -: 2704:template<typename _Tp> inline
+        -: 2705:_Tp& MatIterator_<_Tp>::operator [](ptrdiff_t i) const
+        -: 2706:{
+        -: 2707:    return *(*this + i);
+        -: 2708:}
+        -: 2709:
+        -: 2710:
+        -: 2711:template<typename _Tp> static inline
+        -: 2712:bool operator == (const MatIterator_<_Tp>& a, const MatIterator_<_Tp>& b)
+        -: 2713:{
+        -: 2714:    return a.m == b.m && a.ptr == b.ptr;
+        -: 2715:}
+        -: 2716:
+        -: 2717:template<typename _Tp> static inline
+        -: 2718:bool operator != (const MatIterator_<_Tp>& a, const MatIterator_<_Tp>& b)
+        -: 2719:{
+        -: 2720:    return a.m != b.m || a.ptr != b.ptr;
+        -: 2721:}
+        -: 2722:
+        -: 2723:template<typename _Tp> static inline
+        -: 2724:MatIterator_<_Tp> operator + (const MatIterator_<_Tp>& a, ptrdiff_t ofs)
+        -: 2725:{
+        -: 2726:    MatConstIterator t = (const MatConstIterator&)a + ofs;
+        -: 2727:    return (MatIterator_<_Tp>&)t;
+        -: 2728:}
+        -: 2729:
+        -: 2730:template<typename _Tp> static inline
+        -: 2731:MatIterator_<_Tp> operator + (ptrdiff_t ofs, const MatIterator_<_Tp>& a)
+        -: 2732:{
+        -: 2733:    MatConstIterator t = (const MatConstIterator&)a + ofs;
+        -: 2734:    return (MatIterator_<_Tp>&)t;
+        -: 2735:}
+        -: 2736:
+        -: 2737:template<typename _Tp> static inline
+        -: 2738:MatIterator_<_Tp> operator - (const MatIterator_<_Tp>& a, ptrdiff_t ofs)
+        -: 2739:{
+        -: 2740:    MatConstIterator t = (const MatConstIterator&)a - ofs;
+        -: 2741:    return (MatIterator_<_Tp>&)t;
+        -: 2742:}
+        -: 2743:
+        -: 2744:
+        -: 2745:
+        -: 2746://///////////////////// SparseMatConstIterator //////////////////////
+        -: 2747:
+        -: 2748:inline
+        -: 2749:SparseMatConstIterator::SparseMatConstIterator()
+        -: 2750:    : m(0), hashidx(0), ptr(0)
+        -: 2751:{}
+        -: 2752:
+        -: 2753:inline
+        -: 2754:SparseMatConstIterator::SparseMatConstIterator(const SparseMatConstIterator& it)
+        -: 2755:    : m(it.m), hashidx(it.hashidx), ptr(it.ptr)
+        -: 2756:{}
+        -: 2757:
+        -: 2758:inline SparseMatConstIterator& SparseMatConstIterator::operator = (const SparseMatConstIterator& it)
+        -: 2759:{
+        -: 2760:    if( this != &it )
+        -: 2761:    {
+        -: 2762:        m = it.m;
+        -: 2763:        hashidx = it.hashidx;
+        -: 2764:        ptr = it.ptr;
+        -: 2765:    }
+        -: 2766:    return *this;
+        -: 2767:}
+        -: 2768:
+        -: 2769:template<typename _Tp> inline
+        -: 2770:const _Tp& SparseMatConstIterator::value() const
+        -: 2771:{
+        -: 2772:    return *(const _Tp*)ptr;
+        -: 2773:}
+        -: 2774:
+        -: 2775:inline
+        -: 2776:const SparseMat::Node* SparseMatConstIterator::node() const
+        -: 2777:{
+        -: 2778:    return (ptr && m && m->hdr) ? (const SparseMat::Node*)(const void*)(ptr - m->hdr->valueOffset) : 0;
+        -: 2779:}
+        -: 2780:
+        -: 2781:inline
+        -: 2782:SparseMatConstIterator SparseMatConstIterator::operator ++(int)
+        -: 2783:{
+        -: 2784:    SparseMatConstIterator it = *this;
+        -: 2785:    ++*this;
+        -: 2786:    return it;
+        -: 2787:}
+        -: 2788:
+        -: 2789:inline
+        -: 2790:void SparseMatConstIterator::seekEnd()
+        -: 2791:{
+        -: 2792:    if( m && m->hdr )
+        -: 2793:    {
+        -: 2794:        hashidx = m->hdr->hashtab.size();
+        -: 2795:        ptr = 0;
+        -: 2796:    }
+        -: 2797:}
+        -: 2798:
+        -: 2799:
+        -: 2800:static inline
+        -: 2801:bool operator == (const SparseMatConstIterator& it1, const SparseMatConstIterator& it2)
+        -: 2802:{
+        -: 2803:    return it1.m == it2.m && it1.ptr == it2.ptr;
+        -: 2804:}
+        -: 2805:
+        -: 2806:static inline
+        -: 2807:bool operator != (const SparseMatConstIterator& it1, const SparseMatConstIterator& it2)
+        -: 2808:{
+        -: 2809:    return !(it1 == it2);
+        -: 2810:}
+        -: 2811:
+        -: 2812:
+        -: 2813:
+        -: 2814:///////////////////////// SparseMatIterator /////////////////////////
+        -: 2815:
+        -: 2816:inline
+        -: 2817:SparseMatIterator::SparseMatIterator()
+        -: 2818:{}
+        -: 2819:
+        -: 2820:inline
+        -: 2821:SparseMatIterator::SparseMatIterator(SparseMat* _m)
+        -: 2822:    : SparseMatConstIterator(_m)
+        -: 2823:{}
+        -: 2824:
+        -: 2825:inline
+        -: 2826:SparseMatIterator::SparseMatIterator(const SparseMatIterator& it)
+        -: 2827:    : SparseMatConstIterator(it)
+        -: 2828:{}
+        -: 2829:
+        -: 2830:inline
+        -: 2831:SparseMatIterator& SparseMatIterator::operator = (const SparseMatIterator& it)
+        -: 2832:{
+        -: 2833:    (SparseMatConstIterator&)*this = it;
+        -: 2834:    return *this;
+        -: 2835:}
+        -: 2836:
+        -: 2837:template<typename _Tp> inline
+        -: 2838:_Tp& SparseMatIterator::value() const
+        -: 2839:{
+        -: 2840:    return *(_Tp*)ptr;
+        -: 2841:}
+        -: 2842:
+        -: 2843:inline
+        -: 2844:SparseMat::Node* SparseMatIterator::node() const
+        -: 2845:{
+        -: 2846:    return (SparseMat::Node*)SparseMatConstIterator::node();
+        -: 2847:}
+        -: 2848:
+        -: 2849:inline
+        -: 2850:SparseMatIterator& SparseMatIterator::operator ++()
+        -: 2851:{
+        -: 2852:    SparseMatConstIterator::operator ++();
+        -: 2853:    return *this;
+        -: 2854:}
+        -: 2855:
+        -: 2856:inline
+        -: 2857:SparseMatIterator SparseMatIterator::operator ++(int)
+        -: 2858:{
+        -: 2859:    SparseMatIterator it = *this;
+        -: 2860:    ++*this;
+        -: 2861:    return it;
+        -: 2862:}
+        -: 2863:
+        -: 2864:
+        -: 2865:
+        -: 2866:////////////////////// SparseMatConstIterator_ //////////////////////
+        -: 2867:
+        -: 2868:template<typename _Tp> inline
+        -: 2869:SparseMatConstIterator_<_Tp>::SparseMatConstIterator_()
+        -: 2870:{}
+        -: 2871:
+        -: 2872:template<typename _Tp> inline
+        -: 2873:SparseMatConstIterator_<_Tp>::SparseMatConstIterator_(const SparseMat_<_Tp>* _m)
+        -: 2874:    : SparseMatConstIterator(_m)
+        -: 2875:{}
+        -: 2876:
+        -: 2877:template<typename _Tp> inline
+        -: 2878:SparseMatConstIterator_<_Tp>::SparseMatConstIterator_(const SparseMat* _m)
+        -: 2879:    : SparseMatConstIterator(_m)
+        -: 2880:{
+        -: 2881:    CV_Assert( _m->type() == traits::Type<_Tp>::value );
+        -: 2882:}
+        -: 2883:
+        -: 2884:template<typename _Tp> inline
+        -: 2885:SparseMatConstIterator_<_Tp>::SparseMatConstIterator_(const SparseMatConstIterator_<_Tp>& it)
+        -: 2886:    : SparseMatConstIterator(it)
+        -: 2887:{}
+        -: 2888:
+        -: 2889:template<typename _Tp> inline
+        -: 2890:SparseMatConstIterator_<_Tp>& SparseMatConstIterator_<_Tp>::operator = (const SparseMatConstIterator_<_Tp>& it)
+        -: 2891:{
+        -: 2892:    return reinterpret_cast<SparseMatConstIterator_<_Tp>&>
+        -: 2893:         (*reinterpret_cast<SparseMatConstIterator*>(this) =
+        -: 2894:           reinterpret_cast<const SparseMatConstIterator&>(it));
+        -: 2895:}
+        -: 2896:
+        -: 2897:template<typename _Tp> inline
+        -: 2898:const _Tp& SparseMatConstIterator_<_Tp>::operator *() const
+        -: 2899:{
+        -: 2900:    return *(const _Tp*)this->ptr;
+        -: 2901:}
+        -: 2902:
+        -: 2903:template<typename _Tp> inline
+        -: 2904:SparseMatConstIterator_<_Tp>& SparseMatConstIterator_<_Tp>::operator ++()
+        -: 2905:{
+        -: 2906:    SparseMatConstIterator::operator ++();
+        -: 2907:    return *this;
+        -: 2908:}
+        -: 2909:
+        -: 2910:template<typename _Tp> inline
+        -: 2911:SparseMatConstIterator_<_Tp> SparseMatConstIterator_<_Tp>::operator ++(int)
+        -: 2912:{
+        -: 2913:    SparseMatConstIterator_<_Tp> it = *this;
+        -: 2914:    SparseMatConstIterator::operator ++();
+        -: 2915:    return it;
+        -: 2916:}
+        -: 2917:
+        -: 2918:
+        -: 2919:
+        -: 2920:///////////////////////// SparseMatIterator_ ////////////////////////
+        -: 2921:
+        -: 2922:template<typename _Tp> inline
+        -: 2923:SparseMatIterator_<_Tp>::SparseMatIterator_()
+        -: 2924:{}
+        -: 2925:
+        -: 2926:template<typename _Tp> inline
+        -: 2927:SparseMatIterator_<_Tp>::SparseMatIterator_(SparseMat_<_Tp>* _m)
+        -: 2928:    : SparseMatConstIterator_<_Tp>(_m)
+        -: 2929:{}
+        -: 2930:
+        -: 2931:template<typename _Tp> inline
+        -: 2932:SparseMatIterator_<_Tp>::SparseMatIterator_(SparseMat* _m)
+        -: 2933:    : SparseMatConstIterator_<_Tp>(_m)
+        -: 2934:{}
+        -: 2935:
+        -: 2936:template<typename _Tp> inline
+        -: 2937:SparseMatIterator_<_Tp>::SparseMatIterator_(const SparseMatIterator_<_Tp>& it)
+        -: 2938:    : SparseMatConstIterator_<_Tp>(it)
+        -: 2939:{}
+        -: 2940:
+        -: 2941:template<typename _Tp> inline
+        -: 2942:SparseMatIterator_<_Tp>& SparseMatIterator_<_Tp>::operator = (const SparseMatIterator_<_Tp>& it)
+        -: 2943:{
+        -: 2944:    return reinterpret_cast<SparseMatIterator_<_Tp>&>
+        -: 2945:         (*reinterpret_cast<SparseMatConstIterator*>(this) =
+        -: 2946:           reinterpret_cast<const SparseMatConstIterator&>(it));
+        -: 2947:}
+        -: 2948:
+        -: 2949:template<typename _Tp> inline
+        -: 2950:_Tp& SparseMatIterator_<_Tp>::operator *() const
+        -: 2951:{
+        -: 2952:    return *(_Tp*)this->ptr;
+        -: 2953:}
+        -: 2954:
+        -: 2955:template<typename _Tp> inline
+        -: 2956:SparseMatIterator_<_Tp>& SparseMatIterator_<_Tp>::operator ++()
+        -: 2957:{
+        -: 2958:    SparseMatConstIterator::operator ++();
+        -: 2959:    return *this;
+        -: 2960:}
+        -: 2961:
+        -: 2962:template<typename _Tp> inline
+        -: 2963:SparseMatIterator_<_Tp> SparseMatIterator_<_Tp>::operator ++(int)
+        -: 2964:{
+        -: 2965:    SparseMatIterator_<_Tp> it = *this;
+        -: 2966:    SparseMatConstIterator::operator ++();
+        -: 2967:    return it;
+        -: 2968:}
+        -: 2969:
+        -: 2970:
+        -: 2971:
+        -: 2972://////////////////////// MatCommaInitializer_ ///////////////////////
+        -: 2973:
+        -: 2974:template<typename _Tp> inline
+        -: 2975:MatCommaInitializer_<_Tp>::MatCommaInitializer_(Mat_<_Tp>* _m)
+        -: 2976:    : it(_m)
+        -: 2977:{}
+        -: 2978:
+        -: 2979:template<typename _Tp> template<typename T2> inline
+        -: 2980:MatCommaInitializer_<_Tp>& MatCommaInitializer_<_Tp>::operator , (T2 v)
+        -: 2981:{
+        -: 2982:    CV_DbgAssert( this->it < ((const Mat_<_Tp>*)this->it.m)->end() );
+        -: 2983:    *this->it = _Tp(v);
+        -: 2984:    ++this->it;
+        -: 2985:    return *this;
+        -: 2986:}
+        -: 2987:
+        -: 2988:template<typename _Tp> inline
+        -: 2989:MatCommaInitializer_<_Tp>::operator Mat_<_Tp>() const
+        -: 2990:{
+        -: 2991:    CV_DbgAssert( this->it == ((const Mat_<_Tp>*)this->it.m)->end() );
+        -: 2992:    return Mat_<_Tp>(*this->it.m);
+        -: 2993:}
+        -: 2994:
+        -: 2995:
+        -: 2996:template<typename _Tp, typename T2> static inline
+        -: 2997:MatCommaInitializer_<_Tp> operator << (const Mat_<_Tp>& m, T2 val)
+        -: 2998:{
+        -: 2999:    MatCommaInitializer_<_Tp> commaInitializer((Mat_<_Tp>*)&m);
+        -: 3000:    return (commaInitializer, val);
+        -: 3001:}
+        -: 3002:
+        -: 3003:
+        -: 3004:
+        -: 3005:///////////////////////// Matrix Expressions ////////////////////////
+        -: 3006:
+        -: 3007:inline
+        -: 3008:Mat& Mat::operator = (const MatExpr& e)
+        -: 3009:{
+        -: 3010:    e.op->assign(e, *this);
+        -: 3011:    return *this;
+        -: 3012:}
+        -: 3013:
+        -: 3014:template<typename _Tp> inline
+        -: 3015:Mat_<_Tp>::Mat_(const MatExpr& e)
+        -: 3016:{
+        -: 3017:    e.op->assign(e, *this, traits::Type<_Tp>::value);
+        -: 3018:}
+        -: 3019:
+        -: 3020:template<typename _Tp> inline
+        -: 3021:Mat_<_Tp>& Mat_<_Tp>::operator = (const MatExpr& e)
+        -: 3022:{
+        -: 3023:    e.op->assign(e, *this, traits::Type<_Tp>::value);
+        -: 3024:    return *this;
+        -: 3025:}
+        -: 3026:
+        -: 3027:template<typename _Tp> inline
+        -: 3028:MatExpr Mat_<_Tp>::zeros(int rows, int cols)
+        -: 3029:{
+        -: 3030:    return Mat::zeros(rows, cols, traits::Type<_Tp>::value);
+        -: 3031:}
+        -: 3032:
+        -: 3033:template<typename _Tp> inline
+        -: 3034:MatExpr Mat_<_Tp>::zeros(Size sz)
+        -: 3035:{
+        -: 3036:    return Mat::zeros(sz, traits::Type<_Tp>::value);
+        -: 3037:}
+        -: 3038:
+        -: 3039:template<typename _Tp> inline
+        -: 3040:MatExpr Mat_<_Tp>::ones(int rows, int cols)
+        -: 3041:{
+        -: 3042:    return Mat::ones(rows, cols, traits::Type<_Tp>::value);
+        -: 3043:}
+        -: 3044:
+        -: 3045:template<typename _Tp> inline
+        -: 3046:MatExpr Mat_<_Tp>::ones(Size sz)
+        -: 3047:{
+        -: 3048:    return Mat::ones(sz, traits::Type<_Tp>::value);
+        -: 3049:}
+        -: 3050:
+        -: 3051:template<typename _Tp> inline
+        -: 3052:MatExpr Mat_<_Tp>::eye(int rows, int cols)
+        -: 3053:{
+        -: 3054:    return Mat::eye(rows, cols, traits::Type<_Tp>::value);
+        -: 3055:}
+        -: 3056:
+        -: 3057:template<typename _Tp> inline
+        -: 3058:MatExpr Mat_<_Tp>::eye(Size sz)
+        -: 3059:{
+        -: 3060:    return Mat::eye(sz, traits::Type<_Tp>::value);
+        -: 3061:}
+        -: 3062:
+        -: 3063:inline
+        -: 3064:MatExpr::MatExpr()
+        -: 3065:    : op(0), flags(0), a(Mat()), b(Mat()), c(Mat()), alpha(0), beta(0), s()
+        -: 3066:{}
+        -: 3067:
+        -: 3068:inline
+        -: 3069:MatExpr::MatExpr(const MatOp* _op, int _flags, const Mat& _a, const Mat& _b,
+        -: 3070:                 const Mat& _c, double _alpha, double _beta, const Scalar& _s)
+        -: 3071:    : op(_op), flags(_flags), a(_a), b(_b), c(_c), alpha(_alpha), beta(_beta), s(_s)
+        -: 3072:{}
+        -: 3073:
+        -: 3074:inline
+        -: 3075:MatExpr::operator Mat() const
+        -: 3076:{
+        -: 3077:    Mat m;
+        -: 3078:    op->assign(*this, m);
+        -: 3079:    return m;
+        -: 3080:}
+        -: 3081:
+        -: 3082:template<typename _Tp> inline
+        -: 3083:MatExpr::operator Mat_<_Tp>() const
+        -: 3084:{
+        -: 3085:    Mat_<_Tp> m;
+        -: 3086:    op->assign(*this, m, traits::Type<_Tp>::value);
+        -: 3087:    return m;
+        -: 3088:}
+        -: 3089:
+        -: 3090:
+        -: 3091:template<typename _Tp> static inline
+        -: 3092:MatExpr min(const Mat_<_Tp>& a, const Mat_<_Tp>& b)
+        -: 3093:{
+        -: 3094:    return cv::min((const Mat&)a, (const Mat&)b);
+        -: 3095:}
+        -: 3096:
+        -: 3097:template<typename _Tp> static inline
+        -: 3098:MatExpr min(const Mat_<_Tp>& a, double s)
+        -: 3099:{
+        -: 3100:    return cv::min((const Mat&)a, s);
+        -: 3101:}
+        -: 3102:
+        -: 3103:template<typename _Tp> static inline
+        -: 3104:MatExpr min(double s, const Mat_<_Tp>& a)
+        -: 3105:{
+        -: 3106:    return cv::min((const Mat&)a, s);
+        -: 3107:}
+        -: 3108:
+        -: 3109:template<typename _Tp> static inline
+        -: 3110:MatExpr max(const Mat_<_Tp>& a, const Mat_<_Tp>& b)
+        -: 3111:{
+        -: 3112:    return cv::max((const Mat&)a, (const Mat&)b);
+        -: 3113:}
+        -: 3114:
+        -: 3115:template<typename _Tp> static inline
+        -: 3116:MatExpr max(const Mat_<_Tp>& a, double s)
+        -: 3117:{
+        -: 3118:    return cv::max((const Mat&)a, s);
+        -: 3119:}
+        -: 3120:
+        -: 3121:template<typename _Tp> static inline
+        -: 3122:MatExpr max(double s, const Mat_<_Tp>& a)
+        -: 3123:{
+        -: 3124:    return cv::max((const Mat&)a, s);
+        -: 3125:}
+        -: 3126:
+        -: 3127:template<typename _Tp> static inline
+        -: 3128:MatExpr abs(const Mat_<_Tp>& m)
+        -: 3129:{
+        -: 3130:    return cv::abs((const Mat&)m);
+        -: 3131:}
+        -: 3132:
+        -: 3133:
+        -: 3134:static inline
+        -: 3135:Mat& operator += (Mat& a, const MatExpr& b)
+        -: 3136:{
+        -: 3137:    b.op->augAssignAdd(b, a);
+        -: 3138:    return a;
+        -: 3139:}
+        -: 3140:
+        -: 3141:static inline
+        -: 3142:const Mat& operator += (const Mat& a, const MatExpr& b)
+        -: 3143:{
+        -: 3144:    b.op->augAssignAdd(b, (Mat&)a);
+        -: 3145:    return a;
+        -: 3146:}
+        -: 3147:
+        -: 3148:template<typename _Tp> static inline
+        -: 3149:Mat_<_Tp>& operator += (Mat_<_Tp>& a, const MatExpr& b)
+        -: 3150:{
+        -: 3151:    b.op->augAssignAdd(b, a);
+        -: 3152:    return a;
+        -: 3153:}
+        -: 3154:
+        -: 3155:template<typename _Tp> static inline
+        -: 3156:const Mat_<_Tp>& operator += (const Mat_<_Tp>& a, const MatExpr& b)
+        -: 3157:{
+        -: 3158:    b.op->augAssignAdd(b, (Mat&)a);
+        -: 3159:    return a;
+        -: 3160:}
+        -: 3161:
+        -: 3162:static inline
+        -: 3163:Mat& operator -= (Mat& a, const MatExpr& b)
+        -: 3164:{
+        -: 3165:    b.op->augAssignSubtract(b, a);
+        -: 3166:    return a;
+        -: 3167:}
+        -: 3168:
+        -: 3169:static inline
+        -: 3170:const Mat& operator -= (const Mat& a, const MatExpr& b)
+        -: 3171:{
+        -: 3172:    b.op->augAssignSubtract(b, (Mat&)a);
+        -: 3173:    return a;
+        -: 3174:}
+        -: 3175:
+        -: 3176:template<typename _Tp> static inline
+        -: 3177:Mat_<_Tp>& operator -= (Mat_<_Tp>& a, const MatExpr& b)
+        -: 3178:{
+        -: 3179:    b.op->augAssignSubtract(b, a);
+        -: 3180:    return a;
+        -: 3181:}
+        -: 3182:
+        -: 3183:template<typename _Tp> static inline
+        -: 3184:const Mat_<_Tp>& operator -= (const Mat_<_Tp>& a, const MatExpr& b)
+        -: 3185:{
+        -: 3186:    b.op->augAssignSubtract(b, (Mat&)a);
+        -: 3187:    return a;
+        -: 3188:}
+        -: 3189:
+        -: 3190:static inline
+        -: 3191:Mat& operator *= (Mat& a, const MatExpr& b)
+        -: 3192:{
+        -: 3193:    b.op->augAssignMultiply(b, a);
+        -: 3194:    return a;
+        -: 3195:}
+        -: 3196:
+        -: 3197:static inline
+        -: 3198:const Mat& operator *= (const Mat& a, const MatExpr& b)
+        -: 3199:{
+        -: 3200:    b.op->augAssignMultiply(b, (Mat&)a);
+        -: 3201:    return a;
+        -: 3202:}
+        -: 3203:
+        -: 3204:template<typename _Tp> static inline
+        -: 3205:Mat_<_Tp>& operator *= (Mat_<_Tp>& a, const MatExpr& b)
+        -: 3206:{
+        -: 3207:    b.op->augAssignMultiply(b, a);
+        -: 3208:    return a;
+        -: 3209:}
+        -: 3210:
+        -: 3211:template<typename _Tp> static inline
+        -: 3212:const Mat_<_Tp>& operator *= (const Mat_<_Tp>& a, const MatExpr& b)
+        -: 3213:{
+        -: 3214:    b.op->augAssignMultiply(b, (Mat&)a);
+        -: 3215:    return a;
+        -: 3216:}
+        -: 3217:
+        -: 3218:static inline
+        -: 3219:Mat& operator /= (Mat& a, const MatExpr& b)
+        -: 3220:{
+        -: 3221:    b.op->augAssignDivide(b, a);
+        -: 3222:    return a;
+        -: 3223:}
+        -: 3224:
+        -: 3225:static inline
+        -: 3226:const Mat& operator /= (const Mat& a, const MatExpr& b)
+        -: 3227:{
+        -: 3228:    b.op->augAssignDivide(b, (Mat&)a);
+        -: 3229:    return a;
+        -: 3230:}
+        -: 3231:
+        -: 3232:template<typename _Tp> static inline
+        -: 3233:Mat_<_Tp>& operator /= (Mat_<_Tp>& a, const MatExpr& b)
+        -: 3234:{
+        -: 3235:    b.op->augAssignDivide(b, a);
+        -: 3236:    return a;
+        -: 3237:}
+        -: 3238:
+        -: 3239:template<typename _Tp> static inline
+        -: 3240:const Mat_<_Tp>& operator /= (const Mat_<_Tp>& a, const MatExpr& b)
+        -: 3241:{
+        -: 3242:    b.op->augAssignDivide(b, (Mat&)a);
+        -: 3243:    return a;
+        -: 3244:}
+        -: 3245:
+        -: 3246:
+        -: 3247://////////////////////////////// UMat ////////////////////////////////
+        -: 3248:
+        -: 3249:template<typename _Tp> inline
+        -: 3250:UMat::UMat(const std::vector<_Tp>& vec, bool copyData)
+        -: 3251:: flags(MAGIC_VAL + traits::Type<_Tp>::value + CV_MAT_CONT_FLAG), dims(2), rows((int)vec.size()),
+        -: 3252:cols(1), allocator(0), usageFlags(USAGE_DEFAULT), u(0), offset(0), size(&rows)
+        -: 3253:{
+        -: 3254:    if(vec.empty())
+        -: 3255:        return;
+        -: 3256:    if( !copyData )
+        -: 3257:    {
+        -: 3258:        // !!!TODO!!!
+        -: 3259:        CV_Error(Error::StsNotImplemented, "");
+        -: 3260:    }
+        -: 3261:    else
+        -: 3262:        Mat((int)vec.size(), 1, traits::Type<_Tp>::value, (uchar*)&vec[0]).copyTo(*this);
+        -: 3263:}
+        -: 3264:
+        -: 3265:inline
+        -: 3266:UMat UMat::row(int y) const
+        -: 3267:{
+        -: 3268:    return UMat(*this, Range(y, y + 1), Range::all());
+        -: 3269:}
+        -: 3270:
+        -: 3271:inline
+        -: 3272:UMat UMat::col(int x) const
+        -: 3273:{
+        -: 3274:    return UMat(*this, Range::all(), Range(x, x + 1));
+        -: 3275:}
+        -: 3276:
+        -: 3277:inline
+        -: 3278:UMat UMat::rowRange(int startrow, int endrow) const
+        -: 3279:{
+        -: 3280:    return UMat(*this, Range(startrow, endrow), Range::all());
+        -: 3281:}
+        -: 3282:
+        -: 3283:inline
+        -: 3284:UMat UMat::rowRange(const Range& r) const
+        -: 3285:{
+        -: 3286:    return UMat(*this, r, Range::all());
+        -: 3287:}
+        -: 3288:
+        -: 3289:inline
+        -: 3290:UMat UMat::colRange(int startcol, int endcol) const
+        -: 3291:{
+        -: 3292:    return UMat(*this, Range::all(), Range(startcol, endcol));
+        -: 3293:}
+        -: 3294:
+        -: 3295:inline
+        -: 3296:UMat UMat::colRange(const Range& r) const
+        -: 3297:{
+        -: 3298:    return UMat(*this, Range::all(), r);
+        -: 3299:}
+        -: 3300:
+        -: 3301:inline
+        -: 3302:UMat UMat::operator()( Range _rowRange, Range _colRange ) const
+        -: 3303:{
+        -: 3304:    return UMat(*this, _rowRange, _colRange);
+        -: 3305:}
+        -: 3306:
+        -: 3307:inline
+        -: 3308:UMat UMat::operator()( const Rect& roi ) const
+        -: 3309:{
+        -: 3310:    return UMat(*this, roi);
+        -: 3311:}
+        -: 3312:
+        -: 3313:inline
+        -: 3314:UMat UMat::operator()(const Range* ranges) const
+        -: 3315:{
+        -: 3316:    return UMat(*this, ranges);
+        -: 3317:}
+        -: 3318:
+        -: 3319:inline
+        -: 3320:UMat UMat::operator()(const std::vector<Range>& ranges) const
+        -: 3321:{
+        -: 3322:    return UMat(*this, ranges);
+        -: 3323:}
+        -: 3324:
+        -: 3325:inline
+        -: 3326:bool UMat::isContinuous() const
+        -: 3327:{
+        -: 3328:    return (flags & CONTINUOUS_FLAG) != 0;
+        -: 3329:}
+        -: 3330:
+        -: 3331:inline
+        -: 3332:bool UMat::isSubmatrix() const
+        -: 3333:{
+        -: 3334:    return (flags & SUBMATRIX_FLAG) != 0;
+        -: 3335:}
+        -: 3336:
+        -: 3337:inline
+        -: 3338:size_t UMat::elemSize() const
+        -: 3339:{
+        -: 3340:    size_t res = dims > 0 ? step.p[dims - 1] : 0;
+        -: 3341:    CV_DbgAssert(res != 0);
+        -: 3342:    return res;
+        -: 3343:}
+        -: 3344:
+        -: 3345:inline
+        -: 3346:size_t UMat::elemSize1() const
+        -: 3347:{
+        -: 3348:    return CV_ELEM_SIZE1(flags);
+        -: 3349:}
+        -: 3350:
+        -: 3351:inline
+        -: 3352:int UMat::type() const
+        -: 3353:{
+        -: 3354:    return CV_MAT_TYPE(flags);
+        -: 3355:}
+        -: 3356:
+        -: 3357:inline
+        -: 3358:int UMat::depth() const
+        -: 3359:{
+        -: 3360:    return CV_MAT_DEPTH(flags);
+        -: 3361:}
+        -: 3362:
+        -: 3363:inline
+        -: 3364:int UMat::channels() const
+        -: 3365:{
+        -: 3366:    return CV_MAT_CN(flags);
+        -: 3367:}
+        -: 3368:
+        -: 3369:inline
+        -: 3370:size_t UMat::step1(int i) const
+        -: 3371:{
+        -: 3372:    return step.p[i] / elemSize1();
+        -: 3373:}
+        -: 3374:
+        -: 3375:
+        -: 3376:inline bool UMatData::hostCopyObsolete() const { return (flags & HOST_COPY_OBSOLETE) != 0; }
+        -: 3377:inline bool UMatData::deviceCopyObsolete() const { return (flags & DEVICE_COPY_OBSOLETE) != 0; }
+        -: 3378:inline bool UMatData::deviceMemMapped() const { return (flags & DEVICE_MEM_MAPPED) != 0; }
+        -: 3379:inline bool UMatData::copyOnMap() const { return (flags & COPY_ON_MAP) != 0; }
+        -: 3380:inline bool UMatData::tempUMat() const { return (flags & TEMP_UMAT) != 0; }
+        -: 3381:inline bool UMatData::tempCopiedUMat() const { return (flags & TEMP_COPIED_UMAT) == TEMP_COPIED_UMAT; }
+        -: 3382:
+        -: 3383:inline void UMatData::markDeviceMemMapped(bool flag)
+        -: 3384:{
+        -: 3385:  if(flag)
+        -: 3386:    flags |= DEVICE_MEM_MAPPED;
+        -: 3387:  else
+        -: 3388:    flags &= ~DEVICE_MEM_MAPPED;
+        -: 3389:}
+        -: 3390:
+        -: 3391:inline void UMatData::markHostCopyObsolete(bool flag)
+        -: 3392:{
+        -: 3393:    if(flag)
+        -: 3394:        flags |= HOST_COPY_OBSOLETE;
+        -: 3395:    else
+        -: 3396:        flags &= ~HOST_COPY_OBSOLETE;
+        -: 3397:}
+        -: 3398:inline void UMatData::markDeviceCopyObsolete(bool flag)
+        -: 3399:{
+        -: 3400:    if(flag)
+        -: 3401:        flags |= DEVICE_COPY_OBSOLETE;
+        -: 3402:    else
+        -: 3403:        flags &= ~DEVICE_COPY_OBSOLETE;
+        -: 3404:}
+        -: 3405:
+        -: 3406://! @endcond
+        -: 3407:
+        -: 3408:static inline
+        -: 3409:void swap(MatExpr& a, MatExpr& b) { a.swap(b); }
+        -: 3410:
+        -: 3411:} //cv
+        -: 3412:
+        -: 3413:#ifdef _MSC_VER
+        -: 3414:#pragma warning( pop )
+        -: 3415:#endif
+        -: 3416:
+        -: 3417:#ifdef CV_DISABLE_CLANG_ENUM_WARNINGS
+        -: 3418:#undef CV_DISABLE_CLANG_ENUM_WARNINGS
+        -: 3419:#pragma clang diagnostic pop
+        -: 3420:#endif
+        -: 3421:
+        -: 3422:#endif

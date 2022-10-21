@@ -9,6 +9,7 @@ using namespace std;
 
 const Mat image = imread("/home/gabrielwolf/Documents/Extraclase-II/Testing-Server-Datos-II/stitchTry.png",IMREAD_COLOR);
 
+
 //clase funciones: contiene los metodos usados en el server
 class funciones{
 public:
@@ -29,6 +30,19 @@ public:
         }
     }
 };
+class applyFilters{
+public:
+    bool get_gray_scale(ImageProcessing& funcion2){
+        if(!(image.empty())){
+            funcion2.gray_scale();
+            return true;
+        }else{
+            return false;
+        }
+    }
+};
+
+
 
 
 //Crear un TEST para el mockObject "mockSegmentingImg"
@@ -37,7 +51,10 @@ public:
     MOCK_METHOD(bool,segmentImage_,(const Mat& img,const int blockWidth, vector<cv::Mat>& blocks));
 };
 
-
+class MockFilterGray: public ImageProcessing{
+public:
+    MOCK_METHOD(bool,gray_scale,(Mat *_source, Mat *_destiny));
+};
 
 
 TEST(PruebaSegmentar,Prueba1){
@@ -47,6 +64,12 @@ TEST(PruebaSegmentar,Prueba1){
     EXPECT_TRUE(Segment_image.get_SegmentImage_(mockSegmentingImg,image,65,blocks));
 }
 
+TEST(PruebaFiltroGray,Prueba2){
+    vector<Mat> blocksGray;
+    MockFilterGray mockFilterGray;
+    applyFilters grayImg;
+    EXPECT_TRUE(grayImg.get_gray_scale(mockFilterGray));
+}
 
 
 /**
