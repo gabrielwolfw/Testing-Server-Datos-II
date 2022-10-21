@@ -17,14 +17,36 @@ public:
     }
 };
 
+class applySegmenting{
+public:
+    bool get_SegmentImage_(funciones& funcion1,onst Mat& img,const int blockWidth, vector<cv::Mat>& blocks){
+        if(!(img.empty())){
+            funcion1.segmentImage_(img,blockWidth,blocks);
+            return true;
+        }else{
+            return false;
+        }
+    }
+};
 
-class mockSegmentingImg: public funciones{
+
+//Crear un TEST para el mockObject "mockSegmentingImg"
+class MockSegmentingImg: public funciones{
 public:
     MOCK_METHOD(bool,segmentImage_,(const Mat& img,const int blockWidth, vector<cv::Mat>& blocks));
 };
 
 
-//Crear un TEST para el mockObject "mockSegmentingImg"
+
+
+TEST(PruebaSegmentar,Prueba1){
+    vector<Mat> blocks;
+    MockSegmentingImg mockSegmentingImg;
+    applySegmenting segmentImg;
+    EXPECT_TRUE(segmentImg.get_SegmentImage_(mockSegmentingImg,image,65,blocks));
+}
+
+
 
 /**
  * @param argc
